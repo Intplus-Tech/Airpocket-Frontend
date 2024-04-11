@@ -4,7 +4,6 @@ import "./App.css";
 import { About, Flight, Home, Layout, NotFound } from "./pages";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import SignUp from "./auth/Signup/Signup";
-import { PassengerDetails } from "./pages/PassengerDetails/PassengerDetails";
 import Stepper from "./components/Stepper/Stepper";
 import AccountProfile from "./pages/Account/Account";
 
