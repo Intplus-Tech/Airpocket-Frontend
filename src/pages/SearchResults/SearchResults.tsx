@@ -7,11 +7,11 @@ import FlightAvailable from "@/components/FlightAvailable/FlightAvailable";
 import { AvailableFlightProps } from "@/types/typs";
 import SearchParams from "./components/SearchParams/SearchParams";
 
-type searchResultProps = {
-  setCurrentStep?: React.Dispatch<React.SetStateAction<string>>;
-};
+// type searchResultProps = {
+//   setCurrentStep?: React.Dispatch<React.SetStateAction<string>>;
+// };
 
-const SearchResults = ({ setCurrentStep }: searchResultProps) => {
+const SearchResults = () => {
   const AVAILABLE_FLIGHT: AvailableFlightProps = [
     {
       id: "1",

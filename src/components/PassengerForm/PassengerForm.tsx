@@ -76,7 +76,9 @@ const PassengerForm = () => {
                 </SelectTrigger>
                 <SelectContent className="rounded-none border-none ">
                   {days.map((day: any) => (
-                    <SelectItem value={day ?? "days"}>{day}</SelectItem>
+                    <SelectItem key={day} value={day ?? "days"}>
+                      {day}
+                    </SelectItem>
                   ))}
                   {/* <SelectItem value="dark">Femail</SelectItem> */}
                 </SelectContent>
@@ -90,7 +92,9 @@ const PassengerForm = () => {
                 </SelectTrigger>
                 <SelectContent className="rounded-none border-none">
                   {months.map((month: any) => (
-                    <SelectItem value={month}>{month}</SelectItem>
+                    <SelectItem key={month} value={month}>
+                      {month}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -103,7 +107,9 @@ const PassengerForm = () => {
                 </SelectTrigger>
                 <SelectContent className="rounded-none border-none w-full flex-[2]">
                   {years.map((year: any) => (
-                    <SelectItem value={year}>{year}</SelectItem>
+                    <SelectItem key={year} value={year}>
+                      {year}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -157,7 +163,9 @@ const PassengerForm = () => {
                   </SelectTrigger>
                   <SelectContent className="rounded-none border-none">
                     {days.map((day: any) => (
-                      <SelectItem value={day ?? "days"}>{day}</SelectItem>
+                      <SelectItem key={day} value={day ?? "days"}>
+                        {day}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -170,7 +178,9 @@ const PassengerForm = () => {
                   </SelectTrigger>
                   <SelectContent className="rounded-none border-none">
                     {months.map((month: any) => (
-                      <SelectItem value={month}>{month}</SelectItem>
+                      <SelectItem key={month} value={month}>
+                        {month}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -183,7 +193,9 @@ const PassengerForm = () => {
                   </SelectTrigger>
                   <SelectContent className="rounded-none border-none w-full flex-[2]">
                     {years.map((year: any) => (
-                      <SelectItem value={year}>{year}</SelectItem>
+                      <SelectItem key={year} value={year}>
+                        {year}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
