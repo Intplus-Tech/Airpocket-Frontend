@@ -19,11 +19,11 @@ function App() {
             <Route path="about-us" element={<About />} />
 
             {/* Make sure to remove */}
-            <Route path="search-results" element={<SearchResults />} />
+            <Route path="/search-results" element={<SearchResults />} />
             {/* Make sure to remove */}
 
-            <Route path="stepper" element={<Stepper />} />
-            <Route path="account-infomation" element={<AccountProfile />} />
+            <Route path="/stepper" element={<Stepper />} />
+            <Route path="/account-infomation" element={<AccountProfile />} />
             {/* Make sure to remove */}
             {/* <Route
               path="passenger-detail"
