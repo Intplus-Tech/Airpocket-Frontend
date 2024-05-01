@@ -1,35 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-// import Mobilebcg from "../../assets/mobilebcg.png";
-// import HeroImg from "../../assets/Desktop.svg";
 import { Image } from "../../../components/Image/Index";
 import Arrow_down from "../../../assets/arrow_down.svg";
 import Arrow_right from "../../../assets/Arrow-right.svg";
 import TripType from "../../../components/TripType/TripType";
 import PassengerType from "../../../components/PassengerType/PassengerType";
 import ClassType from "../../../components/ClassType/ClassType";
-// import Bcg from "../../assets/Background.svg";
 import Test from "../../../assets/test1.png";
 
 const Hero = () => {
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
   const [classType, setClassType] = useState("First class");
-  // const [noPeople, setNoPeople] = useState("passenger");
-  const [, setWindowSize] = useState(window.innerWidth);
-
-  const handleResize = () => {
-    // Client-side-only code
-    setWindowSize(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const [passengerNumber, setPassengerNumber] = useState<{
+    [key: string]: number;
+  }>({
+    adult: 0,
+    children: 0,
+    infants: 0,
+  });
 
   return (
     <div className="h-full w-full relative ">
@@ -67,7 +56,12 @@ const Hero = () => {
                 >
                   Passenger <Image src={Arrow_down} alt="Arrow_down" />
                   <div className="absolute top-[2.4rem] left-0 w-fit  bg-white shadow-md rounded-md ">
-                    {openDropdownType === "passenger" && <PassengerType />}
+                    {openDropdownType === "passenger" && (
+                      <PassengerType
+                        passengerNumber={passengerNumber}
+                        setPassengerNumber={setPassengerNumber}
+                      />
+                    )}
                   </div>
                 </div>
                 <div
