@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useDebounce } from "use-debounce";
+import Select from "react-select";
 
 import { Image } from "../../../components/Image/Index";
 import Arrow_down from "../../../assets/arrow_down.svg";
@@ -7,11 +11,31 @@ import TripType from "../../../components/TripType/TripType";
 import PassengerType from "../../../components/PassengerType/PassengerType";
 import ClassType from "../../../components/ClassType/ClassType";
 import Test from "../../../assets/test1.png";
+import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
+import { setSearchQuery } from "@/Features/searchslice/reducers";
+
+interface suggestionList {
+  value: string;
+  label: string;
+}
+[];
 
 const Hero = () => {
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
   const [classType, setClassType] = useState("First class");
+  const [depature, setDeparute] = useState<suggestionList | null>(null);
+  const [destination, setDestination] = useState<suggestionList | null>(null);
+  const [openDestinationDropdown, setOpenDestinationDropdown] = useState(false);
+  const [openDepatureDropdown, setOpenDepartureDropdown] = useState(false);
+  // const [menuIsOpen, setMenuIsOpen] = useState(false);
+  // const [selectedOption, setSelectedOption] = useState<suggestionList | null>(
+  //   null
+  // );
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<suggestionList[]>([]);
   const [passengerNumber, setPassengerNumber] = useState<{
     [key: string]: number;
   }>({
@@ -19,6 +43,46 @@ const Hero = () => {
     children: 0,
     infants: 0,
   });
+  const [value] = useDebounce(query, 500);
+
+  const handleChangeDepature = (selectedCountry: suggestionList | null) => {
+    setDeparute(selectedCountry);
+  };
+  const handleChangeDestination = (selectedCountry: suggestionList | null) => {
+    setDestination(selectedCountry);
+  };
+
+  const handleInputDepatureChange = (inputValue: string) => {
+    setQuery(inputValue);
+  };
+  const handleInputDestinationChange = (inputValue: string) => {
+    setQuery(inputValue);
+  };
+
+  const handleSearchKeyWork = async () => {
+    const respnse = await searchKeyWord({ key: value });
+
+    const result = respnse.success.data.data.map((item: any) => ({
+      value: item.iataCode,
+      label: `${item.address.cityName} (${item.iataCode})`,
+    }));
+
+    setSuggestions(result);
+  };
+
+  useEffect(() => {
+    handleSearchKeyWork();
+  }, [value]);
+
+  const handleSearchFlight = async (data: FieldValues) => {
+    searchFlight(
+      { ...data, ...passengerNumber, travelClass: classType },
+      dispatch
+    );
+    dispatch(
+      setSearchQuery({ ...data, ...passengerNumber, travelClass: classType })
+    );
+  };
 
   return (
     <div className="h-full w-full relative ">
@@ -33,7 +97,7 @@ const Hero = () => {
         </h1>
 
         <div className="bg-white shadow-sm md:shadow-lg rounded-md mt-4 lg:mt-6 px-6 py-6   w-full mx-auto">
-          <form action=" w-full">
+          <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
             <div className="grid grid-cols-1 min-[576px]:grid-cols-2 gap-8 w-full sm:w-fit">
               <div
                 onClick={() => setOpenDropdownType("trip")}
@@ -49,6 +113,7 @@ const Hero = () => {
                   )}
                 </div>
               </div>
+
               <div className="flex items-center gap-2 md:gap-8 sm:ml-[-4rem] lg:ml-[-6rem] ">
                 <div
                   onClick={() => setOpenDropdownType("passenger")}
@@ -80,23 +145,64 @@ const Hero = () => {
                 </div>
               </div>
             </div>
+
             <div className="grid grid-cols-1 min-[576px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-8 mt-6 flex-wrap">
               <div className="flex flex-col ">
                 <label className="text-sm md:text-base">Departure</label>
-                <input
-                  type="text"
-                  placeholder="Wher are you coming from "
-                  className="bg-[#283841] bg-opacity-10 p-2 rounded-md border-none outline-none"
+                <Select
+                  options={suggestions}
+                  onChange={handleChangeDepature}
+                  value={depature}
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                  onInputChange={(input) => {
+                    if (input) {
+                      handleInputDepatureChange(input);
+                      setOpenDepartureDropdown(true);
+                    } else {
+                      setOpenDepartureDropdown(false);
+                    }
+                  }}
+                  menuIsOpen={openDepatureDropdown}
+                  isClearable
+                  isSearchable
+                  placeholder=""
+                  className="peer border-none rounded-lg w-full h-10    "
                 />
               </div>
               {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
               <div className="flex flex-col ">
                 <label className="text-sm md:text-base">Destination</label>
-                <input
+                <Select
+                  options={suggestions}
+                  onChange={handleChangeDestination}
+                  value={destination}
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                  onInputChange={(input) => {
+                    if (input) {
+                      handleInputDestinationChange(input);
+                      setOpenDestinationDropdown(true);
+                    } else {
+                      setOpenDestinationDropdown(false);
+                    }
+                  }}
+                  menuIsOpen={openDestinationDropdown}
+                  isClearable
+                  isSearchable
+                  placeholder=""
+                  className="peer border-none rounded-lg w-full h-10    "
+                />
+                {/* <input
                   type="text"
                   placeholder="Wher are you going "
+                  {...register("destinationLocationCode")}
                   className="bg-[#283841] bg-opacity-10 p-2 rounded-md border-none outline-none  "
-                />
+                /> */}
               </div>
               {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
@@ -105,6 +211,7 @@ const Hero = () => {
                 <input
                   type="date"
                   placeholder="choose date"
+                  {...register("departureDate")}
                   className="bg-[#283841] bg-opacity-10 p-2 h-[40px] rounded-md border-none outline-none"
                 />
               </div>
@@ -114,11 +221,15 @@ const Hero = () => {
                 <label className="text-sm md:text-base">Check out</label>
                 <input
                   type="date"
+                  {...register("returnDate")}
                   className="bg-[#283841] bg-opacity-10 p-2 h-[40px] rounded-md border-none outline-none"
                 />
               </div>
               <div className="flex items-end text-white rounded-md ">
-                <button className="flex items-center sm:items-start gap-4 px-3 py-2 w-full sm:w-fit bg-[#03C3F8] rounded-md whitespace-nowrap text-sm">
+                <button
+                  type="submit"
+                  className="flex items-center sm:items-start gap-4 px-3 py-2 w-full sm:w-fit bg-[#03C3F8] rounded-md whitespace-nowrap text-sm"
+                >
                   Search Flights
                   <Image
                     src={Arrow_right}

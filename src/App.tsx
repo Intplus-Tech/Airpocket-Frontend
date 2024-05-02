@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -29,7 +29,7 @@ function App() {
               <Route path="about-us" element={<About />} />
 
               {/* Make sure to remove */}
-              <Route path="/search-results" element={<SearchResults />} />
+              <Route path="/flight-offers" element={<SearchResults />} />
               {/* Make sure to remove */}
 
               <Route path="/stepper" element={<Stepper />} />

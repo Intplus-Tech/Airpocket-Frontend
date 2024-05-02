@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import searchSlice from "@/Feature/Hero/slice/reducer";
 // import searchSlice from "./features/searchSlice";
+import searchSlice from "@/Features/searchslice/reducers";
 
 export const store = configureStore({
   reducer: {
-    // search: searchSlice,
+    search: searchSlice,
   },
 });
 

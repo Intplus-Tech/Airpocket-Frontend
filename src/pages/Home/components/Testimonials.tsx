@@ -94,7 +94,10 @@ const Testimonials = () => {
         {/* <div className='flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full'> */}
         <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full">
           {TESTIMONIALS.map((testimonial) => (
-            <div className="relative bg-white shadow shadow-gray-300 pt-8 py-4 px-2 w-full min-w-[18rem] max-w-[320px] mx-auto rounded-lg space-y-4">
+            <div
+              key={testimonial.id}
+              className="relative bg-white shadow shadow-gray-300 pt-8 py-4 px-2 w-full min-w-[18rem] max-w-[320px] mx-auto rounded-lg space-y-4"
+            >
               <div className="absolute top-0 right-[50%] translate-x-[50%] translate-y-[-50%] w-[51px] h-[51px]">
                 <Image
                   src={testimonial.img}

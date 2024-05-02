@@ -2,14 +2,15 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import Gulf from "../Table/assets/logo.svg";
 import { Image } from "../Image/Index";
-import { AvailableFlightProps } from "@/types/typs";
+import { AvailableFlightProps, SearchResult } from "@/types/typs";
 import Flight from "./assets/flight.svg";
 import FilghtDetail from "@/pages/SearchResults/components/FlightDetails/FilghtDetail";
 
 type AvailableFlightData = {
-  availableFlight: AvailableFlightProps;
+  availableFlight: SearchResult;
 };
 const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
+  console.log(availableFlight);
   return (
     <main className="mt-6">
       <section className=" mb-4">
@@ -20,7 +21,7 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
         </div>
 
         <article className="border rounded-md pb-3 max-w-[20rem] min-w-full overflow-x-auto">
-          {availableFlight?.map((flight) => (
+          {availableFlight?.data?.map((flight) => (
             <section
               key={flight.id}
               className="flex items-center border-b min-w-[40rem] justify-between mx-6 h-[10rem] "

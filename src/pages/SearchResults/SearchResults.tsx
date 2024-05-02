@@ -6,12 +6,16 @@ import Filters from "@/components/Filters/Filters";
 import FlightAvailable from "@/components/FlightAvailable/FlightAvailable";
 import { AvailableFlightProps } from "@/types/typs";
 import SearchParams from "./components/SearchParams/SearchParams";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 // type searchResultProps = {
 //   setCurrentStep?: React.Dispatch<React.SetStateAction<string>>;
 // };
 
 const SearchResults = () => {
+  const searchResult = useSelector((state: RootState) => state.search.result);
+
   const AVAILABLE_FLIGHT: AvailableFlightProps = [
     {
       id: "1",
@@ -68,7 +72,7 @@ const SearchResults = () => {
           {/* Flight Tables */}
           <div className="h-full w-full ">
             <TableComponent />
-            <FlightAvailable availableFlight={AVAILABLE_FLIGHT} />
+            <FlightAvailable availableFlight={searchResult} />
           </div>
         </div>
       </div>

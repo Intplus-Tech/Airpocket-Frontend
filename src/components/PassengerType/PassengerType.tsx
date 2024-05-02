@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Minus, Plus } from "lucide-react";
 import { PassengersProps } from "@/types/typs";
+// import { setSearchQuery } from "@/Features/searchslice/reducers
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 type Props = {
   passengerNumber: {
@@ -19,6 +22,9 @@ const passengers: PassengersProps = [
   { id: "infants", text: "Infants (under 2)" },
 ];
 const PassengerType = ({ setPassengerNumber, passengerNumber }: Props) => {
+  // const dispatch = useDispatch()
+  const searchQuery = useSelector((state: RootState) => state.search.query);
+  console.log(searchQuery);
   // const [passengerNumber, setPassengerNumber] = useState<{
   //   [key: string]: number;
   // }>({
