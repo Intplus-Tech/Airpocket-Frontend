@@ -24,14 +24,6 @@ const passengers: PassengersProps = [
 const PassengerType = ({ setPassengerNumber, passengerNumber }: Props) => {
   // const dispatch = useDispatch()
   const searchQuery = useSelector((state: RootState) => state.search.query);
-  console.log(searchQuery);
-  // const [passengerNumber, setPassengerNumber] = useState<{
-  //   [key: string]: number;
-  // }>({
-  //   adult: 0,
-  //   children: 0,
-  //   infants: 0,
-  // });
 
   const handleIncrease = (id: string) => {
     setPassengerNumber((prevCounts) => ({

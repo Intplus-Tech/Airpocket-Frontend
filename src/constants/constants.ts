@@ -1,1 +1,36 @@
 export const DAYS = ["01", "02", "03", "04"];
+// const AVAILABLE_FLIGHT: AvailableFlightProps = [
+//   {
+//     id: "1",
+//     airline: "Arik Air",
+//     departureTime: "02:50",
+//     arrivalTime: "21:15",
+//     departure: "INSTABUL-(IST)",
+//     destination: "Dubai",
+//     estimatedTime: "01:20 mins",
+//     desc: "20kg 0 stops Economy ",
+//     price: "₦",
+//   },
+//   {
+//     id: "2",
+//     airline: "Fly Emirates",
+//     departureTime: "02:50",
+//     arrivalTime: "21:15",
+//     departure: "INSTABUL-(IST)",
+//     destination: "Dubai",
+//     estimatedTime: "01:20 mins",
+//     desc: "20kg 0 stops Economy ",
+//     price: "₦",
+//   },
+//   {
+//     id: "3",
+//     airline: "quartar Airways",
+//     departureTime: "02:50",
+//     arrivalTime: "21:15",
+//     departure: "INSTABUL-(IST)",
+//     destination: "Dubai",
+//     estimatedTime: "01:20 mins",
+//     desc: "20kg 0 stops Economy ",
+//     price: "₦",
+//   },
+// ];

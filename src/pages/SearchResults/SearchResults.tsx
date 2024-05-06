@@ -1,56 +1,43 @@
 import TableComponent from "@/components/Table/Table";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Image } from "@/components/Image/Index";
 import SearchBcg from "./assets/SearchFlight.jpeg";
 import Filters from "@/components/Filters/Filters";
 import FlightAvailable from "@/components/FlightAvailable/FlightAvailable";
-import { AvailableFlightProps } from "@/types/typs";
 import SearchParams from "./components/SearchParams/SearchParams";
-import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import NotFilght from "./assets/Noflight.svg";
+import { useEffect } from "react";
+import { searchFlight } from "@/Features/searchslice/api";
+import { getItemFromStorage } from "@/utils/locaStorage";
 
 // type searchResultProps = {
 //   setCurrentStep?: React.Dispatch<React.SetStateAction<string>>;
 // };
 
 const SearchResults = () => {
+  const dispatch = useDispatch();
   const searchResult = useSelector((state: RootState) => state.search.result);
+  const searchQuery = useSelector((state: RootState) => state.search.query);
+  const isLoading = useSelector((state: RootState) => state.search.isLoading);
+  const flightQuery = getItemFromStorage("flight-search-query");
+  console.log("fightfquery", flightQuery);
 
-  const AVAILABLE_FLIGHT: AvailableFlightProps = [
-    {
-      id: "1",
-      airline: "Arik Air",
-      departureTime: "02:50",
-      arrivalTime: "21:15",
-      departure: "INSTABUL-(IST)",
-      destination: "Dubai",
-      estimatedTime: "01:20 mins",
-      desc: "20kg 0 stops Economy ",
-      price: "₦",
-    },
-    {
-      id: "2",
-      airline: "Fly Emirates",
-      departureTime: "02:50",
-      arrivalTime: "21:15",
-      departure: "INSTABUL-(IST)",
-      destination: "Dubai",
-      estimatedTime: "01:20 mins",
-      desc: "20kg 0 stops Economy ",
-      price: "₦",
-    },
-    {
-      id: "3",
-      airline: "quartar Airways",
-      departureTime: "02:50",
-      arrivalTime: "21:15",
-      departure: "INSTABUL-(IST)",
-      destination: "Dubai",
-      estimatedTime: "01:20 mins",
-      desc: "20kg 0 stops Economy ",
-      price: "₦",
-    },
-  ];
+  useEffect(() => {
+    if (!searchResult) {
+      searchFlight(
+        {
+          ...flightQuery,
+        },
+        dispatch
+      );
+    }
+  }, []);
+
+  if (isLoading) {
+    return <h1 className="font-bold text-4xl text-center">loading</h1>;
+  }
 
   return (
     <main className="mb-8">
@@ -71,8 +58,28 @@ const SearchResults = () => {
           </div>
           {/* Flight Tables */}
           <div className="h-full w-full ">
-            <TableComponent />
-            <FlightAvailable availableFlight={searchResult} />
+            {searchResult ? (
+              <div>
+                <TableComponent />
+                <FlightAvailable availableFlight={searchResult} />
+              </div>
+            ) : (
+              <div className="w-full h-[100vh] flex  justify-center">
+                <div>
+                  <Image
+                    src={NotFilght}
+                    alt="Flight not found"
+                    className="mt-10 mx-auto"
+                  />
+                  <p className="text-[12px] text-center font-bold text-[#868686]">
+                    No flights were found for Istanbul to Dubai on this date.
+                  </p>
+                  <p className="text-[#ADADAD] text-center font-bold">
+                    Search on a different date
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

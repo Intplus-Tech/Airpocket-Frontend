@@ -9,7 +9,7 @@ import { SERVER_URL } from "@/utils/apiUrl";
 import { User } from "@/types/typs";
 
 function getSearchResultsApi(data: User) {
-  const url = `${SERVER_URL}/flight-search?originLocationCode=SFO&destinationLocationCode=PRG&departureDate=2024-05-02&returnDate=2024-05-30&adults=1&travelClass=ECONOMY&nonStop=false&page=1&limit=2`;
+  const url = `${SERVER_URL}/flight-search?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2024-10-30&adults=1&travelClass=ECONOMY&nonStop=false`;
   const options = {
     method: "GET",
     headers: {
@@ -26,7 +26,7 @@ function getsearchKeyWordApi(data: User) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer DbGrHPrUQL9GSIyNGXbqQxOgMBd9`,
+      Authorization: `Bearer wI2x3DAy9qlEr58TsVcGylPoU3Ke`,
     },
   };
   return axios(url, options);
@@ -43,7 +43,7 @@ export const searchFlight = async (data: User, dispatch: any) => {
     return { success: { ...response } };
   } catch (error) {
     const response = handleAxiosError(error);
-    dispatch(searchResultError);
+    dispatch(searchResultError(response.error));
     return { error: { response } };
   }
 };

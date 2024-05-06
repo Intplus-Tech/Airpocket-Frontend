@@ -13,6 +13,7 @@ import ClassType from "../../../components/ClassType/ClassType";
 import Test from "../../../assets/test1.png";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
+import { storeItem } from "@/utils/locaStorage";
 
 interface suggestionList {
   value: string;
@@ -30,10 +31,7 @@ const Hero = () => {
   const [destination, setDestination] = useState<suggestionList | null>(null);
   const [openDestinationDropdown, setOpenDestinationDropdown] = useState(false);
   const [openDepatureDropdown, setOpenDepartureDropdown] = useState(false);
-  // const [menuIsOpen, setMenuIsOpen] = useState(false);
-  // const [selectedOption, setSelectedOption] = useState<suggestionList | null>(
-  //   null
-  // );
+
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<suggestionList[]>([]);
   const [passengerNumber, setPassengerNumber] = useState<{
@@ -74,14 +72,43 @@ const Hero = () => {
     handleSearchKeyWork();
   }, [value]);
 
+  console.log(depature);
+
   const handleSearchFlight = async (data: FieldValues) => {
     searchFlight(
-      { ...data, ...passengerNumber, travelClass: classType },
+      {
+        ...data,
+        ...passengerNumber,
+        travelClass: classType,
+        originLocationCode: depature?.value,
+        destinationLocationCode: destination?.value,
+      },
       dispatch
     );
+
     dispatch(
-      setSearchQuery({ ...data, ...passengerNumber, travelClass: classType })
+      setSearchQuery({
+        travelClass: classType,
+        originLocationCode: depature?.label,
+        destinationLocationCode: destination?.label,
+        depatureDate: data.depatureDate,
+        returnDate: data.returnDate,
+        adult: passengerNumber.adult,
+        children: passengerNumber.children,
+        infants: passengerNumber.infants,
+      })
     );
+
+    storeItem("flight-search-query", {
+      travelClass: classType,
+      originLocationCode: depature?.label,
+      destinationLocationCode: destination?.label,
+      depatureDate: data.depatureDate,
+      returnDate: data.returnDate,
+      adult: passengerNumber.adult,
+      children: passengerNumber.children,
+      infants: passengerNumber.infants,
+    });
   };
 
   return (
@@ -197,12 +224,6 @@ const Hero = () => {
                   placeholder=""
                   className="peer border-none rounded-lg w-full h-10    "
                 />
-                {/* <input
-                  type="text"
-                  placeholder="Wher are you going "
-                  {...register("destinationLocationCode")}
-                  className="bg-[#283841] bg-opacity-10 p-2 rounded-md border-none outline-none  "
-                /> */}
               </div>
               {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
@@ -211,7 +232,7 @@ const Hero = () => {
                 <input
                   type="date"
                   placeholder="choose date"
-                  {...register("departureDate")}
+                  {...register("depatureDate")}
                   className="bg-[#283841] bg-opacity-10 p-2 h-[40px] rounded-md border-none outline-none"
                 />
               </div>

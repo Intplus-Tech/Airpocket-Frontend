@@ -8,15 +8,35 @@ interface SearchResult {
 }
 [];
 
+interface Query {
+  adult: number;
+  children: number;
+  infants: number;
+  depatureDate: string;
+  destinationLocationCode?: string | null; // Optional property
+  originLocationCode?: string | null; // Union type for string or null
+  returnDate: string;
+  travelClass: string;
+}
+
 interface SearchState {
-  query: object;
+  query: Query;
   result: SearchResult | null;
   isLoading: boolean;
   error: boolean | { [x: string]: any };
 }
 
 const initialState: SearchState = {
-  query: {},
+  query: {
+    adult: 0,
+    children: 0,
+    infants: 0,
+    depatureDate: "",
+    destinationLocationCode: null,
+    originLocationCode: null,
+    returnDate: "",
+    travelClass: "First class",
+  },
   // result: [{ message: "", data: [{}], meta: [{}] }],
   result: null,
   isLoading: false,
@@ -27,7 +47,7 @@ const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    setSearchQuery(state, action: PayloadAction<{ [key: string]: any }>) {
+    setSearchQuery(state, action: PayloadAction<Query>) {
       state.query = { ...state.query, ...action.payload };
     },
     startSearch: (state) => {

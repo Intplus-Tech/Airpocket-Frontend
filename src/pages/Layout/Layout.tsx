@@ -70,7 +70,7 @@ const Layout = () => {
       </MaxWidthWrapper>
 
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

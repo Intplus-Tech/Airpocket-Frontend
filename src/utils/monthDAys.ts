@@ -44,3 +44,42 @@ export function generateYears(): string[] {
 
   return years;
 }
+
+type TimeFormat = {
+  hours: number;
+  minutes: number;
+};
+
+export function convertTime(timeString: string): TimeFormat | null {
+  const regex = /PT(\d+)H(\d+)M/;
+  const match = timeString.match(regex);
+
+  if (match) {
+    // throw new Error("Invalid time format");
+    const hours = parseInt(match[1], 10);
+    const minutes = parseInt(match[2], 10);
+    return { hours, minutes };
+  } else {
+    return null;
+  }
+}
+
+export function extractTime(isoString: string): string {
+  console.log(isoString);
+  const date = new Date(isoString);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const period = hours >= 12 ? "PM" : "AM";
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+  const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+
+  return `${formattedHours}:${formattedMinutes} ${period}`;
+}
+
+export function formatCurrency(amount: number): string {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "NGN",
+  });
+  return formatter.format(amount);
+}

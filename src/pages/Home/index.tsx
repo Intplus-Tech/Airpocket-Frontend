@@ -7,6 +7,7 @@ import Hero from "./components/Hero";
 import Newsletter from "./components/Newsletter";
 import Places from "./components/Places";
 import Testimonials from "./components/Testimonials";
+import Footer from "@/components/Footer/Footer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Home = () => {
       <Places />
       <Testimonials />
       <Newsletter />
+      <Footer />
     </MaxwidthWrapper>
   );
 };
