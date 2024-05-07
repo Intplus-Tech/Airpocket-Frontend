@@ -7,6 +7,7 @@ import SearchResults from "./pages/SearchResults/SearchResults";
 import SignUp from "./auth/Signup/Signup";
 import Stepper from "./components/Stepper/Stepper";
 import AccountProfile from "./pages/Account/Account";
+import { Toaster } from "./components/ui/toaster";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -20,6 +21,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Toaster />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Layout />}>

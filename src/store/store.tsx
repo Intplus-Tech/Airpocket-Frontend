@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 // import searchSlice from "@/Feature/Hero/slice/reducer";
 // import searchSlice from "./features/searchSlice";
 import searchSlice from "@/Features/searchslice/reducers";
+import userSlice from "@/Features/userSlice/reducer";
 
 export const store = configureStore({
   reducer: {
     search: searchSlice,
+    user: userSlice,
   },
 });
 

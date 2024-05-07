@@ -9,6 +9,7 @@ import countryList from "react-select-country-list";
 import "react-phone-input-2/lib/style.css";
 import { Link } from "react-router-dom";
 import { countries } from "countries-list";
+import { useForm } from "react-hook-form";
 
 import Logo from "../../assets/logo.jpeg";
 import { Image } from "@/components/Image/Index";
@@ -20,6 +21,7 @@ interface countryList {
 [];
 
 const SignUp = () => {
+  const { register, reset, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -34,6 +36,29 @@ const SignUp = () => {
   const handleChange = (selectedCountry: countryList | null) => {
     setSelectedOption(selectedCountry);
   };
+
+  // const handleOnSubmit = async (data: FieldValues) => {
+  //   const response = await signupAccount({
+  //     ...data,
+  //     phone: `+${phoneNumber}`,
+  //     country: selectedOption?.label,
+  //   });
+
+  //   if (response?.success) {
+  //     toast({
+  //       // variant: "success",
+  //       title: `${response.success.status}|| Success`,
+  //       description: `${response.success.message}`,
+  //     });
+  //     reset();
+  //   } else {
+  //     toast({
+  //       // variant: "success",
+  //       title: `${response?.error.status}`,
+  //       description: `${response?.error.message}`,
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     const countryList = Object.keys(countries).map((countryCode) => ({
@@ -63,6 +88,7 @@ const SignUp = () => {
               <div className="relative">
                 <input
                   type="text"
+                  {...register("firstname")}
                   className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
                 />
                 <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
@@ -72,6 +98,7 @@ const SignUp = () => {
               <div className="relative">
                 <input
                   type="text"
+                  {...register("lastname")}
                   className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
                 />
                 <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
@@ -98,10 +125,14 @@ const SignUp = () => {
             </div>
 
             <div className="relative">
-              <input
-                type="text"
-                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
-              />
+              <select
+                // type="text"
+                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none "
+                {...register("gender")}
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
               <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Gender
               </p>
@@ -124,6 +155,7 @@ const SignUp = () => {
             <div className="relative">
               <input
                 type="email"
+                {...register("email")}
                 className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
               />
               <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
@@ -134,10 +166,32 @@ const SignUp = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
+                {...register("password")}
                 className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
               />
               <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Password
+              </p>
+              <span
+                className="absolute right-6 translate-y-[100%] text-[#1D91CC]"
+                onClick={toggleShowPassword}
+              >
+                {showPassword ? (
+                  <EyeSlashIcon className="w-4 h-4" />
+                ) : (
+                  <EyeIcon className="w-4 h-4" />
+                )}
+              </span>
+            </div>
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                {...register("passwordConfirm")}
+                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
+              />
+              <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
+                Confirm Password
               </p>
               <span
                 className="absolute right-6 translate-y-[100%] text-[#1D91CC]"

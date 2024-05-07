@@ -62,4 +62,20 @@ interface LoginResponse {
   };
 }
 
-// export const LoginResponseSchema = z.infer<typeof LoginResponse>();
+export type UserDetail = {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  gender: "male" | "female" | "other"; // Assuming gender can be one of these values
+  country: string;
+  email: string;
+  password: string;
+  verified: boolean;
+  role: "USER" | "ADMIN"; // Assuming role can be one of these values
+  phone: string;
+  generalToken: string;
+  generalTokenExpiration: string | null; // Assuming it's a string in ISO 8601 format or null
+  createdAt: string; // Assuming it's a string in ISO 8601 format
+  __v: number;
+  lastLogin: string; // Assuming it's a string in ISO 8601 format
+};

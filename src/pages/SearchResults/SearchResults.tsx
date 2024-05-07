@@ -11,6 +11,7 @@ import NotFilght from "./assets/Noflight.svg";
 import { useEffect } from "react";
 import { searchFlight } from "@/Features/searchslice/api";
 import { getItemFromStorage } from "@/utils/locaStorage";
+import MobileFilters from "@/components/MobileFilters/MobileFilters";
 
 // type searchResultProps = {
 //   setCurrentStep?: React.Dispatch<React.SetStateAction<string>>;
@@ -41,6 +42,12 @@ const SearchResults = () => {
 
   return (
     <main className="mb-8">
+      <div className="fixed bottom-[5rem] w-full flex items-center md:hidden">
+        <div className="w-[90vw] mx-auto">
+          <MobileFilters />
+        </div>
+      </div>
+
       <div className="absolute top-0 z-[-10] w-full">
         <Image
           src={SearchBcg}

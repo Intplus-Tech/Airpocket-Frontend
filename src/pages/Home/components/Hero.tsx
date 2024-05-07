@@ -69,7 +69,7 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    handleSearchKeyWork();
+    value && handleSearchKeyWork();
   }, [value]);
 
   console.log(depature);
@@ -196,7 +196,7 @@ const Hero = () => {
                   isClearable
                   isSearchable
                   placeholder=""
-                  className="peer border-none rounded-lg w-full h-10    "
+                  className="peer border-none rounded-lg w-full h-10  bg-[#283841] bg-opacity-10   "
                 />
               </div>
               {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
@@ -222,7 +222,7 @@ const Hero = () => {
                   isClearable
                   isSearchable
                   placeholder=""
-                  className="peer border-none rounded-lg w-full h-10    "
+                  className="peer border-none rounded-xl w-full h-10  bg-[#283841] bg-opacity-10   "
                 />
               </div>
               {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
