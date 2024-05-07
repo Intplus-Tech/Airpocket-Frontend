@@ -52,7 +52,7 @@ const SearchResults = () => {
         </div>
       </div>
       <div className=" mt-[12rem] md:mt-[15rem] lg:mt-[18rem] xl:mt-[18rem] w-full">
-        <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-xl mx-8 md:mx-auto flex  gap-6">
+        <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-xl mx-3 md:mx-auto flex  gap-6">
           <div className="hidden min-[1028px]:block w-[310px]">
             <Filters />
           </div>

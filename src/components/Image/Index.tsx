@@ -22,7 +22,7 @@ export function Image({ className, src, alt, ...rest }: ImageProps) {
   };
 
   return (
-    <div>
+    <div className="flex">
       {loading && <div>Loading...</div>}
       <img
         className={className}
