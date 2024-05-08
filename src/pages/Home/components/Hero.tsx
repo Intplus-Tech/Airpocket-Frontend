@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useDebounce } from "use-debounce";
 import Select from "react-select";
 
@@ -14,6 +14,7 @@ import Test from "../../../assets/test1.png";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
+import { RootState } from "@/store/store";
 
 interface suggestionList {
   value: string;
@@ -31,7 +32,6 @@ const Hero = () => {
   const [destination, setDestination] = useState<suggestionList | null>(null);
   const [openDestinationDropdown, setOpenDestinationDropdown] = useState(false);
   const [openDepatureDropdown, setOpenDepartureDropdown] = useState(false);
-
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<suggestionList[]>([]);
   const [passengerNumber, setPassengerNumber] = useState<{
@@ -42,6 +42,7 @@ const Hero = () => {
     infants: 0,
   });
   const [value] = useDebounce(query, 500);
+  // const user = useSelector((state:RootState)=>state.user.user)
 
   const handleChangeDepature = (selectedCountry: suggestionList | null) => {
     setDeparute(selectedCountry);
@@ -147,7 +148,7 @@ const Hero = () => {
                   className="w-full sm:w-fit  relative  flex items-center justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-1 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base"
                 >
                   Passenger <Image src={Arrow_down} alt="Arrow_down" />
-                  <div className="absolute top-[2.4rem] left-0 w-fit  bg-white shadow-md rounded-md ">
+                  <div className="absolute top-[2.4rem] z-[10] left-0 w-72  bg-white shadow-md rounded-md ">
                     {openDropdownType === "passenger" && (
                       <PassengerType
                         passengerNumber={passengerNumber}
@@ -161,7 +162,7 @@ const Hero = () => {
                   className=" w-full sm:w-fit relative flex items-center justify-center bg-[#afdeeb]  bg-opacity-40 px-1 py-1 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base whitespace-nowrap"
                 >
                   {classType} <Image src={Arrow_down} alt="Arrow_down" />
-                  <div className="absolute top-[2.4rem] w-fit bg-white shadow-md rounded-sm ">
+                  <div className="absolute top-[2.4rem] z-[10] w-fit bg-white shadow-md rounded-sm ">
                     {openDropdownType === "class" && (
                       <ClassType
                         classType={classType}
@@ -196,6 +197,13 @@ const Hero = () => {
                   isClearable
                   isSearchable
                   placeholder=""
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      backgroundColor: "#e5edf1",
+                      zIndex: -10,
+                    }),
+                  }}
                   className="peer border-none rounded-lg w-full h-10  bg-[#283841] bg-opacity-10   "
                 />
               </div>
@@ -222,6 +230,13 @@ const Hero = () => {
                   isClearable
                   isSearchable
                   placeholder=""
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      backgroundColor: "#e5edf1",
+                      zIndex: -10,
+                    }),
+                  }}
                   className="peer border-none rounded-xl w-full h-10  bg-[#283841] bg-opacity-10   "
                 />
               </div>

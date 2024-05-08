@@ -83,3 +83,36 @@ export function formatCurrency(amount: number): string {
   });
   return formatter.format(amount);
 }
+
+export function formatDate(dateString: string): string {
+  const months: string[] = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const days: string[] = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const date: Date = new Date(dateString);
+  const dayOfWeek: string = days[date.getDay()];
+  const month: string = months[date.getMonth()];
+  const dayOfMonth: number = date.getDate();
+
+  return `${dayOfWeek}, ${month} ${dayOfMonth}`;
+}

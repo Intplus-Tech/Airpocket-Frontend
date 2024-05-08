@@ -30,7 +30,6 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
             const departureTime = extractTime(departure.at);
             const arrivalTime = extractTime(arrival.at);
             const realTime = convertTime(duration);
-            console.log(flight.price);
 
             return (
               <section
@@ -93,7 +92,7 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                         </p>
                       </DialogTrigger>
                       <DialogContent className="max-w-2xl">
-                        <FilghtDetail />
+                        <FilghtDetail data={flight} />
                       </DialogContent>
                     </Dialog>
 

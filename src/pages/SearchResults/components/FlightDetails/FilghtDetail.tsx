@@ -1,8 +1,28 @@
 import { Image } from "@/components/Image/Index";
 import Gulf from "../../assets/Gulf.svg";
 import Flight from "../../assets/verticalstop.svg";
+import { SingleSearchResult } from "@/types/typs";
+import { convertTime, extractTime, formatDate } from "@/utils/monthDAys";
 
-const FilghtDetail = () => {
+// type SingleFlightData = {
+//   singleFlight: SingleSearchResult;
+// };
+
+const FilghtDetail = (singleFlight: SingleSearchResult) => {
+  console.log(singleFlight?.data);
+
+  if (!singleFlight?.data) {
+    return null;
+  }
+  const { itineraries, travelerPricings } = singleFlight?.data;
+  const { segments, duration } = itineraries[0];
+  const { departure } = segments[0];
+  const { arrival } = segments[segments.length - 1];
+  const departureTime = extractTime(departure.at);
+  const arrivalTime = extractTime(arrival.at);
+  const realTime = convertTime(duration);
+  console.log(segments[0]);
+
   return (
     <main>
       <div className=" mt-4 border-b pb-2  flex gap-4">
@@ -15,13 +35,16 @@ const FilghtDetail = () => {
             <Image src={Gulf} alt="Airline logo" />
             <span className="font-bold">Gulf</span>
           </p>
-          <p className="w-full">Total:19:00 Hours</p>
+          <p className="w-full">
+            Total: {` ${realTime?.hours}hrs`}
+            {` ${realTime?.minutes}mins`}
+          </p>
           <div className="flex flex-col gap-2 justify-end w-full">
             <p className="bg-[#FFF2F2] text-[#C30000] text-xs md:text-base text-center w-fit rounded-md">
               Refundable {"(Penalty Applies)"}
             </p>
             <p className="bg-[#E8F4FA] text-[#1D91CC]  w-fit flex items-end self-end rounded-md px-2">
-              Economy
+              {travelerPricings[0].fareDetailsBySegment[0].cabin}
             </p>
           </div>
         </div>
@@ -30,10 +53,10 @@ const FilghtDetail = () => {
         <div className="mt-4">
           <div className="flex items-center justify-between">
             <p className="w-full">
-              <span className="font-bold">02:50</span> Istanbul, Istanbul
-              Airport
+              <span className="font-bold px-1"> {departureTime}</span>
+              {segments[0].departure.iataCode}
             </p>
-            <p className="w-full">Monday, September 6</p>
+            <p className="w-full">{formatDate(segments[0].departure.at)}</p>
 
             <p className="flex flex-col w-full">
               <span>Price Per Adult ₦11.742,342</span>
@@ -51,10 +74,12 @@ const FilghtDetail = () => {
           </div>
           <div className="flex items-center gap-2 my-5">
             <p>
-              <span className="font-bold pr-3">17:00</span>Amman, Queen Alia
-              Airport
+              <span className="font-bold pr-3">
+                {extractTime(segments[1].departure.at)}
+              </span>
+              {segments[1].departure.iataCode}
             </p>
-            <p>Monday, September 6 </p>
+            <p>{formatDate(segments[1].departure.at)} </p>
           </div>
 
           <div>
@@ -65,9 +90,12 @@ const FilghtDetail = () => {
 
           <div className="flex items-center gap-2 my-5">
             <p>
-              <span className="font-bold pr-3">21:45</span>Dubai, Dubai Airport
+              <span className="font-bold pr-3">
+                {extractTime(segments[segments.length - 1].arrival.at)}
+              </span>
+              {segments[segments.length - 1].arrival.iataCode}
             </p>
-            <p>Monday, September 6 </p>
+            <p>{formatDate(segments[segments.length - 1].arrival.at)} </p>
           </div>
         </div>
       </section>

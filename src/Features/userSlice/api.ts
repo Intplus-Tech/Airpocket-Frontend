@@ -23,15 +23,21 @@ export const loginAccount = async (data: User, dispatch: any) => {
 
   try {
     const response: any = await loginApi(data);
+
+    const cookies = response.headers["set-cookie"];
+    console.log(cookies);
+
     const { access_token, data: userData, message } = response.data;
-    console.log(userData.user);
     if (response.data) {
-      storeItem("access_token", access_token);
-      storeItem("user", userData.user);
-      dispatch(loginSuccess(userData.user));
+      console.log(userData);
+      document.cookie = `access_token=${access_token}`;
+      // storeItem("access_token", access_token);
+      storeItem("user", userData);
+      dispatch(loginSuccess(userData));
     }
     return { success: { message } };
   } catch (error) {
+    console.log(error);
     const response = handleAxiosError(error);
     dispatch(loginError(response.error));
     return { error: { response } };

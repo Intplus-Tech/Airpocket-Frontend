@@ -8,13 +8,15 @@ import Newsletter from "./components/Newsletter";
 import Places from "./components/Places";
 import Testimonials from "./components/Testimonials";
 import Footer from "@/components/Footer/Footer";
+import SearchHistory from "@/components/SearchHistory/SearchHistory";
 
 const Home = () => {
   const navigate = useNavigate();
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
   const result = useSelector((state: RootState) => state.search.result);
-  const query = useSelector((state: RootState) => state.search.query);
-  console.log("qurey", query);
+  const user = useSelector((state: RootState) => state.user.user);
+
+  console.log(user?._id, "id");
 
   if (isLoading) {
     return (
@@ -31,6 +33,7 @@ const Home = () => {
   return (
     <MaxwidthWrapper>
       <Hero />
+      {user && user._id && <SearchHistory />}
       <Places />
       <Testimonials />
       <Newsletter />

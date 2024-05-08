@@ -9,7 +9,7 @@ import countryList from "react-select-country-list";
 import "react-phone-input-2/lib/style.css";
 import { Link } from "react-router-dom";
 import { countries } from "countries-list";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 
 import Logo from "../../assets/logo.jpeg";
 import { Image } from "@/components/Image/Index";
@@ -37,28 +37,28 @@ const SignUp = () => {
     setSelectedOption(selectedCountry);
   };
 
-  // const handleOnSubmit = async (data: FieldValues) => {
-  //   const response = await signupAccount({
-  //     ...data,
-  //     phone: `+${phoneNumber}`,
-  //     country: selectedOption?.label,
-  //   });
-
-  //   if (response?.success) {
-  //     toast({
-  //       // variant: "success",
-  //       title: `${response.success.status}|| Success`,
-  //       description: `${response.success.message}`,
-  //     });
-  //     reset();
-  //   } else {
-  //     toast({
-  //       // variant: "success",
-  //       title: `${response?.error.status}`,
-  //       description: `${response?.error.message}`,
-  //     });
-  //   }
-  // };
+  const handleSignUp = async (data: FieldValues) => {
+    console.log(data);
+    // const response = await signupAccount({
+    //   ...data,
+    //   phone: `+${phoneNumber}`,
+    //   country: selectedOption?.label,
+    // });
+    // if (response?.success) {
+    //   toast({
+    //     // variant: "success",
+    //     title: `${response.success.status}|| Success`,
+    //     description: `${response.success.message}`,
+    //   });
+    //   reset();
+    // } else {
+    //   toast({
+    //     // variant: "success",
+    //     title: `${response?.error.status}`,
+    //     description: `${response?.error.message}`,
+    //   });
+    // }
+  };
 
   useEffect(() => {
     const countryList = Object.keys(countries).map((countryCode) => ({
@@ -82,7 +82,7 @@ const SignUp = () => {
             Get started with best of flight prices
           </p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="space-y-6 mt-10">
             <div className="flex gap-6">
               <div className="relative">

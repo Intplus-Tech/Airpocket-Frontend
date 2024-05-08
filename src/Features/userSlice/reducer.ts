@@ -1,4 +1,5 @@
 import { UserDetail } from "@/types/typs";
+import { getItemFromStorage } from "@/utils/locaStorage";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface userState {
@@ -8,29 +9,19 @@ interface userState {
 }
 
 const initialState: userState = {
-  user: {
+  user: getItemFromStorage("user") || {
     _id: "",
     firstname: "",
     lastname: "",
-    gender: "male",
-    country: "",
     email: "",
-    password: "",
     verified: false,
-    role: "USER",
-    phone: "",
-    generalToken: "",
-    generalTokenExpiration: null,
-    createdAt: "",
-    __v: 0,
-    lastLogin: "",
   },
   isLoading: false,
   error: false,
 };
 
 const searchSlice = createSlice({
-  name: "search",
+  name: "user",
   initialState,
   reducers: {
     login: (state) => {
@@ -44,7 +35,7 @@ const searchSlice = createSlice({
       state.error = false;
       console.log(state.isLoading);
     },
-    loginError(state, action: PayloadAction<boolean>) {
+    loginError: (state, action: PayloadAction<boolean>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
