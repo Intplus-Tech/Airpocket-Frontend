@@ -37,7 +37,6 @@ const Stepper = () => {
   ];
 
   const stepToRender = (key: string) => {
-    console.log(key, "key");
     switch (key) {
       case "searchFlight":
         return <SearchResults />;

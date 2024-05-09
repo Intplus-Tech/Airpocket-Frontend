@@ -201,7 +201,7 @@ const Hero = () => {
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       backgroundColor: "#e5edf1",
-                      zIndex: -10,
+                      // zIndex: -10,
                     }),
                   }}
                   className="peer border-none rounded-lg w-full h-10  bg-[#283841] bg-opacity-10   "
@@ -234,7 +234,7 @@ const Hero = () => {
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       backgroundColor: "#e5edf1",
-                      zIndex: -10,
+                      // zIndex: -10,
                     }),
                   }}
                   className="peer border-none rounded-xl w-full h-10  bg-[#283841] bg-opacity-10   "

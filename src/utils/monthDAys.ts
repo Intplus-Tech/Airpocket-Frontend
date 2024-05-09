@@ -65,7 +65,6 @@ export function convertTime(timeString: string): TimeFormat | null {
 }
 
 export function extractTime(isoString: string): string {
-  console.log(isoString);
   const date = new Date(isoString);
   const hours = date.getHours();
   const minutes = date.getMinutes();

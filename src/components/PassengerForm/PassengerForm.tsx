@@ -5,7 +5,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RootState } from "@/store/store";
 import { generateYears, getDaysInMonth, months } from "@/utils/monthDAys";
+import { useSelector } from "react-redux";
 
 const PassengerForm = () => {
   const currentDate = new Date();

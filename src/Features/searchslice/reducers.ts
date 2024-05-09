@@ -1,3 +1,4 @@
+import { getItemFromStorage } from "@/utils/locaStorage";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface SearchResult {
@@ -27,16 +28,17 @@ interface SearchState {
 }
 
 const initialState: SearchState = {
-  query: {
-    adult: 0,
-    children: 0,
-    infants: 0,
-    depatureDate: "",
-    destinationLocationCode: null,
-    originLocationCode: null,
-    returnDate: "",
-    travelClass: "First class",
-  },
+  query:
+    {
+      adult: 0,
+      children: 0,
+      infants: 0,
+      depatureDate: "",
+      destinationLocationCode: null,
+      originLocationCode: null,
+      returnDate: "",
+      travelClass: "First class",
+    } || getItemFromStorage("flight-search-query"),
   // result: [{ message: "", data: [{}], meta: [{}] }],
   result: null,
   isLoading: false,
@@ -53,7 +55,6 @@ const searchSlice = createSlice({
     startSearch: (state) => {
       state.isLoading = true;
       state.error = false;
-      console.log(state.isLoading);
     },
     searchResultSuccess(
       state,
@@ -67,8 +68,6 @@ const searchSlice = createSlice({
       state.result = action.payload;
       state.isLoading = false;
       state.error = false;
-      console.log(state.result, "redux");
-      console.log(state.isLoading);
     },
     searchResultError(state, action: PayloadAction<boolean>) {
       state.isLoading = false;

@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import FlightDetails from "@/components/FllightDetails/FlightDetail";
 import FlightDetailForm from "./components/FlightDetailForm";
 import PassengerDetailsPreview from "./components/PassengerDetailsPreview";
+import { RootState } from "@/store/store";
+import { getItemFromStorage } from "@/utils/locaStorage";
 
 type PassengerDetialProp = {
   passengers: number;
@@ -15,10 +18,14 @@ export const PassengerDetails = ({
 }: PassengerDetialProp) => {
   const [step, setStep] = useState("flightDetailsForm");
 
+  const flightSearchQuery = getItemFromStorage("flight-search-query");
+  const { adult, children, infants } = flightSearchQuery;
   const inputsArray = Array.from(
-    { length: passengers },
+    { length: adult + children + infants },
     (_, index) => index + 1
   );
+
+  console.log(inputsArray);
   const SINGLE_FLIGHT_DETAILS = {
     id: "1",
     airline: "Arik Air",

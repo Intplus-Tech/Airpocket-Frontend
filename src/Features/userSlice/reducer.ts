@@ -27,13 +27,11 @@ const searchSlice = createSlice({
     login: (state) => {
       state.isLoading = true;
       state.error = false;
-      console.log(state.isLoading);
     },
     loginSuccess: (state, action: PayloadAction<{ user: UserDetail }>) => {
       state.isLoading = false;
       state.user = action.payload.user;
       state.error = false;
-      console.log(state.isLoading);
     },
     loginError: (state, action: PayloadAction<boolean>) => {
       state.isLoading = false;

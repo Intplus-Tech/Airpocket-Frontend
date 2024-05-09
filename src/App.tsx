@@ -29,7 +29,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Toaster />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -42,7 +41,7 @@ function App() {
               <Route path="/flight-offers" element={<SearchResults />} />
               {/* Make sure to remove */}
 
-              <Route path="/stepper" element={<Stepper />} />
+              <Route path="/flight-details" element={<Stepper />} />
               <Route path="/account-infomation" element={<AccountProfile />} />
               {/* Make sure to remove */}
               {/* <Route
@@ -55,6 +54,7 @@ function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
+      <Toaster />
     </>
   );
 }

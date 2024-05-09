@@ -24,7 +24,7 @@ const FlightDetailForm = ({
           <div>
             {inputsArray.map((_, index) => (
               <div key={index} className="border-b">
-                <p className="font-bold mt-4">Passenger {index}</p>
+                <p className="font-bold mt-4">Passenger {index + 1}</p>
                 <PassengerForm />
               </div>
             ))}

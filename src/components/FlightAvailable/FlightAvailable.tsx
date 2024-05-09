@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import Gulf from "../Table/assets/logo.svg";
@@ -7,11 +9,28 @@ import Flight from "./assets/flight.svg";
 import FilghtDetail from "@/pages/SearchResults/components/FlightDetails/FilghtDetail";
 import { convertTime, extractTime, formatCurrency } from "@/utils/monthDAys";
 import Clock from "./assets/clock.svg";
+import { RootState } from "@/store/store";
+import { useToast } from "../ui/use-toast";
 
 type AvailableFlightData = {
   availableFlight: SearchResult;
 };
 const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
+  const { toast } = useToast();
+  const user = useSelector((state: RootState) => state.user.user);
+
+  const navigate = useNavigate();
+
+  const handleBookAction = () => {
+    if (user?._id) {
+      navigate("/flight-details");
+    } else {
+      toast({
+        description: "Please Login to Continue",
+      });
+    }
+  };
+
   return (
     <main className="mt-6">
       <section className=" mb-4">
@@ -101,7 +120,10 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                         {formatCurrency(flight.price.grandTotal)}
                       </p>
                       <p>
-                        <button className="w-full px-8 py-2 whitespace-nowrap bg-[#1B96D6] rounded-md text-white text-sm">
+                        <button
+                          onClick={() => handleBookAction()}
+                          className="w-full px-8 py-2 whitespace-nowrap bg-[#1B96D6] rounded-md text-white text-sm"
+                        >
                           Book Now
                         </button>
                       </p>
