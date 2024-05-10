@@ -27,17 +27,11 @@ export type User = {
   [x: string]: any;
 };
 
-// interface LoginResponse {
-//   status: string;
-//   message: string;
-//   access_token: string;
-//   data: {
-//     user: UserDetial;
-//     generalToken: string;
-//     generalTokenExpiration: string; // Date string
-//     lastLogin: string; // Date string
-//   };
-// }
+export interface countryList {
+  value: string;
+  label: string;
+}
+[];
 
 export type UserDetail = {
   _id: string;

@@ -1,15 +1,39 @@
-import PassengerForm from "@/components/PassengerForm/PassengerForm";
 import React from "react";
+import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+
+import PassengerForm from "@/components/PassengerForm/PassengerForm";
 
 type FLGHT_DETAIL_FORM_PROPS = {
   inputsArray: number[];
   setStep: React.Dispatch<React.SetStateAction<string>>;
 };
 
+type PassengerFormData = {
+  passengers: {
+    firstName: string;
+    lastName: string;
+    gender: string;
+    passportNumber: string;
+    day: string;
+    month: string;
+    year: string;
+  }[];
+};
+
 const FlightDetailForm = ({
   inputsArray,
   setStep,
 }: FLGHT_DETAIL_FORM_PROPS) => {
+  const { register, control, handleSubmit } = useForm<PassengerFormData>();
+  const { fields } = useFieldArray({
+    control,
+    name: "passengers",
+  });
+
+  const SubmitPassengerForm = (data: FieldValues) => {
+    console.log(data);
+  };
+
   return (
     <section className="w-full">
       <div className="border rounded-md p-4 mx-4 md:mx-6 min-[1059px]:mx-0">
@@ -20,14 +44,23 @@ const FlightDetailForm = ({
             <span className="text-red-500">07:59</span>
           </p>
         </div>
-        <form className="w-full">
+        <form className="w-full" onSubmit={handleSubmit(SubmitPassengerForm)}>
           <div>
             {inputsArray.map((_, index) => (
               <div key={index} className="border-b">
                 <p className="font-bold mt-4">Passenger {index + 1}</p>
-                <PassengerForm />
+                <PassengerForm
+                  index={index}
+                  fields={fields}
+                  register={register}
+                />
               </div>
             ))}
+          </div>
+          <div className="w-[60%] mx-auto mt-4 bg-gray-300 rounded-md">
+            <button type="submit" className="bg-transparent w-full py-2 ">
+              Proceed
+            </button>
           </div>
         </form>
       </div>
@@ -51,58 +84,58 @@ const FlightDetailForm = ({
             >
               <input
                 type="text"
-                id="Username"
+                id="FirstName"
                 className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                placeholder="Username"
+                placeholder="FirstName"
               />
 
               <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                Username
+                FirstName
               </span>
             </label>
             <label
-              htmlFor="Username"
+              htmlFor="PhoneNumber"
               className="relative w-full block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
             >
               <input
                 type="text"
-                id="Username"
+                id="PhoneNumber"
                 className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                placeholder="Username"
+                placeholder="PhoneNumber"
               />
 
               <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                Username
+                PhoneNumber
               </span>
             </label>
             <label
-              htmlFor="Username"
+              htmlFor="PhoneNumber"
               className="relative w-full block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
             >
               <input
                 type="text"
-                id="Username"
+                id="PhoneNumber"
                 className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                placeholder="Username"
+                placeholder="PhoneNumber"
               />
 
               <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                Username
+                Phone Number
               </span>
             </label>
             <label
-              htmlFor="Username"
+              htmlFor="email"
               className="relative w-full block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
             >
               <input
-                type="text"
-                id="Username"
+                type="email"
+                id="email"
                 className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                placeholder="Username"
+                placeholder="email"
               />
 
               <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                Username
+                Email
               </span>
             </label>
           </div>
@@ -121,12 +154,12 @@ const FlightDetailForm = ({
         </p>
       </div>
 
-      <div className="w-[60%] mx-auto bg-gray-300 rounded-md">
+      <div className="w-[40%] mx-auto bg-[#1D91CC] rounded-md">
         <button
           onClick={() => setStep("flightDetailsPreview")}
-          className="bg-transparent w-full py-2 "
+          className="bg-transparent w-full py-2 text-white "
         >
-          Proceed
+          Save
         </button>
       </div>
     </section>

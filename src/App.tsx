@@ -9,6 +9,9 @@ import Stepper from "./components/Stepper/Stepper";
 import AccountProfile from "./pages/Account/Account";
 import { Toaster } from "./components/ui/toaster";
 import { getItemFromStorage } from "./utils/locaStorage";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
+import { getCountryList } from "./Features/appSlice/api";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -19,13 +22,16 @@ const LoadingFallback = () => (
 );
 
 function App() {
+  const user = useSelector((state: RootState) => state.user.user);
+
   useEffect(() => {
     const user = getItemFromStorage("user");
-    if (!user?.id) {
+    if (!user?._id) {
       redirect("/");
       console.log("redirect");
     }
-  });
+  }, [user?._id]);
+
   return (
     <>
       <BrowserRouter>
