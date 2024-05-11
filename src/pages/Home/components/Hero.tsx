@@ -14,6 +14,7 @@ import Test from "../../../assets/test1.png";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
+import { DatePickerComponent } from "@/components/DatePicker/DatePickerComponent";
 
 interface suggestionList {
   value: string;
@@ -23,7 +24,7 @@ interface suggestionList {
 
 const Hero = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
   const [classType, setClassType] = useState("First class");
@@ -33,6 +34,8 @@ const Hero = () => {
   const [openDepatureDropdown, setOpenDepartureDropdown] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<suggestionList[]>([]);
+  const [checkInDate, setCheckInDate] = useState<Date | undefined>();
+  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
   const [passengerNumber, setPassengerNumber] = useState<{
     [key: string]: number;
   }>({
@@ -42,7 +45,7 @@ const Hero = () => {
   });
   const [value] = useDebounce(query, 500);
   // const user = useSelector((state:RootState)=>state.user.user)
-
+  console.log(checkInDate, checkOutDate);
   const handleChangeDepature = (selectedCountry: suggestionList | null) => {
     setDeparute(selectedCountry);
   };
@@ -123,18 +126,23 @@ const Hero = () => {
 
         <div className="bg-white shadow-sm md:shadow-lg rounded-md mt-4 lg:mt-6 px-6 py-6   w-full mx-auto">
           <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
+            {/* all three */}
             <div className="grid grid-cols-1 min-[576px]:grid-cols-2 gap-8 w-full sm:w-fit">
               <div
                 onClick={() => setOpenDropdownType("trip")}
                 className=" rounded-md gap-2 relative sm:w-fit "
               >
-                <div className="flex items-center justify-between sm:justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-1 md:px-6 md:py-3 rounded-md w-full sm:w-fit relative">
+                <div className="flex items-center justify-between sm:justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md w-full sm:w-fit relative">
                   {tripType}
                   <Image src={Arrow_down} alt="Arrow_down" />
                 </div>
                 <div className="absolute top-[2.4rem] z-10 w-fit bg-white shadow-md rounded-sm ">
                   {openDropdownType === "trip" && (
-                    <TripType tripType={tripType} setTripType={setTripType} />
+                    <TripType
+                      tripType={tripType}
+                      setTripType={setTripType}
+                      setOpenDropdownType={setOpenDropdownType}
+                    />
                   )}
                 </div>
               </div>
@@ -142,12 +150,17 @@ const Hero = () => {
               <div className="flex items-center gap-2 md:gap-8 sm:ml-[-4rem] lg:ml-[-6rem] ">
                 <div
                   onClick={() => setOpenDropdownType("passenger")}
-                  className="w-full sm:w-fit  relative  flex items-center justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-1 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base"
+                  className="w-full sm:w-fit  relative  flex items-center justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base"
                 >
-                  Passenger <Image src={Arrow_down} alt="Arrow_down" />
+                  Passenger{" "}
+                  {passengerNumber.adult +
+                    passengerNumber.children +
+                    passengerNumber.infants}
+                  <Image src={Arrow_down} alt="Arrow_down" />
                   <div className="absolute top-[2.4rem] z-[10] left-0 w-72  bg-white shadow-md rounded-md ">
                     {openDropdownType === "passenger" && (
                       <PassengerType
+                        setOpenDropdownType={setOpenDropdownType}
                         passengerNumber={passengerNumber}
                         setPassengerNumber={setPassengerNumber}
                       />
@@ -156,7 +169,7 @@ const Hero = () => {
                 </div>
                 <div
                   onClick={() => setOpenDropdownType("class")}
-                  className=" w-full sm:w-fit relative flex items-center justify-center bg-[#afdeeb]  bg-opacity-40 px-1 py-1 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base whitespace-nowrap"
+                  className=" w-full sm:w-fit relative flex items-center justify-center bg-[#afdeeb]  bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base whitespace-nowrap"
                 >
                   {classType} <Image src={Arrow_down} alt="Arrow_down" />
                   <div className="absolute top-[2.4rem] z-[10] w-fit bg-white shadow-md rounded-sm ">
@@ -164,6 +177,7 @@ const Hero = () => {
                       <ClassType
                         classType={classType}
                         setClassType={setClassType}
+                        setOpenDropdownType={setOpenDropdownType}
                       />
                     )}
                   </div>
@@ -241,22 +255,31 @@ const Hero = () => {
 
               <div className="flex flex-col ">
                 <label className="text-sm md:text-base">Check in</label>
-                <input
+                <DatePickerComponent
+                  date={checkInDate}
+                  setDate={setCheckInDate}
+                />
+                {/* <input
                   type="date"
                   placeholder="choose date"
                   {...register("depatureDate")}
                   className="bg-[#283841] bg-opacity-10 p-2 h-[40px] rounded-md border-none outline-none"
-                />
+                /> */}
               </div>
               {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
               <div className="flex flex-col">
                 <label className="text-sm md:text-base">Check out</label>
-                <input
+                <DatePickerComponent
+                  date={checkOutDate}
+                  setDate={setCheckOutDate}
+                />
+
+                {/* <input
                   type="date"
                   {...register("returnDate")}
                   className="bg-[#283841] bg-opacity-10 p-2 h-[40px] rounded-md border-none outline-none"
-                />
+                /> */}
               </div>
               <div className="flex items-end text-white rounded-md ">
                 <button

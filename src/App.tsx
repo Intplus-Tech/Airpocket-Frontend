@@ -29,8 +29,8 @@ function App() {
     }
   });
 
-  const TOKEN_ENDPOINT =
-    "https://test.api.amadeus.com/v1/security/oauth2/token";
+  const TOKEN_ENDPOINT = "";
+  // "https://test.api.amadeus.com/v1/security/oauth2/token";
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {

@@ -41,14 +41,17 @@ const Places = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3  col-span-1 my-6 h-full">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center col-span-1 my-6 h-full">
         <div className="w-fit relative">
-          <Image src={Water} alt="Water" className=" pl-4" />
-          <div className="absolute top-4 right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[220px] ">
+          <Image src={Water} alt="Water" className=" " />
+          <div className="absolute top-4 right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[180px] ">
             <Image
               src={SmallImage}
               alt="small image"
-              className="relative rounded-lg pb-4"
+              // height={50}
+              // width={50}
+              className="relative rounded-lg pb-4 h-[100px] w-full"
             />
             <div className="font-bold text-[11px] flex items-center justify-between w-full">
               <span>culpa est similique</span>
@@ -72,6 +75,7 @@ const Places = () => {
             </div>
           </div>
         </div>
+
         <div className=" grow flex flex-col  justify-center h-full col-span-2 md:pl-32">
           <div className="py-4">
             <h1 className="text-[40px] text-[#1B96D6] font-bold">About Us</h1>
@@ -114,8 +118,8 @@ const Places = () => {
         </div>
       </div>
       <div>
-        <div className="px-6">
-          <h1 className="font-bold text-[41px]">
+        <div className="px-0 md:px-6">
+          <h1 className="font-bold text-xl lg:text-[41px]">
             Trending <span className="text-[#1B96D6]">destination</span> now
             days
           </h1>

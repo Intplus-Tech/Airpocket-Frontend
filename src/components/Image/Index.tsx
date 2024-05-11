@@ -23,7 +23,11 @@ export function Image({ className, src, alt, ...rest }: ImageProps) {
 
   return (
     <div className="flex">
-      {loading && <div>Loading...</div>}
+      {loading && (
+        <div className="w-full flex items-center justify-center">
+          Loading...
+        </div>
+      )}
       <img
         className={className}
         // loading="lazy"
