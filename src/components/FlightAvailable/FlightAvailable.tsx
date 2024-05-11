@@ -18,7 +18,6 @@ type AvailableFlightData = {
 const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
   const { toast } = useToast();
   const user = useSelector((state: RootState) => state.user.user);
-
   const navigate = useNavigate();
 
   const handleBookAction = () => {

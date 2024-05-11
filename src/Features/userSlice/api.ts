@@ -25,11 +25,9 @@ export const loginAccount = async (data: User, dispatch: any) => {
     const response: any = await loginApi(data);
 
     const cookies = response.headers["set-cookie"];
-    console.log(cookies);
 
     const { access_token, data: userData, message } = response.data;
     if (response.data) {
-      console.log(userData);
       document.cookie = `access_token=${access_token}`;
       // storeItem("access_token", access_token);
       storeItem("user", userData);
@@ -37,7 +35,6 @@ export const loginAccount = async (data: User, dispatch: any) => {
     }
     return { success: { message } };
   } catch (error) {
-    console.log(error);
     const response = handleAxiosError(error);
     dispatch(loginError(response.error));
     return { error: { response } };

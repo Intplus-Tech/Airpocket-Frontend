@@ -7,9 +7,10 @@ import {
 } from "./reducers";
 import { SERVER_URL } from "@/utils/apiUrl";
 import { User } from "@/types/typs";
+import { getItemFromStorage } from "@/utils/locaStorage";
 
 function getSearchResultsApi(data: User) {
-  const url = `${SERVER_URL}/flight-search?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2024-10-30&adults=1&travelClass=ECONOMY&nonStop=false`;
+  const url = `${SERVER_URL}/flight-search?originLocationCode=PAR&destinationLocationCode=EWR&departureDate=2024-10-21&adults=1&travelClass=FIRST&nonStop=false&max=2`;
   const options = {
     method: "GET",
     headers: {
@@ -21,12 +22,14 @@ function getSearchResultsApi(data: User) {
 }
 
 function getsearchKeyWordApi(data: User) {
+  const auto_complete_token = getItemFromStorage("auto_complete_token");
+
   const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=${data.key}`;
   const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer wI2x3DAy9qlEr58TsVcGylPoU3Ke`,
+      Authorization: `Bearer ${auto_complete_token}`,
     },
   };
   return axios(url, options);

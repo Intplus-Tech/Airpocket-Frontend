@@ -61,7 +61,7 @@ const Hero = () => {
   const handleSearchKeyWork = async () => {
     const respnse = await searchKeyWord({ key: value });
 
-    const result = respnse.success.data.data.map((item: any) => ({
+    const result = respnse.success?.data.data.map((item: any) => ({
       value: item.iataCode,
       label: `${item.address.cityName} (${item.iataCode})`,
     }));
@@ -72,8 +72,6 @@ const Hero = () => {
   useEffect(() => {
     value && handleSearchKeyWork();
   }, [value]);
-
-  console.log(depature);
 
   const handleSearchFlight = async (data: FieldValues) => {
     searchFlight(
@@ -195,7 +193,7 @@ const Hero = () => {
                   }}
                   menuIsOpen={openDepatureDropdown}
                   isClearable
-                  isSearchable
+                  // isSearchable
                   placeholder=""
                   styles={{
                     control: (baseStyles, state) => ({

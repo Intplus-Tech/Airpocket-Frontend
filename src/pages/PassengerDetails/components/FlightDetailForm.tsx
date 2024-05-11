@@ -2,10 +2,12 @@ import React from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
+import { Generic } from "@/types/typs";
 
 type FLGHT_DETAIL_FORM_PROPS = {
   inputsArray: number[];
   setStep: React.Dispatch<React.SetStateAction<string>>;
+  setPassengerFormData: React.Dispatch<React.SetStateAction<Generic[] | null>>;
 };
 
 type PassengerFormData = {
@@ -23,6 +25,7 @@ type PassengerFormData = {
 const FlightDetailForm = ({
   inputsArray,
   setStep,
+  setPassengerFormData,
 }: FLGHT_DETAIL_FORM_PROPS) => {
   const { register, control, handleSubmit } = useForm<PassengerFormData>();
   const { fields } = useFieldArray({
@@ -31,7 +34,11 @@ const FlightDetailForm = ({
   });
 
   const SubmitPassengerForm = (data: FieldValues) => {
-    console.log(data);
+    const arrayOfObjects = Object.values(data).map((item, index) => ({
+      id: index + 1,
+      ...item,
+    }));
+    setPassengerFormData(arrayOfObjects);
   };
 
   return (

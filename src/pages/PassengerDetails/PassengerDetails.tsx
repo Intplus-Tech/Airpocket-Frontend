@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 import FlightDetails from "@/components/FllightDetails/FlightDetail";
 import FlightDetailForm from "./components/FlightDetailForm";
 import PassengerDetailsPreview from "./components/PassengerDetailsPreview";
-import { RootState } from "@/store/store";
 import { getItemFromStorage } from "@/utils/locaStorage";
+import { Generic } from "@/types/typs";
 
 type PassengerDetialProp = {
   passengers: number;
@@ -17,6 +16,9 @@ export const PassengerDetails = ({
   setCurrentStep,
 }: PassengerDetialProp) => {
   const [step, setStep] = useState("flightDetailsForm");
+  const [passengerFormData, setPassengerFormData] = useState<Generic[] | null>(
+    null
+  );
 
   const flightSearchQuery = getItemFromStorage("flight-search-query");
   const { adult, children, infants } = flightSearchQuery;
@@ -25,7 +27,6 @@ export const PassengerDetails = ({
     (_, index) => index + 1
   );
 
-  console.log(inputsArray);
   const SINGLE_FLIGHT_DETAILS = {
     id: "1",
     airline: "Arik Air",
@@ -47,11 +48,16 @@ export const PassengerDetails = ({
 
       {/* SINGLE_FLIGHT_STOPS Details */}
       {step === "flightDetailsForm" ? (
-        <FlightDetailForm inputsArray={inputsArray} setStep={setStep} />
+        <FlightDetailForm
+          inputsArray={inputsArray}
+          setStep={setStep}
+          setPassengerFormData={setPassengerFormData}
+        />
       ) : (
         <PassengerDetailsPreview
           setStep={setStep}
           setCurrentStep={setCurrentStep}
+          passengerFormData={passengerFormData}
         />
       )}
     </main>

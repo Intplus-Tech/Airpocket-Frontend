@@ -27,6 +27,10 @@ export type User = {
   [x: string]: any;
 };
 
+export type Generic = {
+  [x: string]: any;
+};
+
 export interface countryList {
   value: string;
   label: string;

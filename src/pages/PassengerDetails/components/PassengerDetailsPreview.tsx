@@ -1,14 +1,36 @@
+import { Generic } from "@/types/typs";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
 
 type PASSENGER_DETAILS_PREVIEW_PROPS = {
   setStep: React.Dispatch<React.SetStateAction<string>>;
   setCurrentStep: React.Dispatch<React.SetStateAction<string>>;
+  passengerFormData: Generic | null;
+};
+
+type PassengerFormDataProps = {
+  id: number;
+  passportNumber: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  nationality: string;
+  dob: {
+    day: string;
+    month: string;
+    year: string;
+  };
+  ped: {
+    day: string;
+    month: string;
+    year: string;
+  };
 };
 
 const PassengerDetailsPreview = ({
   setStep,
   setCurrentStep,
+  passengerFormData,
 }: PASSENGER_DETAILS_PREVIEW_PROPS) => {
   const data = [
     {
@@ -45,35 +67,42 @@ const PassengerDetailsPreview = ({
 
       <div className="py-4 text-sm md:text-base pt-2 pb-4 border-b border-b-gray-300">
         <div className="px-6 lg:px-8">
-          {data.map(
-            ({ id, name, age_category, date_of_birth, ticket_price }) => (
-              <div key={id} className="space-y-4 py-4">
-                <p className="flex items-center gap-x-2">
-                  <FaUser /> <span>{name}</span>
-                </p>
-                <div className="flex flex-col md:flex-row gap-x-6 gap-y-2">
-                  <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
-                    <span className="text-xs text-gray-500">
-                      Age Category:{" "}
-                    </span>
-                    <span className="">{age_category}</span>
-                  </p>
-                  <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
-                    <span className="text-xs text-gray-500">
-                      Date of birth:{" "}
-                    </span>
-                    <span className="">{date_of_birth}</span>
-                  </p>
-                  <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
-                    <span className="text-xs text-gray-500">
-                      Ticket Price:{" "}
-                    </span>
-                    <span className="">{ticket_price}</span>
-                  </p>
-                </div>
+          {passengerFormData?.map((item: PassengerFormDataProps) => {
+            return (
+              <div key={item.id} className="space-y-4 py-4">
+                {item.dob && (
+                  <div>
+                    <p className="flex items-center gap-x-2">
+                      <FaUser />{" "}
+                      <span>{`${item.firstName} ${item.lastName}`}</span>
+                    </p>
+                    <div className="flex flex-col md:flex-row gap-x-6 gap-y-2">
+                      <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
+                        <span className="text-xs text-gray-500">
+                          Age Category:{" "}
+                        </span>
+                        <span className="">{"Adult"}</span>
+                      </p>
+
+                      <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
+                        <span className="text-xs text-gray-500">
+                          Date of birth:{" "}
+                        </span>
+                        <span className="">{`${item?.dob.day}/${item?.dob.month}/${item?.dob.year}`}</span>
+                      </p>
+
+                      <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
+                        <span className="text-xs text-gray-500">
+                          Ticket Price:{" "}
+                        </span>
+                        <span className="">{"11,470,154"}</span>
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
-            )
-          )}
+            );
+          })}
         </div>
       </div>
 

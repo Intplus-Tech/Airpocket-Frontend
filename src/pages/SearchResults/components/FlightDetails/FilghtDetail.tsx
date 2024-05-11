@@ -9,8 +9,6 @@ import { convertTime, extractTime, formatDate } from "@/utils/monthDAys";
 // };
 
 const FilghtDetail = (singleFlight: SingleSearchResult) => {
-  console.log(singleFlight?.data);
-
   if (!singleFlight?.data) {
     return null;
   }
@@ -21,7 +19,6 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
   const departureTime = extractTime(departure.at);
   const arrivalTime = extractTime(arrival.at);
   const realTime = convertTime(duration);
-  console.log(segments[0]);
 
   return (
     <main>

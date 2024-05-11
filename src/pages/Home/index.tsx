@@ -16,8 +16,6 @@ const Home = () => {
   const result = useSelector((state: RootState) => state.search.result);
   const user = useSelector((state: RootState) => state.user.user);
 
-  console.log(user?._id, "id");
-
   if (isLoading) {
     return (
       <h1 className="w-fulll h-[100vh] text-4xl font-bold flex items-center justify-center">

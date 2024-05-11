@@ -38,7 +38,6 @@ const SignUp = () => {
   };
 
   const handleSignUp = async (data: FieldValues) => {
-    console.log(data);
     // const response = await signupAccount({
     //   ...data,
     //   phone: `+${phoneNumber}`,

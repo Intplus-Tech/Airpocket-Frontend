@@ -23,7 +23,6 @@ const SearchResults = () => {
   const searchQuery = useSelector((state: RootState) => state.search.query);
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
   const flightQuery = getItemFromStorage("flight-search-query");
-  console.log("fightfquery", flightQuery);
 
   useEffect(() => {
     if (!searchResult) {
@@ -65,12 +64,7 @@ const SearchResults = () => {
           </div>
           {/* Flight Tables */}
           <div className="h-full w-full ">
-            {searchResult ? (
-              <div>
-                <TableComponent />
-                <FlightAvailable availableFlight={searchResult} />
-              </div>
-            ) : (
+            {!searchResult || searchResult.data.length === 0 ? (
               <div className="w-full h-[100vh] flex  justify-center">
                 <div>
                   <Image
@@ -85,6 +79,11 @@ const SearchResults = () => {
                     Search on a different date
                   </p>
                 </div>
+              </div>
+            ) : (
+              <div>
+                <TableComponent />
+                <FlightAvailable availableFlight={searchResult} />
               </div>
             )}
           </div>
