@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { generateYears, getDaysInMonth, months } from "@/utils/monthDAys";
+import { getDaysInMonth, months } from "@/utils/monthDAys";
 import { countries } from "countries-list";
 import { countryList } from "@/types/typs";
 
@@ -10,7 +10,7 @@ type PassengerFormProps = {
   fields: any;
 };
 
-const PassengerForm = ({ index, register, field }: PassengerFormProps) => {
+const PassengerForm = ({ index, register }: PassengerFormProps) => {
   const [list, setList] = useState<countryList[]>([]);
   const currentDate = new Date();
 

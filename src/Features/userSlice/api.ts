@@ -24,7 +24,7 @@ export const loginAccount = async (data: User, dispatch: any) => {
   try {
     const response: any = await loginApi(data);
 
-    const cookies = response.headers["set-cookie"];
+    // const cookies = response.headers["set-cookie"];
 
     const { access_token, data: userData, message } = response.data;
     if (response.data) {

@@ -2,8 +2,6 @@ import React from "react";
 import { Minus, Plus } from "lucide-react";
 import { PassengersProps } from "@/types/typs";
 // import { setSearchQuery } from "@/Features/searchslice/reducers
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 
 type Props = {
   passengerNumber: {
@@ -23,7 +21,6 @@ const passengers: PassengersProps = [
 ];
 const PassengerType = ({ setPassengerNumber, passengerNumber }: Props) => {
   // const dispatch = useDispatch()
-  const searchQuery = useSelector((state: RootState) => state.search.query);
 
   const handleIncrease = (id: string) => {
     setPassengerNumber((prevCounts) => ({

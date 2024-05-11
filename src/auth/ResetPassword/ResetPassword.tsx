@@ -1,5 +1,5 @@
 // import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import Airpocket from "@/app/assets/airpocket.svg";
@@ -8,18 +8,18 @@ import { Image } from "@/components/Image/Index";
 // import { useResetPassword } from "./slice/query";
 // import { useToast } from "@/components/ui/use-toast";
 
-type Props = {
-  showSignInModal: boolean;
-};
+// type Props = {
+//   showSignInModal: boolean;
+// };
 
 const ResetPassword = () => {
   //   const { toast } = useToast();
 
-  const { register, reset, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
   const [showFirstPassword, setShowFirstPassword] = useState(false);
   const [showSecondPassword, setShowSecondPassword] = useState(false);
 
-  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [passwordMatch] = useState(true);
 
   const toggleShowFirstPassword = () => {
     setShowFirstPassword((prevState) => !prevState);

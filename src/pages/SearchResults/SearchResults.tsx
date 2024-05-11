@@ -20,7 +20,6 @@ import MobileFilters from "@/components/MobileFilters/MobileFilters";
 const SearchResults = () => {
   const dispatch = useDispatch();
   const searchResult = useSelector((state: RootState) => state.search.result);
-  const searchQuery = useSelector((state: RootState) => state.search.query);
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
   const flightQuery = getItemFromStorage("flight-search-query");
 

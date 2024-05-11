@@ -12,11 +12,12 @@ type Props = {
 
 const ForgetPassword = ({ setFormType }: Props) => {
   //   const { toast } = useToast();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
 
   //   const { mutateAsync: forgotPassword } = useForgotPassword();
 
   const handleForgotPassword = async (data: FieldValues) => {
+    console.log(data);
     // const response = await forgotPassword(data);
     // console.log(response);
     // if (response?.success) {

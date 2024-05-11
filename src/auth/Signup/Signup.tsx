@@ -21,7 +21,7 @@ interface countryList {
 [];
 
 const SignUp = () => {
-  const { register, reset, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -38,6 +38,7 @@ const SignUp = () => {
   };
 
   const handleSignUp = async (data: FieldValues) => {
+    console.log(data);
     // const response = await signupAccount({
     //   ...data,
     //   phone: `+${phoneNumber}`,

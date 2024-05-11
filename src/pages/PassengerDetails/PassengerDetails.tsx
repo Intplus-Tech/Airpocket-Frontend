@@ -20,6 +20,7 @@ export const PassengerDetails = ({
     null
   );
 
+  console.log(passengers);
   const flightSearchQuery = getItemFromStorage("flight-search-query");
   const { adult, children, infants } = flightSearchQuery;
   const inputsArray = Array.from(

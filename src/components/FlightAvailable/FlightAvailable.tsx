@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import Gulf from "../Table/assets/logo.svg";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useDebounce } from "use-debounce";
 import Select from "react-select";
 
@@ -14,7 +14,6 @@ import Test from "../../../assets/test1.png";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
-import { RootState } from "@/store/store";
 
 interface suggestionList {
   value: string;
@@ -196,7 +195,7 @@ const Hero = () => {
                   // isSearchable
                   placeholder=""
                   styles={{
-                    control: (baseStyles, state) => ({
+                    control: (baseStyles) => ({
                       ...baseStyles,
                       backgroundColor: "#e5edf1",
                       // zIndex: -10,
@@ -229,7 +228,7 @@ const Hero = () => {
                   isSearchable
                   placeholder=""
                   styles={{
-                    control: (baseStyles, state) => ({
+                    control: (baseStyles) => ({
                       ...baseStyles,
                       backgroundColor: "#e5edf1",
                       // zIndex: -10,

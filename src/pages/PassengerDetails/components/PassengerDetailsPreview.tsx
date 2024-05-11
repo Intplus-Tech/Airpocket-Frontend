@@ -32,30 +32,6 @@ const PassengerDetailsPreview = ({
   setCurrentStep,
   passengerFormData,
 }: PASSENGER_DETAILS_PREVIEW_PROPS) => {
-  const data = [
-    {
-      id: "1",
-      name: "Mrs. Nafisat Doe",
-      age_category: "Adult",
-      date_of_birth: "25/04/1987",
-      ticket_price: "NGN 11,470,154",
-    },
-    {
-      id: "2",
-      name: "Mrs. Nafisat Doe",
-      age_category: "Adult",
-      date_of_birth: "25/04/1987",
-      ticket_price: "NGN 11,470,154",
-    },
-    {
-      id: "3",
-      name: "Mrs. Nafisat Doe",
-      age_category: "Adult",
-      date_of_birth: "25/04/1987",
-      ticket_price: "NGN 11,470,154",
-    },
-  ];
-
   return (
     <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-4">
       <div className="text-sm md:text-base flex justify-between items-center pt-2 pb-4 border-b border-b-gray-300">

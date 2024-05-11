@@ -10,6 +10,7 @@ import { User } from "@/types/typs";
 import { getItemFromStorage } from "@/utils/locaStorage";
 
 function getSearchResultsApi(data: User) {
+  console.log(data);
   const url = `${SERVER_URL}/flight-search?originLocationCode=PAR&destinationLocationCode=EWR&departureDate=2024-10-21&adults=1&travelClass=FIRST&nonStop=false&max=2`;
   const options = {
     method: "GET",
