@@ -1,11 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { Suspense, lazy, useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  redirect,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.css";
 import { About, Flight, Layout, NotFound } from "./pages";
@@ -15,8 +10,6 @@ import Stepper from "./components/Stepper/Stepper";
 import AccountProfile from "./pages/Account/Account";
 import { Toaster } from "./components/ui/toaster";
 import { getItemFromStorage, storeItem } from "./utils/locaStorage";
-import { useSelector } from "react-redux";
-import { RootState } from "./store/store";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -27,8 +20,7 @@ const LoadingFallback = () => (
 );
 
 function App() {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-  const user = useSelector((state: RootState) => state.user.user);
+  const [, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
     const user = getItemFromStorage("user");
