@@ -15,9 +15,9 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
   const { itineraries, travelerPricings } = singleFlight?.data;
   const { segments, duration } = itineraries[0];
   const { departure } = segments[0];
-  const { arrival } = segments[segments.length - 1];
+  // const { arrival } = segments[segments.length - 1];
   const departureTime = extractTime(departure.at);
-  const arrivalTime = extractTime(arrival.at);
+  // const arrivalTime = extractTime(arrival.at);
   const realTime = convertTime(duration);
 
   return (
