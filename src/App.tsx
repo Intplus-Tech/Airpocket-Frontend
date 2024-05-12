@@ -59,13 +59,13 @@ function App() {
     };
 
     // Initially fetch access token
-    fetchAccessToken();
+    // fetchAccessToken();
 
     // Set up interval to fetch new access token every 29 minutes
-    const intervalId = setInterval(fetchAccessToken, 29 * 60 * 1000);
+    // const intervalId = setInterval(fetchAccessToken, 29 * 60 * 1000);
 
     // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import {
   startSearch,
 } from "./reducers";
 import { SERVER_URL } from "@/utils/apiUrl";
-import { User } from "@/types/typs";
+import { Generic, User } from "@/types/typs";
 import { getItemFromStorage } from "@/utils/locaStorage";
 
 function getSearchResultsApi(data: User) {
@@ -22,7 +22,7 @@ function getSearchResultsApi(data: User) {
   return axios(url, options);
 }
 
-function getsearchKeyWordApi(data: User) {
+function getsearchKeyWordApi(data: Generic) {
   const auto_complete_token = getItemFromStorage("auto_complete_token");
 
   const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=${data.key}`;

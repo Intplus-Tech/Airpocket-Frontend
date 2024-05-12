@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import FlightDetails from "@/components/FllightDetails/FlightDetail";
 import FlightDetailForm from "./components/FlightDetailForm";
@@ -22,6 +26,12 @@ export const PassengerDetails = ({
 
   console.log(passengers);
   const flightSearchQuery = getItemFromStorage("flight-search-query");
+  const isLoading = useSelector(
+    (state: RootState) => state.selectFlight.isLoading
+  );
+  const result = useSelector((state: RootState) => state.selectFlight.result);
+  console.log(result);
+
   const { adult, children, infants } = flightSearchQuery;
   const inputsArray = Array.from(
     { length: adult + children + infants },
@@ -45,15 +55,31 @@ export const PassengerDetails = ({
     <main className="max-w-screen-lg overflow-hidden mx-6 min-[1059px]:mx-auto  ">
       {/* SINGLE_FLIGHT_STOPS Details */}
 
-      <FlightDetails SINGLE_FLIGHT_DETAILS={SINGLE_FLIGHT_DETAILS} />
+      <div>
+        {isLoading ? (
+          <div className="border  h-[10rem]  px-1 py-1">
+            <Skeleton className="" count={5} />
+          </div>
+        ) : (
+          <FlightDetails SINGLE_FLIGHT_DETAILS={result} />
+        )}
+      </div>
 
       {/* SINGLE_FLIGHT_STOPS Details */}
       {step === "flightDetailsForm" ? (
-        <FlightDetailForm
-          inputsArray={inputsArray}
-          setStep={setStep}
-          setPassengerFormData={setPassengerFormData}
-        />
+        <div>
+          {isLoading ? (
+            <div className="border h-[10rem]  px-1 py-1">
+              <Skeleton className="" count={5} />
+            </div>
+          ) : (
+            <FlightDetailForm
+              inputsArray={inputsArray}
+              setStep={setStep}
+              setPassengerFormData={setPassengerFormData}
+            />
+          )}
+        </div>
       ) : (
         <PassengerDetailsPreview
           setStep={setStep}

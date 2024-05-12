@@ -76,10 +76,10 @@ const Hero = () => {
 
   const handleSearchFlight = async (data: FieldValues) => {
     console.log(data);
-    if (!depature?.value && !checkInDate) {
-      console.log("please input search query");
-      return;
-    }
+    // if (!depature?.value && !checkInDate) {
+    //   console.log("please input search query");
+    //   return;
+    // }
     searchFlight(
       {
         ...data,

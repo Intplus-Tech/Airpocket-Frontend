@@ -59,7 +59,7 @@ const Layout = () => {
 
           <div className="w-full flex justify-end">
             {user?._id ? (
-              <div className="text-white bg-[#1B96D6] px-4 py-2 ml-6 rounded-md cursor-pointer flex items-center gap-1 justify-between w-[10rem]">
+              <div className="text-white bg-[#1B96D6] px-4 py-2 ml-6 rounded-md cursor-pointer hidden md:flex items-center gap-1 justify-between w-[10rem]">
                 <Image src={User} alt="user" />
                 <p>john Doe</p>
                 <Image src={DownArrow} alt="arrow_down" />

@@ -44,3 +44,9 @@ export type UserDetail = {
   email: string;
   verified: boolean;
 };
+
+export interface selectFlightResult {
+  data: { [x: string]: any };
+  dictionaries: { [x: string]: any };
+  // Add other properties as needed
+}

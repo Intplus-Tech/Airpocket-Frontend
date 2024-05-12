@@ -1,33 +1,40 @@
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import Gulf from "../Table/assets/logo.svg";
 import { Image } from "../Image/Index";
-import { SearchResult } from "@/types/typs";
+import { Generic, SearchResult } from "@/types/typs";
 import Flight from "./assets/flight.svg";
 import FilghtDetail from "@/pages/SearchResults/components/FlightDetails/FilghtDetail";
 import { convertTime, extractTime, formatCurrency } from "@/utils/monthDAys";
 import Clock from "./assets/clock.svg";
-import { RootState } from "@/store/store";
-import { useToast } from "../ui/use-toast";
+// import { RootState } from "@/store/store";
+// import { useToast } from "../ui/use-toast";
+import { flightSelect } from "@/Features/selectFlight/api";
 
 type AvailableFlightData = {
   availableFlight: SearchResult;
 };
 const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
-  const { toast } = useToast();
-  const user = useSelector((state: RootState) => state.user.user);
+  // const { toast } = useToast();
+  // const user = useSelector((state: RootState) => state.user.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleBookAction = () => {
-    if (user?._id) {
-      navigate("/flight-details");
-    } else {
-      toast({
-        description: "Please Login to Continue",
-      });
-    }
+  const handleBookAction = (data: Generic) => {
+    console.log(data);
+    navigate("/flight-details");
+
+    flightSelect(data, dispatch);
+
+    // if (user?._id) {
+    //   navigate("/flight-details");
+    // } else {
+    //   toast({
+    //     description: "Please Login to Continue",
+    //   });
+    // }
   };
 
   return (
@@ -120,7 +127,7 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                       </p>
                       <p>
                         <button
-                          onClick={() => handleBookAction()}
+                          onClick={() => handleBookAction(flight)}
                           className="w-full px-8 py-2 whitespace-nowrap bg-[#1B96D6] rounded-md text-white text-sm"
                         >
                           Book Now
