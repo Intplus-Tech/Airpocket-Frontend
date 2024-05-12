@@ -45,13 +45,13 @@ const Places = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 place-items-center col-span-1 my-6 h-full">
         <div className="w-fit relative">
           <Image src={Water} alt="Water" className=" " />
-          <div className="absolute top-4 right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[180px] ">
+          <div className="absolute top-4 right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[220px] ">
             <Image
               src={SmallImage}
               alt="small image"
               // height={50}
               // width={50}
-              className="relative rounded-lg pb-4 h-[100px] w-full"
+              className="relative rounded-lg pb-4 "
             />
             <div className="font-bold text-[11px] flex items-center justify-between w-full">
               <span>culpa est similique</span>

@@ -27,7 +27,7 @@ const Hero = () => {
   const { handleSubmit } = useForm();
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
-  const [classType, setClassType] = useState("First class");
+  const [classType, setClassType] = useState("Economy");
   const [depature, setDeparute] = useState<suggestionList | null>(null);
   const [destination, setDestination] = useState<suggestionList | null>(null);
   const [openDestinationDropdown, setOpenDestinationDropdown] = useState(false);
@@ -39,13 +39,12 @@ const Hero = () => {
   const [passengerNumber, setPassengerNumber] = useState<{
     [key: string]: number;
   }>({
-    adult: 0,
+    adult: 1,
     children: 0,
     infants: 0,
   });
   const [value] = useDebounce(query, 500);
   // const user = useSelector((state:RootState)=>state.user.user)
-  console.log(checkInDate, checkOutDate);
   const handleChangeDepature = (selectedCountry: suggestionList | null) => {
     setDeparute(selectedCountry);
   };
@@ -76,6 +75,11 @@ const Hero = () => {
   }, [value]);
 
   const handleSearchFlight = async (data: FieldValues) => {
+    console.log(data);
+    if (!depature?.value && !checkInDate) {
+      console.log("please input search query");
+      return;
+    }
     searchFlight(
       {
         ...data,
@@ -127,7 +131,8 @@ const Hero = () => {
         <div className="bg-white shadow-sm md:shadow-lg rounded-md mt-4 lg:mt-6 px-6 py-6   w-full mx-auto">
           <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
             {/* all three */}
-            <div className="grid grid-cols-1 min-[576px]:grid-cols-2 gap-8 w-full sm:w-fit">
+            <div className="flex flex-col min-[576px]:flex-row gap-8 w-full sm:w-fit">
+              {/* grid grid-cols-1 min-[576px]:grid-cols-2 */}
               <div
                 onClick={() => setOpenDropdownType("trip")}
                 className=" rounded-md gap-2 relative sm:w-fit "
@@ -146,8 +151,8 @@ const Hero = () => {
                   )}
                 </div>
               </div>
-
-              <div className="flex items-center gap-2 md:gap-8 sm:ml-[-4rem] lg:ml-[-6rem] ">
+              <div className="flex items-center gap-2 md:gap-8  ">
+                {/* sm:ml-[-4rem] lg:ml-[-6rem] */}
                 <div
                   onClick={() => setOpenDropdownType("passenger")}
                   className="w-full sm:w-fit  relative  flex items-center justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base"

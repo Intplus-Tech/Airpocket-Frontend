@@ -10,15 +10,19 @@ import Login from "@/auth/Login/Login";
 import { RootState } from "@/store/store";
 import User from "./assets/user.svg";
 import DownArrow from "./assets/downarrow.svg";
+import Menu from "./assets/Menu.svg";
+import { useState } from "react";
+import MobileNav from "@/components/MobileNav/MobileNav";
 
 const Layout = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
 
   return (
     <div>
       <MaxWidthWrapper>
-        <section className="h-24 w-full flex justify-between items-center px-6 bg-transparent">
+        <section className="h-24 w-full flex justify-between items-center px-6 bg-transparent relative ">
           <div className=" w-full flex items-center md:gap-20 lg:gap-28">
             <Image
               src={Airpocket}
@@ -85,7 +89,14 @@ const Layout = () => {
                 </Dialog>
               </div>
             )}
+
+            <div className="md:hidden ">
+              <span onClick={() => setIsOpen(!isOpen)}>
+                <Image src={Menu} alt="Menu" className="cursor-pointer" />
+              </span>
+            </div>
           </div>
+          <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
         </section>
       </MaxWidthWrapper>
 
