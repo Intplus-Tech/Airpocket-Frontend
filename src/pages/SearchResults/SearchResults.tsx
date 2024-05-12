@@ -13,10 +13,6 @@ import { searchFlight } from "@/Features/searchslice/api";
 import { getItemFromStorage } from "@/utils/locaStorage";
 import MobileFilters from "@/components/MobileFilters/MobileFilters";
 
-// type searchResultProps = {
-//   setCurrentStep?: React.Dispatch<React.SetStateAction<string>>;
-// };
-
 const SearchResults = () => {
   const dispatch = useDispatch();
   const searchResult = useSelector((state: RootState) => state.search.result);
@@ -37,6 +33,7 @@ const SearchResults = () => {
   if (isLoading) {
     return <h1 className="font-bold text-4xl text-center">loading</h1>;
   }
+  // setIsCompleted(true);
 
   return (
     <main className="mb-8">

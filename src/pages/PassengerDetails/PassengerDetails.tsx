@@ -24,13 +24,11 @@ export const PassengerDetails = ({
     null
   );
 
-  console.log(passengers);
   const flightSearchQuery = getItemFromStorage("flight-search-query");
   const isLoading = useSelector(
     (state: RootState) => state.selectFlight.isLoading
   );
   const result = useSelector((state: RootState) => state.selectFlight.result);
-  console.log(result);
 
   const { adult, children, infants } = flightSearchQuery;
   const inputsArray = Array.from(
@@ -57,8 +55,32 @@ export const PassengerDetails = ({
 
       <div>
         {isLoading ? (
-          <div className="border  h-[10rem]  px-1 py-1">
-            <Skeleton className="" count={5} />
+          <div className="flex flex-col gap-1 border mb-4 rounded-md">
+            <div className=" flex gap-2  justify-between h-[6rem]  px-2 py-1">
+              <span className="h-fit">
+                <Skeleton className="w-[10rem] h-[5rem]" />
+              </span>
+              <span className="h-fit">
+                <Skeleton className="w-[10rem] h-[5rem]" />
+              </span>
+              <span className="h-fit">
+                <Skeleton className="w-[10rem] h-[5rem]" />
+              </span>
+              <span className="h-fit">
+                <Skeleton className="w-[10rem] h-[5rem]" />
+              </span>
+              <span className="h-fit">
+                <Skeleton className="w-[10rem] h-[5rem]" />
+              </span>
+            </div>
+            <div className="flex items-center justify-between px-2">
+              <span>
+                <Skeleton className=" w-[15rem]" />
+              </span>
+              <span>
+                <Skeleton className=" w-[10rem]" />
+              </span>
+            </div>
           </div>
         ) : (
           <FlightDetails SINGLE_FLIGHT_DETAILS={result} />

@@ -4,9 +4,11 @@ import FlightDetails from "@/components/FllightDetails/FlightDetail";
 import CardPayment from "./components/CardPayment";
 import { useState } from "react";
 import Transfer from "./components/Transfer";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 
 type paymentProps = {
-  setCurrentStep: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SINGLE_FLIGHT_DETAILS = {
@@ -24,9 +26,13 @@ const SINGLE_FLIGHT_DETAILS = {
 
 const Payment = ({ setCurrentStep }: paymentProps) => {
   const [selectedOption, setSelectedOption] = useState("option1");
+  const selectedFlight = useSelector(
+    (state: RootState) => state.selectFlight.result
+  );
+  const { price } = selectedFlight?.data.flightOffers[0];
   return (
     <main className="max-w-screen-lg overflow-hidden mx-6 min-[1059px]:mx-auto ">
-      <FlightDetails SINGLE_FLIGHT_DETAILS={SINGLE_FLIGHT_DETAILS} />
+      <FlightDetails SINGLE_FLIGHT_DETAILS={selectedFlight} />
 
       <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-8">
         <div className="flex justify-between items-center pt-2 pb-4 border-b border-b-gray-300">
@@ -97,7 +103,7 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
               Return to the previous step
             </button>
             <button
-              onClick={() => setCurrentStep("confirmation")}
+              onClick={() => setCurrentStep(4)}
               className="px-6 md:px-16 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
             >
               Complete Your booking

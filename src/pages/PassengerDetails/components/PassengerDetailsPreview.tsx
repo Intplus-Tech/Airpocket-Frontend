@@ -1,10 +1,13 @@
+import { RootState } from "@/store/store";
 import { Generic } from "@/types/typs";
+import { formatCurrency } from "@/utils/monthDAys";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 type PASSENGER_DETAILS_PREVIEW_PROPS = {
   setStep: React.Dispatch<React.SetStateAction<string>>;
-  setCurrentStep: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   passengerFormData: Generic | null;
 };
 
@@ -32,6 +35,12 @@ const PassengerDetailsPreview = ({
   setCurrentStep,
   passengerFormData,
 }: PASSENGER_DETAILS_PREVIEW_PROPS) => {
+  const selectedFlight = useSelector(
+    (state: RootState) => state.selectFlight.result
+  );
+  const { price } = selectedFlight?.data.flightOffers[0];
+  console.log(passengerFormData?.length, "passenger");
+
   return (
     <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-4">
       <div className="text-sm md:text-base flex justify-between items-center pt-2 pb-4 border-b border-b-gray-300">
@@ -50,9 +59,9 @@ const PassengerDetailsPreview = ({
                   <div>
                     <p className="flex items-center gap-x-2">
                       <FaUser />{" "}
-                      <span>{`${item.firstName} ${item.lastName}`}</span>
+                      <span className="capitalize">{`${item.firstName} ${item.lastName}`}</span>
                     </p>
-                    <div className="flex flex-col md:flex-row gap-x-6 gap-y-2">
+                    <div className="flex flex-col md:flex-row md:items-center gap-x-6 gap-y-2">
                       <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
                         <span className="text-xs text-gray-500">
                           Age Category:{" "}
@@ -68,10 +77,12 @@ const PassengerDetailsPreview = ({
                       </p>
 
                       <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs sm:text-[18px] text-gray-500">
                           Ticket Price:{" "}
                         </span>
-                        <span className="">{"11,470,154"}</span>
+                        <span className="">
+                          {formatCurrency(price.grandTotal)}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -92,9 +103,9 @@ const PassengerDetailsPreview = ({
             name=""
             id=""
             placeholder="discount code"
-            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
+            className="border border-gray-300 rounded-lg px-6 py-2 focus:outline-none"
           />
-          <button className="text-[#1D91CC] px-4 py-2 border border-[#1D91CC] rounded-lg">
+          <button className="text-[#1D91CC] px-6 py-2 border border-[#1D91CC] rounded-lg">
             Submit
           </button>
         </form>
@@ -115,13 +126,16 @@ const PassengerDetailsPreview = ({
           </button>
           <div className="flex items-center gap-x-1 md:gap-x-2 justify-between">
             <p>
-              Your Total Payment <span>NGN11,470,154</span>
+              Your Total Payment{" "}
+              <span>
+                {formatCurrency(price.grandTotal * passengerFormData?.length)}
+              </span>
             </p>
             <button
               onClick={() => {
-                setCurrentStep("paymentOption");
+                setCurrentStep(3);
               }}
-              className="px-2 min-w-fit text-white bg-[#1D91CC] py-1 rounded-lg"
+              className="px-3 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
             >
               Make Payment
             </button>

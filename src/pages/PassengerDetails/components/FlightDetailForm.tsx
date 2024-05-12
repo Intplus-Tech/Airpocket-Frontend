@@ -34,10 +34,15 @@ const FlightDetailForm = ({
   });
 
   const SubmitPassengerForm = (data: FieldValues) => {
-    const arrayOfObjects = Object.values(data).map((item, index) => ({
+    const arrayOfEntries = Object.entries(data);
+    const filteredArray = arrayOfEntries.filter(
+      ([_, value]) => !Array.isArray(value) || value.length > 0
+    );
+    const arrayOfObjects = filteredArray.map(([_, value], index) => ({
       id: index + 1,
-      ...item,
+      ...value,
     }));
+    console.log("passengerformData", arrayOfObjects);
     setPassengerFormData(arrayOfObjects);
   };
 

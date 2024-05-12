@@ -9,48 +9,71 @@ import {
 import payment from "@/components/Stepper/assets/payment.svg";
 import confirmation from "@/components/Stepper/assets/confirmation.svg";
 import { Image } from "../Image/Index";
+import Done from "./assets/Done.svg";
 
 const Stepper = () => {
-  const [currentStep, setCurrentStep] = useState("travellersDetail");
+  const [currentStep, setCurrentStep] = useState(2);
+  const [isCompleted, setIsCompleted] = useState(false);
+  console.log(currentStep);
 
   const CHECKOUT_STEPS = [
     {
-      name: "search Flights",
+      id: "1",
+      name: "Search Flights",
+      stepKey: "searchFlight",
       // Component: () => <SearchResults />,
       Img: confirmation,
     },
     {
-      name: "Travellers Detials",
+      id: "2",
+      stepKey: "travellersDetail",
+
+      name: "Traveller(s) Detials",
       // Component: () => <PassengerDetails passengers={2} />,
       Img: payment,
     },
     {
+      id: "3",
+      stepKey: "paymentOption",
+
       name: "Payment option",
       // Component: () => <Payment />,
       Img: payment,
     },
     {
-      name: "Delivered",
+      id: "4",
+      stepKey: "confirmation",
+
+      name: "Booking confirmation",
       // Component: () => <Confirmation />,
       Img: confirmation,
     },
   ];
 
-  const stepToRender = (key: string) => {
+  const stepToRender = (key: number) => {
     switch (key) {
-      case "searchFlight":
+      case 1:
         return <SearchResults />;
 
-      case "travellersDetail":
+      case 2:
         return (
           <PassengerDetails passengers={2} setCurrentStep={setCurrentStep} />
         );
 
-      case "paymentOption":
-        return <Payment setCurrentStep={setCurrentStep} />;
+      case 3:
+        return (
+          <Payment
+            setCurrentStep={setCurrentStep}
+            // setIsCompleted={setIsCompleted}
+          />
+        );
 
-      case "confirmation":
-        return <Confirmation />;
+      case 4:
+        return (
+          <Confirmation
+          // setIsCompleted={setIsCompleted}
+          />
+        );
 
       default:
         break;
@@ -59,31 +82,41 @@ const Stepper = () => {
 
   return (
     <section>
-      <div className="flex w-full justify-between max-w-screen-lg mx-auto items-center relative">
-        {CHECKOUT_STEPS.map((step) => (
-          // <div></div>
+      <div className="flex w-full justify-between max-w-screen-xl mx-auto items-center relative  overflow-hidden pt-2">
+        {CHECKOUT_STEPS.map((step, index) => (
           <div
             key={step.name}
-            // ref={(el) => (stepRef.current[index] = el)}
-            className=" flex items-center z-[50] justify-center mx-auto w-full"
+            className=" flex items-center z-[50] justify-center mx-auto w-[7rem] rounded-[50%] h-[7rem] bg-white"
           >
-            <div className=" flex flex-col items-center justify-center gap-4">
-              <p className="bg-[#EDEDED] rounded-[50%] h-14 w-14 flex items-center z-50 ">
-                <Image
-                  src={step.Img}
-                  alt={step.name}
-                  className="mx-auto h-8 w-8"
-                />
+            <div className=" flex flex-col items-center justify-center gap-4 ">
+              <p
+                className={`${
+                  currentStep > index + 1 ? "bg-[#E8F4FA]" : "bg-[#EDEDED]"
+                } rounded-[50%] h-14 w-14 flex items-center justify-center text-center z-50 `}
+              >
+                {currentStep > index + 1 ? (
+                  <Image src={Done} alt="completed" className="mx-auto " />
+                ) : (
+                  <Image src={step.Img} alt={step.name} className="mx-auto " />
+                )}
               </p>
-              <p className="text-center whitespace-nowrap text-sm">
+              <p
+                className={`text-center whitespace-nowrap text-sm  ${
+                  currentStep > index + 1 && "text-[#E8F4FA]"
+                } ${
+                  currentStep === index + 1
+                    ? "text-[#1D91CC] font-bold"
+                    : "text-[#ADADAD] "
+                }`}
+              >
                 {step.name}
               </p>
             </div>
           </div>
         ))}
 
-        <div className="absolute h-[1px] w-full mx-6  bg-gray-100 top-[30%] left-0">
-          <div className="h-full transition-all duration-300 ease-in mx-auto"></div>
+        <div className="absolute h-[0.1px] w-full   top-[35%] left-0">
+          <div className="h-full transition-all w-[80%]   bg-gray-100 duration-300 ease-in mx-auto "></div>
         </div>
       </div>
       <section className="my-8">{stepToRender(currentStep)}</section>
