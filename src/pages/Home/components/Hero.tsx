@@ -15,6 +15,7 @@ import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
 import { DatePickerComponent } from "@/components/DatePicker/DatePickerComponent";
+import { formatDateString } from "@/utils/monthDAys";
 
 interface suggestionList {
   value: string;
@@ -43,7 +44,8 @@ const Hero = () => {
     children: 0,
     infants: 0,
   });
-  const [value] = useDebounce(query, 500);
+
+  const [value] = useDebounce(query, 100);
   // const user = useSelector((state:RootState)=>state.user.user)
   const handleChangeDepature = (selectedCountry: suggestionList | null) => {
     setDeparute(selectedCountry);
@@ -59,6 +61,7 @@ const Hero = () => {
     setQuery(inputValue);
   };
 
+  console.log(checkInDate);
   const handleSearchKeyWork = async () => {
     const respnse = await searchKeyWord({ key: value });
 
@@ -76,15 +79,17 @@ const Hero = () => {
 
   const handleSearchFlight = async (data: FieldValues) => {
     console.log(data);
-    // if (!depature?.value && !checkInDate) {
-    //   console.log("please input search query");
-    //   return;
-    // }
+    if (!depature?.value && !checkInDate) {
+      console.log("please input search query");
+      return;
+    }
     searchFlight(
       {
         ...data,
         ...passengerNumber,
         travelClass: classType,
+        depatureDate: formatDateString(checkInDate),
+        returnDate: String(checkOutDate),
         originLocationCode: depature?.value,
         destinationLocationCode: destination?.value,
       },
@@ -96,8 +101,8 @@ const Hero = () => {
         travelClass: classType,
         originLocationCode: depature?.label,
         destinationLocationCode: destination?.label,
-        depatureDate: data.depatureDate,
-        returnDate: data.returnDate,
+        depatureDate: String(checkInDate),
+        returnDate: String(checkOutDate),
         adult: passengerNumber.adult,
         children: passengerNumber.children,
         infants: passengerNumber.infants,
@@ -108,8 +113,8 @@ const Hero = () => {
       travelClass: classType,
       originLocationCode: depature?.label,
       destinationLocationCode: destination?.label,
-      depatureDate: data.depatureDate,
-      returnDate: data.returnDate,
+      depatureDate: String(checkInDate),
+      returnDate: String(checkOutDate),
       adult: passengerNumber.adult,
       children: passengerNumber.children,
       infants: passengerNumber.infants,
@@ -121,7 +126,7 @@ const Hero = () => {
       <Image
         src={Test}
         alt="Airpocket hero image"
-        className="w-full h-[37rem] min-[576px]:h-[22rem] md:h-[30rem] rounded-lg mx-auto max-w-screen-2xl "
+        className="w-full h-[37rem] min-[576px]:h-[22rem] md:h-[30rem] rounded-lg mx-auto max-w-screen-2xl bg-slate-200 "
       />
       <div className="absolute top-[3%] sm:top-[4%] md:top-[15%] w-full px-6 md:px-14">
         <h1 className="capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">

@@ -12,7 +12,7 @@ import { Generic } from "@/types/typs";
 
 type PassengerDetialProp = {
   passengers: number;
-  setCurrentStep: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const PassengerDetails = ({

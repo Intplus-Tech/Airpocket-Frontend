@@ -3,15 +3,19 @@ import { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.css";
-import { About, Flight, Layout, NotFound } from "./pages";
-import SearchResults from "./pages/SearchResults/SearchResults";
+import { Layout, NotFound } from "./pages";
 import SignUp from "./auth/Signup/Signup";
 import Stepper from "./components/Stepper/Stepper";
-import AccountProfile from "./pages/Account/Account";
 import { Toaster } from "./components/ui/toaster";
 import { getItemFromStorage, storeItem } from "./utils/locaStorage";
 
 const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About/About.tsx"));
+const Flight = lazy(() => import("./pages/Flights/Flight.tsx"));
+const SearchResults = lazy(
+  () => import("./pages/SearchResults/SearchResults.tsx")
+);
+const AccountProfile = lazy(() => import("./pages/Account/Account.tsx"));
 
 const LoadingFallback = () => (
   <div className="w-full h-[100vh] flex items-center justify-center">

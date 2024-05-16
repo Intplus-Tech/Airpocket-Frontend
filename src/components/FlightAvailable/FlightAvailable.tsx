@@ -40,13 +40,13 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
   return (
     <main className="mt-6">
       <section className=" mb-4">
-        <div className="flex gap-4">
+        <div className="flex gap-4 py-4 items-center">
           <span className="text-sm font-bold">Sort By :</span>
           <span className="underline text-[#1B96D6]">Recommended</span>
           <span>Fastest</span> <span>cheapest</span>
         </div>
 
-        <article className="border rounded-md pb-3  min-w-full overflow-x-auto">
+        <article className="border rounded-md pb-3">
           {availableFlight?.data?.map((flight) => {
             const { itineraries, travelerPricings } = flight;
             const { segments, duration } = itineraries[0];
@@ -93,7 +93,7 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                     <Image src={Flight} alt="Flight" height={70} width={100} />
                     <p className="flex gap-1">
                       <span className="text-[#868686] text-center text-sm">
-                        {` ${segments.length} stops`}
+                        {` ${segments.length - 1} stops`}
                       </span>
                       <span className="text-[#868686] text-center text-sm">
                         {travelerPricings[0].fareDetailsBySegment[0].cabin}

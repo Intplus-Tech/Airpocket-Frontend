@@ -19,9 +19,8 @@ const ClassType = ({ setClassType, setOpenDropdownType }: ClassTypProps) => {
   };
 
   const handleclick = (text: string) => {
-    selectClassType(text);
+    selectClassType(text.toUpperCase());
     setOpenDropdownType(null);
-    console.log("hey");
   };
 
   return (

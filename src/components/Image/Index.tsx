@@ -7,6 +7,8 @@ type ImageProps = {
   rest?: ReactNode;
   height?: number;
   width?: number;
+  handleError?: () => void;
+  handleLoad?: () => void;
 };
 
 export function Image({ className, src, alt, ...rest }: ImageProps) {
@@ -23,14 +25,14 @@ export function Image({ className, src, alt, ...rest }: ImageProps) {
 
   return (
     <div className="flex">
-      {loading && (
+      {/* {loading && (
         <div className="w-full flex items-center justify-center">
           Loading...
         </div>
-      )}
+      )} */}
       <img
         className={className}
-        // loading="lazy"
+        loading="lazy"
         src={src}
         alt={alt}
         onLoad={handleLoad}
@@ -41,3 +43,5 @@ export function Image({ className, src, alt, ...rest }: ImageProps) {
     </div>
   );
 }
+
+//made teh onload functiona a prop and add a skeleton loader when it's not loaded yet

@@ -8,10 +8,12 @@ import {
 import { SERVER_URL } from "@/utils/apiUrl";
 import { Generic, User } from "@/types/typs";
 import { getItemFromStorage } from "@/utils/locaStorage";
+import { LIMIT_FIVE } from "@/utils/Constant";
 
 function getSearchResultsApi(data: User) {
+  console.log("dat", data);
   console.log(data);
-  const url = `${SERVER_URL}/flight-search?originLocationCode=PAR&destinationLocationCode=EWR&departureDate=2024-10-21&adults=1&travelClass=FIRST&nonStop=false&max=2`;
+  const url = `${SERVER_URL}/flight-search?originLocationCode=${data.originLocationCode}&destinationLocationCode=${data.destinationLocationCode}&departureDate=${data.depatureDate}&adults=1&travelClass=ECONOMY&nonStop=false&max=${LIMIT_FIVE}`;
   const options = {
     method: "GET",
     headers: {

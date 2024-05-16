@@ -9,6 +9,7 @@ import { convertTime, extractTime, formatDate } from "@/utils/monthDAys";
 // };
 
 const FilghtDetail = (singleFlight: SingleSearchResult) => {
+  console.log(singleFlight);
   if (!singleFlight?.data) {
     return null;
   }
@@ -48,18 +49,22 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
 
         {/* stops */}
         <div className="mt-4">
-          <div className="flex items-center justify-between">
-            <p className="w-full">
-              <span className="font-bold px-1"> {departureTime}</span>
-              {segments[0].departure.iataCode}
-            </p>
-            <p className="w-full">{formatDate(segments[0].departure.at)}</p>
+          {segments.map((stop: any) => {
+            return (
+              <div className="flex items-center justify-between">
+                <p className="w-full">
+                  <span className="font-bold px-1"> {departureTime}</span>
+                  {segments[0]?.departure.iataCode}
+                </p>
+                <p className="w-full">{formatDate(segments[0].departure.at)}</p>
 
-            <p className="flex flex-col w-full">
-              <span>Price Per Adult ₦11.742,342</span>
-              <span>Price Per Child ₦11.742,342</span>
-            </p>
-          </div>
+                <p className="flex flex-col w-full">
+                  <span>Price Per Adult ₦11.742,342</span>
+                  <span>Price Per Child ₦11.742,342</span>
+                </p>
+              </div>
+            );
+          })}
 
           <div className="mt-6 flex gap-4 items-center">
             <span>
@@ -72,11 +77,11 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
           <div className="flex items-center gap-2 my-5">
             <p>
               <span className="font-bold pr-3">
-                {extractTime(segments[1].departure.at)}
+                {extractTime(segments[1]?.departure.at)}
               </span>
-              {segments[1].departure.iataCode}
+              {segments[1]?.departure.iataCode}
             </p>
-            <p>{formatDate(segments[1].departure.at)} </p>
+            <p>{formatDate(segments[1]?.departure.at)} </p>
           </div>
 
           <div>
