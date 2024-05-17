@@ -45,7 +45,7 @@ const Hero = () => {
     infants: 0,
   });
 
-  const [value] = useDebounce(query, 100);
+  const [value] = useDebounce(query, 500);
   // const user = useSelector((state:RootState)=>state.user.user)
   const handleChangeDepature = (selectedCountry: suggestionList | null) => {
     setDeparute(selectedCountry);
@@ -89,7 +89,7 @@ const Hero = () => {
         ...passengerNumber,
         travelClass: classType,
         depatureDate: formatDateString(checkInDate),
-        returnDate: String(checkOutDate),
+        returnDate: formatDateString(checkOutDate),
         originLocationCode: depature?.value,
         destinationLocationCode: destination?.value,
       },
@@ -111,10 +111,14 @@ const Hero = () => {
 
     storeItem("flight-search-query", {
       travelClass: classType,
-      originLocationCode: depature?.label,
-      destinationLocationCode: destination?.label,
-      depatureDate: String(checkInDate),
-      returnDate: String(checkOutDate),
+      originLocationCode: depature?.value,
+      destinationLocationCode: destination?.value,
+      originLocation: depature?.label,
+      destinationLocation: destination?.label,
+      depatureDate: formatDateString(checkInDate),
+      returnDate: formatDateString(checkOutDate),
+      depatureTimeDate: String(checkInDate),
+      returnTimeDate: String(checkOutDate),
       adult: passengerNumber.adult,
       children: passengerNumber.children,
       infants: passengerNumber.infants,

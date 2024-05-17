@@ -91,8 +91,8 @@ export const PassengerDetails = ({
       {step === "flightDetailsForm" ? (
         <div>
           {isLoading ? (
-            <div className="border h-[10rem]  px-1 py-1">
-              <Skeleton className="" count={5} />
+            <div className="border h-full px-1 py-1">
+              <Skeleton className="h-[3rem] my-4" count={5} />
             </div>
           ) : (
             <FlightDetailForm

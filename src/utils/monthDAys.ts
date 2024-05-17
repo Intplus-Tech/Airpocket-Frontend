@@ -53,7 +53,7 @@ type TimeFormat = {
   minutes: number;
 };
 
-export function convertTime(timeString: string): TimeFormat | null {
+export function convertTime(timeString: string): TimeFormat | any {
   const regex = /PT(\d+)H(\d+)M/;
   const match = timeString.match(regex);
 
@@ -63,7 +63,7 @@ export function convertTime(timeString: string): TimeFormat | null {
     const minutes = parseInt(match[2], 10);
     return { hours, minutes };
   } else {
-    return null;
+    return "N/A";
   }
 }
 

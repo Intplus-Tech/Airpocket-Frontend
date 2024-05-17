@@ -86,8 +86,8 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                     <p className="flex gap-1 items-center">
                       <Image src={Clock} alt="clock" />
                       <span className="text-[#868686] text-center text-sm">
-                        {` ${realTime?.hours}hrs`}
-                        {` ${realTime?.minutes}mins`}
+                        {`${realTime?.hours}hrs  ${realTime?.minutes}mins` ||
+                          "N/A"}
                       </span>
                     </p>
                     <Image src={Flight} alt="Flight" height={70} width={100} />
@@ -116,7 +116,7 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                           View Details
                         </p>
                       </DialogTrigger>
-                      <DialogContent className="max-w-2xl">
+                      <DialogContent className="w-full px-6 overflow-y-auto max-h-[80vh] bg-slate-50">
                         <FilghtDetail data={flight} />
                       </DialogContent>
                     </Dialog>

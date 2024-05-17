@@ -20,25 +20,26 @@ const SearchParams = () => {
                 Departure
               </p>
               <p className="font-bold text-sm">
-                {flightSearchQuery.originLocationCode}
+                {flightSearchQuery.originLocation}
               </p>
             </div>
             <div className="flex flex-col justify-center items-center h-full">
               <p className="text-sm text-[#404040]">Destination</p>
               <p className="font-bold text-sm">
-                {flightSearchQuery.destinationLocationCode}
+                {flightSearchQuery.destinationLocation}
               </p>
             </div>
             <div className="flex flex-col justify-center items-center h-full">
               <p className="text-sm text-[#404040]">Departing</p>
               <p className="font-bold text-sm">
-                {formatDateWithDateFns(flightSearchQuery.depatureDate)}
+                {formatDateWithDateFns(flightSearchQuery.depatureTimeDate)}
               </p>
             </div>
             <div className="flex flex-col justify-center items-center h-full">
               <p className="text-sm text-[#404040]">Returning</p>
               <p className="font-bold text-sm">
-                {formatDateWithDateFns(flightSearchQuery.returnData) || "N/A"}
+                {formatDateWithDateFns(flightSearchQuery.returnTimeData) ||
+                  "N/A"}
               </p>
             </div>
             <div className="flex flex-col justify-center items-center h-full">
@@ -56,7 +57,7 @@ const SearchParams = () => {
           <div className=" flex flex-col md:hidden  justify-center flex-[5]">
             <div className="flex items-center gap-4 py-2 ">
               <p className="font-bold text-sm  md:text-xl capitalize w-fit text-center ">
-                {flightSearchQuery.originLocationCode || "lagos"}
+                {flightSearchQuery.originLocation || "lagos"}
               </p>
               <Image
                 src={ToandFro}
@@ -66,7 +67,7 @@ const SearchParams = () => {
                 className=" shrink-0 flex"
               />
               <p className="font-bold text-sm md:text-xl capitalize ">
-                {flightSearchQuery.destinationLocationCode || "Abuja"}
+                {flightSearchQuery.destinationLocation || "Abuja"}
               </p>
             </div>
 
@@ -79,7 +80,8 @@ const SearchParams = () => {
               </p>
               <p className="text-sm font-bold px-[5px] ">-</p>
               <p className=" text-[10px] sm:text-base pr-[5px] capitalize">
-                {formatDateWithDateFns(flightSearchQuery.returnData) || "N/A"}
+                {formatDateWithDateFns(flightSearchQuery.returnTimeData) ||
+                  "N/A"}
               </p>
               <p className="h-[20px] w-[2px] bg-[#ABABAB] text-[#ABABAB] mx-1"></p>
               <p className="font-bold text-[10px] sm:text-base">

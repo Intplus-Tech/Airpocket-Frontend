@@ -50,3 +50,9 @@ export interface selectFlightResult {
   dictionaries: { [x: string]: any };
   // Add other properties as needed
 }
+
+export type FlightTableData = {
+  carrierCode: string;
+  price: number;
+  stops: string;
+};

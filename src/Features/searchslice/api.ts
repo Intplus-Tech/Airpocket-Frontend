@@ -44,7 +44,7 @@ export const searchFlight = async (data: User, dispatch: any) => {
   try {
     const response: any = await getSearchResultsApi(data);
 
-    dispatch(searchResultSuccess(response.data.data));
+    dispatch(searchResultSuccess(response.data));
 
     return { success: { ...response } };
   } catch (error) {

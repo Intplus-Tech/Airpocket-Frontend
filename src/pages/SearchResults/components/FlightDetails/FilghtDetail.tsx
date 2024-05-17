@@ -22,8 +22,8 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
   const realTime = convertTime(duration);
 
   return (
-    <main>
-      <div className=" mt-4 border-b pb-2  flex gap-4">
+    <main className="h-full w-full ">
+      <div className=" mt-4 border-b pb-2 flex gap-4 z-50">
         <p>Flight Information</p>
         <p>General Information</p>
       </div>
@@ -49,23 +49,28 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
 
         {/* stops */}
         <div className="mt-4">
-          {segments.map((stop: any) => {
+          {segments.map((segment: any) => {
             return (
-              <div className="flex items-center justify-between">
-                <p className="w-full">
-                  <span className="font-bold px-1"> {departureTime}</span>
-                  {segments[0]?.departure.iataCode}
-                </p>
-                <p className="w-full">{formatDate(segments[0].departure.at)}</p>
-
+              <div className="flex flex-col gap-2">
+                <div className="flex">
+                  <p className="w-full flex gap-4">
+                    <span className=" font-bold px-1">{departureTime}</span>
+                    <span> {segment?.departure.iataCode}</span>
+                  </p>
+                  <p className="w-full">{formatDate(segment.departure.at)}</p>
+                </div>
+                <span>
+                  <Image src={Flight} alt="Flight logo" />
+                </span>
+                {/* 
                 <p className="flex flex-col w-full">
                   <span>Price Per Adult ₦11.742,342</span>
                   <span>Price Per Child ₦11.742,342</span>
-                </p>
+                </p> */}
               </div>
             );
           })}
-
+          {/* 
           <div className="mt-6 flex gap-4 items-center">
             <span>
               <Image src={Flight} alt="Flight logo" />
@@ -73,8 +78,8 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
             <span className="text-[#A9791C] bg-[#FFF8E1] pl-8 h-fit flex items-center py-2 px-4">
               Stopover in Amman, Queen Alia Airport
             </span>
-          </div>
-          <div className="flex items-center gap-2 my-5">
+          </div> */}
+          {/* <div className="flex items-center gap-2 my-5">
             <p>
               <span className="font-bold pr-3">
                 {extractTime(segments[1]?.departure.at)}
@@ -82,13 +87,13 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
               {segments[1]?.departure.iataCode}
             </p>
             <p>{formatDate(segments[1]?.departure.at)} </p>
-          </div>
+          </div> */}
 
-          <div>
+          {/* <div>
             <span>
               <Image src={Flight} alt="Flight logo" />
             </span>
-          </div>
+          </div> */}
 
           <div className="flex items-center gap-2 my-5">
             <p>
