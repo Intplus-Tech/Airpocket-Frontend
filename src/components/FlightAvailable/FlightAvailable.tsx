@@ -12,6 +12,7 @@ import Clock from "./assets/clock.svg";
 // import { RootState } from "@/store/store";
 // import { useToast } from "../ui/use-toast";
 import { flightSelect } from "@/Features/selectFlight/api";
+import { useState } from "react";
 
 type AvailableFlightData = {
   availableFlight: SearchResult;

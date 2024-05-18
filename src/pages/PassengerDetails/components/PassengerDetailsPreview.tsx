@@ -39,15 +39,14 @@ const PassengerDetailsPreview = ({
     (state: RootState) => state.selectFlight.result
   );
   const { price } = selectedFlight?.data.flightOffers[0];
-  console.log(passengerFormData?.length, "passenger");
 
   return (
     <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-4">
       <div className="text-sm md:text-base flex justify-between items-center pt-2 pb-4 border-b border-b-gray-300">
         <h4 className="font-semibold">Passenger Details</h4>
-        <p className="flex gap-x-2 items-center">
+        {/* <p className="flex gap-x-2 items-center">
           Time Left: <span className="text-red-500">07:23</span>
-        </p>
+        </p> */}
       </div>
 
       <div className="py-4 text-sm md:text-base pt-2 pb-4 border-b border-b-gray-300">
@@ -93,7 +92,7 @@ const PassengerDetailsPreview = ({
         </div>
       </div>
 
-      <div className="text-sm pt-6 pb-5 space-y-3 border-b border-b-gray-300">
+      {/* <div className="text-sm pt-6 pb-5 space-y-3 border-b border-b-gray-300">
         <p className="text-gray-600 px-4">
           If you have a discount code, enter it and hit the Submit button.
         </p>
@@ -109,13 +108,13 @@ const PassengerDetailsPreview = ({
             Submit
           </button>
         </form>
-      </div>
+      </div> */}
 
       <div className="text-sm py-4 px-2 space-y-2">
-        <div className="flex gap-x-2 items-center">
+        {/* <div className="flex gap-x-2 items-center">
           <input type="checkbox" name="" id="" />
           <p>Using wallet balance</p>
-        </div>
+        </div> */}
         <div className="md:flex w-full gap-x-4 items-center justify-between space-y-2 md:space-y-0 text-[#1D91CC]">
           <button
             onClick={() => setStep("flightDetailsForm")}
@@ -137,7 +136,8 @@ const PassengerDetailsPreview = ({
               }}
               className="px-3 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
             >
-              Make Payment
+              Continue
+              {/* Make Payment */}
             </button>
           </div>
         </div>

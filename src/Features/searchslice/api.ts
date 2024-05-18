@@ -13,7 +13,7 @@ import { LIMIT_FIVE } from "@/utils/Constant";
 function getSearchResultsApi(data: User) {
   console.log("dat", data);
   console.log(data);
-  const url = `${SERVER_URL}/flight-search?originLocationCode=${data.originLocationCode}&destinationLocationCode=${data.destinationLocationCode}&departureDate=${data.depatureDate}&adults=1&travelClass=ECONOMY&nonStop=false&max=${LIMIT_FIVE}`;
+  const url = `${SERVER_URL}/flight-search?originLocationCode=${data.originLocationCode}&destinationLocationCode=${data.destinationLocationCode}&departureDate=${data.depatureDate}&returnDate=${data.returnDate}&adults=1&travelClass=${data.travelClass}&nonStop=false&max=${LIMIT_FIVE}`;
   const options = {
     method: "GET",
     headers: {

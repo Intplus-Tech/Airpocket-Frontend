@@ -13,6 +13,9 @@ import { FieldValues, useForm } from "react-hook-form";
 
 import Logo from "../../assets/logo.jpeg";
 import { Image } from "@/components/Image/Index";
+import { useToast } from "@/components/ui/use-toast";
+import { signUpAccount } from "@/Features/userSlice/api";
+import { useDispatch } from "react-redux";
 
 interface countryList {
   value: string;
@@ -21,7 +24,14 @@ interface countryList {
 [];
 
 const SignUp = () => {
-  const { register, handleSubmit } = useForm();
+  const { toast } = useToast();
+  const dispatch = useDispatch();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -32,32 +42,41 @@ const SignUp = () => {
     null
   );
   const [countryOptions, setCountryOptions] = useState<countryList[]>([]);
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleChange = (selectedCountry: countryList | null) => {
     setSelectedOption(selectedCountry);
   };
 
+  const handleChangePhoneNumber = (value: string) => {
+    setPhoneNumber(value);
+  };
+  console.log(errors);
+
   const handleSignUp = async (data: FieldValues) => {
-    console.log(data);
-    // const response = await signupAccount({
-    //   ...data,
-    //   phone: `+${phoneNumber}`,
-    //   country: selectedOption?.label,
-    // });
-    // if (response?.success) {
-    //   toast({
-    //     // variant: "success",
-    //     title: `${response.success.status}|| Success`,
-    //     description: `${response.success.message}`,
-    //   });
-    //   reset();
-    // } else {
-    //   toast({
-    //     // variant: "success",
-    //     title: `${response?.error.status}`,
-    //     description: `${response?.error.message}`,
-    //   });
-    // }
+    const response = await signUpAccount(
+      {
+        ...data,
+        phone: `+${phoneNumber}`,
+        country: selectedOption?.label,
+      },
+      dispatch
+    );
+    console.log(response.error);
+    if (response?.success) {
+      toast({
+        // variant: "success",ss
+        title: `Success`,
+        // description: `${response.success.message}`,
+      });
+      reset();
+    } else {
+      toast({
+        // variant: "success",
+        // title: `${response?.error.status}`,
+        // description: `${response?.error.message}`,
+      });
+    }
   };
 
   useEffect(() => {
@@ -83,27 +102,49 @@ const SignUp = () => {
           </p>
         </div>
         <form onSubmit={handleSubmit(handleSignUp)}>
-          <div className="space-y-6 mt-10">
+          <div className="space-y-6 mt-6">
             <div className="flex gap-6">
               <div className="relative">
                 <input
                   type="text"
-                  {...register("firstname")}
+                  {...register("firstname", {
+                    required: "Firstname is required",
+                    minLength: {
+                      value: 4,
+                      message: "Firstname must be at least 4 characters long",
+                    },
+                  })}
                   className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
                 />
                 <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                   First Name
                 </p>
+                {errors.firstname && (
+                  <p className="text-red-500">
+                    {errors.firstname.message as string}
+                  </p>
+                )}
               </div>
               <div className="relative">
                 <input
                   type="text"
-                  {...register("lastname")}
-                  className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
+                  {...register("lastname", {
+                    required: "lastname is required",
+                    minLength: {
+                      value: 4,
+                      message: "lastname must be at least 4 characters long",
+                    },
+                  })}
+                  className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-1.5 focus:outline-none text-[#1D91CC]"
                 />
                 <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                   Last Name
                 </p>
+                {errors.lastname && (
+                  <p className="text-red-500">
+                    {errors.lastname.message as string}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -114,8 +155,10 @@ const SignUp = () => {
 								/> */}
               <PhoneInput
                 country={"ng"}
-                inputClass="!border !border-gray-400 !focus:border-[#1D91CC] rounded-lg !w-full !h-10 px-4 py-2 focus:outline-none text-black"
+                inputClass="!border !border-gray-400 !focus:border-[#1D91CC] rounded-lg !w-full !h-10 px-4 py-1.5 focus:outline-none text-black"
                 containerClass="peer"
+                value={phoneNumber}
+                onChange={handleChangePhoneNumber}
                 placeholder="+234 8000000000"
               />
 
@@ -124,7 +167,7 @@ const SignUp = () => {
               </p>
             </div>
 
-            <div className="relative">
+            {/* <div className="relative">
               <select
                 // type="text"
                 className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none "
@@ -136,9 +179,9 @@ const SignUp = () => {
               <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Gender
               </p>
-            </div>
+            </div> */}
 
-            <div className="relative">
+            {/* <div className="relative">
               <Select
                 options={countryOptions}
                 onChange={handleChange}
@@ -150,24 +193,33 @@ const SignUp = () => {
               <p className="peer-focus-within:text-[#1D91CC] outline-none text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Country
               </p>
-            </div>
+            </div> */}
 
             <div className="relative">
               <input
                 type="email"
-                {...register("email")}
-                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Invalid email address",
+                  },
+                })}
+                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-1.5 focus:outline-none text-[#1D91CC]"
               />
               <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Email address
               </p>
+              {errors.email && (
+                <p className="text-red-500">{errors.email.message as string}</p>
+              )}
             </div>
 
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 {...register("password")}
-                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
+                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-1.5 focus:outline-none text-[#1D91CC]"
               />
               <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Password
@@ -188,7 +240,7 @@ const SignUp = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 {...register("passwordConfirm")}
-                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
+                className="peer border border-gray-400 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-1.5 focus:outline-none text-[#1D91CC]"
               />
               <p className="peer-focus:text-[#1D91CC] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Confirm Password
@@ -206,7 +258,7 @@ const SignUp = () => {
             </div>
           </div>
           {/* <div className="flex text-xs justify-between item-center "> */}
-          <div className="space-x-1 text-xs flex items-start mt-2 text-gray-500">
+          <div className="space-x-1 text-xs flex items-start mt-1.5 text-gray-500">
             <input type="checkbox" name="" id="" className="mt-1 mr-2" />
             <span>
               By entering and registering on the site, I agree to our{" "}
@@ -216,10 +268,10 @@ const SignUp = () => {
             </span>
           </div>
           {/* </div> */}
-          <button className="bg-gray-100 w-full rounded-md p-3 text-gray-500 mt-5">
+          <button className="bg-gray-100 w-full rounded-md p-3 text-gray-500 mt-3">
             Sign Up
           </button>
-          <div className="text-sm flex  items-center gap-3 justify-center py-4 text-gray-500">
+          <div className="text-sm flex  items-center gap-3 justify-center py-2 text-gray-500">
             <button>Already have an account?</button>
             <Link to="/sign-in" className="text-SecondaryColor">
               Login

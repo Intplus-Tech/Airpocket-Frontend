@@ -4,12 +4,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import searchSlice from "@/Features/searchslice/reducers";
 import userSlice from "@/Features/userSlice/reducer";
 import selectFlight from "@/Features/selectFlight/reducer";
+import paymentSlice from "@/Features/paymentSlice/reducer";
 
 export const store = configureStore({
   reducer: {
     search: searchSlice,
     user: userSlice,
     selectFlight: selectFlight,
+    payment: paymentSlice,
   },
 });
 

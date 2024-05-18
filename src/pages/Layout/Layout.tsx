@@ -65,7 +65,7 @@ const Layout = () => {
                 <Image src={DownArrow} alt="arrow_down" />
               </div>
             ) : (
-              <div className="w-full hidden items-center justify-end md:flex gap-4">
+              <div className="w-full h-full hidden items-center justify-end md:flex gap-4">
                 <Dialog>
                   <DialogTrigger>
                     <button className="px-4 py-2 hover:shadow-md rounded-md">
@@ -83,7 +83,7 @@ const Layout = () => {
                       Sign Up
                     </button>
                   </DialogTrigger>
-                  <DialogContent className=" overflow-y-auto min-h-full max-h-[50%] ">
+                  <DialogContent className=" w-full flex item center justify-center h-fit my-4">
                     <SignUp />
                   </DialogContent>
                 </Dialog>

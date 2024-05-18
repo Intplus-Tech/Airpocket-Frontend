@@ -3,33 +3,38 @@ import { IoMdArrowBack } from "react-icons/io";
 import FlightDetails from "@/components/FllightDetails/FlightDetail";
 import CardPayment from "./components/CardPayment";
 import { useState } from "react";
-import Transfer from "./components/Transfer";
+// import Transfer from "./components/Transfer";
 import { RootState } from "@/store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFlightResult } from "@/types/typs";
+import { getItemFromStorage } from "@/utils/locaStorage";
+import { payment } from "@/Features/paymentSlice/api";
 
-type paymentProps = {
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-};
+// type paymentProps = {
+//   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+// };
 
-const SINGLE_FLIGHT_DETAILS = {
-  id: "1",
-  airline: "Arik Air",
-  departureTime: "02:50",
-  arrivalTime: "21:15",
-  arrivalDay: "Monday, September 6",
-  departure: "INSTABUL-(IST)",
-  destination: "Dubai",
-  estimatedTime: "01:20 mins",
-  desc: "20kg 0 stops Economy ",
-  price: "₦",
-};
-
-const Payment = ({ setCurrentStep }: paymentProps) => {
+const Payment = () => {
+  const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState("option1");
-  const selectedFlight = useSelector(
+  const selectedFlight: selectFlightResult | null = useSelector(
     (state: RootState) => state.selectFlight.result
   );
+  const { adult, children, infants } = getItemFromStorage(
+    "flight-search-query"
+  ) || { adult: 0, children: 0, infant: 0 };
   const { price } = selectedFlight?.data.flightOffers[0];
+  const {
+    contact_info: { email },
+  } = getItemFromStorage("passenger_form");
+
+  const handlePayment = () => {
+    payment(
+      { email, amount: price.grandTotal * (adult + children + infants) },
+      dispatch
+    );
+  };
+
   return (
     <main className="max-w-screen-lg overflow-hidden mx-6 min-[1059px]:mx-auto ">
       <FlightDetails SINGLE_FLIGHT_DETAILS={selectedFlight} />
@@ -42,9 +47,6 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
               (Confirm now to secure your reservation)
             </p>
           </div>
-          <p className="flex gap-x-2 items-center min-w-fit">
-            Time Left: <span className="text-red-500">07:23</span>
-          </p>
         </div>
 
         <div className="py-4 pb-4 border-b border-b-gray-300 md:flex justify-between space-y-8 md:space-y-0">
@@ -91,9 +93,13 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
             </form>
           </div>
 
-          {selectedOption === "option1" && <CardPayment />}
-          {selectedOption === "option2" && <CardPayment />}
-          {selectedOption === "option3" && <Transfer />}
+          {selectedOption === "option1" && (
+            <CardPayment amount={price.grandTotal} />
+          )}
+          {selectedOption === "option2" && (
+            <CardPayment amount={price.grandTotal} />
+          )}
+          {/* {selectedOption === "option3" && <Transfer />} */}
         </div>
 
         <div className="text-sm py-8 px-2">
@@ -103,10 +109,11 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
               Return to the previous step
             </button>
             <button
-              onClick={() => setCurrentStep(4)}
+              onClick={handlePayment}
               className="px-6 md:px-16 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
             >
-              Complete Your booking
+              Make payment
+              {/* Complete Your booking */}
             </button>
           </div>
         </div>

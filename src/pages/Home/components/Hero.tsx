@@ -87,7 +87,7 @@ const Hero = () => {
       {
         ...data,
         ...passengerNumber,
-        travelClass: classType,
+        travelClass: classType.toUpperCase(),
         depatureDate: formatDateString(checkInDate),
         returnDate: formatDateString(checkOutDate),
         originLocationCode: depature?.value,
