@@ -4,7 +4,7 @@ import {
   loginSuccess,
   login,
   loginError,
-  signUpSuccess,
+  // signUpSuccess,
   signUp,
   signUpError,
 } from "./reducer";
