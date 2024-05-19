@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FilterProps } from "@/types/typs";
-import { extractHour, formatCurrency } from "@/utils/monthDAys";
+import { formatCurrency } from "@/utils/monthDAys";
 
 type PriceRangeFilters = {
   filters: FilterProps;

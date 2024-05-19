@@ -50,7 +50,6 @@ const Payment = () => {
   };
 
   useEffect(() => {
-    console.log("request fired");
     flightSelect(flightSelected, dispatch);
   }, []);
 

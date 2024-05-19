@@ -64,10 +64,9 @@ export const signUpAccount = async (data: User, dispatch: any) => {
 
   try {
     const response: any = await signUpApi(data);
-    console.log(response);
     // const cookies = response.headers["set-cookie"];
 
-    const { access_token, data: userData, message } = response.data;
+    const { data: userData, message } = response.data;
     if (response.data) {
       // document.cookie = `access_token=${access_token}`;
       // storeItem("access_token", access_token);

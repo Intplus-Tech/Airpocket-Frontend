@@ -30,7 +30,6 @@ const SearchResults = () => {
   const [filteredResult, setFilteredResult] = useState<
     { [x: string]: any }[] | undefined
   >([]);
-  console.log(filters);
   const searchResult: SearchResult | undefined = useSelector(
     (state: RootState) => state.search.result
   );
@@ -38,10 +37,8 @@ const SearchResults = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
 
   const flightQuery = getItemFromStorage("flight-search-query");
-  // { [x: string]: any; }[] | undefined'
   const filterByPriceRange = () => {
     const filtered = searchResult?.data?.filter((result) => {
-      console.log(extractHour(result.itineraries[0].segments[0].departure.at));
       const priceMatch =
         result.price.grandTotal >= filters.price.range[0] &&
         result.price.grandTotal <= filters.price.range[1];

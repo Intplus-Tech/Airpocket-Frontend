@@ -16,6 +16,7 @@ import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
 import { DatePickerComponent } from "@/components/DatePicker/DatePickerComponent";
 import { formatDateString } from "@/utils/monthDAys";
+import { useToast } from "@/components/ui/use-toast";
 
 interface suggestionList {
   value: string;
@@ -24,6 +25,7 @@ interface suggestionList {
 [];
 
 const Hero = () => {
+  const { toast } = useToast();
   const dispatch = useDispatch();
   const { handleSubmit } = useForm();
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
@@ -61,7 +63,6 @@ const Hero = () => {
     setQuery(inputValue);
   };
 
-  console.log(checkInDate);
   const handleSearchKeyWork = async () => {
     const respnse = await searchKeyWord({ key: value });
 
@@ -78,9 +79,10 @@ const Hero = () => {
   }, [value]);
 
   const handleSearchFlight = async (data: FieldValues) => {
-    console.log(data);
     if (!depature?.value && !checkInDate) {
-      console.log("please input search query");
+      toast({
+        description: "Please enter a departur Date",
+      });
       return;
     }
     searchFlight(

@@ -2,13 +2,13 @@
 
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
-import Select from "react-select";
-import countryList from "react-select-country-list";
+// import Select from "react-select";
+// import countryList from "react-select-country-list";
 import "react-phone-input-2/lib/style.css";
 import { Link } from "react-router-dom";
-import { countries } from "countries-list";
+// import { countries } from "countries-list";
 import { FieldValues, useForm } from "react-hook-form";
 
 import Logo from "../../assets/logo.jpeg";
@@ -17,11 +17,11 @@ import { useToast } from "@/components/ui/use-toast";
 import { signUpAccount } from "@/Features/userSlice/api";
 import { useDispatch } from "react-redux";
 
-interface countryList {
-  value: string;
-  label: string;
-}
-[];
+// interface countryList {
+//   value: string;
+//   label: string;
+// }
+// [];
 
 const SignUp = () => {
   const { toast } = useToast();
@@ -38,31 +38,29 @@ const SignUp = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  const [selectedOption, setSelectedOption] = useState<countryList | null>(
-    null
-  );
-  const [countryOptions, setCountryOptions] = useState<countryList[]>([]);
+  // const [selectedOption, setSelectedOption] = useState<countryList | null>(
+  //   null
+  // );
+  // const [countryOptions, setCountryOptions] = useState<countryList[]>([]);
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const handleChange = (selectedCountry: countryList | null) => {
-    setSelectedOption(selectedCountry);
-  };
+  // const handleChange = (selectedCountry: countryList | null) => {
+  //   setSelectedOption(selectedCountry);
+  // };
 
   const handleChangePhoneNumber = (value: string) => {
     setPhoneNumber(value);
   };
-  console.log(errors);
 
   const handleSignUp = async (data: FieldValues) => {
     const response = await signUpAccount(
       {
         ...data,
         phone: `+${phoneNumber}`,
-        country: selectedOption?.label,
+        // country: selectedOption?.label,
       },
       dispatch
     );
-    console.log(response.error);
     if (response?.success) {
       toast({
         // variant: "success",ss
@@ -79,14 +77,14 @@ const SignUp = () => {
     }
   };
 
-  useEffect(() => {
-    const countryList = Object.keys(countries).map((countryCode) => ({
-      value: countryCode,
-      label: countries[countryCode as keyof typeof countries].name,
-    }));
+  // useEffect(() => {
+  //   const countryList = Object.keys(countries).map((countryCode) => ({
+  //     value: countryCode,
+  //     label: countries[countryCode as keyof typeof countries].name,
+  //   }));
 
-    setCountryOptions(countryList);
-  }, []);
+  //   setCountryOptions(countryList);
+  // }, []);
 
   return (
     // <div className="mt-[-3.5rem] inset-0 z-10">

@@ -17,7 +17,6 @@ function paymentApi(data: Generic) {
 }
 
 export const payment = async (data: Generic, dispatch: any) => {
-  console.log("paymentData", data);
   dispatch(makePayment());
   try {
     const response: any = await paymentApi(data);
@@ -25,7 +24,6 @@ export const payment = async (data: Generic, dispatch: any) => {
       const {
         paymentDetails: { data },
       } = response.data;
-      console.log(data.authorization_url);
       window.location.href = data.authorization_url;
     }
     dispatch(paymentSuccess(response.data));
