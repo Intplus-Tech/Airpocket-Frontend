@@ -1,14 +1,11 @@
 import MaxwidthWrapper from "@/components/MaxwidthWrapper.tsx/MaxWidthWrapper";
 import Editbtn from "../../assets/Editbtn.svg";
 import { Image } from "@/components/Image/Index";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import ToandFro from "../../assets/toandfro.svg";
 import { getItemFromStorage } from "@/utils/locaStorage";
 import { formatDateWithDateFns } from "@/utils/monthDAys";
 
 const SearchParams = () => {
-  const searchQurey = useSelector((state: RootState) => state.search.query);
   const flightSearchQuery = getItemFromStorage("flight-search-query");
   return (
     <MaxwidthWrapper>
@@ -80,8 +77,7 @@ const SearchParams = () => {
               </p>
               <p className="text-sm font-bold px-[5px] ">-</p>
               <p className=" text-[10px] sm:text-base pr-[5px] capitalize">
-                {formatDateWithDateFns(flightSearchQuery.returnTimeData) ||
-                  "N/A"}
+                {formatDateWithDateFns(flightSearchQuery.returneData) || "N/A"}
               </p>
               <p className="h-[20px] w-[2px] bg-[#ABABAB] text-[#ABABAB] mx-1"></p>
               <p className="font-bold text-[10px] sm:text-base">

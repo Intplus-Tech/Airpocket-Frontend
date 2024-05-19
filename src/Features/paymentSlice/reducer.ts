@@ -1,4 +1,3 @@
-import { Generic } from "@/types/typs";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface PaymentResponse {

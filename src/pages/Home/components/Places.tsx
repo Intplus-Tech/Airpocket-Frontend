@@ -12,15 +12,6 @@ import Jakarta from "../assets/Jakarta.svg";
 import Dubai from "../assets/Dubai.svg";
 import London from "../assets/London.svg";
 
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-
 const Places = () => {
   const destinations = [
     {

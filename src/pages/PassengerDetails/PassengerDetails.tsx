@@ -32,7 +32,6 @@ export const PassengerDetails = ({
     (state: RootState) => state.selectFlight.isLoading
   );
   const result = useSelector((state: RootState) => state.selectFlight.result);
-  console.log(result, "result");
 
   const { adult, children, infants } = flightSearchQuery;
   const inputsArray = Array.from(

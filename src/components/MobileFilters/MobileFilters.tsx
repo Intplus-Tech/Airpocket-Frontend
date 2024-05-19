@@ -4,10 +4,20 @@ import Sort from "./assets/sort.svg";
 import Filter from "./assets/filters.svg";
 import { Image } from "../Image/Index";
 import Filters from "../Filters/Filters";
+import { FilterProps } from "@/types/typs";
 
 const MobileFilters = () => {
   const [openFilter, setOpenFilters] = useState(false);
   const [activeTab, setActiveTab] = useState<string | null>(null);
+  const [filters, setFilters] = useState<FilterProps>({
+    price: {
+      range: [0, 5000000],
+    },
+    stops: null,
+    departureTime: {
+      range: [0, 24],
+    },
+  });
 
   const handleFilter = () => {
     setActiveTab("filter");
@@ -42,7 +52,11 @@ const MobileFilters = () => {
 
       {openFilter && (
         <div className="fixed z-[10000] w-full h-full bg-zinc-200 top-0 left-0 overflow-auto">
-          <Filters setCloseModal={setOpenFilters} />
+          <Filters
+            setCloseModal={setOpenFilters}
+            filters={filters}
+            setFilters={setFilters}
+          />
         </div>
       )}
     </div>
