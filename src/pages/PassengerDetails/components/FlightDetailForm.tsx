@@ -4,6 +4,7 @@ import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
 import { Generic } from "@/types/typs";
 import { storeItem } from "@/utils/locaStorage";
+import { useToast } from "@/components/ui/use-toast";
 
 type FLGHT_DETAIL_FORM_PROPS = {
   inputsArray: number[];
@@ -28,6 +29,7 @@ const FlightDetailForm = ({
   setStep,
   setPassengerFormData,
 }: FLGHT_DETAIL_FORM_PROPS) => {
+  const { toast } = useToast();
   const { register, control, handleSubmit } = useForm<PassengerFormData>();
   const { fields } = useFieldArray({
     control,
@@ -50,6 +52,12 @@ const FlightDetailForm = ({
   };
 
   const SubmitPassengerForm = (data: FieldValues) => {
+    if (!formData.email) {
+      toast({
+        description: "Please fill in your contact information",
+      });
+      return;
+    }
     const arrayOfEntries = Object.entries(data);
     const filteredArray = arrayOfEntries.filter(
       ([_, value]) => !Array.isArray(value) || value.length > 0
@@ -58,8 +66,7 @@ const FlightDetailForm = ({
       id: index + 1,
       ...value,
     }));
-    console.log("passengerformData", arrayOfObjects);
-    console.log(formData);
+
     storeItem("passenger_form", { ...arrayOfObjects, contact_info: formData });
     setPassengerFormData(arrayOfObjects);
     setStep("flightDetailsPreview");

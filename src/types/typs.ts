@@ -56,3 +56,13 @@ export type FlightTableData = {
   price: number;
   stops: string;
 };
+
+export type FilterProps = {
+  price: {
+    range: [number, number];
+  };
+  stops: number | null;
+  departureTime: {
+    range: [number, number];
+  };
+};

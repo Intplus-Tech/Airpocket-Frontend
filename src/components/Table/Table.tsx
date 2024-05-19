@@ -19,7 +19,6 @@ const TableComponent = () => {
   const dictionaries = useSelector(
     (state: RootState) => state.search.result?.dictionaries
   );
-  console.log("table", dictionaries);
 
   return (
     <section className=" max-w-[20rem] min-w-full overflow-x-auto ">

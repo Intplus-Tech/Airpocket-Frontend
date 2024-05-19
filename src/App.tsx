@@ -33,8 +33,18 @@ function App() {
     }
   });
 
+  // if ("storage" in navigator && "estimate" in navigator.storage) {
+  //   navigator.storage.estimate().then(({ quota, usage }) => {
+  //     console.log(`Quota: ${(quota as number) / (1024 * 1024)} MB`);
+  //     console.log(`Usage: ${(usage as number) / 1024} KB`);
+  //   });
+  // } else {
+  //   console.log("Storage estimate API not supported.");
+  // }
+
   const TOKEN_ENDPOINT =
     "https://test.api.amadeus.com/v1/security/oauth2/token";
+
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {

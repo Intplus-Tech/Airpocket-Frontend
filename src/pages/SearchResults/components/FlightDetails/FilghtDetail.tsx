@@ -15,7 +15,6 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
   const [componentType, setComponentType] = useState("flightDetails");
 
   const FlightInformation = () => {
-    console.log(singleFlight);
     if (!singleFlight?.data) {
       return null;
     }

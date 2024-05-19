@@ -1,5 +1,6 @@
 import { RootState } from "@/store/store";
 import { Generic } from "@/types/typs";
+import { storeItem } from "@/utils/locaStorage";
 import { formatCurrency } from "@/utils/monthDAys";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
@@ -38,7 +39,13 @@ const PassengerDetailsPreview = ({
   const selectedFlight = useSelector(
     (state: RootState) => state.selectFlight.result
   );
+
   const { price } = selectedFlight?.data.flightOffers[0];
+
+  const handleContinue = () => {
+    storeItem("currentStep", 3);
+    setCurrentStep(3);
+  };
 
   return (
     <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-4">
@@ -131,9 +138,7 @@ const PassengerDetailsPreview = ({
               </span>
             </p>
             <button
-              onClick={() => {
-                setCurrentStep(3);
-              }}
+              onClick={handleContinue}
               className="px-3 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
             >
               Continue

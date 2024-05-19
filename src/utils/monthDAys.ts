@@ -1,4 +1,4 @@
-import { parse, format } from "date-fns";
+import { format } from "date-fns";
 
 import { enUS } from "date-fns/locale";
 export function getDaysInMonth(year: number, month: number): string[] {
@@ -136,4 +136,9 @@ export function formatDateString(date: Date | undefined): string {
 
   // Format the Date object into the desired string format (YYYY-MM-DD)
   return format(date, "yyyy-MM-dd");
+}
+
+export function extractHour(dateTime: string): number {
+  const date = new Date(dateTime);
+  return date.getHours();
 }

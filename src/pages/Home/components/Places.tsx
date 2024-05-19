@@ -12,7 +12,44 @@ import Jakarta from "../assets/Jakarta.svg";
 import Dubai from "../assets/Dubai.svg";
 import London from "../assets/London.svg";
 
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const Places = () => {
+  const destinations = [
+    {
+      id: "1",
+      Img: Jakarta,
+      name: "jakarta",
+    },
+    {
+      id: "2",
+      Img: London,
+      name: "London",
+    },
+    {
+      id: "3",
+      Img: Dubai,
+      name: "Dubai",
+    },
+    {
+      id: "4",
+      Img: London,
+      name: "Dubai",
+    },
+    {
+      id: "5",
+      Img: Dubai,
+      name: "Dubai",
+    },
+  ];
+
   return (
     <main className=" max-w-screen-xl h-full mx-6 sm:mx-auto mt-8">
       <div className="mb-4">
@@ -132,13 +169,21 @@ const Places = () => {
 
         {/* <div className="mt-8 max-w-[30rem] md:max-w-full min-w-full overflow-x-auto grid grid-cols-3 space-x-8 md:gap-4 place-items-center"> */}
         <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full">
-          <div className="relative min-w-[20rem] w-full">
-            <Image src={Jakarta} alt="jakarta" className="rounded-lg" />
-            <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
-              Jakart
-            </p>
-          </div>
-          <div className="relative min-w-[20rem] w-full">
+          {destinations.map((destination) => {
+            return (
+              <div className="relative min-w-[20rem] w-full">
+                <Image
+                  src={destination.Img}
+                  alt={destination.name}
+                  className="rounded-lg"
+                />
+                <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
+                  {destination.name}
+                </p>
+              </div>
+            );
+          })}
+          {/* <div className="relative min-w-[20rem] w-full">
             <Image src={Dubai} alt="Dubai" className="rounded-lg" />
             <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
               Dubai
@@ -149,7 +194,7 @@ const Places = () => {
             <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
               London
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>

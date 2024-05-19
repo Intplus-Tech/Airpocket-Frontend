@@ -10,11 +10,11 @@ import payment from "@/components/Stepper/assets/payment.svg";
 import confirmation from "@/components/Stepper/assets/confirmation.svg";
 import { Image } from "../Image/Index";
 import Done from "./assets/Done.svg";
+import { getItemFromStorage } from "@/utils/locaStorage";
 
 const Stepper = () => {
-  const [currentStep, setCurrentStep] = useState(2);
-  const [isCompleted, setIsCompleted] = useState(false);
-  console.log(currentStep);
+  const step = getItemFromStorage("currentStep");
+  const [currentStep, setCurrentStep] = useState(step || 2);
 
   const CHECKOUT_STEPS = [
     {
@@ -36,7 +36,7 @@ const Stepper = () => {
       id: "3",
       stepKey: "paymentOption",
 
-      name: "Payment option",
+      name: "Payment",
       // Component: () => <Payment />,
       Img: payment,
     },
@@ -44,7 +44,7 @@ const Stepper = () => {
       id: "4",
       stepKey: "confirmation",
 
-      name: "Booking confirmation",
+      name: "confirmation",
       // Component: () => <Confirmation />,
       Img: confirmation,
     },
@@ -63,17 +63,12 @@ const Stepper = () => {
       case 3:
         return (
           <Payment
-            setCurrentStep={setCurrentStep}
-            // setIsCompleted={setIsCompleted}
+          // setCurrentStep={setCurrentStep}
           />
         );
 
       case 4:
-        return (
-          <Confirmation
-          // setIsCompleted={setIsCompleted}
-          />
-        );
+        return <Confirmation />;
 
       default:
         break;
@@ -115,7 +110,7 @@ const Stepper = () => {
           </div>
         ))}
 
-        <div className="absolute h-[0.1px] w-full   top-[35%] left-0">
+        <div className="absolute h-[2px] w-full   top-[35%] left-0">
           <div className="h-full transition-all w-[80%]   bg-gray-100 duration-300 ease-in mx-auto "></div>
         </div>
       </div>
