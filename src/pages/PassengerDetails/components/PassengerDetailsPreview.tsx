@@ -1,10 +1,14 @@
+import { RootState } from "@/store/store";
 import { Generic } from "@/types/typs";
+import { storeItem } from "@/utils/locaStorage";
+import { formatCurrency } from "@/utils/monthDAys";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 type PASSENGER_DETAILS_PREVIEW_PROPS = {
   setStep: React.Dispatch<React.SetStateAction<string>>;
-  setCurrentStep: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   passengerFormData: Generic | null;
 };
 
@@ -32,13 +36,24 @@ const PassengerDetailsPreview = ({
   setCurrentStep,
   passengerFormData,
 }: PASSENGER_DETAILS_PREVIEW_PROPS) => {
+  const selectedFlight = useSelector(
+    (state: RootState) => state.selectFlight.result
+  );
+
+  const { price } = selectedFlight?.data.flightOffers[0];
+
+  const handleContinue = () => {
+    storeItem("currentStep", 3);
+    setCurrentStep(3);
+  };
+
   return (
     <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-4">
       <div className="text-sm md:text-base flex justify-between items-center pt-2 pb-4 border-b border-b-gray-300">
         <h4 className="font-semibold">Passenger Details</h4>
-        <p className="flex gap-x-2 items-center">
+        {/* <p className="flex gap-x-2 items-center">
           Time Left: <span className="text-red-500">07:23</span>
-        </p>
+        </p> */}
       </div>
 
       <div className="py-4 text-sm md:text-base pt-2 pb-4 border-b border-b-gray-300">
@@ -50,9 +65,9 @@ const PassengerDetailsPreview = ({
                   <div>
                     <p className="flex items-center gap-x-2">
                       <FaUser />{" "}
-                      <span>{`${item.firstName} ${item.lastName}`}</span>
+                      <span className="capitalize">{`${item.firstName} ${item.lastName}`}</span>
                     </p>
-                    <div className="flex flex-col md:flex-row gap-x-6 gap-y-2">
+                    <div className="flex flex-col md:flex-row md:items-center gap-x-6 gap-y-2">
                       <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
                         <span className="text-xs text-gray-500">
                           Age Category:{" "}
@@ -68,10 +83,12 @@ const PassengerDetailsPreview = ({
                       </p>
 
                       <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs sm:text-[18px] text-gray-500">
                           Ticket Price:{" "}
                         </span>
-                        <span className="">{"11,470,154"}</span>
+                        <span className="">
+                          {formatCurrency(price.grandTotal)}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -82,7 +99,7 @@ const PassengerDetailsPreview = ({
         </div>
       </div>
 
-      <div className="text-sm pt-6 pb-5 space-y-3 border-b border-b-gray-300">
+      {/* <div className="text-sm pt-6 pb-5 space-y-3 border-b border-b-gray-300">
         <p className="text-gray-600 px-4">
           If you have a discount code, enter it and hit the Submit button.
         </p>
@@ -92,19 +109,19 @@ const PassengerDetailsPreview = ({
             name=""
             id=""
             placeholder="discount code"
-            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
+            className="border border-gray-300 rounded-lg px-6 py-2 focus:outline-none"
           />
-          <button className="text-[#1D91CC] px-4 py-2 border border-[#1D91CC] rounded-lg">
+          <button className="text-[#1D91CC] px-6 py-2 border border-[#1D91CC] rounded-lg">
             Submit
           </button>
         </form>
-      </div>
+      </div> */}
 
       <div className="text-sm py-4 px-2 space-y-2">
-        <div className="flex gap-x-2 items-center">
+        {/* <div className="flex gap-x-2 items-center">
           <input type="checkbox" name="" id="" />
           <p>Using wallet balance</p>
-        </div>
+        </div> */}
         <div className="md:flex w-full gap-x-4 items-center justify-between space-y-2 md:space-y-0 text-[#1D91CC]">
           <button
             onClick={() => setStep("flightDetailsForm")}
@@ -115,15 +132,17 @@ const PassengerDetailsPreview = ({
           </button>
           <div className="flex items-center gap-x-1 md:gap-x-2 justify-between">
             <p>
-              Your Total Payment <span>NGN11,470,154</span>
+              Your Total Payment{" "}
+              <span>
+                {formatCurrency(price.grandTotal * passengerFormData?.length)}
+              </span>
             </p>
             <button
-              onClick={() => {
-                setCurrentStep("paymentOption");
-              }}
-              className="px-2 min-w-fit text-white bg-[#1D91CC] py-1 rounded-lg"
+              onClick={handleContinue}
+              className="px-3 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
             >
-              Make Payment
+              Continue
+              {/* Make Payment */}
             </button>
           </div>
         </div>

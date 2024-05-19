@@ -44,3 +44,25 @@ export type UserDetail = {
   email: string;
   verified: boolean;
 };
+
+export interface selectFlightResult {
+  data: { [x: string]: any };
+  dictionaries: { [x: string]: any };
+  // Add other properties as needed
+}
+
+export type FlightTableData = {
+  carrierCode: string;
+  price: number;
+  stops: string;
+};
+
+export type FilterProps = {
+  price: {
+    range: [number, number];
+  };
+  stops: number | null;
+  departureTime: {
+    range: [number, number];
+  };
+};

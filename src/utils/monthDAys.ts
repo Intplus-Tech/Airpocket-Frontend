@@ -1,3 +1,6 @@
+import { format } from "date-fns";
+
+import { enUS } from "date-fns/locale";
 export function getDaysInMonth(year: number, month: number): string[] {
   // Create a new Date object for the first day of the specified month
   //   const firstDayOfMonth = new Date(year, month - 1, 1);
@@ -50,7 +53,7 @@ type TimeFormat = {
   minutes: number;
 };
 
-export function convertTime(timeString: string): TimeFormat | null {
+export function convertTime(timeString: string): TimeFormat | any {
   const regex = /PT(\d+)H(\d+)M/;
   const match = timeString.match(regex);
 
@@ -60,7 +63,7 @@ export function convertTime(timeString: string): TimeFormat | null {
     const minutes = parseInt(match[2], 10);
     return { hours, minutes };
   } else {
-    return null;
+    return "N/A";
   }
 }
 
@@ -114,4 +117,28 @@ export function formatDate(dateString: string): string {
   const dayOfMonth: number = date.getDate();
 
   return `${dayOfWeek}, ${month} ${dayOfMonth}`;
+}
+
+export function formatDateWithDateFns(
+  date: Date | undefined,
+  short?: string
+): string {
+  if (!date) return "";
+  return format(date, short ? " MMMM d" : "EEEE, MMMM d", {
+    locale: enUS,
+  });
+}
+
+export function formatDateString(date: Date | undefined): string {
+  if (!date) {
+    return "Invalid date";
+  }
+
+  // Format the Date object into the desired string format (YYYY-MM-DD)
+  return format(date, "yyyy-MM-dd");
+}
+
+export function extractHour(dateTime: string): number {
+  const date = new Date(dateTime);
+  return date.getHours();
 }

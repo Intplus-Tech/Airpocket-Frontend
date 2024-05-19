@@ -3,12 +3,15 @@ import Airline from "./components/Airline/Airline";
 import Stops from "./components/Stops/Stops";
 import CountrySelect from "./components/AirportSelect/AirportSelect";
 import { X } from "lucide-react";
+import { FilterProps } from "@/types/typs";
 
 type FlightProps = {
   setCloseModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  filters: FilterProps;
+  setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
 };
 
-const Filters = ({ setCloseModal }: FlightProps) => {
+const Filters = ({ setCloseModal, filters, setFilters }: FlightProps) => {
   return (
     <section className="bg-[#EDEDED] bg-opacity-40 min-h-[100vh] flex items-start  justify-center px-8 rounded-md">
       <div className="mt-10 w-[294px]">
@@ -22,7 +25,7 @@ const Filters = ({ setCloseModal }: FlightProps) => {
         </div>
         <div className=" mt-8">
           <div>
-            <Pricerange />
+            <Pricerange filters={filters} setFilters={setFilters} />
           </div>
           <div>
             <Airline />

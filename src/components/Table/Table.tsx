@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 import {
   Table,
   TableBody,
@@ -9,52 +11,44 @@ import {
 
 import Logo from "./assets/logo.svg";
 import { Image } from "../Image/Index";
-
-type Invoice = {
-  invoice: string;
-  paymentStatus: string;
-  totalAmount: string;
-  paymentMethod: string;
-}[];
+import { FlightTableData } from "@/types/typs";
+import { formatCurrency } from "@/utils/monthDAys";
 
 const TableComponent = () => {
-  const invoices: Invoice = [
-    {
-      invoice: "0 stop",
-      paymentStatus: "NGN 3,410,462",
-      totalAmount: "NGN 3,410,462",
-      paymentMethod: "NGN 3,410,462",
-    },
-    {
-      invoice: "1 stop",
-      paymentStatus: "NGN 3,410,462",
-      totalAmount: "NGN 3,410,462",
-      paymentMethod: "NGN 3,410,462",
-    },
-    {
-      invoice: "2 stop",
-      paymentStatus: "NGN 3,410,462",
-      totalAmount: "NGN 3,410,462",
-      paymentMethod: "NGN 3,410,462",
-    },
-    {
-      invoice: "3 stop",
-      paymentStatus: "NGN 3,410,462",
-      totalAmount: "NGN 3,410,462",
-      paymentMethod: "NGN 3,410,462",
-    },
-  ];
+  const tableData = useSelector((state: RootState) => state.search.tableData);
+  const dictionaries = useSelector(
+    (state: RootState) => state.search.result?.dictionaries
+  );
 
   return (
     <section className=" max-w-[20rem] min-w-full overflow-x-auto ">
-      <Table className=" text-[#606060] min-w-[40rem]">
+      <Table className=" text-[#606060] min-w-[40rem] z-[-1]">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader className="border ">
           <TableRow>
-            <TableHead className="w-[100px] h-[100px] px-12 md:px-24 bg-[#03C3F8] bg-opacity-10">
-              {""}
-            </TableHead>
-            <TableHead className="text-center">
+            <TableHead className="w-[100px] h-[100px] px-12 md:px-24 bg-[#03C3F8] bg-opacity-10"></TableHead>
+            {tableData?.map((tableItem: FlightTableData) => {
+              return (
+                <TableHead className="text-center">
+                  <p className="flex flex-col gap-3">
+                    <Image
+                      src={Logo}
+                      alt="Logo"
+                      className="h-14 w-14 flex items-center  mx-auto"
+                    />
+                    <span>
+                      {
+                        dictionaries?.carriers[
+                          tableItem?.carrierCode as unknown as number
+                        ]
+                      }
+                    </span>
+                  </p>
+                </TableHead>
+              );
+            })}
+
+            {/* <TableHead className="text-center">
               <p className="flex flex-col gap-3">
                 <Image
                   src={Logo}
@@ -73,37 +67,27 @@ const TableComponent = () => {
                 />
                 <span>Gulf Air</span>
               </p>
-            </TableHead>
-            <TableHead className="text-center">
-              <p className="flex flex-col gap-3">
-                <Image
-                  src={Logo}
-                  alt="Logo"
-                  className="h-14 w-14 flex items-center  mx-auto"
-                />
-                <span>Gulf Air</span>
-              </p>
-            </TableHead>
+            </TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody className="border">
-          {invoices.map((invoice) => (
+          {tableData?.map((tableitem) => (
             <TableRow
-              key={invoice.invoice}
+              key={tableitem.carrierCode}
               className="text-[13px] font-light tracking-wide"
             >
               <TableCell className="font-medium bg-[#03C3F8] bg-opacity-10 px-12 md:px-24 whitespace-nowrap py-4 border-r text-center ">
-                {invoice.invoice}
+                {tableitem.stops}
               </TableCell>
               <TableCell className="border-r text-center text-[16px] text-[#1D91CC] whitespace-nowrap">
-                {invoice.paymentStatus}
+                {formatCurrency(tableitem.price)}
               </TableCell>
-              <TableCell className="border-r text-center text-[16px] text-[#1D91CC] whitespace-nowrap">
-                {invoice.paymentMethod}
+              {/* <TableCell className="border-r text-center text-[16px] text-[#1D91CC] whitespace-nowrap">
+                {tableitem.paymentMethod}
               </TableCell>
               <TableCell className="text-center text-[16px] text-[#1D91CC] whitespace-nowrap ">
-                {invoice.totalAmount}
-              </TableCell>
+                {tableitem.totalAmount}
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

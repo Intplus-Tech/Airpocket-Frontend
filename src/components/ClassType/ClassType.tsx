@@ -3,25 +3,36 @@ import { PassengersProps } from "../../types/typs";
 type ClassTypProps = {
   classType: string;
   setClassType: React.Dispatch<React.SetStateAction<string>>;
+  setOpenDropdownType: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const ClassType = ({ setClassType }: ClassTypProps) => {
+const ClassType = ({ setClassType, setOpenDropdownType }: ClassTypProps) => {
   const passengers: PassengersProps = [
     { id: "1", text: "Economy" },
-    { id: "1", text: "Economy Premium" },
-    { id: "1", text: "Business Class" },
-    { id: "1", text: "First Class" },
+    { id: "2", text: "Economy Premium" },
+    { id: "3", text: "Business Class" },
+    { id: "4", text: "First Class" },
   ];
 
   const selectClassType = (type: string) => {
     setClassType(type);
   };
 
+  const handleclick = (text: string) => {
+    selectClassType(text.toUpperCase());
+    setOpenDropdownType(null);
+  };
+
   return (
-    <div className="text-lg z-20 ">
+    <div
+      className="text-lg z-20 "
+      onMouseLeave={() => {
+        setOpenDropdownType(null);
+      }}
+    >
       {passengers.map(({ id, text }) => (
         <p
-          onClick={() => selectClassType(text)}
+          onClick={() => handleclick(text)}
           className="py-2 px-4 text-sm whitespace-nowrap hover:bg-gray-50 cursor-pointer"
           key={id}
         >

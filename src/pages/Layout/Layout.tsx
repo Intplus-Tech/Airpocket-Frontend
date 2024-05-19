@@ -10,15 +10,19 @@ import Login from "@/auth/Login/Login";
 import { RootState } from "@/store/store";
 import User from "./assets/user.svg";
 import DownArrow from "./assets/downarrow.svg";
+import Menu from "./assets/Menu.svg";
+import { useState } from "react";
+import MobileNav from "@/components/MobileNav/MobileNav";
 
 const Layout = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
 
   return (
     <div>
       <MaxWidthWrapper>
-        <section className="h-24 w-full flex justify-between items-center px-6 bg-transparent">
+        <section className="h-24 w-full flex justify-between items-center px-6 bg-transparent relative ">
           <div className=" w-full flex items-center md:gap-20 lg:gap-28">
             <Image
               src={Airpocket}
@@ -55,13 +59,13 @@ const Layout = () => {
 
           <div className="w-full flex justify-end">
             {user?._id ? (
-              <div className="text-white bg-[#1B96D6] px-4 py-2 ml-6 rounded-md cursor-pointer flex items-center gap-1 justify-between w-[10rem]">
+              <div className="text-white bg-[#1B96D6] px-4 py-2 ml-6 rounded-md cursor-pointer hidden md:flex items-center gap-1 justify-between w-[10rem]">
                 <Image src={User} alt="user" />
                 <p>john Doe</p>
                 <Image src={DownArrow} alt="arrow_down" />
               </div>
             ) : (
-              <div className="w-full hidden items-center justify-end md:flex gap-4">
+              <div className="w-full h-full hidden items-center justify-end md:flex gap-4">
                 <Dialog>
                   <DialogTrigger>
                     <button className="px-4 py-2 hover:shadow-md rounded-md">
@@ -79,13 +83,20 @@ const Layout = () => {
                       Sign Up
                     </button>
                   </DialogTrigger>
-                  <DialogContent className=" overflow-y-auto min-h-full max-h-[50%] ">
+                  <DialogContent className=" w-full flex item center justify-center h-fit my-4">
                     <SignUp />
                   </DialogContent>
                 </Dialog>
               </div>
             )}
+
+            <div className="md:hidden ">
+              <span onClick={() => setIsOpen(!isOpen)}>
+                <Image src={Menu} alt="Menu" className="cursor-pointer" />
+              </span>
+            </div>
           </div>
+          <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
         </section>
       </MaxWidthWrapper>
 

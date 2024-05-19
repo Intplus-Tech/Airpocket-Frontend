@@ -5,8 +5,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { FilterProps } from "@/types/typs";
+import { formatCurrency } from "@/utils/monthDAys";
 
-const Pricerange = () => {
+type PriceRangeFilters = {
+  filters: FilterProps;
+  setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
+};
+
+const Pricerange = ({ filters, setFilters }: PriceRangeFilters) => {
+  // const minPrice = Math.min(filters.price.range[0], filters.price.range[1]);
+  // const maxPrice = Math.max(filters.price.range[0], filters.price.range[1]);
   return (
     <div>
       <Accordion type="single" collapsible>
@@ -14,16 +23,26 @@ const Pricerange = () => {
           <AccordionTrigger>Price</AccordionTrigger>
           <AccordionContent>
             <div className="flex justify-between">
-              <span>₦1233</span>
-              <span>₦1233</span>
+              <span>{formatCurrency(filters.price.range[0])}</span>
+              <span>{formatCurrency(filters.price.range[1])}</span>
             </div>
           </AccordionContent>
           <AccordionContent className="flex items-center ">
             <Slider
+              onValueChange={(range) => {
+                const [newMin, newMax] = range;
+                setFilters((prev) => ({
+                  ...prev,
+                  price: {
+                    range: [newMin, newMax],
+                  },
+                }));
+              }}
               className="text-[#1B96D6] mt-2"
               defaultValue={[33, 70]}
-              min={2}
-              max={100}
+              value={filters.price.range}
+              min={0}
+              max={500000}
               step={5}
             />
           </AccordionContent>
@@ -35,15 +54,25 @@ const Pricerange = () => {
           <AccordionTrigger>Departure</AccordionTrigger>
           <AccordionContent>
             <div className="flex justify-between">
-              <span>00:00</span>
-              <span>24:00</span>
+              <span>{filters.departureTime.range[0]}</span>
+              <span>{filters.departureTime.range[1]}</span>
             </div>
           </AccordionContent>
           <AccordionContent className="flex items-center ">
             <Slider
               className="text-[#1B96D6] mt-2"
+              onValueChange={(range) => {
+                const [newMin, newMax] = range;
+                setFilters((prev) => ({
+                  ...prev,
+                  departureTime: {
+                    range: [newMin, newMax],
+                  },
+                }));
+              }}
               defaultValue={[0, 12]}
-              min={2}
+              value={filters.departureTime.range}
+              min={0}
               max={24}
               step={1}
             />
@@ -55,3 +84,5 @@ const Pricerange = () => {
 };
 
 export default Pricerange;
+
+// "PT7H"; fix time showing undefined

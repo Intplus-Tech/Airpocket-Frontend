@@ -81,7 +81,8 @@ const Testimonials = () => {
               laboriosam. Quos commodi non assumenda quam illum.
             </p>
           </div>
-          <div className="hidden md:flex gap-x-4 items-end">
+
+          <div className="hidden md:flex gap-x-4 items-end my-2">
             <button className="border rounded-md h-8 w-8 p-2 border-[#1B96D6]">
               <ChevronLeftIcon className="w-4 h-4 text-primaryColor  rounded-md" />
             </button>

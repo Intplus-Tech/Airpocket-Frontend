@@ -13,6 +13,34 @@ import Dubai from "../assets/Dubai.svg";
 import London from "../assets/London.svg";
 
 const Places = () => {
+  const destinations = [
+    {
+      id: "1",
+      Img: Jakarta,
+      name: "jakarta",
+    },
+    {
+      id: "2",
+      Img: London,
+      name: "London",
+    },
+    {
+      id: "3",
+      Img: Dubai,
+      name: "Dubai",
+    },
+    {
+      id: "4",
+      Img: London,
+      name: "Dubai",
+    },
+    {
+      id: "5",
+      Img: Dubai,
+      name: "Dubai",
+    },
+  ];
+
   return (
     <main className=" max-w-screen-xl h-full mx-6 sm:mx-auto mt-8">
       <div className="mb-4">
@@ -41,14 +69,17 @@ const Places = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3  col-span-1 my-6 h-full">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center col-span-1 my-6 h-full">
         <div className="w-fit relative">
-          <Image src={Water} alt="Water" className=" pl-4" />
+          <Image src={Water} alt="Water" className=" " />
           <div className="absolute top-4 right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[220px] ">
             <Image
               src={SmallImage}
               alt="small image"
-              className="relative rounded-lg pb-4"
+              // height={50}
+              // width={50}
+              className="relative rounded-lg pb-4 "
             />
             <div className="font-bold text-[11px] flex items-center justify-between w-full">
               <span>culpa est similique</span>
@@ -72,6 +103,7 @@ const Places = () => {
             </div>
           </div>
         </div>
+
         <div className=" grow flex flex-col  justify-center h-full col-span-2 md:pl-32">
           <div className="py-4">
             <h1 className="text-[40px] text-[#1B96D6] font-bold">About Us</h1>
@@ -114,8 +146,8 @@ const Places = () => {
         </div>
       </div>
       <div>
-        <div className="px-6">
-          <h1 className="font-bold text-[41px]">
+        <div className="px-0 md:px-6">
+          <h1 className="font-bold text-xl lg:text-[41px]">
             Trending <span className="text-[#1B96D6]">destination</span> now
             days
           </h1>
@@ -128,13 +160,21 @@ const Places = () => {
 
         {/* <div className="mt-8 max-w-[30rem] md:max-w-full min-w-full overflow-x-auto grid grid-cols-3 space-x-8 md:gap-4 place-items-center"> */}
         <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full">
-          <div className="relative min-w-[20rem] w-full">
-            <Image src={Jakarta} alt="jakarta" className="rounded-lg" />
-            <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
-              Jakart
-            </p>
-          </div>
-          <div className="relative min-w-[20rem] w-full">
+          {destinations.map((destination) => {
+            return (
+              <div className="relative min-w-[20rem] w-full">
+                <Image
+                  src={destination.Img}
+                  alt={destination.name}
+                  className="rounded-lg"
+                />
+                <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
+                  {destination.name}
+                </p>
+              </div>
+            );
+          })}
+          {/* <div className="relative min-w-[20rem] w-full">
             <Image src={Dubai} alt="Dubai" className="rounded-lg" />
             <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
               Dubai
@@ -145,7 +185,7 @@ const Places = () => {
             <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
               London
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>

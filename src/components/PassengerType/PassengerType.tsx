@@ -12,6 +12,7 @@ type Props = {
       [key: string]: number;
     }>
   >;
+  setOpenDropdownType: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const passengers: PassengersProps = [
@@ -19,7 +20,11 @@ const passengers: PassengersProps = [
   { id: "children", text: "Children (Age 2-12)" },
   { id: "infants", text: "Infants (under 2)" },
 ];
-const PassengerType = ({ setPassengerNumber, passengerNumber }: Props) => {
+const PassengerType = ({
+  setPassengerNumber,
+  passengerNumber,
+  setOpenDropdownType,
+}: Props) => {
   // const dispatch = useDispatch()
 
   const handleIncrease = (id: string) => {
@@ -39,7 +44,10 @@ const PassengerType = ({ setPassengerNumber, passengerNumber }: Props) => {
   };
 
   return (
-    <div className=" py-2 pr-2 z-20">
+    <div
+      className=" py-2 pr-2 z-20"
+      onMouseLeave={() => setOpenDropdownType(null)}
+    >
       {passengers.map(({ id, text }) => (
         <div
           key={id}

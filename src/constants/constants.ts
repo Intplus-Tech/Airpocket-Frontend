@@ -34,3 +34,33 @@ export const DAYS = ["01", "02", "03", "04"];
 //     price: "₦",
 //   },
 // ];
+//   <div className="w-full px-8 mt-8">
+//           <Carousel
+//             opts={{
+//               align: "start",
+//             }}
+//             className=""
+//           >
+//             <CarouselContent className="">
+//               {destinations.map((destination, index) => (
+//                 <CarouselItem
+//                   key={index}
+//                   className="w-full sm:w-[50%] lg:w-[33.33%] mx-2 sm:mx-0"
+//                 >
+//                   <div className="relative min-w-[20rem] w-full">
+//                     <Image
+//                       src={destination.Img}
+//                       alt="Dubai"
+//                       className="rounded-lg"
+//                     />
+//                     <p className=" absolute mx-16 w-[60%] top-[-1rem] bg-white px-10 py-3 rounded-xl text-center">
+//                       Dubai
+//                     </p>
+//                   </div>
+//                 </CarouselItem>
+//               ))}
+//             </CarouselContent>
+//             <CarouselPrevious />
+//             <CarouselNext />
+//           </Carousel>
+//         </div>

@@ -6,12 +6,18 @@ import {
   startSearch,
 } from "./reducers";
 import { SERVER_URL } from "@/utils/apiUrl";
-import { User } from "@/types/typs";
+import { Generic, User } from "@/types/typs";
 import { getItemFromStorage } from "@/utils/locaStorage";
+import { LIMIT_FIVE } from "@/utils/Constant";
 
 function getSearchResultsApi(data: User) {
-  console.log(data);
-  const url = `${SERVER_URL}/flight-search?originLocationCode=PAR&destinationLocationCode=EWR&departureDate=2024-10-21&adults=1&travelClass=FIRST&nonStop=false&max=2`;
+  const url = `${SERVER_URL}/flight-search?originLocationCode=${
+    data.originLocationCode
+  }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
+    data.depatureDate
+  }&returnDate=${
+    data.returnDate
+  }&adults=1&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
   const options = {
     method: "GET",
     headers: {
@@ -22,7 +28,7 @@ function getSearchResultsApi(data: User) {
   return axios(url, options);
 }
 
-function getsearchKeyWordApi(data: User) {
+function getsearchKeyWordApi(data: Generic) {
   const auto_complete_token = getItemFromStorage("auto_complete_token");
 
   const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=${data.key}`;
@@ -42,7 +48,7 @@ export const searchFlight = async (data: User, dispatch: any) => {
   try {
     const response: any = await getSearchResultsApi(data);
 
-    dispatch(searchResultSuccess(response.data.data));
+    dispatch(searchResultSuccess(response.data));
 
     return { success: { ...response } };
   } catch (error) {

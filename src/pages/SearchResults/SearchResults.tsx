@@ -8,20 +8,58 @@ import FlightAvailable from "@/components/FlightAvailable/FlightAvailable";
 import SearchParams from "./components/SearchParams/SearchParams";
 import { RootState } from "@/store/store";
 import NotFilght from "./assets/Noflight.svg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { searchFlight } from "@/Features/searchslice/api";
 import { getItemFromStorage } from "@/utils/locaStorage";
 import MobileFilters from "@/components/MobileFilters/MobileFilters";
-
-// type searchResultProps = {
-//   setCurrentStep?: React.Dispatch<React.SetStateAction<string>>;
-// };
+import { FilterProps, SearchResult } from "@/types/typs";
+import { extractHour } from "@/utils/monthDAys";
 
 const SearchResults = () => {
+  const DEFAULT_CUSTOM_PRICE = [0, 500000] as [number, number];
+  const DEFAULT_CUSTOM_DEPARTURE_TIME = [0, 24] as [number, number];
   const dispatch = useDispatch();
-  const searchResult = useSelector((state: RootState) => state.search.result);
+  const [filters, setFilters] = useState<FilterProps>({
+    price: { range: DEFAULT_CUSTOM_PRICE },
+    stops: null,
+    departureTime: {
+      range: DEFAULT_CUSTOM_DEPARTURE_TIME,
+    },
+  });
+
+  const [filteredResult, setFilteredResult] = useState<
+    { [x: string]: any }[] | undefined
+  >([]);
+  const searchResult: SearchResult | undefined = useSelector(
+    (state: RootState) => state.search.result
+  );
+
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
+
   const flightQuery = getItemFromStorage("flight-search-query");
+  const filterByPriceRange = () => {
+    const filtered = searchResult?.data?.filter((result) => {
+      const priceMatch =
+        result.price.grandTotal >= filters.price.range[0] &&
+        result.price.grandTotal <= filters.price.range[1];
+      const timeMatch =
+        extractHour(result.itineraries[0].segments[0].departure.at) >=
+          filters.departureTime.range[0] &&
+        extractHour(result.itineraries[0].segments[0].departure.at) <=
+          filters.departureTime.range[1];
+      return priceMatch && timeMatch;
+    });
+    setFilteredResult(filtered);
+  };
+
+  useEffect(() => {
+    filterByPriceRange();
+  }, [
+    filters.price.range[0],
+    filters.price.range[1],
+    filters.departureTime.range[0],
+    filters.departureTime.range[1],
+  ]);
 
   useEffect(() => {
     if (!searchResult) {
@@ -56,12 +94,13 @@ const SearchResults = () => {
           <SearchParams />
         </div>
       </div>
+
       <div className=" mt-[12rem] md:mt-[15rem] lg:mt-[18rem] xl:mt-[18rem] w-full">
-        <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-xl mx-3 md:mx-auto flex  gap-6">
-          <div className="hidden min-[1028px]:block w-[310px]">
-            <Filters />
+        <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-xl mx-3 sm:mx-auto sm:px-3 md:px-6 md:mx-auto flex  gap-6">
+          <div className="hidden lg:block  w-[310px]">
+            <Filters filters={filters} setFilters={setFilters} />
           </div>
-          {/* Flight Tables */}
+          {/* Flight Tables min-[1028px]:block*/}
           <div className="h-full w-full ">
             {!searchResult || searchResult.data.length === 0 ? (
               <div className="w-full h-[100vh] flex  justify-center">
@@ -82,7 +121,7 @@ const SearchResults = () => {
             ) : (
               <div>
                 <TableComponent />
-                <FlightAvailable availableFlight={searchResult} />
+                <FlightAvailable availableFlight={filteredResult} />
               </div>
             )}
           </div>

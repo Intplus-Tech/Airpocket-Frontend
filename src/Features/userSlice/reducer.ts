@@ -20,7 +20,7 @@ const initialState: userState = {
   error: false,
 };
 
-const searchSlice = createSlice({
+const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -37,8 +37,28 @@ const searchSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    signUp: (state) => {
+      state.isLoading = true;
+      state.error = false;
+    },
+    signUpSuccess: (state, action: PayloadAction<UserDetail>) => {
+      state.isLoading = false;
+      state.user = action.payload;
+      state.error = false;
+    },
+    signUpError: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { loginSuccess, login, loginError } = searchSlice.actions;
-export default searchSlice.reducer;
+export const {
+  loginSuccess,
+  login,
+  loginError,
+  signUpSuccess,
+  signUp,
+  signUpError,
+} = userSlice.actions;
+export default userSlice.reducer;
