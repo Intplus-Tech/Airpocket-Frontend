@@ -19,6 +19,7 @@ const SearchResults = () => {
   const DEFAULT_CUSTOM_PRICE = [0, 500000] as [number, number];
   const DEFAULT_CUSTOM_DEPARTURE_TIME = [0, 24] as [number, number];
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
   const [filters, setFilters] = useState<FilterProps>({
     price: { range: DEFAULT_CUSTOM_PRICE },
     stops: null,
@@ -37,17 +38,24 @@ const SearchResults = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
 
   const flightQuery = getItemFromStorage("flight-search-query");
+
   const filterByPriceRange = () => {
     const filtered = searchResult?.data?.filter((result) => {
       const priceMatch =
         result.price.grandTotal >= filters.price.range[0] &&
         result.price.grandTotal <= filters.price.range[1];
+
       const timeMatch =
-        extractHour(result.itineraries[0].segments[0].departure.at) >=
+        extractHour(result?.itineraries[0]?.segments[0]?.departure.at) >=
           filters.departureTime.range[0] &&
-        extractHour(result.itineraries[0].segments[0].departure.at) <=
-          filters.departureTime.range[1];
-      return priceMatch && timeMatch;
+        extractHour(result?.itineraries[0]?.segments[0].departure.at) <=
+          filters.departureTime?.range[1];
+
+      const stopsMatch =
+        filters.stops !== null
+          ? result.itineraries[0].segments.length === Number(filters.stops)
+          : true;
+      return priceMatch && timeMatch && stopsMatch;
     });
     setFilteredResult(filtered);
   };
@@ -55,10 +63,12 @@ const SearchResults = () => {
   useEffect(() => {
     filterByPriceRange();
   }, [
+    !isLoading,
     filters.price.range[0],
     filters.price.range[1],
     filters.departureTime.range[0],
     filters.departureTime.range[1],
+    filters.stops,
   ]);
 
   useEffect(() => {
@@ -78,20 +88,24 @@ const SearchResults = () => {
 
   return (
     <main className="mb-8">
-      <div className="fixed bottom-[5rem] w-full flex items-center md:hidden">
+      <div className="fixed bottom-[5rem] w-full flex items-center md:hidden z-[150]">
         <div className="w-[90vw] mx-auto">
-          <MobileFilters />
+          <MobileFilters filters={filters} setFilters={setFilters} />
         </div>
       </div>
 
-      <div className="absolute top-0 z-[-10] w-full">
+      <div className="absolute top-0  w-full">
         <Image
           src={SearchBcg}
           alt="Searh"
           className="bg-cover mx-auto min-h-[200px] md:min-h-[250px] lg:min-h-[301px]"
         />
-        <div className="absolute bottom-[-2rem] w-full ">
-          <SearchParams />
+        <div
+          className={`absolute w-full z-20 ${
+            isOpen ? "top-[6rem] md:top-[8rem] " : "bottom-[-2rem]"
+          }  `}
+        >
+          <SearchParams isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
 
@@ -101,7 +115,12 @@ const SearchResults = () => {
             <Filters filters={filters} setFilters={setFilters} />
           </div>
           {/* Flight Tables min-[1028px]:block*/}
-          <div className="h-full w-full ">
+          <div
+            className={`h-full w-full ${
+              isOpen &&
+              "lg:mt-[0rem] sm:mt-[6rem] min-[576px]:mt-[10rem]  mt-[25rem]"
+            } `}
+          >
             {!searchResult || searchResult.data.length === 0 ? (
               <div className="w-full h-[100vh] flex  justify-center">
                 <div>

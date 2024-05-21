@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -11,18 +12,32 @@ import { RootState } from "@/store/store";
 import User from "./assets/user.svg";
 import DownArrow from "./assets/downarrow.svg";
 import Menu from "./assets/Menu.svg";
-import { useState } from "react";
 import MobileNav from "@/components/MobileNav/MobileNav";
 
 const Layout = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      setShowDropdown(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
 
   return (
     <div>
       <MaxWidthWrapper>
-        <section className="h-24 w-full flex justify-between items-center px-6 bg-transparent relative ">
+        <section className="h-24 w-full flex justify-between items-center px-6 bg-transparent relative z-50 ">
           <div className=" w-full flex items-center md:gap-20 lg:gap-28">
             <Image
               src={Airpocket}
@@ -59,18 +74,37 @@ const Layout = () => {
 
           <div className="w-full flex justify-end">
             {user?._id ? (
-              <div className="text-white bg-[#1B96D6] px-4 py-2 ml-6 rounded-md cursor-pointer hidden md:flex items-center gap-1 justify-between w-[10rem]">
-                <Image src={User} alt="user" />
-                <p>john Doe</p>
-                <Image src={DownArrow} alt="arrow_down" />
+              <div
+                ref={modalRef}
+                onClick={() => setShowDropdown(!showDropdown)}
+                className=" relative bg-[#1B96D6]  rounded-md "
+              >
+                <div className=" px-4 py-2 ml-6  w-full cursor-pointer hidden md:flex items-center gap-2 ">
+                  <Image src={User} alt="user" />
+
+                  <p className=" text-white">john Doe</p>
+                  <Image src={DownArrow} alt="arrow_down" />
+                </div>
+
+                {showDropdown && (
+                  <div
+                    className="bg-white text-black rounded-md absolute top-[4rem] z-[1000]  h-fit flex flex-col gap-4
+                  px-4 py-4 w-[11rem] shadow-md
+                  "
+                  >
+                    <Link to="/account-infomation">Account</Link>
+                    <Link to="/account-infomation">Booked Flight</Link>
+                    <span>Log out</span>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="w-full h-full hidden items-center justify-end md:flex gap-4">
                 <Dialog>
                   <DialogTrigger>
-                    <button className="px-4 py-2 hover:shadow-md rounded-md">
+                    <p className="px-4 py-2 hover:shadow-md rounded-md">
                       Sign In
-                    </button>
+                    </p>
                   </DialogTrigger>
                   <DialogContent className=" max-h-[90vh]   ">
                     <Login />
@@ -79,9 +113,9 @@ const Layout = () => {
 
                 <Dialog>
                   <DialogTrigger>
-                    <button className="px-3 py-2 text-white bg-[#1B96D6] rounded-md cursor-pointer">
+                    <p className="px-3 py-2 text-white bg-[#1B96D6] rounded-md cursor-pointer">
                       Sign Up
-                    </button>
+                    </p>
                   </DialogTrigger>
                   <DialogContent className=" w-full flex item center justify-center h-fit my-4">
                     <SignUp />

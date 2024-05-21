@@ -100,10 +100,7 @@ function App() {
               <Route path="/flight-details" element={<Stepper />} />
               <Route path="/account-infomation" element={<AccountProfile />} />
               {/* Make sure to remove */}
-              {/* <Route
-              path="passenger-detail"
-              element={<PassengerDetails passengers={5} />}
-            /> */}
+
               {/* Make sure to remove */}
               <Route path="*" element={<NotFound />} />
             </Route>

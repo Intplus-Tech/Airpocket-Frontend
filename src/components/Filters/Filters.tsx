@@ -31,11 +31,17 @@ const Filters = ({ setCloseModal, filters, setFilters }: FlightProps) => {
             <Airline />
           </div>
           <div>
-            <Stops />
+            <Stops filters={filters} setFilters={setFilters} />
           </div>
           <div>
             <CountrySelect />
           </div>
+        </div>
+        <div
+          onClick={() => setCloseModal?.(false)}
+          className="md:hidden bg-[#1B96D6] text-white mt-6 mb-4 rounded-md"
+        >
+          <button className="w-full py-2 px-3 ">Apply Filters</button>
         </div>
       </div>
     </section>

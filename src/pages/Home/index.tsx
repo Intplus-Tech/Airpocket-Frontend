@@ -16,13 +16,13 @@ const Home = () => {
   const result = useSelector((state: RootState) => state.search.result);
   const user = useSelector((state: RootState) => state.user.user);
 
-  if (isLoading) {
-    return (
-      <h1 className="w-fulll h-[100vh] text-4xl font-bold flex items-center justify-center">
-        Loading...
-      </h1>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <h1 className="w-fulll h-[100vh] text-4xl font-bold flex items-center justify-center">
+  //       Loading...
+  //     </h1>
+  //   );
+  // }
 
   if (!isLoading && result) {
     navigate("/flight-offers");
@@ -36,6 +36,13 @@ const Home = () => {
       <Testimonials />
       <Newsletter />
       <Footer />
+      {isLoading && (
+        <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
+          <div className="flex h-[100vh] items-center justify-center text-4xl font-bold">
+            Loading...
+          </div>
+        </section>
+      )}
     </MaxwidthWrapper>
   );
 };

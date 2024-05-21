@@ -61,7 +61,7 @@ export type FilterProps = {
   price: {
     range: [number, number];
   };
-  stops: number | null;
+  stops: string | null;
   departureTime: {
     range: [number, number];
   };

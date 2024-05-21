@@ -3,7 +3,7 @@ import "react-phone-input-2/lib/style.css";
 
 const AccountInformation = () => {
   return (
-    <div className="w-full max-w-[580px] bg-gray-50 border border-gray-100 rounded p-1">
+    <div className="w-full max-w-[580px] mx-auto bg-gray-50 border border-gray-100 rounded p-1">
       <div>
         <h3 className="bg-[#dff8fe] font-semibold p-4 rounded text-gray-800">
           Your AccountInformation
@@ -14,9 +14,9 @@ const AccountInformation = () => {
               <div className="relative">
                 <input
                   type="text"
-                  className="peer border border-gray-300 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                  className="peer border border-gray-300 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
                 />
-                <p className="peer-focus:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
+                <p className="peer-focus:text-[#1D91CC] text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                   First Name
                 </p>
               </div>
@@ -24,9 +24,9 @@ const AccountInformation = () => {
               <div className="relative">
                 <input
                   type="text"
-                  className="peer border border-gray-300 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                  className="peer border border-gray-300 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
                 />
-                <p className="peer-focus:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
+                <p className="peer-focus:text-[#1D91CC] text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                   Last Name
                 </p>
               </div>
@@ -35,13 +35,13 @@ const AccountInformation = () => {
             <div className="relative">
               <PhoneInput
                 country={"ng"}
-                inputClass="!border !border-gray-300 !focus:border-primaryColor !rounded-lg !w-full !h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                inputClass="!border !border-gray-300 !focus:border-[#1D91CC] !rounded-lg !w-full !h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
                 buttonClass="!rounded-l-lg !border !border-gray-300"
                 containerClass="peer"
                 placeholder="+234 8000000000"
               />
 
-              <p className="peer-focus-within:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
+              <p className="peer-focus-within:text-[#1D91CC] text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Phone Number
               </p>
             </div>
@@ -49,9 +49,9 @@ const AccountInformation = () => {
             <div className="relative">
               <input
                 type="email"
-                className="peer border border-gray-300 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                className="peer border border-gray-300 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
               />
-              <p className="peer-focus:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
+              <p className="peer-focus:text-[#1D91CC] text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Email address
               </p>
             </div>
@@ -59,9 +59,9 @@ const AccountInformation = () => {
             <div className="relative">
               <input
                 type="text"
-                className="peer border border-gray-300 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                className="peer border border-gray-300 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
               />
-              <p className="peer-focus:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
+              <p className="peer-focus:text-[#1D91CC] text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Gender
               </p>
             </div>
@@ -69,9 +69,9 @@ const AccountInformation = () => {
             <div className="relative">
               <input
                 type="text"
-                className="peer border border-gray-300 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                className="peer border border-gray-300 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
               />
-              <p className="peer-focus:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
+              <p className="peer-focus:text-[#1D91CC] text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Address 1
               </p>
             </div>
@@ -79,9 +79,9 @@ const AccountInformation = () => {
             <div className="relative">
               <input
                 type="text"
-                className="peer border border-gray-300 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                className="peer border border-gray-300 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
               />
-              <p className="peer-focus:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
+              <p className="peer-focus:text-[#1D91CC] text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                 Address 2 (Optional)
               </p>
             </div>
@@ -89,7 +89,7 @@ const AccountInformation = () => {
             <div className="relative">
               <input
                 type="text"
-                className="peer border border-gray-300 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                className="peer border border-gray-300 focus:border-[#1D91CC] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1D91CC]"
               />
               <p className="peer-focus:text-primaryColor text-gray-300 text-sm bg-gray-50 px-2 absolute top-0 left-6 translate-y-[-50%]">
                 State
@@ -106,7 +106,7 @@ const AccountInformation = () => {
               </p>
             </div>
           </div>
-          <button className="bg-primaryColor text-white px-16 text-sm rounded-lg py-2 my-10">
+          <button className="bg-[#1D91CC] text-white px-16 text-sm rounded-lg py-2 my-10">
             Update
           </button>
         </form>
