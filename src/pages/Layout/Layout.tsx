@@ -26,6 +26,7 @@ const Layout = () => {
       setShowDropdown(false);
     }
   };
+
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
 
@@ -82,13 +83,13 @@ const Layout = () => {
                 <div className=" px-4 py-2 ml-6  w-full cursor-pointer hidden md:flex items-center gap-2 ">
                   <Image src={User} alt="user" />
 
-                  <p className=" text-white">john Doe</p>
+                  <p className=" text-white">{user.firstname}</p>
                   <Image src={DownArrow} alt="arrow_down" />
                 </div>
 
                 {showDropdown && (
                   <div
-                    className="bg-white text-black rounded-md absolute top-[4rem] z-[1000]  h-fit flex flex-col gap-4
+                    className="bg-white text-black rounded-md absolute top-[4rem] z-[10000]  h-fit flex flex-col gap-4
                   px-4 py-4 w-[11rem] shadow-md
                   "
                   >

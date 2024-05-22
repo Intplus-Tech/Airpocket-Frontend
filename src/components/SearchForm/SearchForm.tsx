@@ -9,6 +9,7 @@ import ClassType from "../ClassType/ClassType";
 import TripType from "../TripType/TripType";
 import { DatePickerComponent } from "../DatePicker/DatePickerComponent";
 import { X } from "lucide-react";
+// import { useLocation } from "react-router-dom";
 
 interface suggestionList {
   value: string;
@@ -78,6 +79,7 @@ const SearchForm = ({
   setIsOpen,
 }: Props) => {
   const { handleSubmit } = useForm();
+  // const {pathname} = useLocation()
   return (
     <div className="bg-white shadow-sm md:shadow-lg rounded-md mt-4 lg:mt-6 px-6 py-6   w-full mx-auto">
       <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
@@ -146,7 +148,7 @@ const SearchForm = ({
             </div>
           </div>
           <p
-            className="hidden min-[576px]:block"
+            className="hidden min-[576px]:hidden"
             onClick={() => setIsOpen?.(false)}
           >
             <X className="text-[#1B96D6] cursor-pointer" />

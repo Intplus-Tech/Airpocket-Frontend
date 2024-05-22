@@ -38,7 +38,9 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
             <input
               type="text"
               id="firstName"
-              {...register(`passengers${index}.firstName`)}
+              {...register(`passengers${index}.firstName`, {
+                required: "First name is required",
+              })}
               className="peer w-full border-none py-2 px-2 bg-transparent  focus:outline-none focus:ring-0"
               placeholder="First Name"
             />
@@ -53,7 +55,9 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
             <input
               type="text"
               id="Last Name"
-              {...register(`passengers${index}.lastName`)}
+              {...register(`passengers${index}.lastName`, {
+                required: "Last Name name is required",
+              })}
               className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
               placeholder="Last Name"
             />
@@ -154,7 +158,9 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                 <input
                   type="text"
                   id="PassportNO"
-                  {...register(`passengers${index}.passportNumber`)}
+                  {...register(`passengers${index}.passportNumber`, {
+                    required: "Passport number is required",
+                  })}
                   className="peer w-full border-none py-2 px-2 bg-transparent  focus:outline-none focus:ring-0"
                   placeholder="Passport number"
                 />
@@ -203,7 +209,9 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                   <input
                     type="text"
                     id="year"
-                    {...register(`passengers${index}.ped.year`)}
+                    {...register(`passengers${index}.ped.year`, {
+                      required: "Passport Year of expiry  is required",
+                    })}
                     className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                     placeholder=""
                   />

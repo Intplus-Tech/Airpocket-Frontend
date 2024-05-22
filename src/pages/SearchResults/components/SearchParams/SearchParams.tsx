@@ -77,7 +77,7 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
 
     setSuggestions(result);
   };
-
+  console.log(flightSearchQuery);
   const handleSearchFlight = async (data: FieldValues) => {
     if (!depature?.value && !checkInDate) {
       toast({
@@ -165,8 +165,7 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
               <div className="flex flex-col justify-center items-center h-full">
                 <p className="text-sm text-[#404040]">Returning</p>
                 <p className="font-bold text-sm">
-                  {formatDateWithDateFns(flightSearchQuery.returnTimeDate) ||
-                    "N/A"}
+                  {formatDateWithDateFns(flightSearchQuery?.returnTimeDate)}
                 </p>
               </div>
               <div className="flex flex-col justify-center items-center h-full">
@@ -207,10 +206,7 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
                 </p>
                 <p className="text-sm font-bold px-[5px] ">-</p>
                 <p className=" text-[10px] sm:text-base pr-[5px] capitalize">
-                  {formatDateWithDateFns(
-                    flightSearchQuery.returnDate,
-                    "short"
-                  ) || "N/A"}
+                  {formatDateWithDateFns(flightSearchQuery.returnDate, "short")}
                 </p>
                 <p className="h-[20px] w-[2px] bg-[#ABABAB] text-[#ABABAB] mx-1"></p>
                 <p className="font-bold text-[10px] sm:text-base">

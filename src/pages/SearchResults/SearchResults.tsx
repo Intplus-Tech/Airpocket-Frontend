@@ -16,7 +16,7 @@ import { FilterProps, SearchResult } from "@/types/typs";
 import { extractHour } from "@/utils/monthDAys";
 
 const SearchResults = () => {
-  const DEFAULT_CUSTOM_PRICE = [0, 500000] as [number, number];
+  const DEFAULT_CUSTOM_PRICE = [0, 5000000] as [number, number];
   const DEFAULT_CUSTOM_DEPARTURE_TIME = [0, 24] as [number, number];
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
