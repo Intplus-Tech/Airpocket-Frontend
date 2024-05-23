@@ -9,6 +9,7 @@ import Stepper from "./components/Stepper/Stepper";
 import { Toaster } from "./components/ui/toaster";
 import { getItemFromStorage, storeItem } from "./utils/locaStorage";
 import TawkToScript from "./Tawkto/Tawkto.tsx";
+import { PrivateRoute } from "./ProtectedRoute/ProtectedRoute.tsx";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About/About.tsx"));
@@ -99,7 +100,14 @@ function App() {
               {/* Make sure to remove */}
 
               <Route path="/flight-details" element={<Stepper />} />
-              <Route path="/account-infomation" element={<AccountProfile />} />
+              <Route
+                path="/account-infomation"
+                element={
+                  <PrivateRoute>
+                    <AccountProfile />
+                  </PrivateRoute>
+                }
+              />
               {/* Make sure to remove */}
 
               {/* Make sure to remove */}

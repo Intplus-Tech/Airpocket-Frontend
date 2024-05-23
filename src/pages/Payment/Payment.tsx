@@ -23,6 +23,7 @@ const Payment = () => {
   );
 
   const flightSelected = getItemFromStorage("selected_flight");
+  const user = useSelector((state: RootState) => state.user.user);
 
   const { adult, children, infants } = getItemFromStorage(
     "flight-search-query"
@@ -38,7 +39,7 @@ const Payment = () => {
   const handlePayment = () => {
     payment(
       {
-        email,
+        email: email || user?.email,
         amount:
           selectedFlight?.data.flightOffers[0].price.grandTotal *
           (adult + children + infants),
