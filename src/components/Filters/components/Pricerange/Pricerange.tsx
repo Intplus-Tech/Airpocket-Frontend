@@ -42,7 +42,7 @@ const Pricerange = ({ filters, setFilters }: PriceRangeFilters) => {
               defaultValue={[33, 70]}
               value={filters.price.range}
               min={0}
-              max={500000}
+              max={5000000}
               step={5}
             />
           </AccordionContent>

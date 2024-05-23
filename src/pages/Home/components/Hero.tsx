@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useDebounce } from "use-debounce";
-import Select from "react-select";
+// import Select from "react-select";
 
 import { Image } from "../../../components/Image/Index";
-import Arrow_down from "../../../assets/arrow_down.svg";
-import Arrow_right from "../../../assets/Arrow-right.svg";
-import TripType from "../../../components/TripType/TripType";
-import PassengerType from "../../../components/PassengerType/PassengerType";
-import ClassType from "../../../components/ClassType/ClassType";
+// import Arrow_down from "../../../assets/arrow_down.svg";
+// import Arrow_right from "../../../assets/Arrow-right.svg";
+// import TripType from "../../../components/TripType/TripType";
+// import PassengerType from "../../../components/PassengerType/PassengerType";
+// import ClassType from "../../../components/ClassType/ClassType";
 import Test from "../../../assets/test1.png";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
-import { DatePickerComponent } from "@/components/DatePicker/DatePickerComponent";
+// import { DatePickerComponent } from "@/components/DatePicker/DatePickerComponent";
 import { formatDateString } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
+import SearchForm from "@/components/SearchForm/SearchForm";
 
 interface suggestionList {
   value: string;
@@ -27,7 +28,7 @@ interface suggestionList {
 const Hero = () => {
   const { toast } = useToast();
   const dispatch = useDispatch();
-  const { handleSubmit } = useForm();
+  // const { handleSubmit } = useForm();
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
   const [classType, setClassType] = useState("Economy");
@@ -139,170 +140,32 @@ const Hero = () => {
           Embark on a journey to secure the ideal gateway
         </h1>
 
-        <div className="bg-white shadow-sm md:shadow-lg rounded-md mt-4 lg:mt-6 px-6 py-6   w-full mx-auto">
-          <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
-            {/* all three */}
-            <div className="flex flex-col min-[576px]:flex-row min-[576px]:items-center gap-8 w-full sm:w-fit min-[576px]:w-full">
-              {/* grid grid-cols-1 min-[576px]:grid-cols-2 */}
-              <div
-                onClick={() => setOpenDropdownType("trip")}
-                className=" rounded-md gap-2 relative sm:w-fit "
-              >
-                <div className="flex items-center justify-between sm:justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-3 md:px-6 md:py-3 rounded-md w-full sm:w-fit relative">
-                  {tripType}
-                  <Image src={Arrow_down} alt="Arrow_down" />
-                </div>
-                <div className="absolute top-[2.4rem] z-10 w-fit bg-white shadow-md rounded-sm ">
-                  {openDropdownType === "trip" && (
-                    <TripType
-                      tripType={tripType}
-                      setTripType={setTripType}
-                      setOpenDropdownType={setOpenDropdownType}
-                    />
-                  )}
-                </div>
-              </div>
-              <div className="flex items-center gap-2 md:gap-8  ">
-                {/* sm:ml-[-4rem] lg:ml-[-6rem] */}
-                <div
-                  onClick={() => setOpenDropdownType("passenger")}
-                  className="w-full sm:w-fit  relative  flex items-center justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base"
-                >
-                  <span className="whitespace-nowrap">
-                    Passenger{" "}
-                    {passengerNumber.adult +
-                      passengerNumber.children +
-                      passengerNumber.infants}
-                  </span>
-                  <Image src={Arrow_down} alt="Arrow_down" />
-                  <div className="absolute top-[2.4rem] z-[10] left-0 w-full  bg-white shadow-md rounded-md ">
-                    {openDropdownType === "passenger" && (
-                      <PassengerType
-                        setOpenDropdownType={setOpenDropdownType}
-                        passengerNumber={passengerNumber}
-                        setPassengerNumber={setPassengerNumber}
-                      />
-                    )}
-                  </div>
-                </div>
-                <div
-                  onClick={() => setOpenDropdownType("class")}
-                  className=" w-full sm:w-fit relative flex items-center justify-center bg-[#afdeeb]  bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base whitespace-nowrap"
-                >
-                  {classType} <Image src={Arrow_down} alt="Arrow_down" />
-                  <div className="absolute top-[2.4rem] z-[10] w-fit bg-white shadow-md rounded-sm ">
-                    {openDropdownType === "class" && (
-                      <ClassType
-                        classType={classType}
-                        setClassType={setClassType}
-                        setOpenDropdownType={setOpenDropdownType}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 min-[576px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-8 mt-6 flex-wrap">
-              <div className="flex flex-col  md:border-r  md:pr-8">
-                <label className="text-sm md:text-base">Departure</label>
-                <Select
-                  options={suggestions}
-                  onChange={handleChangeDepature}
-                  value={depature}
-                  components={{
-                    DropdownIndicator: () => null,
-                    IndicatorSeparator: () => null,
-                  }}
-                  onInputChange={(input) => {
-                    if (input) {
-                      handleInputDepatureChange(input);
-                      setOpenDepartureDropdown(true);
-                    } else {
-                      setOpenDepartureDropdown(false);
-                    }
-                  }}
-                  menuIsOpen={openDepatureDropdown}
-                  isClearable
-                  // isSearchable
-                  placeholder=""
-                  styles={{
-                    control: (baseStyles) => ({
-                      ...baseStyles,
-                      backgroundColor: "#e5edf1",
-                      // zIndex: -10,
-                    }),
-                  }}
-                  className="peer border-none rounded-lg w-full h-10  bg-[#283841] bg-opacity-10   "
-                />
-              </div>
-              {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
-              <div className="flex flex-col  md:border-r  md:pr-8 ">
-                <label className="text-sm md:text-base">Destination</label>
-                <Select
-                  options={suggestions}
-                  onChange={handleChangeDestination}
-                  value={destination}
-                  components={{
-                    DropdownIndicator: () => null,
-                    IndicatorSeparator: () => null,
-                  }}
-                  onInputChange={(input) => {
-                    if (input) {
-                      handleInputDestinationChange(input);
-                      setOpenDestinationDropdown(true);
-                    } else {
-                      setOpenDestinationDropdown(false);
-                    }
-                  }}
-                  menuIsOpen={openDestinationDropdown}
-                  isClearable
-                  isSearchable
-                  placeholder=""
-                  styles={{
-                    control: (baseStyles) => ({
-                      ...baseStyles,
-                      backgroundColor: "#e5edf1",
-                      // zIndex: -10,
-                    }),
-                  }}
-                  className="peer border-none rounded-xl w-full h-10  bg-[#283841] bg-opacity-10   "
-                />
-              </div>
-              {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
-
-              <div className="flex flex-col md:border-r  md:pr-8 w-full">
-                <label className="text-sm md:text-base">Check in</label>
-                <DatePickerComponent
-                  date={checkInDate}
-                  setDate={setCheckInDate}
-                />
-              </div>
-              {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
-
-              <div className="flex flex-col w-full">
-                <label className="text-sm md:text-base">Check out</label>
-                <DatePickerComponent
-                  date={checkOutDate}
-                  setDate={setCheckOutDate}
-                />
-              </div>
-              <div className="flex items-end justify-end text-white rounded-md ">
-                <button
-                  type="submit"
-                  className="flex items-center sm:items-start gap-4 px-3 py-2 w-full sm:w-fit bg-[#03C3F8] rounded-md whitespace-nowrap text-sm"
-                >
-                  Search Flights
-                  <Image
-                    src={Arrow_right}
-                    alt="arrow_right"
-                    className="flex items-center"
-                  />
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+        <SearchForm
+          handleSearchFlight={handleSearchFlight}
+          setOpenDropdownType={setOpenDropdownType}
+          openDropdownType={openDropdownType}
+          passengerNumber={passengerNumber}
+          setPassengerNumber={setPassengerNumber}
+          classType={classType}
+          setClassType={setClassType}
+          suggestions={suggestions}
+          handleChangeDepature={handleChangeDepature}
+          handleInputDepatureChange={handleInputDepatureChange}
+          setOpenDepartureDropdown={setOpenDepartureDropdown}
+          handleChangeDestination={handleChangeDestination}
+          handleInputDestinationChange={handleInputDestinationChange}
+          setOpenDestinationDropdown={setOpenDestinationDropdown}
+          openDepatureDropdown={openDepatureDropdown}
+          openDestinationDropdown={openDestinationDropdown}
+          checkInDate={checkInDate}
+          checkOutDate={checkOutDate}
+          setCheckInDate={setCheckInDate}
+          setCheckOutDate={setCheckOutDate}
+          tripType={tripType}
+          setTripType={setTripType}
+          destination={destination}
+          depature={depature}
+        />
       </div>
     </div>
   );

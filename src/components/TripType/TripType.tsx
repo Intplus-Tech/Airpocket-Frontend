@@ -21,16 +21,16 @@ const TripType = ({
     >
       <p
         onClick={() => selectTripType("One Way")}
-        className={`hover:bg-gray-50 px-4 py-2 text-sm cursor-pointer ${
-          tripType === "One Way" && "bg-gray-50"
+        className={`hover:bg-gray-50 px-4 py-2 text-sm cursor-pointer  whitespace-nowrap${
+          tripType === "One Way" && "bg-gray-50 whitespace-nowrap"
         }`}
       >
         One Way
       </p>
       <p
         onClick={() => selectTripType("Round Trip")}
-        className={`hover:bg-gray-50 px-4 py-2 text-sm cursor-pointer ${
-          tripType === "Round Trip" && "bg-gray-50"
+        className={`hover:bg-gray-50 px-4 py-2 text-sm cursor-pointer whitespace-nowrap ${
+          tripType === "Round Trip" && "bg-gray-50 whitespace-nowrap"
         }`}
       >
         Round Trip

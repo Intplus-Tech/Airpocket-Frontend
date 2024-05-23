@@ -6,22 +6,18 @@ import { Image } from "../Image/Index";
 import Filters from "../Filters/Filters";
 import { FilterProps } from "@/types/typs";
 
-const MobileFilters = () => {
+type MobileFilterProps = {
+  filters: FilterProps;
+  setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
+};
+
+const MobileFilters = ({ filters, setFilters }: MobileFilterProps) => {
   const [openFilter, setOpenFilters] = useState(false);
   const [activeTab, setActiveTab] = useState<string | null>(null);
-  const [filters, setFilters] = useState<FilterProps>({
-    price: {
-      range: [0, 5000000],
-    },
-    stops: null,
-    departureTime: {
-      range: [0, 24],
-    },
-  });
 
   const handleFilter = () => {
     setActiveTab("filter");
-    setOpenFilters(true);
+    setOpenFilters(!openFilter);
   };
   const handleSort = () => {
     setActiveTab("sort");
@@ -33,7 +29,7 @@ const MobileFilters = () => {
         <p
           onClick={handleFilter}
           className={` ${
-            activeTab === "filter" && "bg-[#465259]"
+            activeTab === "filter" ? "bg-[#465259]" : "bg-[#1B96D6]"
           } cursor-pointer flex gap-3 items-center w-full px-5 py-4 text-center`}
         >
           <Image src={Filter} alt="Filter" className="text-white" />

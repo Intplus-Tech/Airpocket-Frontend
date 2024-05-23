@@ -120,10 +120,12 @@ export function formatDate(dateString: string): string {
 }
 
 export function formatDateWithDateFns(
-  date: Date | undefined,
+  date: Date | undefined | string,
   short?: string
 ): string {
-  if (!date) return "";
+  if (!date || date === "undefined") {
+    return "N/A";
+  }
   return format(date, short ? " MMMM d" : "EEEE, MMMM d", {
     locale: enUS,
   });

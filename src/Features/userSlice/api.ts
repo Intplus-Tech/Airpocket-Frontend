@@ -21,9 +21,11 @@ function loginApi(data: User) {
       //   Authorization: `Bearer ${authToken}`,
     },
     data: JSON.stringify(data),
+    withCredentials: true,
   };
   return axios(url, options);
 }
+
 function signUpApi(data: User) {
   const url = `${SERVER_URL}/signup`;
   const options = {
@@ -33,6 +35,7 @@ function signUpApi(data: User) {
       //   Authorization: `Bearer ${authToken}`,
     },
     data: JSON.stringify(data),
+    withCredentials: true,
   };
   return axios(url, options);
 }
@@ -47,8 +50,9 @@ export const loginAccount = async (data: User, dispatch: any) => {
 
     const { access_token, data: userData, message } = response.data;
     if (response.data) {
+      console.log(response);
       document.cookie = `access_token=${access_token}`;
-      // storeItem("access_token", access_token);
+      storeItem("access_token", access_token);
       storeItem("user", userData);
       dispatch(loginSuccess(userData));
     }
@@ -66,10 +70,11 @@ export const signUpAccount = async (data: User, dispatch: any) => {
     const response: any = await signUpApi(data);
     // const cookies = response.headers["set-cookie"];
 
-    const { data: userData, message } = response.data;
+    const { data: userData, message, access_token } = response.data;
     if (response.data) {
+      // console.log(response);
       // document.cookie = `access_token=${access_token}`;
-      // storeItem("access_token", access_token);
+      storeItem("access_token", access_token);
       storeItem("user", userData);
       dispatch(loginSuccess(userData));
     }

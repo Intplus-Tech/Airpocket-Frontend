@@ -45,7 +45,7 @@ const PassengerType = ({
 
   return (
     <div
-      className=" py-2 pr-2 z-20"
+      className=" py-2 pr-2 z-20 bg-white"
       onMouseLeave={() => setOpenDropdownType(null)}
     >
       {passengers.map(({ id, text }) => (
