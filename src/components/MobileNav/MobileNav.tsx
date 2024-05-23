@@ -44,7 +44,7 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
 
   return (
     <section
-      className={`z-[100] fixed w-full top-0 left-0 overflow-hidden bg-[#F5F6FA] transition-all ease-in-out duration-[1.5s] ${
+      className={`z-[1000] fixed w-full top-0 left-0 overflow-hidden bg-[#F5F6FA] transition-all ease-in-out duration-[1.5s] ${
         isOpen ? "h-[100vh]" : "h-0"
       }`}
     >

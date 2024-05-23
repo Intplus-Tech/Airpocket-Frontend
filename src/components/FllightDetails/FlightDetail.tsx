@@ -60,7 +60,7 @@ const FlightDetails = ({
               </span>
               <Image src={Flight} alt="Flight" height={70} width={100} />
               <span className="text-[#868686] text-center text-sm">
-                {`${segments.length} stop`}
+                {`${segments.length - 1} stop`}
               </span>
             </div>
             <div className="flex flex-col gap-2 w-full items-center">
@@ -117,7 +117,7 @@ const FlightDetails = ({
                 </span>
                 <Image src={Flight} alt="Flight" height={70} width={100} />
                 <span className="text-[#868686] text-center text-sm">
-                  {`${itineraries[1]?.segments.length} stop`}
+                  {`${itineraries[1]?.segments.length - 1} stop`}
                 </span>
               </div>
               <div className="flex flex-col gap-2 w-full items-center">
