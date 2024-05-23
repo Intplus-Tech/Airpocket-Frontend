@@ -6,9 +6,11 @@ import Gulf from "@/pages/SearchResults/assets/Gulf.svg";
 import { useState } from "react";
 import { ContactInformation } from "./ContactInformation";
 import { FlightFareBreakdown } from "./FlightFareBreakDown";
+import { useGetUserHistory } from "../slice/query";
 
 const BookedFlight = () => {
-  const iteneriesCount = ["1", "2", "3"];
+  const { isLoading, data: iteneries } = useGetUserHistory();
+  // const iteneriesCount = ["1", "2", "3"];
 
   const [viewItenery, setViewItenery] = useState<number | null>(null);
 
@@ -72,6 +74,10 @@ const BookedFlight = () => {
     </div>
   );
 
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div className="w-full max-w-[912px] bg-gray-50 border border-gray-100 rounded p-1 mb-8">
       <div>
@@ -80,7 +86,8 @@ const BookedFlight = () => {
         </h3>
       </div>
 
-      {iteneriesCount.map((item, index) => {
+      {iteneries?.success.data.map((item: any, index: number) => {
+        console.log(item);
         return (
           <div className="w-full">
             {viewItenery !== index ? (
