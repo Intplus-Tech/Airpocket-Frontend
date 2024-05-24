@@ -58,11 +58,7 @@ const MobileFilters = ({ filters, setFilters }: MobileFilterProps) => {
       )}
       {activeTab === "sort" && (
         <div className="fixed z-[10000] w-full h-full bg-zinc-200 top-0 left-0 overflow-auto">
-          <SortFilters
-            setActiveTab={setActiveTab}
-            filters={filters}
-            setFilters={setFilters}
-          />
+          <SortFilters setActiveTab={setActiveTab} setFilters={setFilters} />
         </div>
       )}
     </div>

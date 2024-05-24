@@ -40,8 +40,6 @@ const Hero = () => {
   const [suggestions, setSuggestions] = useState<suggestionList[]>([]);
   const [checkInDate, setCheckInDate] = useState<Date | undefined>();
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
-  const [openCheckIn, setOpenCheckIn] = useState(false);
-  const [openCheckOut, setOpenCheckOut] = useState(false);
   const [passengerNumber, setPassengerNumber] = useState<{
     [key: string]: number;
   }>({

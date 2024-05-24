@@ -3,11 +3,10 @@ import { X } from "lucide-react";
 type FlightProps = {
   // setCloseModal?: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveTab?: React.Dispatch<React.SetStateAction<string | null>>;
-  filters: FilterProps;
   setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
 };
 
-const SortFilters = ({ setActiveTab, filters, setFilters }: FlightProps) => {
+const SortFilters = ({ setActiveTab, setFilters }: FlightProps) => {
   const SORT_FILTERS = [
     {
       id: "1",
