@@ -196,7 +196,7 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                               {arrivalTime}
                             </span>
                             <p className="text-sm text-[#868686]">
-                              {itineraries[1].segments[0].arrival.iataCode}
+                              {itineraries[1].segments[1].arrival.iataCode}
                             </p>
                           </div>
                         </div>
