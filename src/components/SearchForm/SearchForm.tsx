@@ -9,6 +9,8 @@ import ClassType from "../ClassType/ClassType";
 import TripType from "../TripType/TripType";
 import { DatePickerComponent } from "../DatePicker/DatePickerComponent";
 import { X } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 // import { useLocation } from "react-router-dom";
 
 interface suggestionList {
@@ -79,9 +81,15 @@ const SearchForm = ({
   setIsOpen,
 }: Props) => {
   const { handleSubmit } = useForm();
-  // const {pathname} = useLocation()
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setOpenDropdownType(null);
+  }, [tripType, classType]);
+
+  console.log(openDropdownType);
   return (
-    <div className="bg-white shadow-sm md:shadow-lg rounded-md mt-4 lg:mt-6 px-6 py-6   w-full mx-auto">
+    <div className="bg-white shadow-sm md:shadow-lg rounded-xl mt-4 lg:mt-6 px-5 py-8   w-full mx-auto">
       <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
         {/* all three */}
 
@@ -89,7 +97,12 @@ const SearchForm = ({
           <div className="flex flex-col min-[576px]:flex-row min-[576px]:items-center gap-8 w-full sm:w-fit min-[576px]:w-full">
             {/* grid grid-cols-1 min-[576px]:grid-cols-2 */}
             <div
-              onClick={() => setOpenDropdownType("trip")}
+              onClick={() => {
+                setOpenDropdownType((prevType) =>
+                  prevType === "trip" ? null : "trip"
+                ),
+                  console.log("still same thing");
+              }}
               className=" rounded-md gap-2 relative sm:w-fit "
             >
               <div className="flex items-center justify-between sm:justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md w-full sm:w-fit relative">
@@ -106,6 +119,7 @@ const SearchForm = ({
                 )}
               </div>
             </div>
+
             <div className="flex items-center gap-2 md:gap-8  ">
               {/* sm:ml-[-4rem] lg:ml-[-6rem] */}
               <div
@@ -251,13 +265,14 @@ const SearchForm = ({
           </div>
         </div>
       </form>
-
-      <p
-        className="text-center w-full mt-4 min-[576px]:hidden "
-        onClick={() => setIsOpen?.(false)}
-      >
-        <X className="text-[#1B96D6] cursor-pointer mx-auto" />
-      </p>
+      {pathname !== "/" && (
+        <p
+          className="text-center w-full mt-6 min-[576px]:hidden "
+          onClick={() => setIsOpen?.(false)}
+        >
+          <X className="text-[#1B96D6] cursor-pointer mx-auto" />
+        </p>
+      )}
     </div>
   );
 };

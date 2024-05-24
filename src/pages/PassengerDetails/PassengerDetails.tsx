@@ -38,14 +38,13 @@ export const PassengerDetails = ({
     { length: adult + children + infants },
     (_, index) => index + 1
   );
-
   useEffect(() => {
-    flightSelect(selectedFlight, dispatch);
+    !result && flightSelect(selectedFlight, dispatch);
   }, []);
 
   // mx-4 md:mx-6 min-[1059px]:mx
   return (
-    <main className="max-w-screen-lg overflow-hidden mx-6 min-[1059px]:mx-auto  ">
+    <main className="max-w-screen-xl overflow-hidden mx-6 min-[1059px]:mx-auto  ">
       {/* SINGLE_FLIGHT_STOPS Details */}
 
       <div>

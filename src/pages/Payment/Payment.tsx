@@ -80,10 +80,10 @@ const Payment = () => {
 
             <div className="py-4 pb-4 border-b border-b-gray-300 md:flex justify-between space-y-8 md:space-y-0">
               <div>
-                <h4 className="font-semibold">Select your payment option</h4>
+                <h4 className="font-semibold">Make Your Payment</h4>
                 <form className="text-gray-800 space-y-2 py-3">
                   {/* TODO: change the radio outline color to the primaryColor */}
-                  <div className="flex gap-x-2 items-center">
+                  {/* <div className="flex gap-x-2 items-center">
                     <input
                       type="radio"
                       name=""
@@ -94,7 +94,7 @@ const Payment = () => {
                       className="accent-primaryColor"
                     />
                     <label>Book</label>
-                  </div>
+                  </div> */}
                   <div className="flex gap-x-2 items-center">
                     <input
                       type="radio"
@@ -107,7 +107,7 @@ const Payment = () => {
                     />
                     <label>Card Payment</label>
                   </div>
-                  <div className="flex gap-x-2 items-center">
+                  {/* <div className="flex gap-x-2 items-center">
                     <input
                       type="radio"
                       name=""
@@ -118,7 +118,7 @@ const Payment = () => {
                       className="accent-primaryColor"
                     />
                     <label>Transfer Payment</label>
-                  </div>
+                  </div> */}
                 </form>
               </div>
 
@@ -147,7 +147,7 @@ const Payment = () => {
                 </button>
                 <button
                   onClick={handlePayment}
-                  className="px-6 md:px-16 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
+                  className="px-6 md:px-16 min-w-fit text-white bg-[#1D91CC] py-4 mt-4 rounded-lg"
                 >
                   Make payment
                   {/* Complete Your booking */}

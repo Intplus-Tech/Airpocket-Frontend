@@ -46,7 +46,7 @@ const Layout = () => {
   return (
     <div>
       <MaxWidthWrapper>
-        <section className="h-24 w-full flex justify-between items-center px-6 bg-transparent relative z-[100] ">
+        <section className="h-24 w-full flex justify-between items-center px-2 md:px-6 bg-transparent relative z-[100] ">
           <div className=" w-full flex items-center md:gap-20 lg:gap-28">
             <Image
               src={Airpocket}

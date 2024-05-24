@@ -5,6 +5,7 @@ import Filter from "./assets/filters.svg";
 import { Image } from "../Image/Index";
 import Filters from "../Filters/Filters";
 import { FilterProps } from "@/types/typs";
+import SortFilters from "../Sort/SortFilters";
 
 type MobileFilterProps = {
   filters: FilterProps;
@@ -12,12 +13,12 @@ type MobileFilterProps = {
 };
 
 const MobileFilters = ({ filters, setFilters }: MobileFilterProps) => {
-  const [openFilter, setOpenFilters] = useState(false);
+  // const [openFilter, setOpenFilters] = useState(false);
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
   const handleFilter = () => {
     setActiveTab("filter");
-    setOpenFilters(!openFilter);
+    // setOpenFilters(!openFilter);
   };
   const handleSort = () => {
     setActiveTab("sort");
@@ -29,7 +30,7 @@ const MobileFilters = ({ filters, setFilters }: MobileFilterProps) => {
         <p
           onClick={handleFilter}
           className={` ${
-            activeTab === "filter" ? "bg-[#465259]" : "bg-[#1B96D6]"
+            activeTab === "filter" && "bg-[#465259]"
           } cursor-pointer flex gap-3 items-center w-full px-5 py-4 text-center`}
         >
           <Image src={Filter} alt="Filter" className="text-white" />
@@ -46,13 +47,18 @@ const MobileFilters = ({ filters, setFilters }: MobileFilterProps) => {
         </p>
       </div>
 
-      {openFilter && (
+      {activeTab === "filter" && (
         <div className="fixed z-[10000] w-full h-full bg-zinc-200 top-0 left-0 overflow-auto">
           <Filters
-            setCloseModal={setOpenFilters}
+            setActiveTab={setActiveTab}
             filters={filters}
             setFilters={setFilters}
           />
+        </div>
+      )}
+      {activeTab === "sort" && (
+        <div className="fixed z-[10000] w-full h-full bg-zinc-200 top-0 left-0 overflow-auto">
+          <SortFilters setActiveTab={setActiveTab} setFilters={setFilters} />
         </div>
       )}
     </div>

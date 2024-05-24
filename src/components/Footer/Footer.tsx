@@ -8,12 +8,12 @@ import MaxwidthWrapper from "../MaxwidthWrapper.tsx/MaxWidthWrapper";
 const Footer = () => {
   return (
     <MaxwidthWrapper>
-      <div className="px-6 md:flex justify-between">
+      <div className=" md:flex justify-between">
         <div className="space-y-3 max-w-[420px]">
           <div className="relative w-28 h-8">
             <Image src={Logo} alt="logo" />
           </div>
-          <p className="text-xs md:text-sm text-gray-600">
+          <p className="text-xs md:text-sm md:max-w-[20rem] text-gray-600">
             Our passion for travel fuels our dedication to exceeding
             expectations and delivering unparalleled value, ensuring that every
             journey with Airpockets is an extraordinary adventure.
@@ -64,7 +64,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div>
+        <div className="mt-8 mb-6">
           <h3 className="font-semibold">Contact Information</h3>
           <div className="text-gray-600 space-y-2 mt-2">
             <p>18, Cray Crescent, Ikoyi, Lagos</p>

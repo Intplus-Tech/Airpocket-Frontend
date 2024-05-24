@@ -26,6 +26,11 @@ const SearchResults = () => {
     departureTime: {
       range: DEFAULT_CUSTOM_DEPARTURE_TIME,
     },
+    sort: {
+      recommended: true,
+      cheapest: false,
+      fastest: false,
+    },
   });
 
   const [filteredResult, setFilteredResult] = useState<
@@ -38,9 +43,9 @@ const SearchResults = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
 
   const flightQuery = getItemFromStorage("flight-search-query");
-
+  console.log(filters);
   const filterByPriceRange = () => {
-    const filtered = searchResult?.data?.filter((result) => {
+    const filtered = (searchResult?.data ?? []).filter((result) => {
       const priceMatch =
         result.price.grandTotal >= filters.price.range[0] &&
         result.price.grandTotal <= filters.price.range[1];
@@ -55,9 +60,21 @@ const SearchResults = () => {
         filters.stops !== null
           ? result.itineraries[0].segments.length === Number(filters.stops)
           : true;
+
       return priceMatch && timeMatch && stopsMatch;
     });
-    setFilteredResult(filtered);
+    const minPrice = Math.min(
+      ...filtered.map((result) => result.price.grandTotal)
+    );
+
+    const resultsWithMinPrice = filtered.filter(
+      (result) => Number(result.price.grandTotal) === minPrice
+    );
+    console.log(filteredResult, "fil", resultsWithMinPrice, "ch");
+
+    filters.sort?.cheapest
+      ? setFilteredResult(resultsWithMinPrice)
+      : setFilteredResult(filtered);
   };
 
   useEffect(() => {
@@ -69,6 +86,7 @@ const SearchResults = () => {
     filters.departureTime.range[0],
     filters.departureTime.range[1],
     filters.stops,
+    filters.sort?.cheapest,
   ]);
 
   useEffect(() => {
@@ -140,7 +158,10 @@ const SearchResults = () => {
             ) : (
               <div>
                 <TableComponent />
-                <FlightAvailable availableFlight={filteredResult} />
+                <FlightAvailable
+                  availableFlight={filteredResult}
+                  setFilters={setFilters}
+                />
               </div>
             )}
           </div>

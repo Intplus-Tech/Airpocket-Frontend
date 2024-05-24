@@ -131,9 +131,9 @@ export function formatDateWithDateFns(
   });
 }
 
-export function formatDateString(date: Date | undefined): string {
+export function formatDateString(date: Date | undefined): string | null {
   if (!date) {
-    return "Invalid date";
+    return null;
   }
 
   // Format the Date object into the desired string format (YYYY-MM-DD)

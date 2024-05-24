@@ -118,7 +118,7 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
     return (
       <section className="w-full">
         <h1 className="font-bold">About </h1>
-        <div className="max-w-lg mx-auto">
+        <div className="max-w-[35rem] mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Ullamcorper a lacus vestibulum sed. Scelerisque eleifend donec pretium

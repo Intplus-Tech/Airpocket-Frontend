@@ -73,7 +73,7 @@ const Places = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 place-items-center col-span-1 my-6 h-full">
         <div className="w-fit relative">
           <Image src={Water} alt="Water" className=" " />
-          <div className="absolute top-4 right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[220px] ">
+          <div className="absolute top-4 right-[-1rem] sm:right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[200px] ">
             <Image
               src={SmallImage}
               alt="small image"
@@ -147,7 +147,7 @@ const Places = () => {
       </div>
       <div>
         <div className="px-0 md:px-6">
-          <h1 className="font-bold text-xl lg:text-[41px]">
+          <h1 className="font-bold text-xl py-4 lg:text-[41px]">
             Trending <span className="text-[#1B96D6]">destination</span> now
             days
           </h1>
