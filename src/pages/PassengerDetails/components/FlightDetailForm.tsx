@@ -93,7 +93,7 @@ const FlightDetailForm = ({
   return (
     <section className="w-full">
       <form className="w-full" onSubmit={handleSubmit(SubmitPassengerForm)}>
-        <div className="border rounded-md p-4 mx-4 md:mx-6 min-[1059px]:mx-0">
+        <div className="border rounded-md p-4  md:mx-6 min-[1059px]:mx-0">
           <div className="flex items-center justify-between">
             <p className="font-bold border-b pb-2 w-full">Passenger Details</p>
             {/* <p>
@@ -215,7 +215,7 @@ const FlightDetailForm = ({
           <p>
             <input type="checkbox" />
           </p>
-          <p>
+          <p className="text-[10px] sm:text-base">
             By proceeding, I acknowledge that I have read and agreed to
             Airpocket’s Flight booking{" "}
             <span className="text-[#1D91CC]"> terms & conditions</span>

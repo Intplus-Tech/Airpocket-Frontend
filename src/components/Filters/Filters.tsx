@@ -6,22 +6,20 @@ import { X } from "lucide-react";
 import { FilterProps } from "@/types/typs";
 
 type FlightProps = {
-  setCloseModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  // setCloseModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveTab?: React.Dispatch<React.SetStateAction<string | null>>;
   filters: FilterProps;
   setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
 };
 
-const Filters = ({ setCloseModal, filters, setFilters }: FlightProps) => {
+const Filters = ({ setActiveTab, filters, setFilters }: FlightProps) => {
   return (
     <section className="bg-[#EDEDED] bg-opacity-40 min-h-[100vh] flex items-start  justify-center px-8 rounded-md">
       <div className="mt-10 w-[294px]">
         <div className=" flex justify-between">
           <h1>Filters</h1>
 
-          <X
-            className="text-[#1B96D6]"
-            onClick={() => setCloseModal?.(false)}
-          />
+          <X className="text-[#1B96D6]" onClick={() => setActiveTab?.(null)} />
         </div>
         <div className=" mt-8">
           <div>
@@ -38,7 +36,7 @@ const Filters = ({ setCloseModal, filters, setFilters }: FlightProps) => {
           </div>
         </div>
         <div
-          onClick={() => setCloseModal?.(false)}
+          onClick={() => setActiveTab?.(null)}
           className="md:hidden bg-[#1B96D6] text-white mt-6 mb-4 rounded-md"
         >
           <button className="w-full py-2 px-3 ">Apply Filters</button>

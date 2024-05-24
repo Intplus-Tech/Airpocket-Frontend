@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Image } from "../Image/Index";
 import Airpocket from "@/assets/Airpocket.svg";
 import Cancel from "./assets/cances.svg";
+import SignUp from "@/auth/Signup/Signup";
+import Login from "@/auth/Login/Login";
 
 type MobileNavPros = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -64,7 +67,7 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
               location.pathname === "/" && "font-bold text-black"
             }`}
             to={"/"}
-            // onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)}
           >
             Home
           </Link>
@@ -73,7 +76,7 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
               location.pathname === "/about-us" && "font-bold text-black"
             }`}
             to={"/about-us"}
-            // onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)}
           >
             About Us
           </Link>
@@ -82,10 +85,42 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
               location.pathname === "/flights" && "font-bold text-black"
             }`}
             to={"/flights"}
-            // onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)}
           >
             Flights
           </Link>
+        </div>
+      </div>
+
+      <div className="mt-48 text-center w-full flex items-center justify-center max-w-lg">
+        <div className="sm:mx-auto flex flex-col w-full mx-4">
+          <Dialog>
+            <DialogTrigger>
+              <p
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-2 hover:shadow-md rounded-md"
+              >
+                Sign In
+              </p>
+            </DialogTrigger>
+            <DialogContent className=" max-h-[90vh]   ">
+              <Login />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog>
+            <DialogTrigger>
+              <p
+                onClick={() => setIsOpen(false)}
+                className="px-3 py-2 text-white bg-[#1B96D6] rounded-md cursor-pointer"
+              >
+                Sign Up
+              </p>
+            </DialogTrigger>
+            <DialogContent className=" w-full flex item center justify-center h-fit my-4">
+              <SignUp />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </section>

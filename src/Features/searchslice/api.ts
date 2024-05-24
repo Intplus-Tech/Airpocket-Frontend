@@ -12,20 +12,25 @@ import { LIMIT_FIVE } from "@/utils/Constant";
 
 function getSearchResultsApi(data: User) {
   let url;
-  data.returnDate
-    ? (url = `${SERVER_URL}/flight-search?originLocationCode=${
-        data.originLocationCode
-      }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
-        data.depatureDate
-      }&returnDate=${
-        data.returnDate
-      }&adults=1&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`)
-    : (url = `${SERVER_URL}/flight-search?originLocationCode=${
-        data.originLocationCode
-      }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
-        data.depatureDate
-      }&adults=1&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`);
+  data.returDate ? console.log("true") : console.log("false");
 
+  if (data.returnDate) {
+    url = `${SERVER_URL}/flight-search?originLocationCode=${
+      data.originLocationCode
+    }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
+      data.depatureDate
+    }&returnDate=${
+      data.returnDate
+    }&adults=1&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
+    console.log(url, "true");
+  } else {
+    url = `${SERVER_URL}/flight-search?originLocationCode=${
+      data.originLocationCode
+    }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
+      data.depatureDate
+    }&adults=1&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
+    console.log(url, "false");
+  }
   const options = {
     method: "GET",
     headers: {

@@ -77,7 +77,6 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
 
     setSuggestions(result);
   };
-  console.log(flightSearchQuery);
   const handleSearchFlight = async (data: FieldValues) => {
     if (!depature?.value && !checkInDate) {
       toast({

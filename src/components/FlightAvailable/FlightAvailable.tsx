@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import Gulf from "../Table/assets/logo.svg";
 import { Image } from "../Image/Index";
-import { Generic } from "@/types/typs";
+import { FilterProps, Generic } from "@/types/typs";
 import Flight from "./assets/flight.svg";
 import FilghtDetail from "@/pages/SearchResults/components/FlightDetails/FilghtDetail";
 import { convertTime, extractTime, formatCurrency } from "@/utils/monthDAys";
@@ -14,9 +14,13 @@ import { storeItem } from "@/utils/locaStorage";
 
 type AvailableFlightData = {
   availableFlight: { [x: string]: any }[] | undefined;
+  setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
 };
 
-const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
+const FlightAvailable = ({
+  availableFlight,
+  setFilters,
+}: AvailableFlightData) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   console.log(availableFlight);
@@ -28,14 +32,54 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
     flightSelect(data, dispatch);
     storeItem("selected_flight", data);
   };
+  const handleSort = (key: string) => {
+    if (key === "Fastest") {
+      setFilters((prev) => ({
+        ...prev,
+        sort: {
+          fastest: true,
+        },
+      }));
+    } else if (key === "Cheapest") {
+      setFilters((prev) => ({
+        ...prev,
+        sort: {
+          cheapest: true,
+        },
+      }));
+    } else {
+      setFilters((prev) => ({
+        ...prev,
+        sort: {
+          recommended: true,
+        },
+      }));
+    }
+  };
 
   return (
     <main className="mt-6">
       <section className=" mb-4">
         <div className="flex gap-4 py-4 items-center">
           <span className="text-sm font-bold">Sort By :</span>
-          <span className="underline text-[#1B96D6]">Recommended</span>
-          <span>Fastest</span> <span>cheapest</span>
+          <span
+            onClick={() => handleSort("Recommended")}
+            className="underline text-[#1B96D6] cursor-pointer"
+          >
+            Recommended
+          </span>
+          <span
+            className="cursor-pointer"
+            onClick={() => handleSort("Fastest")}
+          >
+            Fastest
+          </span>{" "}
+          <span
+            className="cursor-pointer"
+            onClick={() => handleSort("Cheapest")}
+          >
+            cheapest
+          </span>
         </div>
 
         <article className="border rounded-md pb-3">
@@ -212,7 +256,7 @@ const FlightAvailable = ({ availableFlight }: AvailableFlightData) => {
                             View Details
                           </p>
                         </DialogTrigger>
-                        <DialogContent className="w-full px-6 overflow-y-auto max-h-[80vh] bg-slate-50">
+                        <DialogContent className="w-full px-6 overflow-y-auto h-[35rem] bg-slate-50">
                           <FilghtDetail data={flight} />
                         </DialogContent>
                       </Dialog>

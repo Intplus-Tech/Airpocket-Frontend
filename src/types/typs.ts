@@ -65,4 +65,10 @@ export type FilterProps = {
   departureTime: {
     range: [number, number];
   };
+
+  sort?: {
+    recommended?: boolean;
+    cheapest?: boolean;
+    fastest?: boolean;
+  };
 };

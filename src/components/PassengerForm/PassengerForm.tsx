@@ -28,7 +28,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
   }, []);
 
   return (
-    <main className="max-w-screen-lg mx-auto mb-8">
+    <main className="max-w-screen-xl mx-auto mb-8 ">
       <section className="flex flex-wrap md:flex-nowrap gap-4 items-end w-full  h-full">
         <div className="w-full">
           <label
@@ -42,8 +42,11 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                 required: "First name is required",
               })}
               className="peer w-full border-none py-2 px-2 bg-transparent  focus:outline-none focus:ring-0"
-              placeholder="First Name"
+              placeholder=""
             />
+            <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              Firstname
+            </span>
           </label>
         </div>
 
@@ -59,12 +62,15 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                 required: "Last Name name is required",
               })}
               className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
-              placeholder="Last Name"
+              placeholder=""
             />
+            <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              Lastname
+            </span>
           </label>
         </div>
 
-        <div className="w-full border px-2 rounded-md">
+        <div className="w-full border px-2 rounded-md bg-white">
           <select
             name=""
             id=""
@@ -78,7 +84,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
         {/* date of birth */}
         <div className="w-full">
           <p>Date of Birth</p>
-          <div className="flex border w-full md:min-w-[22rem] rounded-md ">
+          <div className="flex border w-full md:min-w-[22rem] rounded-md bg-white ">
             <div className="w-full border-r px-2">
               <select
                 name=""
@@ -94,7 +100,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
               </select>
             </div>
 
-            <div className="w-full border-r px-2 ">
+            <div className="w-full border-r px-2 bg-white ">
               <select
                 name=""
                 id=""
@@ -109,7 +115,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
               </select>
             </div>
 
-            <div className="w-full border-r px-2">
+            <div className="w-full border-r px-2 bg-white">
               <label
                 htmlFor="year"
                 className="relative w-full block rounded-md "
@@ -135,7 +141,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
       <section className="mt-8">
         <div className="flex flex-wrap md:flex-nowrap items-end justify-end gap-4">
           <div className="w-full md:w-fit flex flex-col md:flex-row justify-end gap-4">
-            <div className=" w-full border  px-2 rounded-md ">
+            <div className=" w-full border  px-2 rounded-md bg-white ">
               <select
                 name=""
                 id=""
@@ -153,7 +159,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
             <div className="w-full flex justify-end ">
               <label
                 htmlFor="passportNumber"
-                className="relative w-full block rounded-md border  "
+                className="relative w-full block rounded-md border  bg-white  "
               >
                 <input
                   type="text"
@@ -162,15 +168,18 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                     required: "Passport number is required",
                   })}
                   className="peer w-full border-none py-2 px-2 bg-transparent  focus:outline-none focus:ring-0"
-                  placeholder="Passport number"
+                  placeholder=""
                 />
+                <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                  Passport Number
+                </span>
               </label>
             </div>
           </div>
 
           <div className="w-full md:w-fit">
             <p className="py-0.5">Expiry Date of Passport</p>
-            <div className="flex border w-full md:min-w-[18rem]">
+            <div className="flex border w-full md:min-w-[18rem] bg-white">
               <div className="w-full border-r px-2">
                 <select
                   name=""

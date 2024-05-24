@@ -122,7 +122,7 @@ const PassengerDetailsPreview = ({
           <input type="checkbox" name="" id="" />
           <p>Using wallet balance</p>
         </div> */}
-        <div className="md:flex w-full gap-x-4 items-center justify-between space-y-2 md:space-y-0 text-[#1D91CC]">
+        <div className="md:flex w-full gap-x-4 items-center justify-between space-y-2 md:space-y-0 ">
           <button
             onClick={() => setStep("flightDetailsForm")}
             className="flex items-center min-w-fit gap-x-2"
@@ -130,16 +130,17 @@ const PassengerDetailsPreview = ({
             <IoMdArrowBack />
             Return to the previous step
           </button>
+
           <div className="flex items-center gap-x-1 md:gap-x-2 justify-between">
-            <p>
-              Your Total Payment{" "}
+            <p className="text-[#1D91CC]">
+              Payment{" "}
               <span>
                 {formatCurrency(price.grandTotal * passengerFormData?.length)}
               </span>
             </p>
             <button
               onClick={handleContinue}
-              className="px-3 min-w-fit text-white bg-[#1D91CC] py-2 rounded-lg"
+              className=" min-w-fit text-white bg-[#1D91CC] py-2 px-8 rounded-lg"
             >
               Continue
               {/* Make Payment */}

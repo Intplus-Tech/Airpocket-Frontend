@@ -25,7 +25,7 @@ const CardPayment = ({ amount }: CardPaymentProp) => {
           <p className="flex w-full items-center justify-between gap-x-8">
             <span className="w-1/2">Reservation Fee</span>
             <span className="text-primaryColor w-1/2 text-base flex justify-between">
-              <span>NGN</span>0
+              <span>NGN {"  "} 0</span>
             </span>
           </p>
           <p className="flex w-full items-center justify-between font-semibold gap-x-8">
