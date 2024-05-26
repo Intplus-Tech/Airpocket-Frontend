@@ -88,7 +88,7 @@ const SearchForm = ({
   }, [tripType, classType]);
 
   return (
-    <div className="bg-white shadow-sm md:shadow-lg rounded-xl mt-4 lg:mt-6 px-5 py-8 md:pt-16 md:pb-20   w-full mx-auto">
+    <div className="bg-white shadow-sm md:shadow-lg rounded-xl mt-4 lg:mt-6 px-5 py-8 md:pt-16 md:pb-16   w-full mx-auto">
       <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
         {/* all three */}
 

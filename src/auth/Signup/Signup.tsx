@@ -88,7 +88,7 @@ const SignUp = () => {
 
   return (
     // <div className="mt-[-3.5rem] inset-0 z-10">
-    <div className=" mt-[-2rem] w-[80vw] max-w-[480px] mx-auto  rounded-lg p-2 relative">
+    <div className=" mt-[-2rem]  max-w-[480px] mx-auto  rounded-lg p-2 relative">
       <div className="py-6 px-3">
         <div className="w-36 h-10 mx-auto relative">
           <Image src={Logo} alt="Logo" />
@@ -99,6 +99,7 @@ const SignUp = () => {
             Get started with best of flight prices
           </p>
         </div>
+
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="space-y-6 mt-6">
             <div className="flex gap-6">

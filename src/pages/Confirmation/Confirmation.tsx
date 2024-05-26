@@ -7,8 +7,13 @@ import { useConfirmPaypment } from "./slice/query";
 import { CircleX } from "lucide-react";
 import { bookFlight } from "./slice/api";
 import { useToast } from "@/components/ui/use-toast";
+import Loader from "@/components/Loader/Loader";
 
-const Confirmation = () => {
+type Props = {
+  setCurrentStep: React.Dispatch<any>;
+};
+
+const Confirmation = ({ setCurrentStep }: Props) => {
   const { toast } = useToast();
   const user = useSelector((state: RootState) => state.user.user);
   const paymentData = getItemFromStorage("paymentData");
@@ -18,7 +23,9 @@ const Confirmation = () => {
   const { isLoading, data } = useConfirmPaypment({ id: paymentData._id });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
+      <Loader />
+    </section>;
   }
 
   const handleBookFlight = async () => {
@@ -47,9 +54,12 @@ const Confirmation = () => {
 
     const response = await bookFlight(bookingData);
 
-    response.success
-      ? toast({ title: "Your flight has been booked successfull" })
-      : toast({ title: "Something went wrong" });
+    if (response.success) {
+      toast({ title: "Your flight has been booked successfull" });
+      setCurrentStep(5);
+    } else {
+      toast({ title: "Something went wrong" });
+    }
   };
 
   return (

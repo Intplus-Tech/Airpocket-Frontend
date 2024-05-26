@@ -119,7 +119,7 @@ const FlightDetailForm = ({
 
     storeItem("passenger_form", updatedArray);
     storeItem("contact_info", formData);
-
+    console.log(updatedArray);
     if (formData.email) {
       await AutosignUpAccount(formData, dispatch);
       setPassengerFormData(updatedArray);

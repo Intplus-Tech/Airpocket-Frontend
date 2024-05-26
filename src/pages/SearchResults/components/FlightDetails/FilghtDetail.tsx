@@ -114,6 +114,7 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
       </main>
     );
   };
+
   const GeneralInformation = () => {
     return (
       <section className="w-full">

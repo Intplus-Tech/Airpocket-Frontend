@@ -21,9 +21,9 @@ const SearchResults = lazy(
 const AccountProfile = lazy(() => import("./pages/Account/Account.tsx"));
 
 const LoadingFallback = () => (
-  <div>
+  <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
     <Loader />
-  </div>
+  </section>
 );
 
 function App() {

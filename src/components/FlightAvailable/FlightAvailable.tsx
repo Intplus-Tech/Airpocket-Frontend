@@ -93,7 +93,6 @@ const FlightAvailable = ({
               const departureTime = extractTime(departure.at);
               const arrivalTime = extractTime(arrival.at);
               const realTime = convertTime(duration);
-
               return (
                 <section key={flight.id} className="border-b">
                   <section className="flex flex-col gap-4 py-3 ">

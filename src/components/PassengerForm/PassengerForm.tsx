@@ -123,7 +123,9 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                 <input
                   type="text"
                   id="year"
-                  {...register(`passengers${index}.dob.year`)}
+                  {...register(`passengers${index}.dob.year`, {
+                    required: "Year is required",
+                  })}
                   className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                   placeholder=""
                 />
@@ -229,8 +231,11 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
             <div className=" w-full border  px-2 rounded-md bg-white ">
               <select
                 name=""
-                id=""
-                {...register(`passengers${index}.documents[0].nationality`)}
+                id="country"
+                defaultValue="Nigeria"
+                {...register(`passengers${index}.documents[0].nationality`, {
+                  required: "Nationality name is required",
+                })}
                 className="w-full py-2 h-full outline-none border-none flex items-center "
               >
                 {list.map((item: any) => (
@@ -273,7 +278,9 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                 <select
                   name=""
                   id=""
-                  {...register(`passengers${index}.isd.day`)}
+                  {...register(`passengers${index}.isd.day`, {
+                    required: "Issuance data is required",
+                  })}
                   className="w-full h-full py-2 border border-r outline-none border-none flex items-center "
                 >
                   {days.map((day: any) => (

@@ -28,7 +28,7 @@ const FlightDetails = ({
   const arrivalTime = extractTime(arrival.at);
   const arrivalDate = formatDate(arrival.at);
   // const realTime = convertTime(duration);
-  // console.log(arrivalDate);
+
   return (
     <section
       key={SINGLE_FLIGHT_DETAILS?.data.id}
@@ -124,13 +124,18 @@ const FlightDetails = ({
                   {extractTime(itineraries[1]?.segments[0]?.arrival.at)}
                 </span>
                 <p className="text-sm text-[#868686]">
-                  {itineraries[1]?.segments[1]?.arrival.iataCode}
+                  {
+                    itineraries[1]?.segments[segments.length - 1]?.arrival
+                      .iataCode
+                  }
                 </p>
               </div>
 
               <div className="w-full">
                 <p className="text-sm md:text-base">
-                  {formatDate(itineraries[1]?.segments[1]?.arrival.at)}
+                  {formatDate(
+                    itineraries[1]?.segments[segments.length - 1]?.arrival.at
+                  )}
                 </p>
               </div>
               {/* <div className=" hidden md:block w-full h-full">

@@ -11,6 +11,7 @@ import confirmation from "@/components/Stepper/assets/confirmation.svg";
 import { Image } from "../Image/Index";
 import Done from "./assets/Done.svg";
 import { getItemFromStorage } from "@/utils/locaStorage";
+import CompletedBooking from "../CompletedBooking/CompletedBooking";
 
 const Stepper = () => {
   const step = getItemFromStorage("currentStep");
@@ -68,7 +69,10 @@ const Stepper = () => {
         );
 
       case 4:
-        return <Confirmation />;
+        return <Confirmation setCurrentStep={setCurrentStep} />;
+
+      case 5:
+        return <CompletedBooking />;
 
       default:
         break;

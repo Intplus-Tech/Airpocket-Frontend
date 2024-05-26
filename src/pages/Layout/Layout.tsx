@@ -46,7 +46,7 @@ const Layout = () => {
   return (
     <div>
       <MaxWidthWrapper>
-        <section className="h-24 w-full flex justify-between items-center px-2 md:px-6 bg-transparent relative z-[100] ">
+        <section className="h-24 w-full flex justify-between items-center px-2 md:px-6 bg-transparent relative z-[90] ">
           <div className=" w-full flex items-center md:gap-20 lg:gap-28">
             <Link to={"/"}>
               <Image
@@ -113,27 +113,31 @@ const Layout = () => {
               </div>
             ) : (
               <div className="w-full h-full hidden items-center justify-end md:flex gap-4">
-                <Dialog>
-                  <DialogTrigger>
-                    <p className="px-4 py-2 hover:shadow-md rounded-md">
-                      Sign In
-                    </p>
-                  </DialogTrigger>
-                  <DialogContent className=" max-h-[90vh]   ">
-                    <Login />
-                  </DialogContent>
-                </Dialog>
+                <div className="w-[90%]! mx-4">
+                  <Dialog>
+                    <DialogTrigger>
+                      <p className="px-4 py-2 hover:shadow-md rounded-md">
+                        Sign In
+                      </p>
+                    </DialogTrigger>
+                    <DialogContent className=" max-h-[90vh] w-full  ">
+                      <Login />
+                    </DialogContent>
+                  </Dialog>
+                </div>
 
-                <Dialog>
-                  <DialogTrigger>
-                    <p className="px-3 py-2 text-white bg-[#1B96D6] rounded-md cursor-pointer">
-                      Sign Up
-                    </p>
-                  </DialogTrigger>
-                  <DialogContent className=" w-full flex item center justify-center h-fit my-4">
-                    <SignUp />
-                  </DialogContent>
-                </Dialog>
+                <div className="w-[90vw]! mx-4">
+                  <Dialog>
+                    <DialogTrigger>
+                      <p className="px-3 py-2 text-white bg-[#1B96D6] rounded-md cursor-pointer">
+                        Sign Up
+                      </p>
+                    </DialogTrigger>
+                    <DialogContent className=" w-full flex item center justify-center h-fit my-4">
+                      <SignUp />
+                    </DialogContent>
+                  </Dialog>
+                </div>
               </div>
             )}
 

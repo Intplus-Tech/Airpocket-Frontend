@@ -1,6 +1,6 @@
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-20">
+    <div className="flex items-center justify-center min-h-screen ">
       <div className="relative w-32 h-32 flex items-center justify-center">
         <div className="absolute border-4 border-blue-500 border-t-transparent rounded-full w-full h-full spin-clockwise"></div>
         <div className="absolute border-4 border-green-500 border-t-transparent rounded-full w-2/3 h-2/3 spin-counterclockwise"></div>
@@ -9,6 +9,12 @@ const Loader = () => {
     </div>
   );
 };
+
+{
+  /* <div className="flex h-[100vh] items-center justify-center text-4xl font-bold">
+            Loading...
+          </div> */
+}
 
 export default Loader;
 
