@@ -8,7 +8,7 @@ import MaxwidthWrapper from "../MaxwidthWrapper.tsx/MaxWidthWrapper";
 const Footer = () => {
   return (
     <MaxwidthWrapper>
-      <div className=" md:flex justify-between">
+      <div className="px-4 md:flex justify-between">
         <div className="space-y-3 max-w-[420px]">
           <div className="relative w-28 h-8">
             <Image src={Logo} alt="logo" />
@@ -73,7 +73,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="hidden lg:flex mx-auto justify-center mt-8">
+      <div className="hidden lg:flex mx-auto justify-center my-8">
         <ul className="flex gap-x-6 text-gray-700 text-sm">
           <li>
             <Link to={"/terms"}>Terms</Link>

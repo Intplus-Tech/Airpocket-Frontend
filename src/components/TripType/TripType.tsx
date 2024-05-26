@@ -8,7 +8,6 @@ type TriptypProps = {
 
 const TripType = ({ tripType, setTripType }: TriptypProps) => {
   const selectTripType = (type: string) => {
-    console.log("hey");
     setTripType(type);
   };
 

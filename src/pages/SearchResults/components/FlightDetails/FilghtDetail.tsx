@@ -117,18 +117,18 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
   const GeneralInformation = () => {
     return (
       <section className="w-full">
-        <h1 className="font-bold">About </h1>
-        <div className="max-w-[35rem] mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ullamcorper a lacus vestibulum sed. Scelerisque eleifend donec pretium
-          vulputate sapien. Eu lobortis elementum nibh tellus molestie. Quis
-          varius quam quisque id diam. Aliquam sem et tortor consequat id porta
-          nibh venenatis cras. Duis ut diam quam nulla. In metus vulputate eu
-          scelerisque. Id aliquet lectus proin nibh nisl condimentum. Purus sit
-          amet volutpat consequat mauris nunc congue nisi. Ullamcorper sit amet
-          risus nullam eget felis eget nunc. Consectetur adipiscing elit ut
-          aliquam purus. Quis viverra nibh cras pulvinar mattis nunc.
+        <div className="max-w-[35rem] mx-auto flex flex-col gap-16 mt-5">
+          <div>
+            <h1 className="text-lg font-bold">Refundable</h1>
+            <p>Nno refundable</p>
+          </div>
+          <div>
+            <h1 className="text-lg font-bold">Price</h1>
+            <p>
+              Total fare displayed above has been rounded off and may thus show
+              a slight difference.
+            </p>
+          </div>
         </div>
       </section>
     );
@@ -138,13 +138,17 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
       <div className=" mt-4 border-b pb-2 flex gap-4 z-50">
         <p
           onClick={() => setComponentType("flightDetails")}
-          className="cursor-pointer"
+          className={`cursor-pointer ${
+            componentType === "flightDetails" && "text-[#1D91CC]"
+          }`}
         >
           Flight Information
         </p>
         <p
           onClick={() => setComponentType("generalInfomation")}
-          className="cursor-pointer border-b active"
+          className={`cursor-pointer ${
+            componentType === "generalInfomation" && "text-[#1D91CC]"
+          }`}
         >
           General Information
         </p>

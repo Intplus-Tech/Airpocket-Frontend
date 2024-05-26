@@ -1,5 +1,6 @@
 // axiosConfig.ts
 import axios, { AxiosError } from "axios";
+import { clearStorage } from "./utils/locaStorage";
 
 // Create an instance of Axios
 const axiosInstance = axios.create({
@@ -16,6 +17,7 @@ axiosInstance.interceptors.response.use(
   (error: AxiosError) => {
     // If the response has a status of 401, redirect to the home page
     if (error.response && error.response.status === 401) {
+      clearStorage();
       window.location.href = "/";
     }
     // Otherwise, return the error

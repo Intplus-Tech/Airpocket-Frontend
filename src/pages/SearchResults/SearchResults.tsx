@@ -43,7 +43,6 @@ const SearchResults = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
 
   const flightQuery = getItemFromStorage("flight-search-query");
-  console.log(filters);
   const filterByPriceRange = () => {
     const filtered = (searchResult?.data ?? []).filter((result) => {
       const priceMatch =
@@ -58,7 +57,7 @@ const SearchResults = () => {
 
       const stopsMatch =
         filters.stops !== null
-          ? result.itineraries[0].segments.length === Number(filters.stops)
+          ? result.itineraries[0].segments.length - 1 === Number(filters.stops)
           : true;
 
       return priceMatch && timeMatch && stopsMatch;
@@ -70,7 +69,6 @@ const SearchResults = () => {
     const resultsWithMinPrice = filtered.filter(
       (result) => Number(result.price.grandTotal) === minPrice
     );
-    console.log(filteredResult, "fil", resultsWithMinPrice, "ch");
 
     filters.sort?.cheapest
       ? setFilteredResult(resultsWithMinPrice)
@@ -129,14 +127,18 @@ const SearchResults = () => {
 
       <div className=" mt-[12rem] md:mt-[15rem] lg:mt-[18rem] xl:mt-[18rem] w-full">
         <div className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-xl mx-3 sm:mx-auto sm:px-3 md:px-6 md:mx-auto flex  gap-6">
-          <div className="hidden lg:block  w-[310px]">
+          <div
+            className={`hidden lg:block  w-[310px] ${
+              isOpen && "lg:mt-[6rem] "
+            } `}
+          >
             <Filters filters={filters} setFilters={setFilters} />
           </div>
           {/* Flight Tables min-[1028px]:block*/}
           <div
             className={`h-full w-full ${
               isOpen &&
-              "lg:mt-[0rem] sm:mt-[6rem] min-[576px]:mt-[10rem]  mt-[25rem]"
+              "lg:mt-[6rem] md:mt-[13rem] sm:mt-[7rem] min-[576px]:mt-[10rem]  mt-[26rem]"
             } `}
           >
             {!searchResult || searchResult.data.length === 0 ? (

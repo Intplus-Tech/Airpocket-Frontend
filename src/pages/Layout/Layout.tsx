@@ -48,11 +48,13 @@ const Layout = () => {
       <MaxWidthWrapper>
         <section className="h-24 w-full flex justify-between items-center px-2 md:px-6 bg-transparent relative z-[100] ">
           <div className=" w-full flex items-center md:gap-20 lg:gap-28">
-            <Image
-              src={Airpocket}
-              alt="Airpocket"
-              className="mr-4 md:mr-0 w-full shrink-0"
-            />
+            <Link to={"/"}>
+              <Image
+                src={Airpocket}
+                alt="Airpocket"
+                className="mr-4 md:mr-0 w-full shrink-0"
+              />
+            </Link>
             <div className="hidden md:flex gap-6 text-[#283841] opacity-60 ">
               <Link
                 className={`${

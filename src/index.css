@@ -78,3 +78,70 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes spin-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-counterclockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.spin-clockwise {
+  animation: spin-clockwise 2s linear infinite;
+}
+
+.spin-counterclockwise {
+  animation: spin-counterclockwise 2s linear infinite;
+}
+
+@keyframes moveLine {
+  0% {
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 8px);
+    width: 8px;
+    height: 8px;
+  }
+  50% {
+    top: calc(100% - 8px);
+    left: calc(100% - 8px);
+    width: 8px;
+    height: 8px;
+  }
+  75% {
+    top: calc(100% - 8px);
+    left: 0;
+    width: 8px;
+    height: 8px;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+  }
+}
+
+.line-animation {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: blue;
+  animation: moveLine 4s linear infinite;
+}

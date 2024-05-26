@@ -92,7 +92,7 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
         </div>
       </div>
 
-      <div className="mt-48 text-center w-full flex items-center justify-center max-w-lg">
+      <div className="mt-32 text-center w-full flex items-center justify-center max-w-lg mx-auto">
         <div className="sm:mx-auto flex flex-col w-full mx-4">
           <Dialog>
             <DialogTrigger>

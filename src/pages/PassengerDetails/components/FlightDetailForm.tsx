@@ -1,12 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import { getCountryCode } from "countries-list";
 
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
-import { Generic } from "@/types/typs";
+import { Generic, TravellerFormData } from "@/types/typs";
 import { storeItem } from "@/utils/locaStorage";
 import { useToast } from "@/components/ui/use-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { AutosignUpAccount } from "@/Features/userSlice/api";
 
 type FLGHT_DETAIL_FORM_PROPS = {
   inputsArray: number[];
@@ -31,6 +33,7 @@ const FlightDetailForm = ({
   setStep,
   setPassengerFormData,
 }: FLGHT_DETAIL_FORM_PROPS) => {
+  const dispatch = useDispatch();
   const { toast } = useToast();
   const {
     register,
@@ -48,7 +51,7 @@ const FlightDetailForm = ({
     firstname: "",
     lastname: "",
     email: "",
-    phoneNumber: "",
+    phone: "",
   });
 
   const user = useSelector((state: RootState) => state.user.user);
@@ -68,7 +71,7 @@ const FlightDetailForm = ({
       });
   }, [errors]);
 
-  const SubmitPassengerForm = (data: FieldValues) => {
+  const SubmitPassengerForm = async (data: FieldValues) => {
     if (!formData.email && !user?._id) {
       toast({
         description: "Please fill in your contact information",
@@ -85,9 +88,46 @@ const FlightDetailForm = ({
       ...value,
     }));
 
-    storeItem("passenger_form", { ...arrayOfObjects, contact_info: formData });
-    setPassengerFormData(arrayOfObjects);
-    setStep("flightDetailsPreview");
+    const updatedArray = arrayOfObjects
+      .map((item: TravellerFormData) => ({
+        ...item,
+        dateOfBirth: `${item.dob.year}-${item.dob.month}-${item.dob.day}`,
+        contact: {
+          ...item.contact,
+          phones: [
+            {
+              ...item.contact.phones[0],
+              deviceType: "MOBILE",
+              countryCallingCode: "34",
+            },
+          ],
+        },
+        documents: [
+          {
+            ...item.documents[0],
+            documentType: "PASSPORT",
+            issuanceDate: `${item.isd.year}-${item.isd.month}-${item.isd.day}`,
+            expiryDate: `${item.ped.year}-${item.ped.month}-${item.ped.day}`,
+            issuanceCountry: getCountryCode(item.documents[0].nationality),
+            validityCountry: getCountryCode(item.documents[0].nationality),
+            nationality: getCountryCode(item.documents[0].nationality),
+            holder: true,
+          },
+        ],
+      }))
+      .map(({ dob, isd, ped, ...rest }) => rest);
+
+    storeItem("passenger_form", updatedArray);
+    storeItem("contact_info", formData);
+
+    if (formData.email) {
+      await AutosignUpAccount(formData, dispatch);
+      setPassengerFormData(updatedArray);
+      setStep("flightDetailsPreview");
+    } else {
+      setPassengerFormData(updatedArray);
+      setStep("flightDetailsPreview");
+    }
   };
 
   return (
@@ -96,15 +136,11 @@ const FlightDetailForm = ({
         <div className="border rounded-md p-4  md:mx-6 min-[1059px]:mx-0">
           <div className="flex items-center justify-between">
             <p className="font-bold border-b pb-2 w-full">Passenger Details</p>
-            {/* <p>
-            <span className="font-semibold">Time Left:</span>{" "}
-            <span className="text-red-500">07:59</span>
-          </p> */}
           </div>
           <div>
             {inputsArray.map((_, index) => (
               <div key={index} className="border-b">
-                <p className="font-bold mt-4">Passenger {index + 1}</p>
+                <p className="font-bold my-4">Passenger {index + 1}</p>
                 <PassengerForm
                   index={index}
                   fields={fields}
@@ -176,12 +212,12 @@ const FlightDetailForm = ({
               >
                 <input
                   type="text"
-                  id="PhoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
+                  id="Phone"
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleChange}
                   className="peer w-full border-none py-1.5 px-2 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                  placeholder="PhoneNumber"
+                  placeholder="Phone Number"
                 />
 
                 <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
