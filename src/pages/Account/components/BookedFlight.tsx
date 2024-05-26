@@ -87,6 +87,7 @@ const BookedFlight = () => {
       </div>
 
       {iteneries?.success.data.map((item: any, index: number) => {
+        console.log(item);
         return (
           <div className="w-full">
             {viewItenery !== index ? (
