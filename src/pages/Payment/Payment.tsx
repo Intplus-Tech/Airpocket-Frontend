@@ -32,9 +32,7 @@ const Payment = () => {
     (state: RootState) => state.selectFlight.isLoading
   );
 
-  const {
-    contact_info: { email },
-  } = getItemFromStorage("passenger_form");
+  const { email } = getItemFromStorage("contact_info");
 
   const handlePayment = () => {
     payment(
@@ -51,7 +49,7 @@ const Payment = () => {
   };
 
   useEffect(() => {
-    flightSelect(flightSelected, dispatch);
+    !selectedFlight && !isLoading && flightSelect(flightSelected, dispatch);
   }, []);
 
   if (isLoading) {

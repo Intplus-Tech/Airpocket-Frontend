@@ -10,6 +10,7 @@ import { Toaster } from "./components/ui/toaster";
 import { getItemFromStorage, storeItem } from "./utils/locaStorage";
 import TawkToScript from "./Tawkto/Tawkto.tsx";
 import { PrivateRoute } from "./ProtectedRoute/ProtectedRoute.tsx";
+import Loader from "./components/Loader/Loader.tsx";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About/About.tsx"));
@@ -20,9 +21,9 @@ const SearchResults = lazy(
 const AccountProfile = lazy(() => import("./pages/Account/Account.tsx"));
 
 const LoadingFallback = () => (
-  <div className="w-full h-[100vh] flex items-center justify-center">
-    Loading...
-  </div>
+  <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
+    <Loader />
+  </section>
 );
 
 function App() {

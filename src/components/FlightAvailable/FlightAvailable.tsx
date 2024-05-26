@@ -23,15 +23,16 @@ const FlightAvailable = ({
 }: AvailableFlightData) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(availableFlight);
 
   const handleBookAction = (data: Generic) => {
     navigate("/flight-details");
     storeItem("currentStep", 2);
 
     flightSelect(data, dispatch);
+
     storeItem("selected_flight", data);
   };
+
   const handleSort = (key: string) => {
     if (key === "Fastest") {
       setFilters((prev) => ({
@@ -64,7 +65,7 @@ const FlightAvailable = ({
           <span className="text-sm font-bold">Sort By :</span>
           <span
             onClick={() => handleSort("Recommended")}
-            className="underline text-[#1B96D6] cursor-pointer"
+            className={`underline text-[#1B96D6] cursor-pointer`}
           >
             Recommended
           </span>
@@ -92,7 +93,6 @@ const FlightAvailable = ({
               const departureTime = extractTime(departure.at);
               const arrivalTime = extractTime(arrival.at);
               const realTime = convertTime(duration);
-
               return (
                 <section key={flight.id} className="border-b">
                   <section className="flex flex-col gap-4 py-3 ">
@@ -229,7 +229,7 @@ const FlightAvailable = ({
                               </span>
                               <span className="text-[#868686] text-center text-sm">
                                 {
-                                  travelerPricings[0].fareDetailsBySegment[1]
+                                  travelerPricings[0]?.fareDetailsBySegment[1]
                                     .cabin
                                 }
                               </span>
@@ -240,7 +240,7 @@ const FlightAvailable = ({
                               {arrivalTime}
                             </span>
                             <p className="text-sm text-[#868686]">
-                              {itineraries[1].segments[1].arrival.iataCode}
+                              {itineraries[1].segments[1]?.arrival?.iataCode}
                             </p>
                           </div>
                         </div>

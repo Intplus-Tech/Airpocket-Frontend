@@ -135,10 +135,10 @@ const Hero = () => {
         alt="Airpocket hero image"
         className="w-full h-[37rem] min-[576px]:h-[22rem] md:h-[30rem] rounded-lg mx-auto max-w-screen-2xl bg-slate-200 "
       />
-      <div className="absolute top-[3%] sm:top-[4%] md:top-[15%] w-full px-2 md:px-14">
-        {/* <h1 className="capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">
+      <div className="  absolute top-[3%] sm:top-[4%] md:top-[15%] w-full px-2 md:px-14">
+        <h1 className=" hidden sm:block capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">
           Embark on a journey to secure the ideal gateway
-        </h1> */}
+        </h1>
 
         <SearchForm
           handleSearchFlight={handleSearchFlight}

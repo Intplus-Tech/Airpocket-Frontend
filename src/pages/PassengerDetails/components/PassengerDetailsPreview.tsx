@@ -1,5 +1,5 @@
 import { RootState } from "@/store/store";
-import { Generic } from "@/types/typs";
+import { Generic, TravellerFormData } from "@/types/typs";
 import { storeItem } from "@/utils/locaStorage";
 import { formatCurrency } from "@/utils/monthDAys";
 import { FaUser } from "react-icons/fa";
@@ -10,25 +10,6 @@ type PASSENGER_DETAILS_PREVIEW_PROPS = {
   setStep: React.Dispatch<React.SetStateAction<string>>;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   passengerFormData: Generic | null;
-};
-
-type PassengerFormDataProps = {
-  id: number;
-  passportNumber: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  nationality: string;
-  dob: {
-    day: string;
-    month: string;
-    year: string;
-  };
-  ped: {
-    day: string;
-    month: string;
-    year: string;
-  };
 };
 
 const PassengerDetailsPreview = ({
@@ -46,7 +27,6 @@ const PassengerDetailsPreview = ({
     storeItem("currentStep", 3);
     setCurrentStep(3);
   };
-
   return (
     <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-4">
       <div className="text-sm md:text-base flex justify-between items-center pt-2 pb-4 border-b border-b-gray-300">
@@ -58,14 +38,14 @@ const PassengerDetailsPreview = ({
 
       <div className="py-4 text-sm md:text-base pt-2 pb-4 border-b border-b-gray-300">
         <div className="px-6 lg:px-8">
-          {passengerFormData?.map((item: PassengerFormDataProps) => {
+          {passengerFormData?.map((item: TravellerFormData) => {
             return (
               <div key={item.id} className="space-y-4 py-4">
-                {item.dob && (
+                {item.dateOfBirth && (
                   <div>
                     <p className="flex items-center gap-x-2">
                       <FaUser />{" "}
-                      <span className="capitalize">{`${item.firstName} ${item.lastName}`}</span>
+                      <span className="capitalize">{`${item.name.firstName} ${item.name.lastName}`}</span>
                     </p>
                     <div className="flex flex-col md:flex-row md:items-center gap-x-6 gap-y-2">
                       <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
@@ -79,7 +59,7 @@ const PassengerDetailsPreview = ({
                         <span className="text-xs text-gray-500">
                           Date of birth:{" "}
                         </span>
-                        <span className="">{`${item?.dob.day}/${item?.dob.month}/${item?.dob.year}`}</span>
+                        <span className="">{`${item.dateOfBirth}`}</span>
                       </p>
 
                       <p className="flex justify-between items-center gap-x-1 md:gap-x-2">
@@ -118,10 +98,6 @@ const PassengerDetailsPreview = ({
       </div> */}
 
       <div className="text-sm py-4 px-2 space-y-2">
-        {/* <div className="flex gap-x-2 items-center">
-          <input type="checkbox" name="" id="" />
-          <p>Using wallet balance</p>
-        </div> */}
         <div className="md:flex w-full gap-x-4 items-center justify-between space-y-2 md:space-y-0 ">
           <button
             onClick={() => setStep("flightDetailsForm")}

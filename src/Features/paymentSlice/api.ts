@@ -3,6 +3,7 @@ import { SERVER_URL } from "@/utils/apiUrl";
 import handleAxiosError from "@/utils/error";
 import axios from "axios";
 import { makePayment, paymentError, paymentSuccess } from "./reducer";
+import { storeItem } from "@/utils/locaStorage";
 
 function paymentApi(data: Generic) {
   const url = `${SERVER_URL}/payments`;
@@ -21,6 +22,7 @@ export const payment = async (data: Generic, dispatch: any) => {
   try {
     const response: any = await paymentApi(data);
     if (response.data.paymentDetails) {
+      storeItem("paymentData", response.data.data);
       const {
         paymentDetails: { data },
       } = response.data;

@@ -72,3 +72,67 @@ export type FilterProps = {
     fastest?: boolean;
   };
 };
+
+type DateType = {
+  day: string;
+  month: string;
+  year: string;
+};
+
+export type Person = {
+  id: number;
+  key: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  nationality: string;
+  passportNumber: string;
+  dob: DateType;
+  ped: DateType;
+};
+
+interface DateObject {
+  day: string;
+  month: string;
+  year: string;
+}
+
+interface Phone {
+  deviceType: string;
+  countryCallingCode: string;
+  number: string;
+}
+
+interface Contact {
+  emailAddress: string;
+  phones: Phone[];
+}
+
+interface Document {
+  documentType: string;
+  birthPlace: string;
+  issuanceLocation: string;
+  issuanceDate: string;
+  number: string;
+  expiryDate: string;
+  issuanceCountry: string;
+  validityCountry: string;
+  nationality: string;
+  holder: true;
+}
+
+export interface TravellerFormData {
+  id: number;
+  dateOfBirth: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  contact: Contact;
+  gender: string;
+  dob: DateObject;
+  isd: DateObject;
+  ped: DateObject;
+  documents: Document[];
+}
+[];

@@ -14,7 +14,7 @@ export function getDaysInMonth(year: number, month: number): string[] {
 
   // Loop through the days of the month and add them to the array as strings
   for (let i = 1; i <= numberOfDaysInMonth; i++) {
-    daysOfMonth.push(String(i)); // Convert each day number to a string
+    daysOfMonth.push(String(i).padStart(2, "0")); // Convert each day number to a string
   }
 
   return daysOfMonth;
@@ -22,18 +22,18 @@ export function getDaysInMonth(year: number, month: number): string[] {
 
 // Example usage:
 export const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12",
 ];
 
 export function generateYears(): string[] {

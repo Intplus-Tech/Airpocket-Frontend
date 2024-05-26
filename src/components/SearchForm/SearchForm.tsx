@@ -87,9 +87,8 @@ const SearchForm = ({
     setOpenDropdownType(null);
   }, [tripType, classType]);
 
-  console.log(openDropdownType);
   return (
-    <div className="bg-white shadow-sm md:shadow-lg rounded-xl mt-4 lg:mt-6 px-5 py-8   w-full mx-auto">
+    <div className="bg-white shadow-sm md:shadow-lg rounded-xl mt-4 lg:mt-6 px-5 py-8 md:pt-16 md:pb-16   w-full mx-auto">
       <form onSubmit={handleSubmit(handleSearchFlight)} className=" w-full">
         {/* all three */}
 
@@ -100,8 +99,7 @@ const SearchForm = ({
               onClick={() => {
                 setOpenDropdownType((prevType) =>
                   prevType === "trip" ? null : "trip"
-                ),
-                  console.log("still same thing");
+                );
               }}
               className=" rounded-md gap-2 relative sm:w-fit "
             >
@@ -121,7 +119,6 @@ const SearchForm = ({
             </div>
 
             <div className="flex items-center gap-2 md:gap-8  ">
-              {/* sm:ml-[-4rem] lg:ml-[-6rem] */}
               <div
                 onClick={() => setOpenDropdownType("passenger")}
                 className="w-full sm:w-fit  relative  flex items-center justify-center bg-[#afdeeb] bg-opacity-40 px-1 py-2 md:px-6 md:py-3 rounded-md gap-2 text-xs sm:text-base"
@@ -161,16 +158,18 @@ const SearchForm = ({
               </div>
             </div>
           </div>
-          <p
-            className="hidden min-[576px]:hidden"
-            onClick={() => setIsOpen?.(false)}
-          >
-            <X className="text-[#1B96D6] cursor-pointer" />
-          </p>
+          {pathname !== "/" && (
+            <p
+              className="hidden min-[576px]:block"
+              onClick={() => setIsOpen?.(false)}
+            >
+              <X className="text-[#1B96D6] cursor-pointer" />
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 min-[576px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-8 mt-6 flex-wrap">
-          <div className="flex flex-col  md:border-r  md:pr-8">
+          <div className="flex flex-col ">
             <label className="text-sm md:text-base">Departure</label>
             <Select
               options={suggestions}
@@ -203,7 +202,7 @@ const SearchForm = ({
             />
           </div>
           {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
-          <div className="flex flex-col  md:border-r  md:pr-8 ">
+          <div className="flex flex-col   ">
             <label className="text-sm md:text-base">Destination</label>
             <Select
               options={suggestions}
@@ -237,7 +236,7 @@ const SearchForm = ({
           </div>
           {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
-          <div className="flex flex-col md:border-r  md:pr-8 w-full">
+          <div className="flex flex-col w-full">
             <label className="text-sm md:text-base">Check in</label>
             <DatePickerComponent date={checkInDate} setDate={setCheckInDate} />
           </div>
@@ -250,7 +249,7 @@ const SearchForm = ({
               setDate={setCheckOutDate}
             />
           </div>
-          <div className="flex items-end justify-end text-white rounded-md ">
+          <div className="flex items-end w-full sm:w-[10rem] justify-end text-white rounded-md ">
             <button
               type="submit"
               className="flex items-center sm:items-start gap-4 px-3 py-2 w-full sm:w-fit bg-[#03C3F8] rounded-md whitespace-nowrap text-sm"

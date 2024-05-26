@@ -22,9 +22,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className=" mt-[-4rem] inset-0 z-10">
-      <div className=" w-[80vw] mx-auto mt-16 rounded-lg p-2 relative max-w-[480px]">
-        <div className="py-6 px-3">
+    <div className=" mt-[-4rem] ">
+      <div className="  mx-auto mt-16 rounded-lg p-2 relative max-w-[480px]">
+        <div className="py-6  sm:px-3">
           <div className="w-36 h-10 mx-auto relative">
             <Image src={Logo} alt="Logo" />
           </div>

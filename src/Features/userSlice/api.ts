@@ -40,6 +40,20 @@ function signUpApi(data: User) {
   return axios(url, options);
 }
 
+function autoSignUpApi(data: User) {
+  const url = `${SERVER_URL}/automatic-user-signup`;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      //   Authorization: `Bearer ${authToken}`,
+    },
+    data: JSON.stringify(data),
+    withCredentials: true,
+  };
+  return axios(url, options);
+}
+
 export const loginAccount = async (data: User, dispatch: any) => {
   dispatch(login());
 
@@ -63,6 +77,7 @@ export const loginAccount = async (data: User, dispatch: any) => {
     return { error: { response } };
   }
 };
+
 export const signUpAccount = async (data: User, dispatch: any) => {
   dispatch(signUp());
 
@@ -77,6 +92,29 @@ export const signUpAccount = async (data: User, dispatch: any) => {
       storeItem("access_token", access_token);
       storeItem("user", userData);
       dispatch(loginSuccess(userData));
+    }
+    return { success: { message } };
+  } catch (error) {
+    const response = handleAxiosError(error);
+    dispatch(signUpError(response.error));
+    return { error: response };
+  }
+};
+
+export const AutosignUpAccount = async (data: User, dispatch: any) => {
+  dispatch(signUp());
+
+  try {
+    const response: any = await autoSignUpApi(data);
+    // const cookies = response.headers["set-cookie"];
+    console.log(response);
+    const { user, message, access_token } = response.data;
+    if (response.data) {
+      // console.log(response);
+      // document.cookie = `access_token=${access_token}`;
+      storeItem("access_token", access_token);
+      storeItem("user", user);
+      dispatch(loginSuccess(user));
     }
     return { success: { message } };
   } catch (error) {

@@ -9,6 +9,7 @@ import Places from "./components/Places";
 import Testimonials from "./components/Testimonials";
 import Footer from "@/components/Footer/Footer";
 import SearchHistory from "@/components/SearchHistory/SearchHistory";
+import Loader from "@/components/Loader/Loader";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Home = () => {
   //   );
   // }
 
-  if (!isLoading && result) {
+  if (!isLoading && result?.data) {
     navigate("/flight-offers");
   }
 
@@ -38,9 +39,10 @@ const Home = () => {
       <Footer />
       {isLoading && (
         <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
-          <div className="flex h-[100vh] items-center justify-center text-4xl font-bold">
+          <Loader />
+          {/* <div className="flex h-[100vh] items-center justify-center text-4xl font-bold">
             Loading...
-          </div>
+          </div> */}
         </section>
       )}
     </MaxwidthWrapper>

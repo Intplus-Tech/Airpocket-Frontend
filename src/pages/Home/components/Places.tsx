@@ -162,7 +162,10 @@ const Places = () => {
         <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full">
           {destinations.map((destination) => {
             return (
-              <div className="relative min-w-[20rem] w-full">
+              <div
+                key={destination.id}
+                className="relative min-w-[20rem] w-full"
+              >
                 <Image
                   src={destination.Img}
                   alt={destination.name}
