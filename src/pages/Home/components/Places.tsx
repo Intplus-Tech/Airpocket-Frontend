@@ -1,8 +1,8 @@
 import { Image } from "../../../components/Image/Index";
-import Swimming from "../assets/Img1.svg";
-import Turkey from "../assets/Img2.svg";
-import History from "../assets/Img3.svg";
-import Desert from "../assets/Img4.svg";
+// import Swimming from "../assets/Img1.svg";
+// import Turkey from "../assets/Img2.svg";
+// import History from "../assets/Img3.svg";
+// import Desert from "../assets/Img4.svg";
 import Water from "../assets/Img5.svg";
 import BlueSquare from "../assets/Bluesquare.svg";
 import SmallImage from "../assets/smallImg.svg";
@@ -11,6 +11,10 @@ import Location from "../assets/Location.svg";
 import Jakarta from "../assets/Jakarta.svg";
 import Dubai from "../assets/Dubai.svg";
 import London from "../assets/London.svg";
+import Zanziba from "@/pages/Home//assets/Zanziba.jpeg";
+import Egypt from "@/pages/Home//assets/Egypt.jpeg";
+import Kigali from "@/pages/Home//assets/Kigali.jpeg";
+// import WaterMobile from "@/pages/Home/assets/WaterMobile.svg";
 
 const Places = () => {
   const destinations = [
@@ -48,32 +52,33 @@ const Places = () => {
           Plan Your Vacation
         </h1>
         <p className="text-[#283841] text-opacity-70 text-[14px]">
-          Tempora facere doloribus id aut. Ea maiores esse accusantium
-          laboriosam. Quos commodi non assumenda quam illum. Id omnis saepe
-          corrupti incidunt qui sed delectus. Eaque minus ducimus.
+          Experience the best with our summer 04 deals
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 place-items-center py-5">
         <div>
-          <Image src={Swimming} alt="swimmig" />
+          <Image src={Kigali} alt="kigali" />
         </div>
         <div>
-          <Image src={Turkey} alt="Turkey" />
+          <Image src={Egypt} alt="Egypt" />
         </div>
-        <div className="flex flex-col gap-4">
+        <div>
+          <Image src={Zanziba} alt="zanziba" />
+        </div>
+        {/* <div className="flex flex-col gap-4">
           <div>
             <Image src={History} alt="History" />
           </div>
           <div>
             <Image src={Desert} alt="Desert" />
           </div>
-        </div>
+        </div> */}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center col-span-1 my-6 h-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center gap-4 col-span-1 my-6 h-full">
         <div className="w-fit relative">
-          <Image src={Water} alt="Water" className=" " />
-          <div className="absolute top-4 right-[-1rem] sm:right-[-4rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[200px] ">
+          <Image src={Water} alt="Water" className="" />
+          <div className="absolute top-4 right-[-1rem] sm:right-[-3rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[200px] ">
             <Image
               src={SmallImage}
               alt="small image"
@@ -82,80 +87,83 @@ const Places = () => {
               className="relative rounded-lg pb-4 "
             />
             <div className="font-bold text-[11px] flex items-center justify-between w-full">
-              <span>culpa est similique</span>
+              <span>Miami, Florida, US</span>
               <p className="flex gap-2">
                 <Image src={BlackStar} alt="Black star" />
                 <span className="font-bold">4.92</span>
               </p>
             </div>
             <p className="text-[#283841] text-opacity-70 text-[11px] py-2">
-              Voluptatibus nemo amet voluptatem quia ipsa eum. Est ut voluptas.
+              Get breath taking experiences from shortlets and hotels wherever
+              you are traveling to on Airpockets Coming soon!{" "}
             </p>
 
             <div className="flex justify-between items-center w-full">
               <p>
-                $240 <span>Night</span>
+                $70 <span>Night</span>
               </p>
               <p className="flex items-center gap-2">
                 <Image src={Location} alt="location" />
-                <span>India</span>
+                <span>Florida</span>
               </p>
             </div>
           </div>
         </div>
 
-        <div className=" grow flex flex-col  justify-center h-full col-span-2 md:pl-32">
+        <div className=" grow flex flex-col mt-4  justify-center h-full col-span-2 md:pl-32">
           <div className="py-4">
             <h1 className="text-[40px] text-[#1B96D6] font-bold">About Us</h1>
             <p className="text-[#283841] text-opacity-70 text-[14px]">
-              Tempora facere doloribus id aut. Ea maiores esse accusantium
-              laboriosam. Quos commodi non assumenda quam illum.
+              At Airpockets, we understand that travel is more than just a trip,
+              it's an experience. It's about feeling young and alive, exploring
+              new cultures, and creating memories that last a lifetime. That's
+              why we're dedicated to providing you with the most affordable
+              luxury flights and travel packages, without compromising on
+              quality or service.
             </p>
           </div>
 
           <div className="flex flex-col items-start">
             <p className="flex gap-4 py-1">
               <Image src={BlueSquare} alt="BlueSquare" />
-              <span className="font-bold text-xs">
-                Assumenda nobis sit deserunt dolorem repudiandae occaecati
-                quisquam.
+              <span className="font-bold">
+                Unbeatable Prices: Get the cheapest luxury rate in the market,
+                while flying in style.
               </span>
             </p>
             <p className="flex gap-4 py-1">
               <Image src={BlueSquare} alt="BlueSquare" />
-              <span className="font-bold text-xs">
-                Assumenda nobis sit deserunt dolorem repudiandae occaecati
-                quisquam.
+              <span className="font-bold">
+                Luxury for Less: Enjoy luxury at the cheapest prices.
+              </span>
+            </p>
+            <p className="flex gap-4 py-1 items-center">
+              <Image
+                src={BlueSquare}
+                alt="BlueSquare"
+                className="flex items-start "
+              />
+              <span className="font-bold">
+                Tailored Support: You can reach us 24/7 (Monday – Sunday).
               </span>
             </p>
             <p className="flex gap-4 py-1">
               <Image src={BlueSquare} alt="BlueSquare" />
-              <span className="font-bold text-xs">
-                Assumenda nobis sit deserunt dolorem repudiandae occaecati
-                quisquam.
-              </span>
-            </p>
-            <p className="flex gap-4 py-1">
-              <Image src={BlueSquare} alt="BlueSquare" />
-              <span className="font-bold text-xs">
-                Assumenda nobis sit deserunt dolorem repudiandae occaecati
-                quisquam.
+              <span className="font-bold">
+                Focus on Youthful Exploration: Take advantage of our summer 04
+                deals.
               </span>
             </p>
           </div>
         </div>
       </div>
+
       <div>
         <div className="px-0 md:px-6">
           <h1 className="font-bold text-xl py-4 lg:text-[41px]">
-            Trending <span className="text-[#1B96D6]">destination</span> now
-            days
+            Trending <span className="text-[#1B96D6]">destination</span>
           </h1>
-          <p>
-            Tempora facere doloribus id aut. Ea maiores esse accusantium
-            laboriosam. Quos commodi non assumenda quam illum. Id omnis saepe
-            corrupti incidunt qui sed delectus. Eaque minus ducimus.
-          </p>
+          <p>TIncredible places you must visit….</p>
         </div>
 
         {/* <div className="mt-8 max-w-[30rem] md:max-w-full min-w-full overflow-x-auto grid grid-cols-3 space-x-8 md:gap-4 place-items-center"> */}

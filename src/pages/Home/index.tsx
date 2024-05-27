@@ -16,6 +16,8 @@ const Home = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
   const result = useSelector((state: RootState) => state.search.result);
   const user = useSelector((state: RootState) => state.user.user);
+  const error = useSelector((state: RootState) => state.search.error);
+  console.log(error);
 
   // if (isLoading) {
   //   return (
@@ -40,9 +42,6 @@ const Home = () => {
       {isLoading && (
         <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
           <Loader />
-          {/* <div className="flex h-[100vh] items-center justify-center text-4xl font-bold">
-            Loading...
-          </div> */}
         </section>
       )}
     </MaxwidthWrapper>

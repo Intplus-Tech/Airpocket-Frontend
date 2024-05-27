@@ -80,9 +80,9 @@ const Hero = () => {
   }, [value]);
 
   const handleSearchFlight = async (data: FieldValues) => {
-    if (!depature?.value && !checkInDate) {
+    if (!depature?.value || !destination?.value || !checkInDate) {
       toast({
-        description: "Please enter a departur Date",
+        description: "Departure, destination and checkin data are required",
       });
       return;
     }
@@ -137,7 +137,7 @@ const Hero = () => {
       />
       <div className="  absolute top-[3%] sm:top-[4%] md:top-[15%] w-full px-2 md:px-14">
         <h1 className=" hidden sm:block capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">
-          Embark on a journey to secure the ideal gateway
+          GET POCKET FRINEDLY LUXURY, WHERE ARE YOU GOING TO?
         </h1>
 
         <SearchForm

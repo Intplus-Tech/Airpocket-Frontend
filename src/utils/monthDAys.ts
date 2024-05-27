@@ -53,14 +53,14 @@ type TimeFormat = {
   minutes: number;
 };
 
-export function convertTime(timeString: string): TimeFormat | any {
-  const regex = /PT(\d+)H(\d+)M/;
+export function convertTime(timeString: string): string | any {
+  // Updated regex to handle both PT11H and PT11H30M formats
+  const regex = /PT(\d+)H(?:(\d+)M)?/;
   const match = timeString.match(regex);
 
   if (match) {
-    // throw new Error("Invalid time format");
     const hours = parseInt(match[1], 10);
-    const minutes = parseInt(match[2], 10);
+    const minutes = match[2] ? parseInt(match[2], 10) : 0;
     return { hours, minutes };
   } else {
     return "N/A";

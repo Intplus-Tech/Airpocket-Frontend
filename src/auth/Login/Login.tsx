@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,17 +6,22 @@ import { Image } from "@/components/Image/Index";
 import Logo from "../../assets/logo.jpeg";
 import { loginAccount } from "@/Features/userSlice/api";
 import { RootState } from "@/store/store";
-// import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 const SignIn = () => {
   const dippatch = useDispatch();
-  // const toast = useToast();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
   const { register, handleSubmit, reset } = useForm();
   const isLoading = useSelector((state: RootState) => state.user.isLoading);
 
   const handleSignIn = async (data: FieldValues) => {
     const response = await loginAccount(data, dippatch);
     console.log("respone", response);
+    response.success
+      ? navigate(pathname)
+      : toast({ title: "Login Failed, please try again" });
 
     reset();
   };

@@ -11,6 +11,7 @@ import { getItemFromStorage, storeItem } from "./utils/locaStorage";
 import TawkToScript from "./Tawkto/Tawkto.tsx";
 import { PrivateRoute } from "./ProtectedRoute/ProtectedRoute.tsx";
 import Loader from "./components/Loader/Loader.tsx";
+import VerifyEmail from "./pages/VerifyEmail/VerifyEmail.tsx";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About/About.tsx"));
@@ -92,9 +93,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="flights" element={<Flight />} />
-              <Route path="sign-up" element={<SignUp />} />
-              <Route path="about-us" element={<About />} />
+              <Route path="/flights" element={<Flight />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/about-us" element={<About />} />
+              <Route path="/verify-email/:id" element={<VerifyEmail />} />
 
               {/* Make sure to remove */}
               <Route path="/flight-offers" element={<SearchResults />} />

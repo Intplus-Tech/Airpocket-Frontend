@@ -64,6 +64,7 @@ export const searchFlight = async (data: User, dispatch: any) => {
   } catch (error) {
     const response = handleAxiosError(error);
     dispatch(searchResultError(response.error));
+    console.log(response, "api");
     return { error: { response } };
   }
 };
@@ -75,7 +76,7 @@ export const searchKeyWord = async (data: User) => {
     return { success: { ...response } };
   } catch (error) {
     const response = handleAxiosError(error);
-    return { error: { response } };
+    return { error: response };
   }
 };
 
