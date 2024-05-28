@@ -3,6 +3,7 @@ import { Image } from "../Image/Index";
 
 import { RootState } from "@/store/store";
 import confirmation from "@/pages/Confirmation/assets/confirm.svg";
+import { Link } from "react-router-dom";
 
 const CompletedBooking = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -24,9 +25,12 @@ const CompletedBooking = () => {
       </div>
 
       <div className="text-center">
-        <button className="border border-[#1D91CC] px-3 py-2 rounded-md text-black">
+        <Link
+          to={"/"}
+          className="border border-[#1D91CC] px-3 py-2 rounded-md text-black"
+        >
           Back To Home
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -159,7 +159,7 @@ const SearchForm = ({
               </div>
             </div>
           </div>
-          {pathname !== "/" && (
+          {pathname !== "/" && pathname !== "/flights" && (
             <p
               className="hidden min-[576px]:block"
               onClick={() => setIsOpen?.(false)}
@@ -265,7 +265,7 @@ const SearchForm = ({
           </div>
         </div>
       </form>
-      {pathname !== "/" && (
+      {pathname !== "/" && pathname !== "/flights" && (
         <p
           className="text-center w-full mt-6 min-[576px]:hidden "
           onClick={() => setIsOpen?.(false)}

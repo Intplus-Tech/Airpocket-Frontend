@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 // import { useToast } from "@/components/ui/use-toast";
 import { FieldValues, useForm } from "react-hook-form";
+import Loader from "@/components/Loader/Loader";
 
 const AccountInformation = () => {
   // const { toast } = useToast();
@@ -24,13 +25,13 @@ const AccountInformation = () => {
     },
   });
 
-  if (isLoading) {
-    return (
-      <div>
-        <h2>loading....</h2>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div>
+  //       <h2>loading....</h2>
+  //     </div>
+  //   );
+  // }
 
   // useEffect(() => {
   //   if (data?.success) {
@@ -166,6 +167,11 @@ const AccountInformation = () => {
           </button>
         </form>
       </div>
+      {isLoading && (
+        <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
+          <Loader />
+        </section>
+      )}
     </div>
   );
 };

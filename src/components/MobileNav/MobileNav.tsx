@@ -88,6 +88,7 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
           {UNPROTECTED_ITEM.map((item) => {
             return (
               <Link
+                key={item.id}
                 className={` text-[18px] ${
                   location.pathname === item.path && "font-bold text-black"
                 }`}
