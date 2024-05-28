@@ -18,10 +18,12 @@ import { storeItem } from "@/utils/locaStorage";
 import { formatDateString } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
 import SearchForm from "@/components/SearchForm/SearchForm";
+import { FLIGHT_TYPE } from "@/utils/Constant";
 
 interface suggestionList {
   value: string;
   label: string;
+  country: string;
 }
 [];
 
@@ -70,11 +72,17 @@ const Hero = () => {
     const result = respnse.success?.data.data.map((item: any) => ({
       value: item.iataCode,
       label: `${item.address.cityName} (${item.iataCode})`,
+      country: item.address.countryName,
     }));
 
     setSuggestions(result);
   };
-
+  console.log("departure", depature, "destination", destination);
+  if (depature?.country === destination?.country) {
+    console.log("LOCAL");
+  } else {
+    console.log("INTERNATIONAL");
+  }
   useEffect(() => {
     value && handleSearchKeyWork();
   }, [value]);
@@ -86,6 +94,13 @@ const Hero = () => {
       });
       return;
     }
+
+    if (depature?.country === destination?.country) {
+      storeItem("flight_type", FLIGHT_TYPE.LOCAL);
+    } else {
+      storeItem("flight_type", FLIGHT_TYPE.INTERENATIONAL);
+    }
+
     searchFlight(
       {
         ...data,

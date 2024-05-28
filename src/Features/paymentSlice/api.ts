@@ -3,7 +3,8 @@ import { SERVER_URL } from "@/utils/apiUrl";
 import handleAxiosError from "@/utils/error";
 import axios from "axios";
 import { makePayment, paymentError, paymentSuccess } from "./reducer";
-import { storeItem } from "@/utils/locaStorage";
+import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
+const authToken = getItemFromStorage("access_token");
 
 function paymentApi(data: Generic) {
   const url = `${SERVER_URL}/payments`;
@@ -11,6 +12,7 @@ function paymentApi(data: Generic) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
     },
     data: JSON.stringify(data),
   };

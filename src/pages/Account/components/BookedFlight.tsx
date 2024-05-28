@@ -8,8 +8,18 @@ import { ContactInformation } from "./ContactInformation";
 import { FlightFareBreakdown } from "./FlightFareBreakDown";
 import { useGetUserHistory } from "../slice/query";
 
+interface FlightOrder {
+  flightOrder: string;
+  from: string;
+  to: string;
+  departure: string;
+  cabin: string;
+}
+
 const BookedFlight = () => {
   const { isLoading, data: iteneries } = useGetUserHistory();
+  console.log(iteneries);
+
   // const iteneriesCount = ["1", "2", "3"];
 
   const [viewItenery, setViewItenery] = useState<number | null>(null);
@@ -18,7 +28,7 @@ const BookedFlight = () => {
     setViewItenery(index);
   };
 
-  const BookedFlight = (index: number) => (
+  const BookedFlight = (singleFlight: FlightOrder, index: number) => (
     <div className="bg-white py-2 my-4 rounded-lg px-2 md:px-4">
       <div className="flex flex-col md:flex-row md:items-center gap-x-10 gap-y-4">
         <div className="flex gap-2 items-center ">
@@ -31,7 +41,7 @@ const BookedFlight = () => {
 
           <div className="flex flex-col items-center text-center gap-1">
             <p className="font-bold text-lg">2:50</p>
-            <p className="text-gray-600">Istanbul (SAW)</p>
+            <p className="text-gray-600">{singleFlight.from}</p>
           </div>
 
           <div className="flex flex-col gap-8">
@@ -51,7 +61,7 @@ const BookedFlight = () => {
 
           <div className="flex flex-col items-center gap-1 text-center">
             <p className="font-bold text-lg">21:50</p>
-            <p className="text-gray-600">Dubai (DXB)</p>
+            <p className="text-gray-600">{singleFlight.to}</p>
           </div>
         </div>
         <p className="text-gray-700">Monday, September 6</p>
@@ -59,7 +69,7 @@ const BookedFlight = () => {
 
       <div className="py-8 md:py-12 flex items-center justify-between text-sm md:text-base">
         <p className="text-primaryColor bg-[#dff8fe] px-2 rounded-lg py-1">
-          Economy
+          {singleFlight.cabin}
         </p>
         <div className="flex items-center gap-1 md:gap-3">
           <p>NGN 34,410,462</p>
@@ -91,7 +101,7 @@ const BookedFlight = () => {
         return (
           <div className="w-full">
             {viewItenery !== index ? (
-              <div>{BookedFlight(index)}</div>
+              <div>{BookedFlight(item, index)}</div>
             ) : (
               <div>
                 <ContactInformation />

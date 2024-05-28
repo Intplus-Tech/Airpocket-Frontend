@@ -136,3 +136,12 @@ export interface TravellerFormData {
   documents: Document[];
 }
 [];
+
+export type FLIGHT_TYPES = {
+  LOCAL: {
+    rate: number;
+  };
+  INTERENATIONAL: {
+    rate: number;
+  };
+};

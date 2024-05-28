@@ -10,6 +10,7 @@ import { selectFlightResult } from "@/types/typs";
 import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
 import { payment } from "@/Features/paymentSlice/api";
 import { flightSelect } from "@/Features/selectFlight/api";
+import { addPercentage, formatCurrency } from "@/utils/monthDAys";
 
 // type paymentProps = {
 //   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
@@ -17,12 +18,14 @@ import { flightSelect } from "@/Features/selectFlight/api";
 
 const Payment = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("option1");
   const selectedFlight: selectFlightResult | null = useSelector(
     (state: RootState) => state.selectFlight.result
   );
 
   const flightSelected = getItemFromStorage("selected_flight");
+  const flightType: { rate: number } = getItemFromStorage("flight_type");
   const user = useSelector((state: RootState) => state.user.user);
 
   const { adult, children, infants } = getItemFromStorage(
@@ -33,19 +36,28 @@ const Payment = () => {
   );
 
   const { email } = getItemFromStorage("contact_info");
-
+  console.log(
+    formatCurrency(
+      selectedFlight?.data.flightOffers[0].price.grandTotal *
+        (adult + children + infants)
+    )
+  );
   const handlePayment = () => {
+    setLoading(true);
     payment(
       {
         email: email || user?.email,
-        amount:
+        amount: addPercentage(
           selectedFlight?.data.flightOffers[0].price.grandTotal *
-          (adult + children + infants),
+            (adult + children + infants),
+          flightType.rate
+        ),
       },
       dispatch
     );
     storeItem("currentStep", 4);
     // setCurrentStep(4)
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -147,7 +159,7 @@ const Payment = () => {
                   onClick={handlePayment}
                   className="px-6 md:px-16 min-w-fit text-white bg-[#1D91CC] py-4 mt-4 rounded-lg"
                 >
-                  Make payment
+                  {loading ? "Loading..." : "    Make payment"}
                   {/* Complete Your booking */}
                 </button>
               </div>
