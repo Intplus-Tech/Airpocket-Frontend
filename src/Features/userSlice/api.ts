@@ -64,7 +64,6 @@ export const loginAccount = async (data: User, dispatch: any) => {
 
     const { access_token, data: userData, message } = response.data;
     if (response.data) {
-      console.log(response);
       document.cookie = `access_token=${access_token}`;
       storeItem("access_token", access_token);
       storeItem("user", userData);
@@ -85,13 +84,11 @@ export const signUpAccount = async (data: User, dispatch: any) => {
     const response: any = await signUpApi(data);
     // const cookies = response.headers["set-cookie"];
 
-    const { data: userData, message, access_token } = response.data;
+    const { user, message, access_token } = response.data;
     if (response.data) {
-      // console.log(response);
-      // document.cookie = `access_token=${access_token}`;
       storeItem("access_token", access_token);
-      storeItem("user", userData);
-      dispatch(loginSuccess(userData));
+      storeItem("user", user);
+      dispatch(loginSuccess(user));
     }
     return { success: { message } };
   } catch (error) {

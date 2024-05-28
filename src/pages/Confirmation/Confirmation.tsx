@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Image } from "@/components/Image/Index";
 import confirmation from "./assets/confirm.svg";
 import { useSelector } from "react-redux";
@@ -15,6 +17,7 @@ type Props = {
 
 const Confirmation = ({ setCurrentStep }: Props) => {
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
   const paymentData = getItemFromStorage("paymentData");
   const TravellerDetails = getItemFromStorage("passenger_form");
@@ -22,13 +25,16 @@ const Confirmation = ({ setCurrentStep }: Props) => {
   const searchQuery = getItemFromStorage("flight-search-query");
   const { isLoading, data } = useConfirmPaypment({ id: paymentData._id });
 
-  if (isLoading) {
+  if (loading) {
     <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
       <Loader />
     </section>;
   }
 
+  console.log(data?.success);
+
   const handleBookFlight = async () => {
+    setLoading(true);
     const bookingData = searchQuery.returnDate
       ? {
           flightOffers: [selectedFlight],
@@ -60,11 +66,12 @@ const Confirmation = ({ setCurrentStep }: Props) => {
     } else {
       toast({ title: "Something went wrong" });
     }
+    setLoading(false);
   };
 
   return (
     <section className="max-w-xl sm:mx-auto mx-4">
-      {data?.success.data ? (
+      {data?.success.status === "success" && (
         <div>
           <p className="bg-[#F3FDFA] px-6 py-2 text-center rounded-md flex items-center justify-center gap-1 md:gap-2 capitalize">
             <span>
@@ -82,13 +89,14 @@ const Confirmation = ({ setCurrentStep }: Props) => {
           <div className="text-center">
             <button
               onClick={() => handleBookFlight()}
-              className="bg-[#1D91CC] px-3 py-2 rounded-md text-white"
+              className="bg-[#1D91CC] px-4 py-2 rounded-md text-white"
             >
-              {isLoading ? "Loading" : " Complete your Booking"}
+              {loading ? "Loading" : " Complete your Booking"}
             </button>
           </div>
         </div>
-      ) : (
+      )}
+      {data?.success.status === "fail" && (
         <div>
           <p className="bg-[#F3FDFA] px-6 py-2 text-center rounded-md flex items-center justify-center gap-1 md:gap-2 capitalize">
             <span>
@@ -97,6 +105,11 @@ const Confirmation = ({ setCurrentStep }: Props) => {
             Your payment has Failed.
           </p>
         </div>
+      )}
+      {isLoading && (
+        <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
+          <Loader />
+        </section>
       )}
     </section>
   );

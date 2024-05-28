@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, Outlet, redirect, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
@@ -13,11 +13,11 @@ import User from "./assets/user.svg";
 import DownArrow from "./assets/downarrow.svg";
 import Menu from "./assets/Menu.svg";
 import MobileNav from "@/components/MobileNav/MobileNav";
-import { removeItemFromStorage } from "@/utils/locaStorage";
+import { clearStorage } from "@/utils/locaStorage";
 
 const Layout = () => {
   const location = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
@@ -38,9 +38,9 @@ const Layout = () => {
   }, []);
 
   const handleLogOut = () => {
-    removeItemFromStorage("access_token");
-    removeItemFromStorage("user");
-    redirect("/");
+    clearStorage();
+    window.location.href = "/";
+    navigate(location.pathname);
   };
 
   return (

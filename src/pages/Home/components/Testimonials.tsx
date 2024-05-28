@@ -1,5 +1,8 @@
 import { Image } from "../../../components/Image/Index";
-import Test1 from "../assets/Test1.svg";
+import Mimi from "@/pages/Home/assets/Mimi.jpeg";
+import Paul from "@/pages/Home/assets/Paul.jpeg";
+import Samuel from "@/pages/Home/assets/Samuel.jpeg";
+import Chidi from "@/pages/Home/assets/Chidi.jpeg";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -9,67 +12,36 @@ const Testimonials = () => {
   const TESTIMONIALS = [
     {
       id: "1",
-      text: "Odit deserunt quia et sed repellendus veniam totam. Illo magnam perferendis. Impedit laborum ipsa doloremque rerum. Est rerum aut dolorum et omnis a. ",
-      img: Test1,
-      name: "Carolyn Jacobson",
-      country: "Brazil",
+      text: "OBooked my flight with Airpockets and it was like breeze, amazing customer support and feedback, I definitely recommend them. ",
+      img: Chidi,
+      name: "Chidi",
+      country: "Nigeria",
     },
     {
       id: "2",
-      text: "Odit deserunt quia et sed repellendus veniam totam. Illo magnam perferendis. Impedit laborum ipsa doloremque rerum. Est rerum aut dolorum et omnis a. ",
-      img: Test1,
-      name: "Carolyn Jacobson",
-      country: "Brazil",
+      text: "Airpockets has become my go to travel platform, I enjoy the luxury perks they off offer. I used to get higher rates elsewhere till I discovered Airpockets ",
+      img: Mimi,
+      name: "Mimi",
+      country: "Nigeria",
     },
     {
       id: "3",
-      text: "Odit deserunt quia et sed repellendus veniam totam. Illo magnam perferendis. Impedit laborum ipsa doloremque rerum. Est rerum aut dolorum et omnis a. ",
-      img: Test1,
-      name: "Carolyn Jacobson",
-      country: "Brazil",
+      text: "After spending for school requirements, money for flight was a bit challenge, but surprisingly I got a budget friendly flight on Airpocket ",
+      img: Samuel,
+      name: "Samuel",
+      country: "Nigeria",
     },
     {
       id: "4",
-      text: "Odit deserunt quia et sed repellendus veniam totam. Illo magnam perferendis. Impedit laborum ipsa doloremque rerum. Est rerum aut dolorum et omnis a. ",
-      img: Test1,
-      name: "Carolyn Jacobson",
-      country: "Brazil",
+      text: "The convenience and constant support is impressive. ",
+      img: Paul,
+      name: "Paul",
+      country: "Nigeria",
     },
   ];
 
   return (
     <main className=" max-w-screen-xl mx-auto mt-8">
-      {/* <div className="my-2">
-        <h1 className="font-bold text-xl md:text-[42px] py-1">
-          <span className="text-[#1B96D6]">Why</span> Choose Us
-        </h1>
-        <p className="text-[#283841]">
-          Tempora facere doloribus id aut. Ea maiores esse accusantium
-          laboriosam. Quos commodi non assumenda quam illum.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-16">
-        {testimonial.map((item) => (
-          <div className="bg-white shadow-2xl py-2 px-3 rounded-md relative">
-            <div className="w-fit h-fit mx-auto">
-              <Image
-                src={item.img}
-                alt={item.img}
-                className=" absolute top-[-1rem] w-fit text-center "
-              />
-            </div>
-            <p className="text-center mt-10 text-sm text-opacity-60">
-              {item.text}
-            </p>
-            <div>
-              <p>{item.name}</p>
-              <p>{item.country}</p>
-            </div>
-          </div>
-        ))}
-      </div> */}
-
       <div className="w-full px-2 mx-auto space-y-16">
         <div className="lg:flex justify-between">
           <div className="space-y-3">
@@ -77,8 +49,9 @@ const Testimonials = () => {
               <span className="text-[#1B96D6]">Why</span> Choose Us
             </h1>
             <p className="text-gray-500 text-xs">
-              Tempora facere doloribus id aut. Ea maiores esse accusantium
-              laboriosam. Quos commodi non assumenda quam illum.
+              At Airpockets, we are more than just a travel booking platform. We
+              are your travel partner, here to help you discover the world and
+              create unforgettable experiences.
             </p>
           </div>
 
@@ -103,7 +76,7 @@ const Testimonials = () => {
                 <Image
                   src={testimonial.img}
                   alt="random"
-                  className="rounded-full"
+                  className="rounded-[50%] h-[51px] w-[51px]"
                 />
               </div>
               <p className="text-xs text-gray-500 text-center">
@@ -118,8 +91,8 @@ const Testimonials = () => {
                   <StarIcon className="w-4 h-4 text-[#DABE29]" />
                 </span>
                 <div className="text-center md:text-start">
-                  <h4 className="font-bold text-sm">Carolyn Jacobson</h4>
-                  <p className="text-xs text-gray-500">Brazil</p>
+                  <h4 className="font-bold text-sm">{testimonial.name}</h4>
+                  <p className="text-xs text-gray-500">{testimonial.country}</p>
                 </div>
               </div>
             </div>

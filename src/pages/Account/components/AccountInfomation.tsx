@@ -13,7 +13,7 @@ const AccountInformation = () => {
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      firstname: data?.success.data?.firstname,
+      firstname: data?.success.data?.firstname || "",
       lastname: data?.success.data?.lastname || "",
       gender: data?.success.data?.gender || "",
       email: data?.success.data?.email || "",

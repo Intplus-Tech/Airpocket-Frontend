@@ -50,9 +50,9 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
 
           {/* stops */}
           <div className="mt-4">
-            {segments.map((segment: any) => {
+            {segments.map((segment: any, index: number) => {
               return (
-                <div className="flex flex-col gap-2">
+                <div key={index} className="flex flex-col gap-2">
                   <div className="flex items-center">
                     <p className="w-full flex gap-4">
                       <span className=" font-bold px-1">

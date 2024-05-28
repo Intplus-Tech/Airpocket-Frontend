@@ -7,7 +7,7 @@ import PhoneInput from "react-phone-input-2";
 // import Select from "react-select";
 // import countryList from "react-select-country-list";
 import "react-phone-input-2/lib/style.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { countries } from "countries-list";
 import { FieldValues, useForm } from "react-hook-form";
 
@@ -25,7 +25,10 @@ import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -53,6 +56,7 @@ const SignUp = () => {
   };
 
   const handleSignUp = async (data: FieldValues) => {
+    setIsLoading(true);
     const response = await signUpAccount(
       {
         ...data,
@@ -61,20 +65,24 @@ const SignUp = () => {
       },
       dispatch
     );
+    console.log(response);
     if (response?.success) {
       toast({
         // variant: "success",ss
         title: `Success`,
         // description: `${response.success.message}`,
       });
+      navigate(pathname);
+
       reset();
     } else {
       toast({
         // variant: "success",
         // title: `${response?.error.status}`,
-        // description: `${response?.error.message}`,
+        description: `${response?.error.message}`,
       });
     }
+    setIsLoading(false);
   };
 
   // useEffect(() => {
@@ -267,8 +275,8 @@ const SignUp = () => {
             </span>
           </div>
           {/* </div> */}
-          <button className="bg-gray-100 w-full rounded-md p-3 text-gray-500 mt-3">
-            Sign Up
+          <button className="bg-[#1D91CC] w-full rounded-md p-3 text-white mt-3">
+            {isLoading ? "Loading..." : "   Sign Up"}
           </button>
           <div className="text-sm flex  items-center gap-3 justify-center py-2 text-gray-500">
             <button>Already have an account?</button>

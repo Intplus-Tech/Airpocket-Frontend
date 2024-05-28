@@ -18,10 +18,12 @@ import { storeItem } from "@/utils/locaStorage";
 import { formatDateString } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
 import SearchForm from "@/components/SearchForm/SearchForm";
+import { FLIGHT_TYPE } from "@/utils/Constant";
 
 interface suggestionList {
   value: string;
   label: string;
+  country: string;
 }
 [];
 
@@ -70,22 +72,35 @@ const Hero = () => {
     const result = respnse.success?.data.data.map((item: any) => ({
       value: item.iataCode,
       label: `${item.address.cityName} (${item.iataCode})`,
+      country: item.address.countryName,
     }));
 
     setSuggestions(result);
   };
-
+  console.log("departure", depature, "destination", destination);
+  if (depature?.country === destination?.country) {
+    console.log("LOCAL");
+  } else {
+    console.log("INTERNATIONAL");
+  }
   useEffect(() => {
     value && handleSearchKeyWork();
   }, [value]);
 
   const handleSearchFlight = async (data: FieldValues) => {
-    if (!depature?.value && !checkInDate) {
+    if (!depature?.value || !destination?.value || !checkInDate) {
       toast({
-        description: "Please enter a departur Date",
+        description: "Departure, destination and checkin data are required",
       });
       return;
     }
+
+    if (depature?.country === destination?.country) {
+      storeItem("flight_type", FLIGHT_TYPE.LOCAL);
+    } else {
+      storeItem("flight_type", FLIGHT_TYPE.INTERENATIONAL);
+    }
+
     searchFlight(
       {
         ...data,
@@ -137,7 +152,7 @@ const Hero = () => {
       />
       <div className="  absolute top-[3%] sm:top-[4%] md:top-[15%] w-full px-2 md:px-14">
         <h1 className=" hidden sm:block capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">
-          Embark on a journey to secure the ideal gateway
+          GET POCKET FRINEDLY LUXURY, WHERE ARE YOU GOING TO?
         </h1>
 
         <SearchForm

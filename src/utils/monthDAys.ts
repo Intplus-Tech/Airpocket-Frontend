@@ -1,6 +1,8 @@
 import { format } from "date-fns";
 
 import { enUS } from "date-fns/locale";
+import { getItemFromStorage } from "./locaStorage";
+
 export function getDaysInMonth(year: number, month: number): string[] {
   // Create a new Date object for the first day of the specified month
   //   const firstDayOfMonth = new Date(year, month - 1, 1);
@@ -48,19 +50,14 @@ export function generateYears(): string[] {
   return years;
 }
 
-type TimeFormat = {
-  hours: number;
-  minutes: number;
-};
-
-export function convertTime(timeString: string): TimeFormat | any {
-  const regex = /PT(\d+)H(\d+)M/;
+export function convertTime(timeString: string): string | any {
+  // Updated regex to handle both PT11H and PT11H30M formats
+  const regex = /PT(\d+)H(?:(\d+)M)?/;
   const match = timeString.match(regex);
 
   if (match) {
-    // throw new Error("Invalid time format");
     const hours = parseInt(match[1], 10);
-    const minutes = parseInt(match[2], 10);
+    const minutes = match[2] ? parseInt(match[2], 10) : 0;
     return { hours, minutes };
   } else {
     return "N/A";
@@ -79,11 +76,21 @@ export function extractTime(isoString: string): string {
 }
 
 export function formatCurrency(amount: number): string {
+  const FLIGHT_TYPE: { rate: number } = getItemFromStorage("flight_type");
+  console.log(FLIGHT_TYPE.rate);
+  const addedPrice = addPercentage(Number(amount), FLIGHT_TYPE.rate);
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "NGN",
   });
-  return formatter.format(amount);
+  // return formatter.format(amount);
+  return formatter.format(addedPrice);
+}
+
+export function addPercentage(price: number, percentage: number): number {
+  const additionalAmount = price * (percentage / 100);
+  const newPrice = price + additionalAmount;
+  return newPrice; // Formats the number to 2 decimal places
 }
 
 export function formatDate(dateString: string): string {

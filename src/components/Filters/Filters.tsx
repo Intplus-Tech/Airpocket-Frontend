@@ -1,7 +1,7 @@
 import Pricerange from "./components/Pricerange/Pricerange";
-import Airline from "./components/Airline/Airline";
+// import Airline from "./components/Airline/Airline";
 import Stops from "./components/Stops/Stops";
-import CountrySelect from "./components/AirportSelect/AirportSelect";
+// import CountrySelect from "./components/AirportSelect/AirportSelect";
 import { X } from "lucide-react";
 import { FilterProps } from "@/types/typs";
 
@@ -25,15 +25,15 @@ const Filters = ({ setActiveTab, filters, setFilters }: FlightProps) => {
           <div>
             <Pricerange filters={filters} setFilters={setFilters} />
           </div>
-          <div>
+          {/* <div>
             <Airline />
-          </div>
+          </div> */}
           <div>
             <Stops filters={filters} setFilters={setFilters} />
           </div>
-          <div>
+          {/* <div>
             <CountrySelect />
-          </div>
+          </div> */}
         </div>
         <div
           onClick={() => setActiveTab?.(null)}
