@@ -14,10 +14,12 @@ import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { useToast } from "@/components/ui/use-toast";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import SearchForm from "@/components/SearchForm/SearchForm";
+import { FLIGHT_TYPE } from "@/utils/Constant";
 
 interface suggestionList {
   value: string;
   label: string;
+  country: string;
 }
 [];
 
@@ -84,6 +86,12 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
       });
       return;
     }
+    if (depature?.country === destination?.country) {
+      storeItem("flight_type", FLIGHT_TYPE.LOCAL);
+    } else {
+      storeItem("flight_type", FLIGHT_TYPE.INTERENATIONAL);
+    }
+
     searchFlight(
       {
         ...data,
