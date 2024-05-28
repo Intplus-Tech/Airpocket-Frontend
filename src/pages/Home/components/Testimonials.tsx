@@ -12,21 +12,21 @@ const Testimonials = () => {
   const TESTIMONIALS = [
     {
       id: "1",
-      text: "OBooked my flight with Airpockets and it was like breeze, amazing customer support and feedback, I definitely recommend them. ",
+      text: "Booked my flight with Airpockets and it was like breeze, amazing customer support and feedback, I definitely recommend them. ",
       img: Chidi,
       name: "Chidi",
       country: "Nigeria",
     },
     {
       id: "2",
-      text: "Airpockets has become my go to travel platform, I enjoy the luxury perks they off offer. I used to get higher rates elsewhere till I discovered Airpockets ",
+      text: "Airpockets has become my go to travel platform, I enjoy the luxury perks they off offer. I used to get higher rates elsewhere till I discovered Airpockets",
       img: Mimi,
       name: "Mimi",
       country: "Nigeria",
     },
     {
       id: "3",
-      text: "After spending for school requirements, money for flight was a bit challenge, but surprisingly I got a budget friendly flight on Airpocket ",
+      text: "After spending for school requirements, money for flight was a bit challenge, but surprisingly I got a budget friendly flight on Airpocket",
       img: Samuel,
       name: "Samuel",
       country: "Nigeria",
@@ -64,6 +64,7 @@ const Testimonials = () => {
             </button>
           </div>
         </div>
+
         {/* TODO: Horizontal scroll on mobile: remove the "flex-wrap" below */}
         {/* <div className='flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full'> */}
         <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full">

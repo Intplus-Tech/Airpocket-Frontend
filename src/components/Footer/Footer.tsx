@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
-import { FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 import { Image } from "../Image/Index";
 import Logo from "@/assets/logo.jpeg";
 import MaxwidthWrapper from "../MaxwidthWrapper.tsx/MaxWidthWrapper";
+import X from "./assets/x.png";
+import Tiktok from "./assets/tiktok.png";
 
 const Footer = () => {
   return (
     <MaxwidthWrapper>
-      <div className="px-4 md:flex justify-between">
+      <div className="px-4 md:flex justify-between mb-5">
         <div className="space-y-3 max-w-[420px]">
           <div className="relative w-28 h-8">
             <Image src={Logo} alt="logo" />
@@ -22,16 +24,36 @@ const Footer = () => {
             <p className="text-primaryColor font-semibold text-sm lg:hidden">
               Follow us
             </p>
-            <div className="space-x-3">
-              <button className="border border-primaryColor rounded-full p-2 lg:border-gray-300">
-                <FaLinkedinIn className="text-primaryColor lg:text-[#333333]" />
-              </button>
-              <button className="border border-primaryColor rounded-full p-2 lg:border-gray-300">
-                <FaFacebookF className="text-primaryColor lg:text-[#333333]" />
-              </button>
-              <button className="border border-primaryColor rounded-full p-2 lg:border-gray-300">
-                <FaTwitter className="text-primaryColor lg:text-[#333333]" />
-              </button>
+            <div className="space-x-3 flex items-center">
+              <Link
+                to={"https://www.instagram.com/airpocketstravels"}
+                className="inline-block  border rounded-full  p-2 lg:border-gray-300"
+              >
+                <FaInstagram className="text-primaryColor lg:text-[#333333]" />
+              </Link>
+              <Link
+                to={
+                  "https://www.tiktok.com/@airpocketstravels?_t=8mfNVkAGf38&_r=1"
+                }
+                className="inline-block  border rounded-full p-2 lg:border-gray-300"
+              >
+                <Image
+                  src={Tiktok}
+                  alt="Tiktok"
+                  className="text-black bg-black h-4 w-4 "
+                />
+              </Link>
+              <Link
+                to={"https://x.com/airpocketstrave"}
+                className=" inline-block border rounded-full p-2 lg:border-gray-300"
+              >
+                <Image
+                  src={X}
+                  alt="X"
+                  className="text-black bg-black h-4 w-4 "
+                />
+                {/* <FaTwitter className="text-primaryColor lg:text-[#333333]" /> */}
+              </Link>
             </div>
           </div>
         </div>

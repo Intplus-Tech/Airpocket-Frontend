@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import Airpocket from "@/app/assets/airpocket.svg";
 import { FieldValues, useForm } from "react-hook-form";
 import { Image } from "@/components/Image/Index";
+import Airpocket from "@/assets/Airpocket.svg";
 // import { useResetPassword } from "./slice/query";
 // import { useToast } from "@/components/ui/use-toast";
 
@@ -50,7 +50,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="">
+    <div className="mt-16">
       <div className="bg-white  mx-auto mt-4 rounded-lg p-2 relative max-w-[480px]">
         <div className="py-6 px-3">
           <div className="w-36 h-10 mx-auto relative">
@@ -70,14 +70,14 @@ const ResetPassword = () => {
                   {...register("password")}
                   className={`peer border rounded-lg w-full h-10 px-4 py-2 focus:outline-none ${
                     passwordMatch
-                      ? "border-gray-400 focus:border-primaryColor text-primaryColor"
+                      ? "border-gray-400 focus:border-[#1B96D6] text-[#1B96D6]"
                       : "border-red-500 text-red-500"
                   }`}
                 />
                 <p
                   className={`text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%] ${
                     passwordMatch
-                      ? "peer-focus:text-primaryColor text-gray-400"
+                      ? "peer-focus:text-[#1B96D6] text-gray-400"
                       : "text-red-500"
                   }`}
                 >
@@ -85,7 +85,7 @@ const ResetPassword = () => {
                 </p>
                 <span
                   className={`absolute right-6 translate-y-[100%] ${
-                    passwordMatch ? "text-primaryColor" : "text-red-500"
+                    passwordMatch ? "text-[#1B96D6]" : "text-red-500"
                   }`}
                   onClick={toggleShowFirstPassword}
                 >
@@ -103,14 +103,14 @@ const ResetPassword = () => {
                   {...register("passwordConfirm")}
                   className={`peer border rounded-lg w-full h-10 px-4 py-2 focus:outline-none ${
                     passwordMatch
-                      ? "border-gray-400 focus:border-primaryColor text-primaryColor"
+                      ? "border-gray-400 focus:border-[#1B96D6] text-[#1B96D6]"
                       : "border-red-500 text-red-500"
                   }`}
                 />
                 <p
                   className={`text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%] ${
                     passwordMatch
-                      ? "peer-focus:text-primaryColor text-gray-400"
+                      ? "peer-focus:text-[#1B96D6] text-gray-400"
                       : "text-red-500"
                   }`}
                 >
@@ -118,7 +118,7 @@ const ResetPassword = () => {
                 </p>
                 <span
                   className={`absolute right-6 translate-y-[100%] ${
-                    passwordMatch ? "text-primaryColor" : "text-red-500"
+                    passwordMatch ? "text-[#1B96D6]" : "text-red-500"
                   }`}
                   onClick={toggleShowSecondPassword}
                 >
@@ -137,7 +137,7 @@ const ResetPassword = () => {
             >
               Password do not match!
             </small>
-            <button className="text-sm bg-gray-100 w-full rounded-md p-3 text-gray-500 mt-2">
+            <button className="text-sm bg-[#1B96D6] w-full rounded-md p-3 text-white mt-2">
               Confirm
             </button>
           </form>

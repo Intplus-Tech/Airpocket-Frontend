@@ -52,18 +52,22 @@ const Places = () => {
           Plan Your Vacation
         </h1>
         <p className="text-[#283841] text-opacity-70 text-[14px]">
-          Experience the best with our summer 04 deals
+          Experience the best with our summer deals
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 place-items-center py-5">
         <div>
-          <Image src={Kigali} alt="kigali" />
+          <Image src={Kigali} alt="kigali" className="shadow-md rounded-md " />
         </div>
         <div>
-          <Image src={Egypt} alt="Egypt" />
+          <Image src={Egypt} alt="Egypt" className="shadow-md rounded-md " />
         </div>
         <div>
-          <Image src={Zanziba} alt="zanziba" />
+          <Image
+            src={Zanziba}
+            alt="zanziba"
+            className="shadow-md rounded-md "
+          />
         </div>
         {/* <div className="flex flex-col gap-4">
           <div>
@@ -126,14 +130,14 @@ const Places = () => {
           <div className="flex flex-col items-start">
             <p className="flex gap-4 py-1">
               <Image src={BlueSquare} alt="BlueSquare" />
-              <span className="font-bold">
+              <span className="font-bold text-xs sm:text-base">
                 Unbeatable Prices: Get the cheapest luxury rate in the market,
                 while flying in style.
               </span>
             </p>
             <p className="flex gap-4 py-1">
               <Image src={BlueSquare} alt="BlueSquare" />
-              <span className="font-bold">
+              <span className="font-bold text-xs sm:text-base">
                 Luxury for Less: Enjoy luxury at the cheapest prices.
               </span>
             </p>
@@ -143,14 +147,14 @@ const Places = () => {
                 alt="BlueSquare"
                 className="flex items-start "
               />
-              <span className="font-bold">
+              <span className="font-bold text-xs sm:text-base">
                 Tailored Support: You can reach us 24/7 (Monday – Sunday).
               </span>
             </p>
             <p className="flex gap-4 py-1">
               <Image src={BlueSquare} alt="BlueSquare" />
-              <span className="font-bold">
-                Focus on Youthful Exploration: Take advantage of our summer 04
+              <span className="font-bold text-xs sm:text-base">
+                Focus on Youthful Exploration: Take advantage of our summer
                 deals.
               </span>
             </p>
@@ -163,7 +167,7 @@ const Places = () => {
           <h1 className="font-bold text-xl py-4 lg:text-[41px]">
             Trending <span className="text-[#1B96D6]">destination</span>
           </h1>
-          <p>TIncredible places you must visit….</p>
+          <p>Incredible places you must visit….</p>
         </div>
 
         {/* <div className="mt-8 max-w-[30rem] md:max-w-full min-w-full overflow-x-auto grid grid-cols-3 space-x-8 md:gap-4 place-items-center"> */}

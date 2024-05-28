@@ -5,16 +5,11 @@ import { useDebounce } from "use-debounce";
 // import Select from "react-select";
 
 import { Image } from "../../../components/Image/Index";
-// import Arrow_down from "../../../assets/arrow_down.svg";
-// import Arrow_right from "../../../assets/Arrow-right.svg";
-// import TripType from "../../../components/TripType/TripType";
-// import PassengerType from "../../../components/PassengerType/PassengerType";
-// import ClassType from "../../../components/ClassType/ClassType";
+
 import Test from "../../../assets/test1.png";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
-// import { DatePickerComponent } from "@/components/DatePicker/DatePickerComponent";
 import { formatDateString } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
 import SearchForm from "@/components/SearchForm/SearchForm";
@@ -152,7 +147,7 @@ const Hero = () => {
       />
       <div className="  absolute top-[3%] sm:top-[4%] md:top-[15%] w-full px-2 md:px-14">
         <h1 className=" hidden sm:block capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">
-          GET POCKET FRINEDLY LUXURY, WHERE ARE YOU GOING TO?
+          GET POCKET FRIENDLY LUXURY, WHERE ARE YOU GOING TO?
         </h1>
 
         <SearchForm
