@@ -77,7 +77,7 @@ const FlightDetailForm = ({
   const SubmitPassengerForm = async (data: FieldValues) => {
     if (!formData.email && !user?._id) {
       toast({
-        description: "Please fill in your contact information",
+        description: "Please fill in your contact information or Login",
       });
       return;
     }
@@ -164,8 +164,8 @@ const FlightDetailForm = ({
           <div className="mt-6 border px-6 mx-4 md:mx-6 min-[1059px]:mx-0 h-full rounded-md py-6">
             <h1 className="font-bold">Contact information</h1>
             <h1 className="font-bold text-red-400">
-              Contact information automatically creates an account for you so if
-              u already have an account Please Login
+              Contact information automatically creates an account for you. If
+              you already have an account Please Login
             </h1>
             <p className="text-[#868686]">
               In case the contact information of this form is inconsistent with

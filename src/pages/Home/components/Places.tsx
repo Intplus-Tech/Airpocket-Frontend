@@ -1,8 +1,8 @@
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import { Image } from "../../../components/Image/Index";
-// import Swimming from "../assets/Img1.svg";
-// import Turkey from "../assets/Img2.svg";
-// import History from "../assets/Img3.svg";
-// import Desert from "../assets/Img4.svg";
 import Water from "../assets/Img5.svg";
 import BlueSquare from "../assets/Bluesquare.svg";
 import SmallImage from "../assets/smallImg.svg";
@@ -14,7 +14,6 @@ import London from "../assets/London.svg";
 import Zanziba from "@/pages/Home//assets/Zanziba.jpeg";
 import Egypt from "@/pages/Home//assets/Egypt.jpeg";
 import Kigali from "@/pages/Home//assets/Kigali.jpeg";
-// import WaterMobile from "@/pages/Home/assets/WaterMobile.svg";
 
 const Places = () => {
   const destinations = [
@@ -45,6 +44,80 @@ const Places = () => {
     },
   ];
 
+  function SampleNextArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "none", background: "black" }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "none",
+          background: "black",
+          color: "white",
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  var settings = {
+    dots: false,
+    infinite: true,
+    // speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 6000,
+    autoplaySpeed: 4000,
+    cssEase: "linear",
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1240,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 840,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      // {
+      //   breakpoint: 500,
+      //   settings: {
+      //     slidesToShow: 1,
+      //     slidesToScroll: 1,
+      //   },
+      // },
+    ],
+  };
+
   return (
     <main className=" max-w-screen-xl h-full mx-6 sm:mx-auto mt-8">
       <div className="mb-4">
@@ -66,17 +139,9 @@ const Places = () => {
           <Image
             src={Zanziba}
             alt="zanziba"
-            className="shadow-md rounded-md "
+            className="shadow-md rounded-md flex shrink-0"
           />
         </div>
-        {/* <div className="flex flex-col gap-4">
-          <div>
-            <Image src={History} alt="History" />
-          </div>
-          <div>
-            <Image src={Desert} alt="Desert" />
-          </div>
-        </div> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 place-items-center gap-4 col-span-1 my-6 h-full">
@@ -171,37 +236,30 @@ const Places = () => {
         </div>
 
         {/* <div className="mt-8 max-w-[30rem] md:max-w-full min-w-full overflow-x-auto grid grid-cols-3 space-x-8 md:gap-4 place-items-center"> */}
-        <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full">
-          {destinations.map((destination) => {
-            return (
-              <div
-                key={destination.id}
-                className="relative min-w-[20rem] w-full"
-              >
-                <Image
-                  src={destination.Img}
-                  alt={destination.name}
-                  className="rounded-lg"
-                />
-                <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
-                  {destination.name}
-                </p>
-              </div>
-            );
-          })}
-          {/* <div className="relative min-w-[20rem] w-full">
-            <Image src={Dubai} alt="Dubai" className="rounded-lg" />
-            <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
-              Dubai
-            </p>
-          </div>
-          <div className="relative min-w-[20rem] w-full">
-            <Image src={London} alt="London" className="rounded-lg" />
-            <p className=" absolute mx-16 w-[60%] top-[-1.2rem] bg-white px-10 py-3 rounded-xl text-center">
-              London
-            </p>
-          </div> */}
+        {/* <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full"> */}
+        <div className="mt-8 w-full">
+          <Slider {...settings}>
+            {destinations.map((destination) => {
+              return (
+                <div
+                  key={destination.id}
+                  className="relative mx-2 "
+                  // className="relative min-w-[20rem] w-full mx-2"
+                >
+                  <Image
+                    src={destination.Img}
+                    alt={destination.name}
+                    className="rounded-lg mx-auto "
+                  />
+                  <p className=" absolute mx-16 w-[60%] top-[-1.2rem]  bg-white px-10 py-3 rounded-xl text-center">
+                    {destination.name}
+                  </p>
+                </div>
+              );
+            })}
+          </Slider>
         </div>
+        {/* </div> */}
       </div>
     </main>
   );
