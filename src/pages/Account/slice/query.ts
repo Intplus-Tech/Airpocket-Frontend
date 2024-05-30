@@ -7,6 +7,7 @@ export const useGetUserInfo = (data: { id: string | undefined }) => {
     queryFn: () => getUserInfo(data),
   });
 };
+
 export const useGetUserHistory = () => {
   return useQuery({
     queryKey: ["getUserHistory"],

@@ -1,25 +1,29 @@
-// import Image from "next/image";
 import { useState } from "react";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+
 import { Image } from "@/components/Image/Index";
 import Airpocket from "@/assets/Airpocket.svg";
-// import { useResetPassword } from "./slice/query";
-// import { useToast } from "@/components/ui/use-toast";
-
+import { useToast } from "@/components/ui/use-toast";
+import { ChangePassword } from "@/types/typs";
+import { useResetPassword } from "./slice/query";
 // type Props = {
 //   showSignInModal: boolean;
 // };
 
 const ResetPassword = () => {
-  //   const { toast } = useToast();
+  const { id } = useParams<{ id: string }>();
+  const { toast } = useToast();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm<ChangePassword>();
   const [showFirstPassword, setShowFirstPassword] = useState(false);
   const [showSecondPassword, setShowSecondPassword] = useState(false);
 
   const [passwordMatch] = useState(true);
+
+  // const { data, isLoading, isError } = useResetPassword({ id });
 
   const toggleShowFirstPassword = () => {
     setShowFirstPassword((prevState) => !prevState);
@@ -27,26 +31,28 @@ const ResetPassword = () => {
   const toggleShowSecondPassword = () => {
     setShowSecondPassword((prevState) => !prevState);
   };
+  console.log(id);
+  const { mutateAsync: resetPassword, isPending } = useResetPassword();
 
-  //   const { mutateAsync: resetPassword } = useResetPassword();
-  const handleResetPassword = async (data: FieldValues) => {
-    console.log(data);
-    // const response = await resetPassword(data);
-    // console.log(response);
-    // if (response?.success) {
-    //   toast({
-    //     // variant: "success",
-    //     title: `${response.success.status}`,
-    //     description: `${response.success.message}`,
-    //   });
-    //   reset();
-    // } else {
-    //   toast({
-    //     // variant: "destructive",
-    //     title: `${response?.error.status}`,
-    //     description: `${response?.error.message}`,
-    //   });
-    // }
+  const handleResetPassword = async (data: ChangePassword) => {
+    const updatedData = { ...data, id };
+
+    const response = await resetPassword(updatedData);
+    console.log(response);
+    if (response?.success) {
+      toast({
+        // variant: "success",
+        title: `${response.success.status}`,
+        description: `${response.success.message}`,
+      });
+      reset();
+    } else {
+      toast({
+        // variant: "destructive",
+        title: `${response?.error.status}`,
+        description: `${response?.error.message}`,
+      });
+    }
   };
 
   return (
@@ -138,7 +144,7 @@ const ResetPassword = () => {
               Password do not match!
             </small>
             <button className="text-sm bg-[#1B96D6] w-full rounded-md p-3 text-white mt-2">
-              Confirm
+              {isPending ? "Loading..." : "Confirm"}
             </button>
           </form>
         </div>

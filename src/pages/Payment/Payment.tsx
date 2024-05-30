@@ -92,19 +92,6 @@ const Payment = () => {
               <div>
                 <h4 className="font-semibold">Make Your Payment</h4>
                 <form className="text-gray-800 space-y-2 py-3">
-                  {/* TODO: change the radio outline color to the primaryColor */}
-                  {/* <div className="flex gap-x-2 items-center">
-                    <input
-                      type="radio"
-                      name=""
-                      id=""
-                      value="option1"
-                      checked={selectedOption === "option1"}
-                      onChange={() => setSelectedOption("option1")}
-                      className="accent-primaryColor"
-                    />
-                    <label>Book</label>
-                  </div> */}
                   <div className="flex gap-x-2 items-center">
                     <input
                       type="radio"
@@ -117,18 +104,6 @@ const Payment = () => {
                     />
                     <label>Card Payment</label>
                   </div>
-                  {/* <div className="flex gap-x-2 items-center">
-                    <input
-                      type="radio"
-                      name=""
-                      id=""
-                      value="option1"
-                      checked={selectedOption === "option3"}
-                      onChange={() => setSelectedOption("option3")}
-                      className="accent-primaryColor"
-                    />
-                    <label>Transfer Payment</label>
-                  </div> */}
                 </form>
               </div>
 

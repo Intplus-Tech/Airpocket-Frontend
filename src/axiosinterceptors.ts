@@ -17,8 +17,9 @@ axiosInstance.interceptors.response.use(
   (error: AxiosError) => {
     // If the response has a status of 401, redirect to the home page
     if (error.response && error.response.status === 401) {
+      console.log(error);
       clearStorage();
-      window.location.href = "/";
+      // window.location.href = "/";
     }
     // Otherwise, return the error
     return Promise.reject(error);

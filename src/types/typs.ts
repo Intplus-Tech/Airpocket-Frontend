@@ -145,3 +145,21 @@ export type FLIGHT_TYPES = {
     rate: number;
   };
 };
+
+export type ChangePassword = {
+  password: string;
+  passwordConfirm: string;
+  id: string | undefined;
+};
+
+export type PassengerFormData = {
+  passengers: {
+    firstName: string;
+    lastName: string;
+    gender: string;
+    passportNumber: string;
+    day: string;
+    month: string;
+    year: string;
+  }[];
+};
