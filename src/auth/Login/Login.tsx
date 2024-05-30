@@ -65,8 +65,8 @@ const SignIn = () => {
                 <input type="checkbox" name="" id="" />
                 <span>Remember Password</span>
               </div>
-              <Link to="#" className="text-SecondaryColor">
-                Forget Password
+              <Link to="/forgot-password" className="text-[#1B96D6]">
+                Forgot Password
               </Link>
             </div>
             <button

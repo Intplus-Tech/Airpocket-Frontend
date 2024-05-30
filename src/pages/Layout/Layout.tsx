@@ -29,7 +29,11 @@ const Layout = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const hideNavbarPatterns = ["/reset-password/:id", "/verify-email/:id"];
+  const hideNavbarPatterns = [
+    "/reset-password/:id",
+    "/verify-email/:id",
+    "/forgot-password",
+  ];
 
   const shouldHideNavbar = hideNavbarPatterns.some((pattern) =>
     matchPath(pattern, location.pathname)

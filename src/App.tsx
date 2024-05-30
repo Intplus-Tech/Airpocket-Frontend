@@ -13,6 +13,7 @@ import { PrivateRoute } from "./ProtectedRoute/ProtectedRoute.tsx";
 import Loader from "./components/Loader/Loader.tsx";
 import VerifyEmail from "./pages/VerifyEmail/VerifyEmail.tsx";
 import ResetPassword from "./auth/ResetPassword/ResetPassword.tsx";
+import ForgetPassword from "./auth/ForgotPassword/ForgotPassword.tsx";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About/About.tsx"));
@@ -99,6 +100,7 @@ function App() {
               <Route path="/about-us" element={<About />} />
               <Route path="/verify-email/:id" element={<VerifyEmail />} />
               <Route path="/reset-password/:id" element={<ResetPassword />} />
+              <Route path="/forgot-password" element={<ForgetPassword />} />
 
               {/* Make sure to remove */}
               <Route path="/flight-offers" element={<SearchResults />} />

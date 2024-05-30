@@ -1,44 +1,40 @@
 // import Image from "next/image";
 import { FieldValues, useForm } from "react-hook-form";
 
-import Airpocket from "@/app/assets/airpocket.svg";
-// import { useForgotPassword } from "./slice/query";
-// import { useToast } from "@/components/ui/use-toast";
+import Airpocket from "@/assets/Airpocket.svg";
 import { Image } from "@/components/Image/Index";
+import { useForgotPassword } from "./slice/query";
+import { useToast } from "@/components/ui/use-toast";
 
-type Props = {
-  setFormType: React.Dispatch<React.SetStateAction<string>>;
-};
+const ForgetPassword = () => {
+  const { toast } = useToast();
+  const { register, handleSubmit, reset } = useForm();
 
-const ForgetPassword = ({ setFormType }: Props) => {
-  //   const { toast } = useToast();
-  const { register, handleSubmit } = useForm();
-
-  //   const { mutateAsync: forgotPassword } = useForgotPassword();
+  const { mutateAsync: forgotPassword, isPending } = useForgotPassword();
 
   const handleForgotPassword = async (data: FieldValues) => {
     console.log(data);
-    // const response = await forgotPassword(data);
-    // console.log(response);
-    // if (response?.success) {
-    //   toast({
-    //     // variant: "success",
-    //     title: `${response.success.status}`,
-    //     description: `${response.success.message}`,
-    //   });
-    //   reset();
-    // } else {
-    //   toast({
-    //     // variant: "destructive",
-    //     title: `${response?.error.status}`,
-    //     description: `${response?.error.message}`,
-    //   });
-    // }
+    const response = await forgotPassword(data);
+    console.log(response);
+    if (response?.success) {
+      toast({
+        // variant: "success",
+        title: "Success",
+        description: `${response.success.message}`,
+      });
+      reset();
+    } else {
+      toast({
+        // variant: "destructive",
+        title: `${response?.error.status}`,
+        description: `${response?.error.message}`,
+      });
+    }
   };
 
   return (
-    <div className=" w-full mr-4">
-      <div className="bg-red-500   mx-auto mt-4  rounded-lg p-2 relative max-w-[480px]">
+    <div className=" mt-24 w-full mr-4">
+      <div className=" border  sm:mx-auto mt-4  rounded-lg p-2 relative max-w-[480px] ">
         <div className="py-6 px-3">
           <div className="w-36 h-10 mx-auto relative">
             <Image src={Airpocket} alt="Logo" />
@@ -55,19 +51,19 @@ const ForgetPassword = ({ setFormType }: Props) => {
                 <input
                   type="email"
                   {...register("email")}
-                  className="peer border border-gray-400 focus:border-primaryColor rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-primaryColor"
+                  className="peer border border-gray-400 focus:border-[#1B96D6] rounded-lg w-full h-10 px-4 py-2 focus:outline-none text-[#1B96D6]"
                 />
-                <p className="peer-focus:text-primaryColor text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
+                <p className="peer-focus:text-[#1B96D6] text-gray-400 text-sm bg-white px-2 absolute top-0 left-6 translate-y-[-50%]">
                   Email Address
                 </p>
               </div>
             </div>
             <button
               type="submit"
-              onClick={() => setFormType("")}
-              className="text-sm bg-gray-100 w-full rounded-md p-3 text-gray-500 mt-10"
+              // onClick={() => setFormType("")}
+              className="text-sm bg-[#1B96D6] w-full rounded-md p-3 text-white mt-10"
             >
-              Reset Password
+              {isPending ? "Loading" : "Reset Password"}
             </button>
           </form>
         </div>

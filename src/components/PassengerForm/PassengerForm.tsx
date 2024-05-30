@@ -1,22 +1,32 @@
 import { useEffect, useState } from "react";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 import { getDaysInMonth, months } from "@/utils/monthDAys";
 import { countries } from "countries-list";
-import { countryList } from "@/types/typs";
+import { PassengerFormData, countryList } from "@/types/typs";
+import { FieldErrors } from "react-hook-form";
 
 type PassengerFormProps = {
   index: number;
   register: any;
   fields: any;
+  errors: FieldErrors<PassengerFormData>;
 };
 
-const PassengerForm = ({ index, register }: PassengerFormProps) => {
+const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
   const [list, setList] = useState<countryList[]>([]);
   const currentDate = new Date();
 
   const monthNumber = currentDate.getMonth() + 1;
 
   const days = getDaysInMonth(2024, monthNumber);
+
+  const validatePhoneNumber = (value: string) => {
+    const parsedNumber = parsePhoneNumberFromString(value);
+    return parsedNumber && parsedNumber.isValid()
+      ? parsedNumber
+      : "Invalid phone number";
+  };
 
   useEffect(() => {
     const countryList = Object.keys(countries).map((countryCode) => ({
@@ -53,7 +63,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
         <div className="w-full">
           <label
             htmlFor="LastName"
-            className="relative block rounded-md border  "
+            className="relative block rounded-md border"
           >
             <input
               type="text"
@@ -148,18 +158,22 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
               className="relative block rounded-md border  "
             >
               <input
-                type="text"
+                type="tel"
                 id="passport"
                 {...register(`passengers${index}.contact.phones[0].number`, {
                   required: "Phone number is required",
+                  validate: validatePhoneNumber,
                 })}
                 className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
                 placeholder="+2348134650533"
               />
               <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                Phone number
+                Phone {" (+234 )"}
               </span>
             </label>
+            {errors?.passengers && (
+              <p style={{ color: "red" }}>{errors.passengers.message}</p>
+            )}
           </div>
 
           <div className="w-full">

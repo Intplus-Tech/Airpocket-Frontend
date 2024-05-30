@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
-import { getCountryCode } from "countries-list";
+// import { parsePhoneNumberFromString } from "libphonenumber-js";
+
+import { getCountryCode, getCountryData, TCountryCode } from "countries-list";
 
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
 import { Generic, TravellerFormData } from "@/types/typs";
@@ -35,6 +37,7 @@ const FlightDetailForm = ({
 }: FLGHT_DETAIL_FORM_PROPS) => {
   const dispatch = useDispatch();
   const { toast } = useToast();
+  console.log(getCountryData("Nigeria" as TCountryCode));
   const {
     register,
     control,
@@ -78,7 +81,6 @@ const FlightDetailForm = ({
       });
       return;
     }
-
     const arrayOfEntries = Object.entries(data);
     const filteredArray = arrayOfEntries.filter(
       ([_, value]) => !Array.isArray(value) || value.length > 0
@@ -98,7 +100,7 @@ const FlightDetailForm = ({
             {
               ...item.contact.phones[0],
               deviceType: "MOBILE",
-              countryCallingCode: "34",
+              countryCallingCode: "234",
             },
           ],
         },
@@ -145,6 +147,7 @@ const FlightDetailForm = ({
                   index={index}
                   fields={fields}
                   register={register}
+                  errors={errors}
                 />
               </div>
             ))}
@@ -159,7 +162,11 @@ const FlightDetailForm = ({
         {/* CONTACT_INFORMATION_FORM */}
         {!user?._id && (
           <div className="mt-6 border px-6 mx-4 md:mx-6 min-[1059px]:mx-0 h-full rounded-md py-6">
-            <h1 className="font-bold">contact information</h1>
+            <h1 className="font-bold">Contact information</h1>
+            <h1 className="font-bold text-red-400">
+              Contact information automatically creates an account for you so if
+              u already have an account Please Login
+            </h1>
             <p className="text-[#868686]">
               In case the contact information of this form is inconsistent with
               the information entered in the user account, the ticket and
