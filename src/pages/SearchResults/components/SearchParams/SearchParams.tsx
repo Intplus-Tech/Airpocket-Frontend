@@ -9,7 +9,11 @@ import Editbtn from "../../assets/Editbtn.svg";
 import { Image } from "@/components/Image/Index";
 import ToandFro from "../../assets/toandfro.svg";
 import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
-import { formatDateString, formatDateWithDateFns } from "@/utils/monthDAys";
+import {
+  formatDateString,
+  formatDateWithDateFns,
+  isDateLessThanYesterday,
+} from "@/utils/monthDAys";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { useToast } from "@/components/ui/use-toast";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
@@ -80,6 +84,16 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
     setSuggestions(result);
   };
   const handleSearchFlight = async (data: FieldValues) => {
+    if (
+      isDateLessThanYesterday(checkInDate) ||
+      isDateLessThanYesterday(checkOutDate)
+    ) {
+      toast({
+        description: " Date must not be in the past",
+      });
+      return;
+    }
+
     if (!depature?.value && !checkInDate) {
       toast({
         description: "Please enter a departur Date",

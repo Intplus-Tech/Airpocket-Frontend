@@ -145,3 +145,29 @@
   background-color: blue;
   animation: moveLine 4s linear infinite;
 }
+
+.slick-slide {
+  margin: 0 10px; /* Adjust the margin as needed */
+  height: 15rem;
+}
+
+/* To handle the overflow due to margin */
+.slick-list {
+  margin: 0 -10px; /* This should be negative of the slick-slide margin */
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-scale {
+  animation: scale 2s infinite;
+}

@@ -150,14 +150,14 @@ const Layout = () => {
                           Sign Up
                         </p>
                       </DialogTrigger>
-                      <DialogContent className=" w-full flex item center justify-center h-fit my-4">
+                      <DialogContent className=" w-full ">
                         <SignUp />
                       </DialogContent>
                     </Dialog>
                   </div>
                 </div>
               )}
-
+              {/* flex item center justify-center h-fit my-4 */}
               <div className="md:hidden ">
                 <span onClick={() => setIsOpen(!isOpen)}>
                   <Image src={Menu} alt="Menu" className="cursor-pointer" />

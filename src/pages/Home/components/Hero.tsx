@@ -10,7 +10,7 @@ import Test from "../../../assets/test1.png";
 import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import { storeItem } from "@/utils/locaStorage";
-import { formatDateString } from "@/utils/monthDAys";
+import { formatDateString, isDateLessThanYesterday } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
 import SearchForm from "@/components/SearchForm/SearchForm";
 import { FLIGHT_TYPE } from "@/utils/Constant";
@@ -83,6 +83,16 @@ const Hero = () => {
   }, [value]);
 
   const handleSearchFlight = async (data: FieldValues) => {
+    if (
+      isDateLessThanYesterday(checkInDate) ||
+      isDateLessThanYesterday(checkOutDate)
+    ) {
+      toast({
+        description: " Date must not be in the past",
+      });
+      return;
+    }
+
     if (!depature?.value || !destination?.value || !checkInDate) {
       toast({
         description: "Departure, destination and checkin data are required",

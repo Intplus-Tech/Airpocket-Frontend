@@ -44,6 +44,7 @@ const SearchResults = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
 
   const flightQuery = getItemFromStorage("flight-search-query");
+  console.log(flightQuery);
   const filterByPriceRange = () => {
     const filtered = (searchResult?.data ?? []).filter((result) => {
       const priceMatch =
@@ -155,7 +156,7 @@ const SearchResults = () => {
                     className="mt-10 mx-auto"
                   />
                   <p className="text-[12px] text-center font-bold text-[#868686]">
-                    No flights were found for Istanbul to Dubai on this date.
+                    {` No flights were found from ${flightQuery.originLocation} to ${flightQuery.destinationLocation} on this date.`}
                   </p>
                   <p className="text-[#ADADAD] text-center font-bold">
                     Search on a different date

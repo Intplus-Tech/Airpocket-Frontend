@@ -23,15 +23,13 @@ const Confirmation = ({ setCurrentStep }: Props) => {
   const TravellerDetails = getItemFromStorage("passenger_form");
   const selectedFlight = getItemFromStorage("selected_flight");
   const searchQuery = getItemFromStorage("flight-search-query");
-  const { isLoading, data } = useConfirmPaypment({ id: paymentData._id });
+  const { isLoading, data } = useConfirmPaypment({ id: paymentData?._id });
 
   if (loading) {
     <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
       <Loader />
     </section>;
   }
-
-  console.log(data?.success);
 
   const handleBookFlight = async () => {
     setLoading(true);
@@ -91,7 +89,7 @@ const Confirmation = ({ setCurrentStep }: Props) => {
               onClick={() => handleBookFlight()}
               className="bg-[#1D91CC] px-4 py-2 rounded-md text-white"
             >
-              {loading ? "Loading" : " Complete your Booking"}
+              {loading ? "Loading..." : " Complete your Booking"}
             </button>
           </div>
         </div>

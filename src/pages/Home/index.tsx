@@ -16,16 +16,6 @@ const Home = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
   const result = useSelector((state: RootState) => state.search.result);
   const user = useSelector((state: RootState) => state.user.user);
-  const error = useSelector((state: RootState) => state.search.error);
-  console.log(error);
-
-  // if (isLoading) {
-  //   return (
-  //     <h1 className="w-fulll h-[100vh] text-4xl font-bold flex items-center justify-center">
-  //       Loading...
-  //     </h1>
-  //   );
-  // }
 
   if (!isLoading && result?.data) {
     navigate("/flight-offers");
