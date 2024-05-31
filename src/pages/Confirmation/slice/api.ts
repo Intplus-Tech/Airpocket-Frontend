@@ -42,11 +42,9 @@ export const confirmPayment = async (data: { id: string | undefined }) => {
 export const bookFlight = async (data: Generic) => {
   try {
     const response: any = await bookFlighttApi(data);
-    console.log(response);
     return { success: { ...response.data } };
   } catch (error) {
     const response = handleAxiosError(error);
-    console.log(response);
     return { error: { response } };
   }
 };

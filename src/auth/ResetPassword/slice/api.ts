@@ -6,7 +6,6 @@ import axios from "axios";
 const authToken = getItemFromStorage("access_token");
 
 function resetPasswordApi(data: ChangePassword) {
-  console.log("api", data);
   const url = `${SERVER_URL}/change-password/${data.id}`;
   const options = {
     method: "GET",

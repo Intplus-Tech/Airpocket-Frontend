@@ -32,7 +32,7 @@ const PassengerForm = ({
       ? true
       : "Invalid phone number";
   };
-  console.log(errors?.passengers?.[index], fields);
+
   useEffect(() => {
     const countryList = Object.keys(countries).map((countryCode) => ({
       value: countryCode,
@@ -46,10 +46,7 @@ const PassengerForm = ({
     <main className="max-w-screen-xl mx-auto mb-8 ">
       <section className="flex flex-wrap md:flex-nowrap gap-4 items-end w-full  h-full">
         <div className="w-full">
-          <p>
-            {errors?.passengers?.[index]?.firstName &&
-              errors?.passengers?.[index]?.firstName?.message}
-          </p>
+          <span className="">Firstname</span>
           <label
             htmlFor="firstName"
             className="relative block rounded-md border  "
@@ -63,17 +60,11 @@ const PassengerForm = ({
               className="peer w-full border-none py-2 px-2 bg-transparent  focus:outline-none focus:ring-0"
               placeholder=""
             />
-            <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-              Firstname
-            </span>
           </label>
         </div>
 
         <div className="w-full">
-          <p>
-            {errors?.passengers?.[index + 1]?.lastName &&
-              errors?.passengers?.[index + 1]?.lastName?.message}
-          </p>
+          <span className="">Lastname</span>
           <label
             htmlFor="LastName"
             className="relative block rounded-md border"
@@ -87,17 +78,18 @@ const PassengerForm = ({
               className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
               placeholder=""
             />
-            <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+            {/* <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
               Lastname
-            </span>
+            </span> */}
           </label>
         </div>
 
-        <div className="w-full border px-2 rounded-md bg-white">
+        <div className="w-full px-2 rounded-md bg-white">
+          <span className="">Gender</span>
           <select
             name=""
             id=""
-            className="w-full  py-2 border-none outline-none "
+            className="w-full  py-2  border rounded-md outline-none "
             {...register(`passengers${index}.gender`)}
           >
             <option value="MALE">Male</option>
@@ -106,7 +98,7 @@ const PassengerForm = ({
         </div>
         {/* date of birth */}
         <div className="w-full">
-          <p>Date of Birth</p>
+          <p>Date of Birth {" (DD-MM-YYYY)"}</p>
           <div className="flex border w-full md:min-w-[22rem] rounded-md bg-white ">
             <div className="w-full border-r px-2">
               <select
@@ -139,10 +131,6 @@ const PassengerForm = ({
             </div>
 
             <div className="w-full border-r px-2 bg-white">
-              <p>
-                {errors?.passengers?.[index]?.year &&
-                  errors?.passengers?.[index]?.year?.message}
-              </p>
               <label
                 htmlFor="year"
                 className="relative w-full block rounded-md "
@@ -157,13 +145,9 @@ const PassengerForm = ({
                       message: "Year must be exactly 4 digits",
                     },
                   })}
-                  className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+                  className="peer w-full border-none py-1.5 bg-transparent  focus:border-transparent focus:outline-none focus:ring-0"
                   placeholder="2024"
                 />
-
-                <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                  Year
-                </span>
               </label>
             </div>
           </div>
@@ -174,6 +158,7 @@ const PassengerForm = ({
       <section className="flex justify-end">
         <section className="flex flex-wrap md:flex-nowrap gap-4 items-end w-full  justify-between  h-full mt-8">
           <div className="w-full">
+            <span>Phone number</span>
             <label
               htmlFor="Phone number"
               className="relative block rounded-md border  "
@@ -188,16 +173,14 @@ const PassengerForm = ({
                 className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
                 placeholder="+2348134650533"
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              {/* <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Phone {" (E.g+234 )"}
-              </span>
+              </span> */}
             </label>
-            {errors?.passengers && (
-              <p style={{ color: "red" }}>{errors.passengers.message}</p>
-            )}
           </div>
 
           <div className="w-full">
+            <span>Passport number</span>
             <label
               htmlFor="LastName"
               className="relative block rounded-md border  "
@@ -211,13 +194,14 @@ const PassengerForm = ({
                 className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
                 placeholder=""
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              {/* <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Passport number
-              </span>
+              </span> */}
             </label>
           </div>
 
           <div className="w-full">
+            <span>Place of issuance</span>
             <label
               htmlFor="LastName"
               className="relative block rounded-md border  "
@@ -234,13 +218,14 @@ const PassengerForm = ({
                 className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
                 placeholder=""
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              {/* <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Place of Issuance
-              </span>
+              </span> */}
             </label>
           </div>
 
           <div className="w-full">
+            <span>Place of birth</span>
             <label
               htmlFor="LastName"
               className="relative block rounded-md border  "
@@ -254,14 +239,14 @@ const PassengerForm = ({
                 className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
                 placeholder=""
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              {/* <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Place of Birth
-              </span>
+              </span> */}
             </label>
           </div>
 
           <div className="w-full">
-            <p className="py-0.5">Nationality</p>
+            <p className="">Nationality</p>
 
             <div className=" w-full border  px-2 rounded-md bg-white ">
               <select
@@ -287,6 +272,7 @@ const PassengerForm = ({
       <section className="mt-6 flex justify-end">
         <div className="flex flex-wrap md:flex-nowrap items-end  gap-4  justify-between ">
           <div className="w-full">
+            <span>Email</span>
             <label
               htmlFor="Email"
               className="relative block rounded-md border  "
@@ -300,14 +286,14 @@ const PassengerForm = ({
                 className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
                 placeholder=""
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              {/* <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Email
-              </span>
+              </span> */}
             </label>
           </div>
 
           <div className="w-full md:w-fit">
-            <p className="py-0.5"> Issuance Date</p>
+            <p className="py-0.5"> Issuance Date{" (DD-MM-YYYY)"}</p>
             <div className="flex border w-full md:min-w-[18rem] bg-white">
               <div className="w-full border-r px-2">
                 <select
@@ -356,13 +342,13 @@ const PassengerForm = ({
                         message: "Year must be exactly 4 digits",
                       },
                     })}
-                    className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+                    className="peer w-full border-none py-1.5 bg-transparent  focus:border-transparent focus:outline-none focus:ring-0"
                     placeholder="2024"
                   />
 
-                  <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                  {/* <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                     Year
-                  </span>
+                  </span> */}
                 </label>
               </div>
             </div>
@@ -409,7 +395,7 @@ const PassengerForm = ({
           </div> */}
 
           <div className="w-full md:w-fit">
-            <p className="py-0.5">Expiry Date of Passport</p>
+            <p className="py-0.5">Expiry Date of Passport {"(DD-MM-YYYY)"}</p>
             <div className="flex border w-full md:min-w-[18rem] bg-white">
               <div className="w-full border-r px-2">
                 <select
@@ -452,13 +438,9 @@ const PassengerForm = ({
                     {...register(`passengers${index}.ped.year`, {
                       required: "Passport Year of expiry  is required",
                     })}
-                    className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                    placeholder=""
+                    className="peer w-full border-none py-1.5 bg-transparent  focus:border-transparent focus:outline-none focus:ring-0"
+                    placeholder="2024"
                   />
-
-                  <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                    Year
-                  </span>
                 </label>
               </div>
             </div>
@@ -471,33 +453,3 @@ const PassengerForm = ({
 };
 
 export default PassengerForm;
-
-// "name": {
-//           "firstName": "JORGE",
-//           "lastName": "GONZALES"
-//         },
-//         "gender": "MALE",
-//         "contact": {
-//           "emailAddress": "jorge.gonzales833@telefonica.es",
-//           "phones": [
-//             {
-//               "deviceType": "MOBILE",
-//               "countryCallingCode": "34",
-//               "number": "480080076"
-//             }
-//           ]
-//         },
-//         "documents": [
-//           {
-//             "documentType": "PASSPORT",
-//             "birthPlace": "Madrid",
-//             "issuanceLocation": "Madrid",
-//             "issuanceDate": "2015-04-14",
-//             "number": "00000000",
-//             "expiryDate": "2025-04-14",
-//             "issuanceCountry": "ES",
-//             "validityCountry": "ES",
-//             "nationality": "ES",
-//             "holder": true
-//           }
-//         ]

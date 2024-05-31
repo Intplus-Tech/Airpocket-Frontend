@@ -29,13 +29,12 @@ export const payment = async (data: Generic, dispatch: any) => {
         paymentDetails: { data },
       } = response.data;
       window.location.href = data.authorization_url;
+      dispatch(paymentSuccess(response.data));
+      return { success: response.data };
     }
-    dispatch(paymentSuccess(response.data));
-
-    return { success: { ...response } };
   } catch (error) {
     const response = handleAxiosError(error);
     dispatch(paymentError(response));
-    return { error: { response } };
+    return { error: response };
   }
 };

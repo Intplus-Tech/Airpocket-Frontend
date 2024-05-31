@@ -18,10 +18,9 @@ const SignIn = () => {
 
   const handleSignIn = async (data: FieldValues) => {
     const response = await loginAccount(data, dippatch);
-    console.log("respone", response);
     response.success
       ? navigate(pathname)
-      : toast({ title: "Login Failed, please try again" });
+      : toast({ title: `Login Failed, Please try again` });
 
     reset();
   };

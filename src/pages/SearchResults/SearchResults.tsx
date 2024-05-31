@@ -44,7 +44,6 @@ const SearchResults = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
 
   const flightQuery = getItemFromStorage("flight-search-query");
-  console.log(flightQuery);
   const filterByPriceRange = () => {
     const filtered = (searchResult?.data ?? []).filter((result) => {
       const priceMatch =

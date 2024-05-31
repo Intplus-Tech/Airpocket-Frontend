@@ -11,12 +11,14 @@ import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
 import { payment } from "@/Features/paymentSlice/api";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { addPercentage, formatCurrency } from "@/utils/monthDAys";
+import { useToast } from "@/components/ui/use-toast";
 
 type paymentProps = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const Payment = ({ setCurrentStep }: paymentProps) => {
+  const { toast } = useToast();
   const dispatch = useDispatch();
   // const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("option1");
@@ -37,20 +39,14 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
   );
 
   const { email } = getItemFromStorage("contact_info");
-  console.log(
-    formatCurrency(
-      selectedFlight?.data.flightOffers[0].price.grandTotal *
-        (adult + children + infants)
-    )
-  );
 
   const handlePrev = () => {
     storeItem("currentStep", 2);
     setCurrentStep(2);
   };
 
-  const handlePayment = () => {
-    payment(
+  const handlePayment = async () => {
+    const response = await payment(
       {
         email: email || user?.email,
         amount: addPercentage(
@@ -62,6 +58,7 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
       dispatch
     );
     storeItem("currentStep", 4);
+    response?.error && toast({ title: `${response?.error.message}` });
     // setCurrentStep(4)
   };
 
