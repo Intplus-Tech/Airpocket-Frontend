@@ -13,12 +13,7 @@ type PassengerFormProps = {
   errors: FieldErrors<PassengerFormData>;
 };
 
-const PassengerForm = ({
-  index,
-  register,
-  errors,
-  fields,
-}: PassengerFormProps) => {
+const PassengerForm = ({ index, register }: PassengerFormProps) => {
   const [list, setList] = useState<countryList[]>([]);
   const currentDate = new Date();
 

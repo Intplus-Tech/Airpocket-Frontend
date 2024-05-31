@@ -10,7 +10,7 @@ import { selectFlightResult } from "@/types/typs";
 import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
 import { payment } from "@/Features/paymentSlice/api";
 import { flightSelect } from "@/Features/selectFlight/api";
-import { addPercentage, formatCurrency } from "@/utils/monthDAys";
+import { addPercentage } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
 
 type paymentProps = {
