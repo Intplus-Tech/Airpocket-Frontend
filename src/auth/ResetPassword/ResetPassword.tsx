@@ -31,14 +31,12 @@ const ResetPassword = () => {
   const toggleShowSecondPassword = () => {
     setShowSecondPassword((prevState) => !prevState);
   };
-  console.log(id);
   const { mutateAsync: resetPassword, isPending } = useResetPassword();
 
   const handleResetPassword = async (data: ChangePassword) => {
     const updatedData = { ...data, id };
 
     const response = await resetPassword(updatedData);
-    console.log(response);
     if (response?.success) {
       toast({
         // variant: "success",

@@ -12,21 +12,22 @@ import { LIMIT_FIVE } from "@/utils/Constant";
 
 function getSearchResultsApi(data: User) {
   let url;
-
   if (data.returnDate) {
     url = `${SERVER_URL}/flight-search?originLocationCode=${
       data.originLocationCode
     }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
       data.depatureDate
-    }&returnDate=${
-      data.returnDate
-    }&adults=1&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
+    }&returnDate=${data.returnDate}&adults=${
+      data.adult
+    }&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
   } else {
     url = `${SERVER_URL}/flight-search?originLocationCode=${
       data.originLocationCode
     }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
       data.depatureDate
-    }&adults=1&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
+    }&adults=${
+      data.adult
+    }&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
   }
   const options = {
     method: "GET",
@@ -64,7 +65,6 @@ export const searchFlight = async (data: User, dispatch: any) => {
   } catch (error) {
     const response = handleAxiosError(error);
     dispatch(searchResultError(response.error));
-    console.log(response, "api");
     return { error: { response } };
   }
 };

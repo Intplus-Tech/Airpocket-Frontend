@@ -13,9 +13,7 @@ const ForgetPassword = () => {
   const { mutateAsync: forgotPassword, isPending } = useForgotPassword();
 
   const handleForgotPassword = async (data: FieldValues) => {
-    console.log(data);
     const response = await forgotPassword(data);
-    console.log(response);
     if (response?.success) {
       toast({
         // variant: "success",

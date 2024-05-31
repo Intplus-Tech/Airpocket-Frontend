@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 // import { parsePhoneNumberFromString } from "libphonenumber-js";
 
-import { getCountryCode, getCountryData, TCountryCode } from "countries-list";
+import { getCountryCode } from "countries-list";
 
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
 import { Generic, TravellerFormData } from "@/types/typs";
@@ -37,7 +37,6 @@ const FlightDetailForm = ({
 }: FLGHT_DETAIL_FORM_PROPS) => {
   const dispatch = useDispatch();
   const { toast } = useToast();
-  console.log(getCountryData("Nigeria" as TCountryCode));
   const {
     register,
     control,
@@ -58,7 +57,6 @@ const FlightDetailForm = ({
     email: "",
     phone: "",
   });
-  console.log(loading);
   const user = useSelector((state: RootState) => state.user.user);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -75,7 +73,6 @@ const FlightDetailForm = ({
         description: "Please fill in your flight information",
       });
   }, [errors]);
-  console.log(errors);
 
   const SubmitPassengerForm = async (data: FieldValues) => {
     setLoading(true);
@@ -271,6 +268,7 @@ const FlightDetailForm = ({
         <div className="w-[40%] mx-auto bg-[#1D91CC] rounded-md">
           <button
             // onClick={() => {}}
+            type="submit"
             className="bg-transparent w-full py-2 text-white "
           >
             {loading ? "Saving" : "Save"}

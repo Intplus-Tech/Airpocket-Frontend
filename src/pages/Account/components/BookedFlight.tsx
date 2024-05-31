@@ -18,7 +18,6 @@ interface FlightOrder {
 
 const BookedFlight = () => {
   const { isLoading, data: iteneries } = useGetUserHistory();
-  console.log(iteneries);
 
   // const iteneriesCount = ["1", "2", "3"];
 
@@ -97,7 +96,6 @@ const BookedFlight = () => {
       </div>
 
       {iteneries?.success.data.map((item: any, index: number) => {
-        console.log(item);
         return (
           <div className="w-full">
             {viewItenery !== index ? (

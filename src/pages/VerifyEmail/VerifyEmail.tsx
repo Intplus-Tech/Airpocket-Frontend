@@ -12,7 +12,6 @@ const VerifyEmail = () => {
   const { isLoading, isError } = useVerityEmail({ id });
 
   if (isError) {
-    console.log(isError);
     return (
       <section className="max-w-xl sm:mx-auto mx-4 flex items-center justify-center h-[80vh]">
         <div>

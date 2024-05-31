@@ -44,7 +44,6 @@ const Hero = () => {
     children: 0,
     infants: 0,
   });
-
   const [value] = useDebounce(query, 500);
   // const user = useSelector((state:RootState)=>state.user.user)
   const handleChangeDepature = (selectedCountry: suggestionList | null) => {
@@ -72,12 +71,7 @@ const Hero = () => {
 
     setSuggestions(result);
   };
-  console.log("departure", depature, "destination", destination);
-  if (depature?.country === destination?.country) {
-    console.log("LOCAL");
-  } else {
-    console.log("INTERNATIONAL");
-  }
+
   useEffect(() => {
     value && handleSearchKeyWork();
   }, [value]);
@@ -114,6 +108,7 @@ const Hero = () => {
         depatureDate: formatDateString(checkInDate),
         returnDate: formatDateString(checkOutDate),
         originLocationCode: depature?.value,
+        adult: passengerNumber.adult,
         destinationLocationCode: destination?.value,
       },
       dispatch

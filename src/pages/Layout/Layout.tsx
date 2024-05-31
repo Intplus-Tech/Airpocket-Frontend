@@ -150,7 +150,7 @@ const Layout = () => {
                           Sign Up
                         </p>
                       </DialogTrigger>
-                      <DialogContent className=" w-full ">
+                      <DialogContent className="  h-[95%]">
                         <SignUp />
                       </DialogContent>
                     </Dialog>

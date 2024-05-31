@@ -73,7 +73,8 @@ export const loginAccount = async (data: User, dispatch: any) => {
   } catch (error) {
     const response = handleAxiosError(error);
     dispatch(loginError(response.error));
-    return { error: { response } };
+    response;
+    return { error: response };
   }
 };
 
@@ -104,11 +105,8 @@ export const AutosignUpAccount = async (data: User, dispatch: any) => {
   try {
     const response: any = await autoSignUpApi(data);
     // const cookies = response.headers["set-cookie"];
-    console.log(response);
     const { user, message, access_token } = response.data;
     if (response.data) {
-      // console.log(response);
-      // document.cookie = `access_token=${access_token}`;
       storeItem("access_token", access_token);
       storeItem("user", user);
       dispatch(loginSuccess(user));

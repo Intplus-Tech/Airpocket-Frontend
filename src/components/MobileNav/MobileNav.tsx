@@ -143,7 +143,8 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
                   Sign Up
                 </p>
               </DialogTrigger>
-              <DialogContent className=" w-full flex item center justify-center h-fit my-4">
+              {/* flex item center justify-center h-fit my-4 */}
+              <DialogContent className=" ">
                 <SignUp />
               </DialogContent>
             </Dialog>
