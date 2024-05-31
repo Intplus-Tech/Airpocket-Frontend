@@ -16,7 +16,6 @@ const Home = () => {
   const isLoading = useSelector((state: RootState) => state.search.isLoading);
   const result = useSelector((state: RootState) => state.search.result);
   const user = useSelector((state: RootState) => state.user.user);
-  const error = useSelector((state: RootState) => state.search.error);
 
   if (!isLoading && result?.data) {
     navigate("/flight-offers");
