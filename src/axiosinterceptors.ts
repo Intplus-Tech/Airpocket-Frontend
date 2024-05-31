@@ -10,7 +10,6 @@ const axiosInstance = axios.create({
 // Add a response interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
-    console.log("hey");
     // If the response is successful, simply return it
     return response;
   },
@@ -19,7 +18,7 @@ axiosInstance.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       console.log(error);
       clearStorage();
-      // window.location.href = "/";
+      window.location.href = "/";
     }
     // Otherwise, return the error
     return Promise.reject(error);

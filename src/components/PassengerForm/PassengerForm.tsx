@@ -13,7 +13,12 @@ type PassengerFormProps = {
   errors: FieldErrors<PassengerFormData>;
 };
 
-const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
+const PassengerForm = ({
+  index,
+  register,
+  errors,
+  fields,
+}: PassengerFormProps) => {
   const [list, setList] = useState<countryList[]>([]);
   const currentDate = new Date();
 
@@ -24,10 +29,10 @@ const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
   const validatePhoneNumber = (value: string) => {
     const parsedNumber = parsePhoneNumberFromString(value);
     return parsedNumber && parsedNumber.isValid()
-      ? parsedNumber
+      ? true
       : "Invalid phone number";
   };
-
+  console.log(errors?.passengers?.[index], fields);
   useEffect(() => {
     const countryList = Object.keys(countries).map((countryCode) => ({
       value: countryCode,
@@ -41,6 +46,10 @@ const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
     <main className="max-w-screen-xl mx-auto mb-8 ">
       <section className="flex flex-wrap md:flex-nowrap gap-4 items-end w-full  h-full">
         <div className="w-full">
+          <p>
+            {errors?.passengers?.[index]?.firstName &&
+              errors?.passengers?.[index]?.firstName?.message}
+          </p>
           <label
             htmlFor="firstName"
             className="relative block rounded-md border  "
@@ -61,6 +70,10 @@ const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
         </div>
 
         <div className="w-full">
+          <p>
+            {errors?.passengers?.[index + 1]?.lastName &&
+              errors?.passengers?.[index + 1]?.lastName?.message}
+          </p>
           <label
             htmlFor="LastName"
             className="relative block rounded-md border"
@@ -126,6 +139,10 @@ const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
             </div>
 
             <div className="w-full border-r px-2 bg-white">
+              <p>
+                {errors?.passengers?.[index]?.year &&
+                  errors?.passengers?.[index]?.year?.message}
+              </p>
               <label
                 htmlFor="year"
                 className="relative w-full block rounded-md "
@@ -135,9 +152,13 @@ const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
                   id="year"
                   {...register(`passengers${index}.dob.year`, {
                     required: "Year is required",
+                    pattern: {
+                      value: /^\d{4}$/,
+                      message: "Year must be exactly 4 digits",
+                    },
                   })}
                   className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                  placeholder=""
+                  placeholder="2024"
                 />
 
                 <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
@@ -168,7 +189,7 @@ const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
                 placeholder="+2348134650533"
               />
               <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                Phone {" (+234 )"}
+                Phone {" (E.g+234 )"}
               </span>
             </label>
             {errors?.passengers && (
@@ -330,9 +351,13 @@ const PassengerForm = ({ index, register, errors }: PassengerFormProps) => {
                     id="year"
                     {...register(`passengers${index}.isd.year`, {
                       required: "Passport Year of expiry  is required",
+                      pattern: {
+                        value: /^\d{4}$/,
+                        message: "Year must be exactly 4 digits",
+                      },
                     })}
                     className="peer w-full border-none py-1.5 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                    placeholder=""
+                    placeholder="2024"
                   />
 
                   <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">

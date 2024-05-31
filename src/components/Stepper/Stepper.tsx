@@ -62,11 +62,7 @@ const Stepper = () => {
         );
 
       case 3:
-        return (
-          <Payment
-          // setCurrentStep={setCurrentStep}
-          />
-        );
+        return <Payment setCurrentStep={setCurrentStep} />;
 
       case 4:
         return <Confirmation setCurrentStep={setCurrentStep} />;

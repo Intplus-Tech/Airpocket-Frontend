@@ -90,7 +90,7 @@ export function formatCurrency(amount: number): string {
 export function addPercentage(price: number, percentage: number): number {
   const additionalAmount = price * (percentage / 100);
   const newPrice = price + additionalAmount;
-  return newPrice; // Formats the number to 2 decimal places
+  return Math.round(newPrice); // Rounds the number to the nearest integer
 }
 
 export function formatDate(dateString: string): string {
@@ -150,4 +150,26 @@ export function formatDateString(date: Date | undefined): string | null {
 export function extractHour(dateTime: string): number {
   const date = new Date(dateTime);
   return date.getHours();
+}
+
+export function isDateLessThanYesterday(inputDate: undefined | Date): boolean {
+  const date = new Date(inputDate as Date);
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  return isBefore(date, yesterday) && !isToday(date);
+}
+
+function isBefore(date: Date, comparedDate: Date): boolean {
+  return date < comparedDate;
+}
+
+function isToday(date: Date): boolean {
+  const today = new Date();
+  return (
+    date.getFullYear() === today.getFullYear() &&
+    date.getMonth() === today.getMonth() &&
+    date.getDate() === today.getDate()
+  );
 }

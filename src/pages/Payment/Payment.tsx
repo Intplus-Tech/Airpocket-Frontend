@@ -12,13 +12,13 @@ import { payment } from "@/Features/paymentSlice/api";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { addPercentage, formatCurrency } from "@/utils/monthDAys";
 
-// type paymentProps = {
-//   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-// };
+type paymentProps = {
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+};
 
-const Payment = () => {
+const Payment = ({ setCurrentStep }: paymentProps) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("option1");
   const selectedFlight: selectFlightResult | null = useSelector(
     (state: RootState) => state.selectFlight.result
@@ -27,6 +27,7 @@ const Payment = () => {
   const flightSelected = getItemFromStorage("selected_flight");
   const flightType: { rate: number } = getItemFromStorage("flight_type");
   const user = useSelector((state: RootState) => state.user.user);
+  const loading = useSelector((state: RootState) => state.payment.isLoading);
 
   const { adult, children, infants } = getItemFromStorage(
     "flight-search-query"
@@ -42,8 +43,13 @@ const Payment = () => {
         (adult + children + infants)
     )
   );
+
+  const handlePrev = () => {
+    storeItem("currentStep", 2);
+    setCurrentStep(2);
+  };
+
   const handlePayment = () => {
-    setLoading(true);
     payment(
       {
         email: email || user?.email,
@@ -57,7 +63,6 @@ const Payment = () => {
     );
     storeItem("currentStep", 4);
     // setCurrentStep(4)
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -126,7 +131,10 @@ const Payment = () => {
 
             <div className="text-sm py-8 px-2">
               <div className="flex flex-col md:flex-row gap-4 w-full items-start md:items-center md:justify-between text-primaryColor">
-                <button className="flex items-center min-w-fit gap-x-2">
+                <button
+                  className="flex items-center min-w-fit gap-x-2"
+                  onClick={handlePrev}
+                >
                   <IoMdArrowBack />
                   Return to the previous step
                 </button>

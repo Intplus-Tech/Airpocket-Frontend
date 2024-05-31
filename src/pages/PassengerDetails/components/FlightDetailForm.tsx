@@ -45,6 +45,8 @@ const FlightDetailForm = ({
     formState: { errors },
   } = useForm<PassengerFormData>();
 
+  const [loading, setLoading] = useState(false);
+
   const { fields } = useFieldArray({
     control,
     name: "passengers",
@@ -56,7 +58,7 @@ const FlightDetailForm = ({
     email: "",
     phone: "",
   });
-
+  console.log(loading);
   const user = useSelector((state: RootState) => state.user.user);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -73,8 +75,10 @@ const FlightDetailForm = ({
         description: "Please fill in your flight information",
       });
   }, [errors]);
+  console.log(errors);
 
   const SubmitPassengerForm = async (data: FieldValues) => {
+    setLoading(true);
     if (!formData.email && !user?._id) {
       toast({
         description: "Please fill in your contact information or Login",
@@ -121,7 +125,7 @@ const FlightDetailForm = ({
 
     storeItem("passenger_form", updatedArray);
     storeItem("contact_info", formData);
-    console.log(updatedArray);
+
     if (formData.email) {
       await AutosignUpAccount(formData, dispatch);
       setPassengerFormData(updatedArray);
@@ -130,6 +134,7 @@ const FlightDetailForm = ({
       setPassengerFormData(updatedArray);
       setStep("flightDetailsPreview");
     }
+    setLoading(false);
   };
 
   return (
@@ -163,15 +168,13 @@ const FlightDetailForm = ({
         {!user?._id && (
           <div className="mt-6 border px-6 mx-4 md:mx-6 min-[1059px]:mx-0 h-full rounded-md py-6">
             <h1 className="font-bold">Contact information</h1>
-            <h1 className="font-bold text-red-400">
+            <h1 className="font-bold text-red-400 animate-scale">
               Contact information automatically creates an account for you. If
               you already have an account Please Login
             </h1>
             <p className="text-[#868686]">
-              In case the contact information of this form is inconsistent with
-              the information entered in the user account, the ticket and
-              purchase confirmation will be sent to the contact information of
-              this form. Also, "announcement of ticket changes" or "receipt of
+              The ticket and purchase confirmation will be sent to the contact
+              information. Also, "announcement of ticket changes" or "receipt of
               confirmation" will be done from one of the channels of "user
               account contact information" or "information of the same form" .
             </p>
@@ -210,7 +213,7 @@ const FlightDetailForm = ({
                 />
 
                 <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                  PhoneNumber
+                  LastName
                 </span>
               </label>
               <label
@@ -270,7 +273,7 @@ const FlightDetailForm = ({
             // onClick={() => {}}
             className="bg-transparent w-full py-2 text-white "
           >
-            Save
+            {loading ? "Saving" : "Save"}
           </button>
         </div>
       </form>
