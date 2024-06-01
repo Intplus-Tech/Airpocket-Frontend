@@ -31,12 +31,13 @@ const ResetPassword = () => {
   const toggleShowSecondPassword = () => {
     setShowSecondPassword((prevState) => !prevState);
   };
-  const { mutateAsync: resetPassword, isPending } = useResetPassword();
+  const { mutateAsync: resetPassword, isPending, isError } = useResetPassword();
 
   const handleResetPassword = async (data: ChangePassword) => {
     const updatedData = { ...data, id };
 
     const response = await resetPassword(updatedData);
+    console.log(response.error, response.success, isError, "re");
     if (response?.success) {
       toast({
         // variant: "success",
@@ -44,11 +45,11 @@ const ResetPassword = () => {
         description: `${response.success.message}`,
       });
       reset();
+      window.location.href = "/";
     } else {
       toast({
         // variant: "destructive",
-        title: `${response?.error.status}`,
-        description: `${response?.error.message}`,
+        description: `${response}`,
       });
     }
   };

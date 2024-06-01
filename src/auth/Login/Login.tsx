@@ -20,7 +20,7 @@ const SignIn = () => {
     const response = await loginAccount(data, dippatch);
     response.success
       ? navigate(pathname)
-      : toast({ title: `Login Failed, Please try again` });
+      : toast({ title: `Invalid email of password` });
 
     reset();
   };

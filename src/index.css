@@ -147,8 +147,8 @@
 }
 
 .slick-slide {
-  margin: 0 10px; /* Adjust the margin as needed */
-  height: 15rem;
+  /* margin: 0 10px;  */
+  height: fit-content;
 }
 
 /* To handle the overflow due to margin */

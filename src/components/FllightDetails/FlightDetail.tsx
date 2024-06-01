@@ -20,7 +20,8 @@ type SINGLE_FLIGHT_DETAILS_PROPS = {
 const FlightDetails = ({
   SINGLE_FLIGHT_DETAILS,
 }: SINGLE_FLIGHT_DETAILS_PROPS) => {
-  const { itineraries, price } = SINGLE_FLIGHT_DETAILS?.data.flightOffers[0];
+  const { itineraries, price } =
+    SINGLE_FLIGHT_DETAILS?.data.flightOffers[0] || {};
   const { segments } = itineraries[0] || {};
   const { departure } = segments[0] || {};
   const { arrival } = segments[segments.length - 1];

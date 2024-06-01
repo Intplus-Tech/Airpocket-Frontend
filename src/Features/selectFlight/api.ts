@@ -9,7 +9,7 @@ import {
 } from "./reducer";
 
 function flightSelectApi(data: Generic) {
-  const url = `${SERVER_URL}//flight-select`;
+  const url = `${SERVER_URL}/flight-select`;
   const options = {
     method: "POST",
     headers: {

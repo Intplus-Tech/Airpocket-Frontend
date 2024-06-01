@@ -46,6 +46,8 @@ const FlightDetailForm = ({
 
   const [loading, setLoading] = useState(false);
 
+  const isLoading = useSelector((state: RootState) => state.user.isLoading);
+
   const { fields } = useFieldArray({
     control,
     name: "passengers",
@@ -124,7 +126,11 @@ const FlightDetailForm = ({
     storeItem("contact_info", formData);
 
     if (formData.email) {
-      await AutosignUpAccount(formData, dispatch);
+      const response = await AutosignUpAccount(formData, dispatch);
+      response.success
+        ? toast({ title: "Successfully created an account" })
+        : toast({ title: "Failed something went wrong" });
+
       setPassengerFormData(updatedArray);
       setStep("flightDetailsPreview");
     } else {
@@ -271,7 +277,7 @@ const FlightDetailForm = ({
             type="submit"
             className="bg-transparent w-full py-2 text-white "
           >
-            {loading ? "Saving" : "Save"}
+            {isLoading || loading ? "Saving" : "Save"}
           </button>
         </div>
       </form>

@@ -238,13 +238,13 @@ const SearchForm = ({
           {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
           <div className="flex flex-col w-full">
-            <label className="text-sm md:text-base">Check in</label>
+            <label className="text-sm md:text-base">Leaving</label>
             <DatePickerComponent date={checkInDate} setDate={setCheckInDate} />
           </div>
           {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
           <div className="flex flex-col w-full">
-            <label className="text-sm md:text-base">Check out</label>
+            <label className="text-sm md:text-base">Returning</label>
             <DatePickerComponent
               date={checkOutDate}
               setDate={setCheckOutDate}

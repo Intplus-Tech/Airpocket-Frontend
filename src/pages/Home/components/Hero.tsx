@@ -151,8 +151,8 @@ const Hero = () => {
         className="w-full h-[37rem] min-[576px]:h-[22rem] md:h-[30rem] rounded-lg mx-auto max-w-screen-2xl bg-slate-700 "
       />
       <div className="  absolute top-[3%] sm:top-[4%] md:top-[15%] w-full px-2 md:px-14">
-        <h1 className=" hidden sm:block capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">
-          GET POCKET FRIENDLY LUXURY, WHERE ARE YOU GOING TO?
+        <h1 className=" block capitalize text-white font-bold tracking-widest text-center text-sm sm:text-lg  lg:text-3xl">
+          FLY HIGH, PAY LESS
         </h1>
 
         <SearchForm
