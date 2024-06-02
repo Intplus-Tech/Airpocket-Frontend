@@ -14,6 +14,7 @@ import Loader from "./components/Loader/Loader.tsx";
 import VerifyEmail from "./pages/VerifyEmail/VerifyEmail.tsx";
 import ResetPassword from "./auth/ResetPassword/ResetPassword.tsx";
 import ForgetPassword from "./auth/ForgotPassword/ForgotPassword.tsx";
+import useInactivity from "./hooks/useInactivity.tsx";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About/About.tsx"));
@@ -29,24 +30,18 @@ const LoadingFallback = () => (
   </section>
 );
 
+const TIMEOUT = 3600 * 20000;
+
 function App() {
   const [, setAccessToken] = useState<string | null>(null);
-
+  const authenticated = useInactivity(TIMEOUT);
+  console.log(authenticated);
   useEffect(() => {
     const user = getItemFromStorage("user");
     if (!user?._id) {
       <Navigate to="/" />;
     }
   });
-
-  // if ("storage" in navigator && "estimate" in navigator.storage) {
-  //   navigator.storage.estimate().then(({ quota, usage }) => {
-  //     console.log(`Quota: ${(quota as number) / (1024 * 1024)} MB`);
-  //     console.log(`Usage: ${(usage as number) / 1024} KB`);
-  //   });
-  // } else {
-  //   console.log("Storage estimate API not supported.");
-  // }
 
   const TOKEN_ENDPOINT =
     "https://test.api.amadeus.com/v1/security/oauth2/token";
@@ -115,9 +110,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              {/* Make sure to remove */}
 
-              {/* Make sure to remove */}
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

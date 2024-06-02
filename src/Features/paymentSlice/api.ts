@@ -4,9 +4,9 @@ import handleAxiosError from "@/utils/error";
 import axios from "axios";
 import { makePayment, paymentError, paymentSuccess } from "./reducer";
 import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
-const authToken = getItemFromStorage("access_token");
 
 function paymentApi(data: Generic) {
+  const authToken = getItemFromStorage("access_token");
   const url = `${SERVER_URL}/payments`;
   const options = {
     method: "POST",

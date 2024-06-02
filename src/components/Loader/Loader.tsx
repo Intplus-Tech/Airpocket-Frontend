@@ -1,3 +1,5 @@
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 const Loader = () => {
   return (
     <div className="flex items-center justify-center min-h-screen ">
@@ -18,12 +20,40 @@ const Loader = () => {
 
 export default Loader;
 
-// export const FetchLoader = () => {
-//   return (
-//     <div className="flex items-center justify-center h-screen bg-gray-100">
-//       <div className="relative w-64 h-32 bg-white border border-gray-300">
-//         <div className="line-animation absolute w-full h-full"></div>
-//       </div>
-//     </div>
-//   );
-// };
+export const SkeletonComponent = () => {
+  return (
+    <section className="mx-4 overflow-hidden">
+      <div className="flex flex-col gap-1 border mb-4 rounded-md">
+        <div className=" flex gap-2  justify-between h-[6rem]  px-2 py-1">
+          <span className="h-fit">
+            <Skeleton className="w-[10rem] h-[5rem]" />
+          </span>
+          <span className="h-fit">
+            <Skeleton className="w-[10rem] h-[5rem]" />
+          </span>
+          <span className="h-fit">
+            <Skeleton className="w-[10rem] h-[5rem]" />
+          </span>
+          <span className="h-fit">
+            <Skeleton className="w-[10rem] h-[5rem]" />
+          </span>
+          <span className="h-fit">
+            <Skeleton className="w-[10rem] h-[5rem]" />
+          </span>
+        </div>
+        <div className="flex items-center justify-between px-2">
+          <span>
+            <Skeleton className=" w-[10rem]" />
+          </span>
+          <span>
+            <Skeleton className=" w-[10rem]" />
+          </span>
+        </div>
+      </div>
+
+      <div className="border h-full px-1 py-1">
+        <Skeleton className="h-[3rem] my-4" count={5} />
+      </div>
+    </section>
+  );
+};

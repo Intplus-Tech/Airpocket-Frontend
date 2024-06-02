@@ -6,11 +6,11 @@ import { getCountryCode } from "countries-list";
 
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
 import { Generic, TravellerFormData } from "@/types/typs";
-import { storeItem } from "@/utils/locaStorage";
 import { useToast } from "@/components/ui/use-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { AutosignUpAccount } from "@/Features/userSlice/api";
+import { storeItem } from "@/utils/locaStorage";
 
 type FLGHT_DETAIL_FORM_PROPS = {
   inputsArray: number[];
@@ -45,6 +45,8 @@ const FlightDetailForm = ({
   } = useForm<PassengerFormData>();
 
   const [loading, setLoading] = useState(false);
+
+  const isLoading = useSelector((state: RootState) => state.user.isLoading);
 
   const { fields } = useFieldArray({
     control,
@@ -124,7 +126,11 @@ const FlightDetailForm = ({
     storeItem("contact_info", formData);
 
     if (formData.email) {
-      await AutosignUpAccount(formData, dispatch);
+      const response = await AutosignUpAccount(formData, dispatch);
+      response.success
+        ? toast({ title: "Successfully created an account" })
+        : toast({ title: "Failed something went wrong" });
+
       setPassengerFormData(updatedArray);
       setStep("flightDetailsPreview");
     } else {
@@ -141,6 +147,7 @@ const FlightDetailForm = ({
           <div className="flex items-center justify-between">
             <p className="font-bold border-b pb-2 w-full">Passenger Details</p>
           </div>
+
           <div>
             {inputsArray.map((_, index) => (
               <div key={index} className="border-b">
@@ -154,6 +161,7 @@ const FlightDetailForm = ({
               </div>
             ))}
           </div>
+
           {/* <div className="w-[60%] mx-auto mt-4 bg-gray-300 rounded-md">
             <button type="submit" className="bg-transparent w-full py-2 ">
               Proceed
@@ -271,7 +279,7 @@ const FlightDetailForm = ({
             type="submit"
             className="bg-transparent w-full py-2 text-white "
           >
-            {loading ? "Saving" : "Save"}
+            {isLoading || loading ? "Saving" : "Save"}
           </button>
         </div>
       </form>

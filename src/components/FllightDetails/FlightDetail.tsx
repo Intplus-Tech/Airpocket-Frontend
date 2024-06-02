@@ -20,7 +20,8 @@ type SINGLE_FLIGHT_DETAILS_PROPS = {
 const FlightDetails = ({
   SINGLE_FLIGHT_DETAILS,
 }: SINGLE_FLIGHT_DETAILS_PROPS) => {
-  const { itineraries, price } = SINGLE_FLIGHT_DETAILS?.data.flightOffers[0];
+  const { itineraries, price, travelerPricings } =
+    SINGLE_FLIGHT_DETAILS?.data.flightOffers[0] || {};
   const { segments } = itineraries[0] || {};
   const { departure } = segments[0] || {};
   const { arrival } = segments[segments.length - 1];
@@ -28,7 +29,7 @@ const FlightDetails = ({
   const arrivalTime = extractTime(arrival.at);
   const arrivalDate = formatDate(arrival.at);
   // const realTime = convertTime(duration);
-
+  console.log(SINGLE_FLIGHT_DETAILS);
   return (
     <section
       key={SINGLE_FLIGHT_DETAILS?.data.id}
@@ -80,14 +81,16 @@ const FlightDetails = ({
           </section>
         </article>
 
-        {/* <article className="w-full flex justify-between items-center px-2 md:px-4 py-4">
-          <p className="text-[#1D91CC] bg-[#E8F4FA] rounded-md p-[8px]">
-            Ecomomy
-          </p>
-          <p className="text-[#1D91CC] text-xs sm:text-base">
-            Your total payment :{`${formatCurrency(price.grandTotal)}`}
-          </p>
-        </article> */}
+        {!itineraries[1] && (
+          <article className="w-full flex justify-between items-center px-2 md:px-4 py-4">
+            <p className="text-[#1D91CC] bg-[#E8F4FA] rounded-md p-[8px]">
+              {travelerPricings[0].fareDetailsBySegment[0].cabin}
+            </p>
+            <p className="text-[#1D91CC] text-xs sm:text-base">
+              Your total payment :{`${formatCurrency(price.grandTotal)}`}
+            </p>
+          </article>
+        )}
       </section>
 
       {itineraries[1] && (
@@ -148,7 +151,7 @@ const FlightDetails = ({
 
           <article className="w-full flex justify-between items-center px-2 md:px-4 py-4">
             <p className="text-[#1D91CC] bg-[#E8F4FA] rounded-md p-[8px]">
-              Ecomomy
+              {travelerPricings[0].fareDetailsBySegment[0].cabin}
             </p>
             <p className="text-[#1D91CC] text-xs sm:text-base">
               Your total payment :{`${formatCurrency(price.grandTotal)}`}

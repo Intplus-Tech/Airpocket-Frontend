@@ -84,11 +84,20 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
     setSuggestions(result);
   };
   const handleSearchFlight = async (data: FieldValues) => {
+    if (passengerNumber.adult < passengerNumber.infants) {
+      toast({
+        variant: "destructive",
+        title: "Number of infants can't exceed number of adults",
+      });
+      return;
+    }
+
     if (
       isDateLessThanYesterday(checkInDate) ||
       isDateLessThanYesterday(checkOutDate)
     ) {
       toast({
+        variant: "destructive",
         description: " Date must not be in the past",
       });
       return;
@@ -96,6 +105,7 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
 
     if (!depature?.value && !checkInDate) {
       toast({
+        variant: "destructive",
         description: "Please enter a departur Date",
       });
       return;
@@ -114,6 +124,8 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
         depatureDate: formatDateString(checkInDate),
         returnDate: formatDateString(checkOutDate),
         originLocationCode: depature?.value,
+        children: passengerNumber.children,
+        infants: passengerNumber.infants,
         destinationLocationCode: destination?.value,
       },
       dispatch

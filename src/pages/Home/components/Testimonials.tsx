@@ -1,45 +1,12 @@
+import { TESTIMONIALS } from "@/utils/Constant";
 import { Image } from "../../../components/Image/Index";
-import Mimi from "@/pages/Home/assets/Mimi.jpeg";
-import Paul from "@/pages/Home/assets/Paul.jpeg";
-import Samuel from "@/pages/Home/assets/Samuel.jpeg";
-import Chidi from "@/pages/Home/assets/Chidi.jpeg";
+
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   StarIcon,
 } from "@heroicons/react/24/solid";
 const Testimonials = () => {
-  const TESTIMONIALS = [
-    {
-      id: "1",
-      text: "Booked my flight with Airpockets and it was like breeze, amazing customer support and feedback, I definitely recommend them. ",
-      img: Chidi,
-      name: "Chidi",
-      country: "Nigeria",
-    },
-    {
-      id: "2",
-      text: "Airpockets has become my go to travel platform, I enjoy the luxury perks they off offer. I used to get higher rates elsewhere till I discovered Airpockets",
-      img: Mimi,
-      name: "Mimi",
-      country: "Nigeria",
-    },
-    {
-      id: "3",
-      text: "After spending for school requirements, money for flight was a bit challenge, but surprisingly I got a budget friendly flight on Airpocket",
-      img: Samuel,
-      name: "Samuel",
-      country: "Nigeria",
-    },
-    {
-      id: "4",
-      text: "The convenience and constant support is impressive. ",
-      img: Paul,
-      name: "Paul",
-      country: "Nigeria",
-    },
-  ];
-
   return (
     <main className=" max-w-screen-xl mx-auto mt-8">
       <div className="w-full px-2 mx-auto space-y-16">
@@ -71,7 +38,7 @@ const Testimonials = () => {
           {TESTIMONIALS.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="relative bg-white shadow shadow-gray-300 pt-8 py-4 px-2 w-full min-w-[18rem] max-w-[320px] mx-auto rounded-lg space-y-4"
+              className="relative bg-white shadow-md shadow-gray-300 pt-8 py-4 px-2 w-full min-w-[18rem] max-w-[320px] mx-auto rounded-lg space-y-4"
             >
               <div className="absolute top-0 right-[50%] translate-x-[50%] translate-y-[-50%] w-[51px] h-[51px]">
                 <Image
@@ -88,7 +55,7 @@ const Testimonials = () => {
                   <StarIcon className="w-4 h-4 text-[#DABE29]" />
                   <StarIcon className="w-4 h-4 text-[#DABE29]" />
                   <StarIcon className="w-4 h-4 text-[#DABE29]" />
-                  <StarIcon className="w-4 h-4 text-[#DABE29]" />
+                  <StarIcon className="w-4 h-4 text-[#726a3d]" />
                   <StarIcon className="w-4 h-4 text-[#DABE29]" />
                 </span>
                 <div className="text-center md:text-start">

@@ -4,23 +4,26 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { Image } from "../../../components/Image/Index";
 import Water from "../assets/Img5.svg";
-import BlueSquare from "../assets/Bluesquare.svg";
-import SmallImage from "../assets/smallImg.svg";
-import BlackStar from "../assets/Blackstar.svg";
-import Location from "../assets/Location.svg";
-import Jakarta from "../assets/Jakarta.svg";
+// import BlueSquare from "../assets/Bluesquare.svg";
+// import SmallImage from "../assets/smallImg.svg";
+// import BlackStar from "../assets/Blackstar.svg";
+// import Location from "../assets/Location.svg";
+import home from "../assets/home.jpeg";
+import Thailand from "../assets/thailand.jpeg";
 import Dubai from "../assets/Dubai.svg";
-import London from "../assets/London.svg";
+import London from "../assets/london.jpeg";
+import Barcelona from "../assets/barcelona.jpeg";
 import Zanziba from "@/pages/Home//assets/Zanziba.jpeg";
 import Egypt from "@/pages/Home//assets/Egypt.jpeg";
 import Kigali from "@/pages/Home//assets/Kigali.jpeg";
+import AboutUs from "./aboutUs";
 
 const Places = () => {
   const destinations = [
     {
       id: "1",
-      Img: Jakarta,
-      name: "jakarta",
+      Img: Thailand,
+      name: "Thailand",
     },
     {
       id: "2",
@@ -34,8 +37,8 @@ const Places = () => {
     },
     {
       id: "4",
-      Img: London,
-      name: "Dubai",
+      Img: Barcelona,
+      name: "Barcelona",
     },
     {
       id: "5",
@@ -128,7 +131,7 @@ const Places = () => {
           Experience the best with our summer deals
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 place-items-center py-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center py-5">
         <div>
           <Image src={Kigali} alt="kigali" className="shadow-md rounded-md " />
         </div>
@@ -144,7 +147,10 @@ const Places = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center gap-4 col-span-1 my-6 h-full">
+      <div>
+        <AboutUs img={Water} text={"About Us"} />
+      </div>
+      {/* <div className="grid grid-cols-1 md:grid-cols-3 place-items-center gap-4 col-span-1 my-6 h-full">
         <div className="w-fit relative">
           <Image src={Water} alt="Water" className="" />
           <div className="absolute top-4 right-[-1rem] sm:right-[-3rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[200px] ">
@@ -225,14 +231,14 @@ const Places = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div>
         <div className="px-0 md:px-6">
           <h1 className="font-bold text-xl py-4 lg:text-[41px]">
             Trending <span className="text-[#1B96D6]">destination</span>
           </h1>
-          <p>Incredible places you must visit….</p>
+          <p>Incredible places you must visit…</p>
         </div>
 
         {/* <div className="mt-8 max-w-[30rem] md:max-w-full min-w-full overflow-x-auto grid grid-cols-3 space-x-8 md:gap-4 place-items-center"> */}
@@ -249,10 +255,12 @@ const Places = () => {
                   <Image
                     src={destination.Img}
                     alt={destination.name}
-                    className="rounded-lg mx-auto "
+                    className="rounded-lg w-full mx-auto h-[20rem] "
                   />
-                  <p className=" absolute mx-16 w-[60%] top-[-1.2rem]  bg-white px-10 py-3 rounded-xl text-center">
-                    {destination.name}
+                  <p className=" absolute top-[-1rem] px-auto  mx-auto w-full   capitalize px-10 py-3 rounded-xl text-center">
+                    <span className="w-[80%] mx-auto  bg-white px-10 py-3 rounded-xl">
+                      {destination.name}
+                    </span>
                   </p>
                 </div>
               );
