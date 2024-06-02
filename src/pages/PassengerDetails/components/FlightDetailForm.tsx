@@ -6,11 +6,11 @@ import { getCountryCode } from "countries-list";
 
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
 import { Generic, TravellerFormData } from "@/types/typs";
-import { storeItem } from "@/utils/locaStorage";
 import { useToast } from "@/components/ui/use-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { AutosignUpAccount } from "@/Features/userSlice/api";
+import { storeItem } from "@/utils/locaStorage";
 
 type FLGHT_DETAIL_FORM_PROPS = {
   inputsArray: number[];
@@ -147,6 +147,7 @@ const FlightDetailForm = ({
           <div className="flex items-center justify-between">
             <p className="font-bold border-b pb-2 w-full">Passenger Details</p>
           </div>
+
           <div>
             {inputsArray.map((_, index) => (
               <div key={index} className="border-b">
@@ -160,6 +161,7 @@ const FlightDetailForm = ({
               </div>
             ))}
           </div>
+
           {/* <div className="w-[60%] mx-auto mt-4 bg-gray-300 rounded-md">
             <button type="submit" className="bg-transparent w-full py-2 ">
               Proceed

@@ -77,11 +77,20 @@ const Hero = () => {
   }, [value]);
 
   const handleSearchFlight = async (data: FieldValues) => {
+    if (passengerNumber.adult < passengerNumber.infants) {
+      toast({
+        variant: "destructive",
+        title: "Number of infants can't exceed number of adults",
+      });
+      return;
+    }
+
     if (
       isDateLessThanYesterday(checkInDate) ||
       isDateLessThanYesterday(checkOutDate)
     ) {
       toast({
+        variant: "destructive",
         description: " Date must not be in the past",
       });
       return;
@@ -89,6 +98,7 @@ const Hero = () => {
 
     if (!depature?.value || !destination?.value || !checkInDate) {
       toast({
+        variant: "destructive",
         description: "Departure, destination and checkin data are required",
       });
       return;
@@ -109,6 +119,8 @@ const Hero = () => {
         returnDate: formatDateString(checkOutDate),
         originLocationCode: depature?.value,
         adult: passengerNumber.adult,
+        children: passengerNumber.children,
+        infants: passengerNumber.infants,
         destinationLocationCode: destination?.value,
       },
       dispatch

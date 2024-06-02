@@ -5,10 +5,11 @@ import { redirect } from "react-router-dom";
 const EVENTS: string[] = ["mousemove", "keydown", "click"]; // Add more events as needed
 
 function useInactivity(timeout: number): boolean {
-  const [authenticated, setAuthenticated] = useState<boolean>(() => {
-    return !!localStorage.getItem("user");
+  const [authenticated, setAuthenticated] = useState<any>(() => {
+    return localStorage.getItem("user");
   });
 
+  console.log(authenticated);
   useEffect(() => {
     if (!authenticated) return;
     let activityTimer: ReturnType<typeof setTimeout>;
@@ -18,7 +19,8 @@ function useInactivity(timeout: number): boolean {
       activityTimer = setTimeout(() => {
         setAuthenticated(false);
         clearStorage(); // C
-        window.location.href = "/"; // Redirect to login page
+        redirect("/");
+        window.location.href = "/";
       }, timeout);
     };
 

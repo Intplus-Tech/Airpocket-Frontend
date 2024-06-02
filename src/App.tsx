@@ -30,7 +30,7 @@ const LoadingFallback = () => (
   </section>
 );
 
-const TIMEOUT = 3600 * 3000;
+const TIMEOUT = 3600 * 20000;
 
 function App() {
   const [, setAccessToken] = useState<string | null>(null);

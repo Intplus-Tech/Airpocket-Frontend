@@ -11,22 +11,25 @@ import { getItemFromStorage } from "@/utils/locaStorage";
 import { LIMIT_FIVE } from "@/utils/Constant";
 
 function getSearchResultsApi(data: User) {
+  console.log(data);
   let url;
   if (data.returnDate) {
     url = `${SERVER_URL}/flight-search?originLocationCode=${
       data.originLocationCode
     }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
       data.depatureDate
-    }&returnDate=${data.returnDate}&adults=${
-      data.adult
+    }&returnDate=${data.returnDate}&adults=${data.adult}&children=${
+      data.children
+    }&infants=${
+      data.infants
     }&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
   } else {
     url = `${SERVER_URL}/flight-search?originLocationCode=${
       data.originLocationCode
     }&destinationLocationCode=${data.destinationLocationCode}&departureDate=${
       data.depatureDate
-    }&adults=${
-      data.adult
+    }&adults=${data.adult}&children=${data.children}&infants=${
+      data.infants
     }&travelClass=${data.travelClass.toUpperCase()}&nonStop=false&max=${LIMIT_FIVE}`;
   }
   const options = {

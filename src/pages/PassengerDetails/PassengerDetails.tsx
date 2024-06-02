@@ -35,6 +35,13 @@ export const PassengerDetails = ({
   const error = useSelector((state: RootState) => state.selectFlight.error);
 
   const { adult, children, infants } = flightSearchQuery;
+
+  // const testing = array.map((passenger, idx) =>
+  //   Array.from({ length: passenger.value }).map((_, index) => (
+  //     <h1>{`testint${passenger.name}`}</h1>
+  //   ))
+  // );
+
   const inputsArray = Array.from(
     { length: adult + children + infants },
     (_, index) => index + 1

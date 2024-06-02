@@ -8,18 +8,18 @@ type ClassTypProps = {
 
 const ClassType = ({ setClassType, setOpenDropdownType }: ClassTypProps) => {
   const passengers: PassengersProps = [
-    { id: "1", text: "Economy" },
-    { id: "2", text: "Economy Premium" },
-    { id: "3", text: "Business Class" },
-    { id: "4", text: "First Class" },
+    { id: "1", text: "Economy", value: "ECONOMY" },
+    { id: "2", text: " Premium Economy", value: "PREMIUM_ECONOMY" },
+    { id: "3", text: "Business Class", value: "BUSINESS" },
+    { id: "4", text: "First Class", value: "FIRST" },
   ];
 
   const selectClassType = (type: string) => {
     setClassType(type);
   };
 
-  const handleclick = (text: string) => {
-    selectClassType(text.toUpperCase());
+  const handleclick = (text: string | undefined) => {
+    selectClassType(text?.toUpperCase() as string);
     setOpenDropdownType(null);
   };
 
@@ -30,9 +30,9 @@ const ClassType = ({ setClassType, setOpenDropdownType }: ClassTypProps) => {
         setOpenDropdownType(null);
       }}
     >
-      {passengers.map(({ id, text }) => (
+      {passengers.map(({ id, text, value }) => (
         <p
-          onClick={() => handleclick(text)}
+          onClick={() => handleclick(value)}
           className="py-2 px-4 text-sm whitespace-nowrap hover:bg-gray-50 cursor-pointer"
           key={id}
         >
