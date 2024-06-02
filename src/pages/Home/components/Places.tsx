@@ -8,7 +8,7 @@ import Water from "../assets/Img5.svg";
 // import SmallImage from "../assets/smallImg.svg";
 // import BlackStar from "../assets/Blackstar.svg";
 // import Location from "../assets/Location.svg";
-import home from "../assets/home.jpeg";
+// import home from "../assets/home.jpeg";
 import Thailand from "../assets/thailand.jpeg";
 import Dubai from "../assets/Dubai.svg";
 import London from "../assets/london.jpeg";
