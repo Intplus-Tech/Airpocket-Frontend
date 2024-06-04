@@ -23,7 +23,8 @@ const SearchResults = lazy(
   () => import("./pages/SearchResults/SearchResults.tsx")
 );
 const AccountProfile = lazy(() => import("./pages/Account/Account.tsx"));
-
+const Faqs = lazy(() => import("./pages/Faqs/Faqs.tsx"));
+const Privacy = lazy(() => import("./pages/Privacy/Privacy.tsx"));
 const LoadingFallback = () => (
   <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
     <Loader />
@@ -93,6 +94,8 @@ function App() {
               <Route path="/flights" element={<Flight />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/about-us" element={<About />} />
+              <Route path="/privacy-policy" element={<Privacy />} />
+              <Route path="/faqs" element={<Faqs />} />
               <Route path="/verify-email/:id" element={<VerifyEmail />} />
               <Route path="/reset-password/:id" element={<ResetPassword />} />
               <Route path="/forgot-password" element={<ForgetPassword />} />

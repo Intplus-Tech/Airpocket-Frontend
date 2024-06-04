@@ -4,11 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { Image } from "../../../components/Image/Index";
 import Water from "../assets/Img5.svg";
-// import BlueSquare from "../assets/Bluesquare.svg";
-// import SmallImage from "../assets/smallImg.svg";
-// import BlackStar from "../assets/Blackstar.svg";
-// import Location from "../assets/Location.svg";
-// import home from "../assets/home.jpeg";
 import Thailand from "../assets/thailand.jpeg";
 import Dubai from "../assets/Dubai.svg";
 import London from "../assets/london.jpeg";
@@ -79,7 +74,7 @@ const Places = () => {
     infinite: true,
     // speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     autoplay: true,
     speed: 6000,
     autoplaySpeed: 4000,
@@ -91,7 +86,7 @@ const Places = () => {
         breakpoint: 1240,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 2,
+          slidesToScroll: 4,
           infinite: true,
           dots: true,
         },
@@ -100,7 +95,7 @@ const Places = () => {
         breakpoint: 840,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 4,
           initialSlide: 1,
         },
       },
@@ -108,7 +103,7 @@ const Places = () => {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToScroll: 4,
         },
       },
       // {

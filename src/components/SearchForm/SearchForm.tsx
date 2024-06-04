@@ -46,6 +46,8 @@ type Props = {
   setOpenDestinationDropdown: (value: React.SetStateAction<boolean>) => void;
   destination: suggestionList | null;
   depature: suggestionList | null;
+  prevDeparture?: suggestionList | null;
+  prevDestination?: suggestionList | null;
   openDepatureDropdown: boolean;
   openDestinationDropdown: boolean;
   checkInDate: Date | undefined;
@@ -87,6 +89,12 @@ const SearchForm = ({
   useEffect(() => {
     setOpenDropdownType(null);
   }, [tripType, classType]);
+
+  const defaultValue: suggestionList | null = {
+    value: "chocolate",
+    label: "Chocolate",
+    country: "",
+  };
 
   return (
     <div className="bg-white shadow-sm md:shadow-lg rounded-xl mt-4 lg:mt-6 px-5 py-8 md:pt-16 md:pb-16   w-full mx-auto">
@@ -174,6 +182,7 @@ const SearchForm = ({
             <label className="text-sm md:text-base">Departure</label>
             <Select
               options={suggestions}
+              defaultValue={defaultValue}
               onChange={handleChangeDepature}
               value={depature}
               components={{

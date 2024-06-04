@@ -163,3 +163,10 @@ export type PassengerFormData = {
     year: string;
   }[];
 };
+
+export interface suggestionList {
+  value: string;
+  label: string;
+  country: string;
+}
+[];
