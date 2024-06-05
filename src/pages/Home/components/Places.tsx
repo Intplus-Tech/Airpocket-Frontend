@@ -8,7 +8,6 @@ import Thailand from "../assets/thailand.jpeg";
 import Singapore from "../assets/singapore.jpeg";
 import Shangai from "../assets/shangai.jpeg";
 import Thailand2 from "../assets/thailand (2).jpeg";
-import London from "../assets/london.jpeg";
 import Barcelona from "../assets/barcelona.jpeg";
 import Zanziba from "@/pages/Home//assets/Zanziba.jpeg";
 import Egypt from "@/pages/Home//assets/Egypt.jpeg";
