@@ -4,14 +4,10 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { Image } from "../../../components/Image/Index";
 import Water from "../assets/Img5.svg";
-// import BlueSquare from "../assets/Bluesquare.svg";
-// import SmallImage from "../assets/smallImg.svg";
-// import BlackStar from "../assets/Blackstar.svg";
-// import Location from "../assets/Location.svg";
-// import home from "../assets/home.jpeg";
 import Thailand from "../assets/thailand.jpeg";
-import Dubai from "../assets/Dubai.svg";
-import London from "../assets/london.jpeg";
+import Singapore from "../assets/singapore.jpeg";
+import Shangai from "../assets/shangai.jpeg";
+import Thailand2 from "../assets/thailand (2).jpeg";
 import Barcelona from "../assets/barcelona.jpeg";
 import Zanziba from "@/pages/Home//assets/Zanziba.jpeg";
 import Egypt from "@/pages/Home//assets/Egypt.jpeg";
@@ -26,14 +22,9 @@ const Places = () => {
       name: "Thailand",
     },
     {
-      id: "2",
-      Img: London,
-      name: "London",
-    },
-    {
       id: "3",
-      Img: Dubai,
-      name: "Dubai",
+      Img: Singapore,
+      name: "Singapore",
     },
     {
       id: "4",
@@ -41,9 +32,14 @@ const Places = () => {
       name: "Barcelona",
     },
     {
+      id: "2",
+      Img: Thailand2,
+      name: "Thailand",
+    },
+    {
       id: "5",
-      Img: Dubai,
-      name: "Dubai",
+      Img: Shangai,
+      name: "Shangai",
     },
   ];
 
@@ -79,7 +75,7 @@ const Places = () => {
     infinite: true,
     // speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     autoplay: true,
     speed: 6000,
     autoplaySpeed: 4000,
@@ -91,7 +87,7 @@ const Places = () => {
         breakpoint: 1240,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 2,
+          slidesToScroll: 4,
           infinite: true,
           dots: true,
         },
@@ -100,7 +96,7 @@ const Places = () => {
         breakpoint: 840,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 4,
           initialSlide: 1,
         },
       },
@@ -108,7 +104,7 @@ const Places = () => {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToScroll: 4,
         },
       },
       // {

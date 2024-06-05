@@ -29,7 +29,11 @@ const Hero = () => {
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
   const [classType, setClassType] = useState("Economy");
-  const [depature, setDeparute] = useState<suggestionList | null>(null);
+  const [depature, setDeparute] = useState<suggestionList | null>({
+    value: "today",
+    label: "today",
+    country: "nigeria",
+  });
   const [destination, setDestination] = useState<suggestionList | null>(null);
   const [openDestinationDropdown, setOpenDestinationDropdown] = useState(false);
   const [openDepatureDropdown, setOpenDepartureDropdown] = useState(false);

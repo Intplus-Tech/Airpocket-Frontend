@@ -74,13 +74,14 @@ const Footer = () => {
             <h3 className="font-semibold">Help</h3>
             <ul className="text-gray-600 space-y-2">
               <li>
-                <Link to={"/faq"}>FAQ</Link>
+                <Link to={"/faqs"}>FAQ</Link>
               </li>
               <li>
-                <Link to={"/help-center"}>Help Center</Link>
+                <Link to={"/terms&conditon"}>Terms and Contitions</Link>
               </li>
+
               <li>
-                <Link to={"/help-center"}>Privacy Policy</Link>
+                <Link to={"/privacy-policy"}>Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -95,13 +96,14 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
       <div className="hidden lg:flex mx-auto justify-center my-8">
         <ul className="flex gap-x-6 text-gray-700 text-sm">
           <li>
             <Link to={"/terms"}>Terms</Link>
           </li>
           <li>
-            <Link to={"/privacy"}>Privacy</Link>
+            <Link to={"/privacy-policy"}>Privacy</Link>
           </li>
           <li>
             <Link to={"/cookies"}>Cookies</Link>

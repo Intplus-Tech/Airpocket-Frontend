@@ -1,33 +1,92 @@
 import MaxwidthWrapper from "@/components/MaxwidthWrapper.tsx/MaxWidthWrapper";
-import AboutUs from "../Home/components/aboutUs";
 import Footer from "@/components/Footer/Footer";
-import Testimonials from "../Home/components/Testimonials";
-import home from "@/pages/Home/assets/home.jpeg";
+import { Image } from "@/components/Image/Index";
+import About1 from "@/pages/About/assets/about1.svg";
+import About2 from "@/pages/About/assets/about2.svg";
 
 const About = () => {
+  const OUR_INFO = [
+    {
+      id: "1",
+      name: "who we are",
+      desc: "     Who we are Lorem ipsum dolor sit amet, consectetur adipis elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper a lacus vestibulum sed. Scelerisque eleifenddonec pretium vulputate sapien. Eu lobortis elementum nibh tellus molestie. Quis varius quam quisque id diam. Aliquam sem et tortor consequat id porta nibh venenatis .",
+    },
+    {
+      id: "2",
+      name: "What we do",
+      desc: "     Who we are Lorem ipsum dolor sit amet, consectetur adipis elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper a lacus vestibulum sed. Scelerisque eleifenddonec pretium vulputate sapien. Eu lobortis elementum nibh tellus molestie. Quis varius quam quisque id diam. Aliquam sem et tortor consequat id porta nibh venenatis .",
+    },
+    {
+      id: "3",
+      name: "Our Mission",
+      desc: "     Who we are Lorem ipsum dolor sit amet, consectetur adipis elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper a lacus vestibulum sed. Scelerisque eleifenddonec pretium vulputate sapien. Eu lobortis elementum nibh tellus molestie. Quis varius quam quisque id diam. Aliquam sem et tortor consequat id porta nibh venenatis ",
+    },
+  ];
+
   return (
     <MaxwidthWrapper>
       <main className=" mx-auto px-2 sm:px-6">
-        <h1 className="text-3xl text-center py-2 text-[#1B96D6] capitalize font-bold">
-          About us{" "}
-        </h1>
-        <div className="mt-1">
-          Airpockets Travel and Tours Limited was founded with the aim of
-          simplifying travel bookings and offering seamless travel experiences
-          to customers. We specialize in providing comprehensive travel
-          solutions, including airline ticketing, hotel reservations, and tour
-          packages, and creating memories that last a lifetime. That's why we're
-          dedicated to providing you with the most affordable luxury flights and
-          travel packages, without compromising on quality or service.?
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="h-full">
+            <h1 className="font-bold py-4">who we are</h1>
+            <div className=" h-full flex ">
+              <p>
+                Who we are Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ullamcorper a lacus vestibulum sed. Scelerisque eleifend
+                donec pretium vulputate sapien. Eu lobortis elementum nibh
+                tellus molestie. Quis varius quam quisque id diam. Aliquam sem
+                et tortor consequat id porta nibh venenatis cras. Duis ut diam
+                quam nulla. In metus vulputate eu scelerisque. Id aliquet lectus
+                proin nibh nisl condimentum. Purus sit amet volutpat consequat
+                mauris nunc congue nisi. Ullamcorper sit amet risus nullam eget
+                felis eget nunc.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center py-6">
+            <Image src={About1} alt="about img" className="mx-auto  relative" />
+          </div>
         </div>
 
-        <div className="mt-12 mb-8">
-          <AboutUs img={home} text={null} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+          <div className="h-full order-2">
+            <div className=" h-full flex mt-6 ">
+              <p>
+                orem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ullamcorper a lacus vestibulum sed. Scelerisque eleifend donec
+                pretium vulputate sapien. Eu lobortis elementum nibh tellus
+                molestie. Quis varius quam quisque id diam. Aliquam sem et
+                tortor consequat id porta nibh venenatis cras. Duis ut diam quam
+                nulla. In metus vulputate eu scelerisque. Id aliquet lectus
+                proin nibh nisl condimentum. Purus sit amet volutpat consequat
+                mauris nunc congue nisi. Ullamcorper sit amet risus nullam eget
+                felis eget nunc. Consectetur adipiscing elit ut aliquam purus.
+                Quis viverra nibh cras pulvinar mattis nunc. Scelerisque
+                eleifend donec pretium vulputate sapien nec. Tincidunt tortor
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center  py-6 order-1">
+            <Image src={About2} alt="about img" className="relative" />
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <h1 className="text-center font-bold text-3xl">Our value</h1>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 mt-6 gap-6">
+            {OUR_INFO.map((info) => (
+              <div key={info.id} className="">
+                <h1 className="text-center font-bold py-1">{info.name}</h1>
+                <p>{info.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
-      <div className="my-4">
-        <Testimonials />
-      </div>
+
       <Footer />
     </MaxwidthWrapper>
   );

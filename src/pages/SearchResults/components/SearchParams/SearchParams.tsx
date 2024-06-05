@@ -38,23 +38,52 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
   const dispatch = useDispatch();
   // const [isOpen, setIsOpen] = useState(false);
   const flightSearchQuery = getItemFromStorage("flight-search-query");
+
+  const prevDeparture: suggestionList | null = {
+    label: flightSearchQuery.originLocation,
+    value: flightSearchQuery.riginLocationCode,
+    country: "",
+  };
+
+  const prevDestination: suggestionList | null = {
+    label: flightSearchQuery.destinationLocation,
+    value: flightSearchQuery.destinationLocationCode,
+    country: "",
+  };
+  const prevChekInDate = flightSearchQuery.depatureTimeDate;
+  const prevChekOutDate = flightSearchQuery.returnTimeDate;
+  const prevClassType = flightSearchQuery.travelClass;
+  const prevPassenger = {
+    adult: flightSearchQuery.adult,
+    children: flightSearchQuery.children,
+    infants: flightSearchQuery.infants,
+  };
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
-  const [classType, setClassType] = useState("Economy");
-  const [depature, setDeparute] = useState<suggestionList | null>(null);
-  const [destination, setDestination] = useState<suggestionList | null>(null);
+  const [classType, setClassType] = useState(prevClassType || "Economy");
+  const [depature, setDeparute] = useState<suggestionList | null>(
+    prevDeparture || null
+  );
+  const [destination, setDestination] = useState<suggestionList | null>(
+    prevDestination || null
+  );
   const [openDestinationDropdown, setOpenDestinationDropdown] = useState(false);
   const [openDepatureDropdown, setOpenDepartureDropdown] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<suggestionList[]>([]);
-  const [checkInDate, setCheckInDate] = useState<Date | undefined>();
-  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
+  const [checkInDate, setCheckInDate] = useState<Date | undefined>(
+    prevChekInDate || undefined
+  );
+  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
+    prevChekOutDate === "undefined" ? undefined : prevChekOutDate
+  );
+
   const [passengerNumber, setPassengerNumber] = useState<{
     [key: string]: number;
   }>({
-    adult: 1,
-    children: 0,
-    infants: 0,
+    adult: prevPassenger.adult || 1,
+    children: prevPassenger.children || 0,
+    infants: prevPassenger.infants || 0,
   });
 
   const [value] = useDebounce(query, 500);
@@ -292,6 +321,8 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
             destination={destination}
             depature={depature}
             setIsOpen={setIsOpen}
+            prevDeparture={prevDeparture}
+            prevDestination={prevDestination}
           />
         </section>
       )}

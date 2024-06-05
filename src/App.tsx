@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Suspense, lazy, useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import { Layout, NotFound } from "./pages";
@@ -14,7 +14,9 @@ import Loader from "./components/Loader/Loader.tsx";
 import VerifyEmail from "./pages/VerifyEmail/VerifyEmail.tsx";
 import ResetPassword from "./auth/ResetPassword/ResetPassword.tsx";
 import ForgetPassword from "./auth/ForgotPassword/ForgotPassword.tsx";
-import useInactivity from "./hooks/useInactivity.tsx";
+import { verifyAccessToken } from "./api.ts";
+import Cookie from "./pages/Cookie/Cookie.tsx";
+import { useToast } from "./components/ui/use-toast.ts";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About/About.tsx"));
@@ -23,25 +25,33 @@ const SearchResults = lazy(
   () => import("./pages/SearchResults/SearchResults.tsx")
 );
 const AccountProfile = lazy(() => import("./pages/Account/Account.tsx"));
-
+const Faqs = lazy(() => import("./pages/Faqs/Faqs.tsx"));
+const Privacy = lazy(() => import("./pages/Privacy/Privacy.tsx"));
 const LoadingFallback = () => (
   <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
     <Loader />
   </section>
 );
 
-const TIMEOUT = 3600 * 20000;
-
 function App() {
+  const { toast } = useToast();
   const [, setAccessToken] = useState<string | null>(null);
-  const authenticated = useInactivity(TIMEOUT);
-  console.log(authenticated);
+
+  const verifyToken = async (token: string) => {
+    const response = await verifyAccessToken(token);
+    response.error && toast({ title: "Session expired" });
+    console.log(response);
+  };
+
   useEffect(() => {
-    const user = getItemFromStorage("user");
-    if (!user?._id) {
-      <Navigate to="/" />;
+    const access_token = getItemFromStorage("access_token");
+    if (!access_token) {
+      console.log("ok");
+      return;
+    } else {
+      verifyToken(access_token);
     }
-  });
+  }, []);
 
   const TOKEN_ENDPOINT =
     "https://test.api.amadeus.com/v1/security/oauth2/token";
@@ -93,6 +103,9 @@ function App() {
               <Route path="/flights" element={<Flight />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/about-us" element={<About />} />
+              <Route path="/privacy-policy" element={<Privacy />} />
+              <Route path="/faqs" element={<Faqs />} />
+              <Route path="/terms&conditon" element={<Cookie />} />
               <Route path="/verify-email/:id" element={<VerifyEmail />} />
               <Route path="/reset-password/:id" element={<ResetPassword />} />
               <Route path="/forgot-password" element={<ForgetPassword />} />
