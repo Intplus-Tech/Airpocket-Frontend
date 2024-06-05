@@ -5,7 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { Image } from "../../../components/Image/Index";
 import Water from "../assets/Img5.svg";
 import Thailand from "../assets/thailand.jpeg";
-import Dubai from "../assets/Dubai.svg";
+import Singapore from "../assets/singapore.jpeg";
+import Shangai from "../assets/shangai.jpeg";
+import Thailand2 from "../assets/thailand (2).jpeg";
 import London from "../assets/london.jpeg";
 import Barcelona from "../assets/barcelona.jpeg";
 import Zanziba from "@/pages/Home//assets/Zanziba.jpeg";
@@ -21,14 +23,9 @@ const Places = () => {
       name: "Thailand",
     },
     {
-      id: "2",
-      Img: London,
-      name: "London",
-    },
-    {
       id: "3",
-      Img: Dubai,
-      name: "Dubai",
+      Img: Singapore,
+      name: "Singapore",
     },
     {
       id: "4",
@@ -36,9 +33,14 @@ const Places = () => {
       name: "Barcelona",
     },
     {
+      id: "2",
+      Img: Thailand2,
+      name: "Thailand",
+    },
+    {
       id: "5",
-      Img: Dubai,
-      name: "Dubai",
+      Img: Shangai,
+      name: "Shangai",
     },
   ];
 
