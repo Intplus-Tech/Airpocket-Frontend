@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 // import Transfer from "./components/Transfer";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFlightResult } from "@/types/typs";
+import { FlightOffer } from "@/types/typs";
 import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
 import { payment } from "@/Features/paymentSlice/api";
 import { flightSelect } from "@/Features/selectFlight/api";
@@ -22,7 +22,7 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
   const dispatch = useDispatch();
   // const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("option1");
-  const selectedFlight: selectFlightResult | null = useSelector(
+  const selectedFlight: FlightOffer[] | null = useSelector(
     (state: RootState) => state.selectFlight.result
   );
 
@@ -50,7 +50,7 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
       {
         email: email || user?.email,
         amount: addPercentage(
-          selectedFlight?.data.flightOffers[0].price.grandTotal *
+          Number(selectedFlight?.[0].price.grandTotal) *
             (adult + children + infants),
           flightType.rate
         ),
@@ -111,16 +111,12 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
 
               {selectedOption === "option1" && (
                 <CardPayment
-                  amount={
-                    selectedFlight?.data.flightOffers[0].price?.grandTotal
-                  }
+                  amount={Number(selectedFlight?.[0].price?.grandTotal)}
                 />
               )}
               {selectedOption === "option2" && (
                 <CardPayment
-                  amount={
-                    selectedFlight?.data.flightOffers[0].price?.grandTotal
-                  }
+                  amount={Number(selectedFlight?.[0].price?.grandTotal)}
                 />
               )}
               {/* {selectedOption === "option3" && <Transfer />} */}

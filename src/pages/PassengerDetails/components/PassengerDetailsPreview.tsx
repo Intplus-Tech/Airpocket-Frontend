@@ -1,5 +1,5 @@
 import { RootState } from "@/store/store";
-import { Generic, TravellerFormData } from "@/types/typs";
+import { FlightOffer, Generic, TravellerFormData } from "@/types/typs";
 import { storeItem } from "@/utils/locaStorage";
 import { formatCurrency } from "@/utils/monthDAys";
 import { FaUser } from "react-icons/fa";
@@ -17,11 +17,9 @@ const PassengerDetailsPreview = ({
   setCurrentStep,
   passengerFormData,
 }: PASSENGER_DETAILS_PREVIEW_PROPS) => {
-  const selectedFlight = useSelector(
+  const selectedFlight: FlightOffer[] | null = useSelector(
     (state: RootState) => state.selectFlight.result
   );
-
-  const { price } = selectedFlight?.data.flightOffers[0];
 
   const handleContinue = () => {
     storeItem("currentStep", 3);
@@ -67,7 +65,9 @@ const PassengerDetailsPreview = ({
                           Ticket Price:{" "}
                         </span>
                         <span className="">
-                          {formatCurrency(price.grandTotal)}
+                          {formatCurrency(
+                            Number(selectedFlight?.[0].price.grandTotal)
+                          )}
                         </span>
                       </p>
                     </div>
@@ -111,7 +111,10 @@ const PassengerDetailsPreview = ({
             <p className="text-[#1D91CC]">
               Payment{" "}
               <span>
-                {formatCurrency(price.grandTotal * passengerFormData?.length)}
+                {formatCurrency(
+                  Number(selectedFlight?.[0].price.grandTotal) *
+                    passengerFormData?.length
+                )}
               </span>
             </p>
             <button
