@@ -29,11 +29,7 @@ const Hero = () => {
   const [openDropdownType, setOpenDropdownType] = useState<string | null>(null);
   const [tripType, setTripType] = useState<string>("One Way");
   const [classType, setClassType] = useState("Economy");
-  const [depature, setDeparute] = useState<suggestionList | null>({
-    value: "today",
-    label: "today",
-    country: "nigeria",
-  });
+  const [depature, setDeparute] = useState<suggestionList | null>(null);
   const [destination, setDestination] = useState<suggestionList | null>(null);
   const [openDestinationDropdown, setOpenDestinationDropdown] = useState(false);
   const [openDepatureDropdown, setOpenDepartureDropdown] = useState(false);
@@ -114,22 +110,6 @@ const Hero = () => {
       storeItem("flight_type", FLIGHT_TYPE.INTERENATIONAL);
     }
 
-    searchFlight(
-      {
-        ...data,
-        ...passengerNumber,
-        travelClass: classType.toUpperCase(),
-        depatureDate: formatDateString(checkInDate),
-        returnDate: formatDateString(checkOutDate),
-        originLocationCode: depature?.value,
-        adult: passengerNumber.adult,
-        children: passengerNumber.children,
-        infants: passengerNumber.infants,
-        destinationLocationCode: destination?.value,
-      },
-      dispatch
-    );
-
     dispatch(
       setSearchQuery({
         travelClass: classType,
@@ -157,6 +137,23 @@ const Hero = () => {
       children: passengerNumber.children,
       infants: passengerNumber.infants,
     });
+
+    const response = await searchFlight(
+      {
+        ...data,
+        ...passengerNumber,
+        travelClass: classType.toUpperCase(),
+        depatureDate: formatDateString(checkInDate),
+        returnDate: formatDateString(checkOutDate),
+        originLocationCode: depature?.value,
+        adult: passengerNumber.adult,
+        children: passengerNumber.children,
+        infants: passengerNumber.infants,
+        destinationLocationCode: destination?.value,
+      },
+      dispatch
+    );
+    response.error && toast({ title: response.error.response });
   };
 
   return (

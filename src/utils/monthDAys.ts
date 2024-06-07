@@ -64,15 +64,18 @@ export function convertTime(timeString: string): string | any {
   }
 }
 
-export function extractTime(isoString: string): string {
-  const date = new Date(isoString);
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const period = hours >= 12 ? "PM" : "AM";
-  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-  const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+export function extractTime(isoString: string | undefined): string {
+  if (isoString) {
+    const date = new Date(isoString);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const period = hours >= 12 ? "PM" : "AM";
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
 
-  return `${formattedHours}:${formattedMinutes} ${period}`;
+    return `${formattedHours}:${formattedMinutes} ${period}`;
+  }
+  return "N/A";
 }
 
 export function formatCurrency(amount: number): string {

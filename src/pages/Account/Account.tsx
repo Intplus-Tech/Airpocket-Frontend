@@ -5,7 +5,7 @@ import BookedFlight from "./components/BookedFlight";
 
 const AccountProfile = () => {
   const [pageOption, setPageOption] = useState<"account" | "booked_flight">(
-    "account"
+    "booked_flight"
   );
 
   const changePageOption = (option: "account" | "booked_flight") => {

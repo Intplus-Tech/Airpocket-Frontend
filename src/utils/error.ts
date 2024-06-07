@@ -14,7 +14,7 @@ const handleAxiosError = (error: any) => {
     // toast.error(`Error: ${status} - ${data.message}`);
   } else if (error.request) {
     // The request was made, but no response was received
-    errorResponse = `${error.message},Check your internet connection`;
+    errorResponse = `${error.message}, Check your internet connection`;
     return errorResponse;
 
     // toast.error('No response received. Check your internet connection.');

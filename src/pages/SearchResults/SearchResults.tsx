@@ -14,7 +14,7 @@ import { getItemFromStorage } from "@/utils/locaStorage";
 import MobileFilters from "@/components/MobileFilters/MobileFilters";
 import { FilterProps, SearchResult } from "@/types/typs";
 import { extractHour } from "@/utils/monthDAys";
-import Loader from "@/components/Loader/Loader";
+import { FetchLoader } from "@/components/Loader/Loader";
 
 const SearchResults = () => {
   const DEFAULT_CUSTOM_PRICE = [0, 5000000] as [number, number];
@@ -176,7 +176,7 @@ const SearchResults = () => {
       </div>
       {isLoading && (
         <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
-          <Loader />
+          <FetchLoader />
         </section>
       )}
     </main>

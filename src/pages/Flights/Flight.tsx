@@ -6,7 +6,7 @@ import SearchHistory from "@/components/SearchHistory/SearchHistory";
 import Places from "../Home/components/Places";
 import Footer from "@/components/Footer/Footer";
 import Newsletter from "../Home/components/Newsletter";
-import Loader from "@/components/Loader/Loader";
+import { FetchLoader } from "@/components/Loader/Loader";
 import { RootState } from "@/store/store";
 import Hero from "../Home/components/Hero";
 import MobileApp from "@/components/MobileApp/MobileApp";
@@ -31,7 +31,7 @@ const Flight = () => {
       <Footer />
       {isLoading && (
         <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
-          <Loader />
+          <FetchLoader />
         </section>
       )}
     </MaxwidthWrapper>

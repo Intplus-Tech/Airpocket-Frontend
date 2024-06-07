@@ -104,6 +104,7 @@ const MobileNav = ({ setIsOpen, isOpen }: MobileNavPros) => {
             (item) =>
               user?._id && (
                 <Link
+                  key={item.id}
                   className={` text-[18px] ${
                     location.pathname === item.path && "font-bold text-black"
                   }`}

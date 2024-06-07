@@ -22,23 +22,16 @@ export function Image({ className, src, alt, ...rest }: ImageProps) {
   // };
 
   return (
-    <div className="flex">
-      {/* {loading && (
-        <div className="w-full flex items-center justify-center">
-          Loading...
-        </div>
-      )} */}
-      <img
-        className={className}
-        loading="lazy"
-        src={src}
-        alt={alt}
-        // onLoad={handleLoad}
-        // onError={handleError}
-        {...rest}
-        // style={{ display: loading ? "none" : "block" }}
-      />
-    </div>
+    <img
+      className={className}
+      loading="lazy"
+      src={src}
+      alt={alt}
+      // onLoad={handleLoad}
+      // onError={handleError}
+      {...rest}
+      // style={{ display: loading ? "none" : "block" }}
+    />
   );
 }
 
