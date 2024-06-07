@@ -79,7 +79,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
           </label>
         </div>
 
-        <div className="w-full px-2 rounded-md bg-white">
+        <div className="w-full  rounded-md bg-white">
           <span className="">Gender</span>
           <select
             name=""

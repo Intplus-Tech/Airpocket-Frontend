@@ -1,13 +1,15 @@
+import { FlightOffer } from "@/types/typs";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface selectFlightResult {
-  data: { [x: string]: any };
-  dictionaries: { [x: string]: any };
-  // Add other properties as needed
-}
+// interface selectFlightResult {
+//   // data: { [x: string]: any };
+//   // dictionaries: { [x: string]: any };
+//   // Add other properties as needed
+//   // data: FlightOffer[] | null;
+// }
 
 interface SelectFlightState {
-  result: selectFlightResult | null;
+  result: FlightOffer[] | null;
   isLoading: boolean;
   error: boolean | { [x: string]: any };
 }
@@ -26,7 +28,7 @@ const searchSlice = createSlice({
       state.isLoading = true;
       state.error = false;
     },
-    selectFlightSuccess(state, action: PayloadAction<selectFlightResult>) {
+    selectFlightSuccess(state, action: PayloadAction<FlightOffer[] | null>) {
       state.result = action.payload;
       state.isLoading = false;
       state.error = false;

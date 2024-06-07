@@ -39,7 +39,7 @@ function App() {
 
   const verifyToken = async (token: string) => {
     const response = await verifyAccessToken(token);
-    response.error && toast({ title: "Session expired" });
+    response.error && toast({ title: response.error });
     console.log(response);
   };
 

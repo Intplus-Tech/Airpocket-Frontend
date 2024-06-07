@@ -41,7 +41,7 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
 
   const prevDeparture: suggestionList | null = {
     label: flightSearchQuery.originLocation,
-    value: flightSearchQuery.riginLocationCode,
+    value: flightSearchQuery.originLocationCode,
     country: "",
   };
 

@@ -232,7 +232,7 @@ const Places = () => {
       <div>
         <div className="px-0 md:px-6">
           <h1 className="font-bold text-xl py-4 lg:text-[41px]">
-            Trending <span className="text-[#1B96D6]">destination</span>
+            Trending <span className="text-[#1B96D6]">destinations</span>
           </h1>
           <p>Incredible places you must visit…</p>
         </div>

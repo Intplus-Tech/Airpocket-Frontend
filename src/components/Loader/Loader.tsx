@@ -1,22 +1,43 @@
+import { getItemFromStorage } from "@/utils/locaStorage";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Airpocket from "@/assets/Airpocket.svg";
+import { Image } from "../Image/Index";
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen ">
-      <div className="relative w-32 h-32 flex items-center justify-center">
-        <div className="absolute border-4 border-blue-500 border-t-transparent rounded-full w-full h-full spin-clockwise"></div>
-        <div className="absolute border-4 border-green-500 border-t-transparent rounded-full w-2/3 h-2/3 spin-counterclockwise"></div>
-        <div className="absolute border-4 border-red-500 border-t-transparent rounded-full w-1/3 h-1/3 spin-clockwise"></div>
+    <main className="flex flex-col items-center justify-center h-[100vh] relative">
+      <div className="rotating-box bg-gray-100"></div>
+      <div className="text-xs z-10 w-36 h-36 flex flex-col gap-2 items-center justify-center mt-[-150px]  rounded-[50%] text-center">
+        <p>
+          <Image src={Airpocket} alt="Airpocket" className="h-20 w-20 " />
+        </p>
       </div>
-    </div>
+    </main>
   );
 };
 
-{
-  /* <div className="flex h-[100vh] items-center justify-center text-4xl font-bold">
-            Loading...
-          </div> */
-}
+export const FetchLoader = () => {
+  const flightSearchQuery = getItemFromStorage("flight_query");
+  return (
+    <main className="flex flex-col items-center justify-center h-[100vh] relative">
+      <div className="rotating-box bg-gray-100"></div>
+      <div className="text-xs z-10 w-36 h-36 flex flex-col gap-2 items-center justify-center mt-[-150px]  rounded-[50%] text-center">
+        <p>
+          <Image
+            src={Airpocket}
+            alt="Airpocket"
+            className="h-10 w-20 mt-[-2rem]"
+          />
+        </p>
+        <div className="flex gap-1 font-bold">
+          <span>{flightSearchQuery?.originLocation || "LONDON"}</span>{" "}
+          <span>to</span>{" "}
+          <span>{flightSearchQuery?.destinationLocation || "SPAIN"}</span>
+        </div>
+      </div>
+    </main>
+  );
+};
 
 export default Loader;
 

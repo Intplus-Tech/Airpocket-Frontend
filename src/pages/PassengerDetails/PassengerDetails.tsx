@@ -7,7 +7,7 @@ import FlightDetails from "@/components/FllightDetails/FlightDetail";
 import FlightDetailForm from "./components/FlightDetailForm";
 import PassengerDetailsPreview from "./components/PassengerDetailsPreview";
 import { getItemFromStorage } from "@/utils/locaStorage";
-import { Generic } from "@/types/typs";
+import { FlightOffer, Generic } from "@/types/typs";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { SkeletonComponent } from "@/components/Loader/Loader";
 
@@ -31,7 +31,9 @@ export const PassengerDetails = ({
   const isLoading = useSelector(
     (state: RootState) => state.selectFlight.isLoading
   );
-  const result = useSelector((state: RootState) => state.selectFlight.result);
+  const result: FlightOffer[] | null = useSelector(
+    (state: RootState) => state.selectFlight.result
+  );
   const error = useSelector((state: RootState) => state.selectFlight.error);
 
   const { adult, children, infants } = flightSearchQuery;
@@ -41,7 +43,6 @@ export const PassengerDetails = ({
   //     <h1>{`testint${passenger.name}`}</h1>
   //   ))
   // );
-
   const inputsArray = Array.from(
     { length: adult + children + infants },
     (_, index) => index + 1

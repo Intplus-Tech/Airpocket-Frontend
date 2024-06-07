@@ -79,6 +79,13 @@
   display: none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 @keyframes spin-clockwise {
   0% {
     transform: rotate(0deg);
@@ -170,4 +177,28 @@
 
 .animate-scale {
   animation: scale 2s infinite;
+}
+
+.rotating-box {
+  width: 10rem;
+  height: 10rem;
+
+  border: 5px solid rgb(227, 233, 247);
+  border-top-color: #1b96d6;
+
+  border-radius: 50%;
+  animation: rotate 1s linear infinite;
+}
+
+/* Keyframes for the rotating animation */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.tg {
+  @apply -translate-x-2/4 -translate-y-2/4;
 }
