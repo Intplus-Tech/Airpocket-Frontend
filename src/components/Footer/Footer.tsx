@@ -63,7 +63,7 @@ const Footer = () => {
             <h3 className="font-semibold">Product</h3>
             <ul className="text-gray-600 space-y-2">
               <li>
-                <Link to={"/about"}>About</Link>
+                <Link to={"/about-us"}>About</Link>
               </li>
               <li>
                 <Link to={"/career"}>Career</Link>
@@ -90,8 +90,8 @@ const Footer = () => {
         <div className="mt-8 mb-6">
           <h3 className="font-semibold">Contact Information</h3>
           <div className="text-gray-600 space-y-2 mt-2">
-            <p>18, Cray Crescent, Ikoyi, Lagos</p>
-            <p>+234 701 100 1000</p>
+            <p>42 Local Airport Road, Ikeja Lagos</p>
+            <p>08169715754</p>
             <p>info@airpocketstravels.com</p>
           </div>
         </div>
@@ -104,9 +104,6 @@ const Footer = () => {
           </li>
           <li>
             <Link to={"/privacy-policy"}>Privacy</Link>
-          </li>
-          <li>
-            <Link to={"/cookies"}>Cookies</Link>
           </li>
         </ul>
       </div>

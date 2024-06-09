@@ -112,6 +112,20 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
 
     setSuggestions(result);
   };
+
+  const storeDepartureAndDestination = () => {
+    if (depature && destination) {
+      storeItem("location", {
+        depature,
+        destination,
+      });
+    }
+  };
+
+  useEffect(() => {
+    storeDepartureAndDestination();
+  }, [depature, destination]);
+
   const handleSearchFlight = async (data: FieldValues) => {
     if (passengerNumber.adult < passengerNumber.infants) {
       toast({
