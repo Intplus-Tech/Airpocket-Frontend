@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import parsePhoneNumberFromString from "libphonenumber-js";
 // import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 import { getCountryCode } from "countries-list";
@@ -77,6 +78,7 @@ const FlightDetailForm = ({
   }, [errors]);
 
   const SubmitPassengerForm = async (data: FieldValues) => {
+    console.log(data);
     setLoading(true);
     if (!formData.email && !user?._id) {
       toast({
@@ -103,7 +105,9 @@ const FlightDetailForm = ({
             {
               ...item.contact.phones[0],
               deviceType: "MOBILE",
-              countryCallingCode: "234",
+              countryCallingCode: parsePhoneNumberFromString(
+                item.contact.phones[0].number
+              )?.countryCallingCode,
             },
           ],
         },
@@ -135,13 +139,13 @@ const FlightDetailForm = ({
       setStep("flightDetailsPreview");
     } else {
       setPassengerFormData(updatedArray);
-      setStep("flightDetailsPreview");
+      // setStep("flightDetailsPreview");
     }
     setLoading(false);
   };
 
   return (
-    <section className="w-full">
+    <section className="w-full ">
       <form className="w-full" onSubmit={handleSubmit(SubmitPassengerForm)}>
         <div className="border rounded-md p-4  md:mx-6 min-[1059px]:mx-0">
           <div className="flex items-center justify-between">
@@ -161,15 +165,8 @@ const FlightDetailForm = ({
               </div>
             ))}
           </div>
-
-          {/* <div className="w-[60%] mx-auto mt-4 bg-gray-300 rounded-md">
-            <button type="submit" className="bg-transparent w-full py-2 ">
-              Proceed
-            </button>
-          </div> */}
         </div>
-        {/* </form> */}
-        {/* CONTACT_INFORMATION_FORM */}
+
         {!user?._id && (
           <div className="mt-6 border px-6 mx-4 md:mx-6 min-[1059px]:mx-0 h-full rounded-md py-6">
             <h1 className="font-bold">Contact information</h1>
@@ -183,7 +180,7 @@ const FlightDetailForm = ({
               confirmation" will be done from one of the channels of "user
               account contact information" or "information of the same form" .
             </p>
-            {/* <form action=""> */}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
               <label
                 htmlFor="Username"
@@ -260,7 +257,6 @@ const FlightDetailForm = ({
             </div>
           </div>
         )}
-        {/* CONTACT_INFORMATION_FORM */}
 
         <div className="flex gap-4 px-6 mx-4 md:mx-6 mt-5 mb-10 text-center justify-center ">
           <p>
@@ -275,7 +271,6 @@ const FlightDetailForm = ({
 
         <div className="w-[40%] mx-auto bg-[#1D91CC] rounded-md">
           <button
-            // onClick={() => {}}
             type="submit"
             className="bg-transparent w-full py-2 text-white "
           >
