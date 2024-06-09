@@ -57,7 +57,7 @@ const AboutUs = ({ img, text }: AboutProp) => {
           <h1 className="text-[40px] text-[#1B96D6] font-bold">{text}</h1>
           <p className="text-[#283841] text-opacity-70 text-[14px]">
             {text &&
-              "At Airpockets, we understand that travel is more than just a trip. Its an experience. Its about feeling young and alive, exploring new cultures, and creating memories that last a lifetime. That's why were dedicated to providing you with the most affordable luxury flights and travel packages, without compromising on quality or service."}
+              "At Airpockets, we understand that travel is more than just a trip. It's an experience. It's about feeling young and alive, exploring new cultures, and creating memories that last a lifetime. That's why we are dedicated to providing you with the most affordable luxury flights and travel packages, without compromising on quality or service."}
           </p>
         </div>
 
@@ -72,7 +72,7 @@ const AboutUs = ({ img, text }: AboutProp) => {
           <p className="flex gap-4 py-1">
             <Image src={BlueSquare} alt="BlueSquare" />
             <span className="font-bold text-xs sm:text-base">
-              Luxury for Less: Enjoy luxury at the cheapest prices.
+              Luxury for Less: Enjoy luxury and exclusivity.
             </span>
           </p>
           <p className="flex gap-4 py-1 items-center">

@@ -121,7 +121,7 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
         <div className="max-w-[35rem] mx-auto flex flex-col gap-16 mt-5">
           <div>
             <h1 className="text-lg font-bold">Refundable</h1>
-            <p>Nno refundable</p>
+            <p>Non refundable</p>
           </div>
           <div>
             <h1 className="text-lg font-bold">Price</h1>

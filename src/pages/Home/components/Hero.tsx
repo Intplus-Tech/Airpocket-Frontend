@@ -62,6 +62,7 @@ const Hero = () => {
 
   const handleSearchKeyWork = async () => {
     const respnse = await searchKeyWord({ key: value });
+    console.log(respnse?.success.data);
 
     const result = respnse.success?.data.data.map((item: any) => ({
       value: item.iataCode,
@@ -75,6 +76,19 @@ const Hero = () => {
   useEffect(() => {
     value && handleSearchKeyWork();
   }, [value]);
+
+  const storeDepartureAndDestination = () => {
+    if (depature && destination) {
+      storeItem("location", {
+        depature,
+        destination,
+      });
+    }
+  };
+
+  useEffect(() => {
+    storeDepartureAndDestination();
+  }, [depature, destination]);
 
   const handleSearchFlight = async (data: FieldValues) => {
     if (passengerNumber.adult < passengerNumber.infants) {

@@ -5,6 +5,8 @@ import { getDaysInMonth, months } from "@/utils/monthDAys";
 import { countries } from "countries-list";
 import { PassengerFormData, countryList } from "@/types/typs";
 import { FieldErrors } from "react-hook-form";
+import { useToast } from "../ui/use-toast";
+import { debounce } from "@/utils/debounce";
 
 type PassengerFormProps = {
   index: number;
@@ -14,19 +16,32 @@ type PassengerFormProps = {
 };
 
 const PassengerForm = ({ index, register }: PassengerFormProps) => {
+  const { toast } = useToast();
   const [list, setList] = useState<countryList[]>([]);
   const currentDate = new Date();
-
   const monthNumber = currentDate.getMonth() + 1;
 
   const days = getDaysInMonth(2024, monthNumber);
 
   const validatePhoneNumber = (value: string) => {
     const parsedNumber = parsePhoneNumberFromString(value);
-    return parsedNumber && parsedNumber.isValid()
-      ? true
-      : "Invalid phone number";
+    console.log(parsedNumber?.countryCallingCode);
+
+    if (parsedNumber && parsedNumber.isValid()) {
+      return true;
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Phone number must be of international standard",
+      });
+      return "Invalid phone number";
+    }
+    // return parsedNumber && parsedNumber.isValid()
+    //   ? true
+    //   : "Invalid phone number";
   };
+
+  const debouncedValidatePhoneNumber = debounce(validatePhoneNumber, 4000);
 
   useEffect(() => {
     const countryList = Object.keys(countries).map((countryCode) => ({
@@ -153,7 +168,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
       <section className="flex justify-end">
         <section className="flex flex-wrap md:flex-nowrap gap-4 items-end w-full  justify-between  h-full mt-8">
           <div className="w-full">
-            <span>Phone number</span>
+            <span>Phone number{" (+234)"}</span>{" "}
             <label
               htmlFor="Phone number"
               className="relative block rounded-md border  "
@@ -163,7 +178,7 @@ const PassengerForm = ({ index, register }: PassengerFormProps) => {
                 id="passport"
                 {...register(`passengers${index}.contact.phones[0].number`, {
                   required: "Phone number is required",
-                  validate: validatePhoneNumber,
+                  validate: debouncedValidatePhoneNumber,
                 })}
                 className="peer w-full border-none py-2 px-2 bg-transparent placeholder  focus:outline-none focus:ring-0"
                 placeholder="+2348134650533"

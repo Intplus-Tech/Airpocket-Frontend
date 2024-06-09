@@ -26,6 +26,7 @@ type AllProp = {
 };
 
 export const SingleFlight = ({ singleFlight, viewItenery }: AllProp) => {
+  console.log(singleFlight);
   return (
     <div className="bg-white py-2 my-4 rounded-lg px-2 md:px-4">
       <div className="flex flex-col md:flex-row md:items-center gap-x-10 gap-y-4">
