@@ -168,6 +168,7 @@ const SearchResults = () => {
                 <FlightAvailable
                   availableFlight={filteredResult}
                   setFilters={setFilters}
+                  filters={filters}
                 />
               </div>
             )}

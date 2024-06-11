@@ -91,8 +91,8 @@ const Footer = () => {
           <h3 className="font-semibold">Contact Information</h3>
           <div className="text-gray-600 space-y-2 mt-2">
             <p>42 Local Airport Road, Ikeja Lagos</p>
-            <p>08169715754</p>
-            <p>info@airpocketstravels.com</p>
+            <p>+234 816 971 5754</p>
+            <p>connect@airpockets.co</p>
           </div>
         </div>
       </div>

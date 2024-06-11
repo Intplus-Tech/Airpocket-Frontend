@@ -1,9 +1,9 @@
+import { useSelector } from "react-redux";
 import Gulf from "@/pages/SearchResults/assets/Gulf.svg";
 import Flight from "@/components/FlightAvailable/assets/flight.svg";
 
 import { Image } from "../Image/Index";
-// import { useSelector } from "react-redux";
-// import { RootState } from "@/store/store";
+
 import { FlightOffer } from "@/types/typs";
 import {
   // convertTime,
@@ -11,6 +11,8 @@ import {
   formatCurrency,
   formatDate,
 } from "@/utils/monthDAys";
+import { RootState } from "@/store/store";
+import { getItemFromStorage } from "@/utils/locaStorage";
 
 type SINGLE_FLIGHT_DETAILS_PROPS = {
   SINGLE_FLIGHT_DETAILS: FlightOffer[] | null;
@@ -20,6 +22,10 @@ type SINGLE_FLIGHT_DETAILS_PROPS = {
 const FlightDetails = ({
   SINGLE_FLIGHT_DETAILS,
 }: SINGLE_FLIGHT_DETAILS_PROPS) => {
+  const dictionaries =
+    useSelector((state: RootState) => state.search.result?.dictionaries) ||
+    getItemFromStorage("dictionaries");
+
   if (SINGLE_FLIGHT_DETAILS) {
     const { itineraries, price, travelerPricings } = SINGLE_FLIGHT_DETAILS?.[0];
     const { segments } = itineraries[0];
@@ -42,7 +48,12 @@ const FlightDetails = ({
                 <Image src={Gulf} alt="airline Logo" height={70} width={70} />
                 <span className="text-xs text-[#868686]">
                   {/* {SINGLE_FLIGHT_DETAILS[0].id} */}
-                  Oman Air
+                  {
+                    dictionaries?.carriers[
+                      segments[segments.length - 1]
+                        .carrierCode as unknown as number
+                    ]
+                  }
                 </span>
               </div>
 
@@ -97,7 +108,13 @@ const FlightDetails = ({
                 <div className="flex flex-col gap-2 w-[40%] md:w-full">
                   <Image src={Gulf} alt="airline Logo" height={70} width={70} />
                   <span className="text-xs text-[#868686]">
-                    {SINGLE_FLIGHT_DETAILS[0].id}
+                    {
+                      dictionaries?.carriers[
+                        itineraries[1].segments[
+                          itineraries[1].segments.length - 1
+                        ].carrierCode as unknown as number
+                      ]
+                    }
                   </span>
                 </div>
 

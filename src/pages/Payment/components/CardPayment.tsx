@@ -11,8 +11,8 @@ const CardPayment = ({ amount }: CardPaymentProp) => {
   ) || { adult: 0, children: 0, infant: 0 };
   return (
     <div className="py-2 space-y-2 md:w-[350px]">
-      <h4 className="font-semibold">How to pay to confirm your booking</h4>
-      <p className="text-gray-500">Pay with your Nigerian debit card</p>
+      <h4 className="font-semibold"> Confirm your booking</h4>
+      <p className="text-gray-500">Pay with debit card</p>
 
       <div className="text-sm space-y-4 py-4 text-gray-500">
         <p className="flex w-full items-center justify-between gap-x-8">

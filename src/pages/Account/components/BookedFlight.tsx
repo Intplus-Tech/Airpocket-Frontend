@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useGetUserHistory } from "../slice/query";
 import { SingleFlight } from "./SingleFlight";
 import {
+  // AllFlightProps,
   BookingInformation,
   FlightInformation,
-  FlightOrder,
+  // FlightOrder,
   flight,
 } from "@/types/typs";
 import MoreFlightDetails from "./MoreFlightDetails";
@@ -33,7 +34,7 @@ const BookedFlight = () => {
     console.log(id);
     // setStep("singleItenery");
   };
-
+  console.log(iteneries?.success.data);
   const renderStep = (step: string) => {
     if (step === "singleItenery") {
       return <MoreFlightDetails singleFlight={moreInfo} setStep={setStep} />;
@@ -75,15 +76,17 @@ const BookedFlight = () => {
 export default BookedFlight;
 
 type AllFlightProps = {
-  allFlight: FlightOrder;
+  allFlight: flight[];
   setStep: React.Dispatch<React.SetStateAction<string>>;
   viewItenery?: (id: string) => void;
 };
 
 const AllFlight = ({ allFlight, setStep, viewItenery }: AllFlightProps) => {
+  const reverse = allFlight.reverse();
+  console.log(reverse, "r");
   return (
     <div>
-      {allFlight.map((flight: flight) => {
+      {allFlight.reverse().map((flight: flight) => {
         return (
           <div key={flight._id} className="w-full">
             <SingleFlight

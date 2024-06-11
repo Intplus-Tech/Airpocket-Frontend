@@ -172,24 +172,19 @@ export interface suggestionList {
 }
 [];
 
-export type FlightOrder = {
-  map(
-    arg0: (flight: flight) => import("react/jsx-runtime").JSX.Element
-  ): import("react").ReactNode;
-  allFlight: {
-    _id: string;
-    payment: string;
-    flightOrder: string;
-    from: string;
-    to: string;
-    departure: string;
-    cabin: string;
-    user: string;
-    flightInformation: [];
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-  }[];
+export type AllFlightProps = {
+  _id: string;
+  payment: string;
+  flightOrder: string;
+  from: string;
+  to: string;
+  departure: string;
+  cabin: string;
+  user: string;
+  flightInformation: FlightInformation;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 };
 
 export type flight = {
@@ -201,7 +196,7 @@ export type flight = {
   departure: string;
   cabin: string;
   user: string;
-  flightInformation: [];
+  flightInformation: FlightInformation;
   createdAt: string;
   updatedAt: string;
   __v: number;
