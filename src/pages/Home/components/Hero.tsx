@@ -19,6 +19,7 @@ interface suggestionList {
   value: string;
   label: string;
   country: string;
+  airport?: string;
 }
 [];
 
@@ -66,10 +67,11 @@ const Hero = () => {
 
     const result = respnse.success?.data.data.map((item: any) => ({
       value: item.iataCode,
-      label: `${item.address.cityName} (${item.iataCode})`,
+      label: `${item.address.cityName} (${item.iataCode}) ${item.name} ${item.subType}`,
       country: item.address.countryName,
+      airport: `${item.name} ${item.subType}`,
     }));
-
+    console.log(result);
     setSuggestions(result);
   };
 
