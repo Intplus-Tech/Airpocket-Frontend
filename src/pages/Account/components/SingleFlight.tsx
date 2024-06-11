@@ -1,8 +1,8 @@
 import { Image } from "@/components/Image/Index";
-import { ClockIcon } from "lucide-react";
-import { GiGymBag } from "react-icons/gi";
 import { IoAirplane } from "react-icons/io5";
 import Gulf from "@/pages/SearchResults/assets/Gulf.svg";
+import { FlightInformation } from "@/types/typs";
+import { extractTime } from "@/utils/monthDAys";
 
 type SingleFlight = {
   _id: string;
@@ -13,7 +13,7 @@ type SingleFlight = {
   departure: string;
   cabin: string;
   user: string;
-  flightInformation: [];
+  flightInformation: FlightInformation;
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -26,7 +26,8 @@ type AllProp = {
 };
 
 export const SingleFlight = ({ singleFlight, viewItenery }: AllProp) => {
-  console.log(singleFlight);
+  const flight = singleFlight.flightInformation.flightOffers[0];
+
   return (
     <div className="bg-white py-2 my-4 rounded-lg px-2 md:px-4">
       <div className="flex flex-col md:flex-row md:items-center gap-x-10 gap-y-4">
@@ -39,27 +40,36 @@ export const SingleFlight = ({ singleFlight, viewItenery }: AllProp) => {
           </div>
 
           <div className="flex flex-col items-center text-center gap-1">
-            <p className="font-bold text-lg">2:50</p>
+            <p className="font-bold text-lg">
+              {extractTime(flight.itineraries[0].segments[0].departure.at)}
+            </p>
             <p className="text-gray-600">{singleFlight.from}</p>
           </div>
 
           <div className="flex flex-col gap-8">
             <p className="text-gray-500 flex items-center justify-center gap-1">
-              <ClockIcon className="h-6 w-6" />
-              19:00
+              {/* <ClockIcon className="h-6 w-6" /> */}
+              {/* {convertTime(flight.itineraries[0].)} */}
+              {/* 19:00 */}
             </p>
             <div className="relative">
               <div className="border-t border-dashed w-20 border-1 border-t-gray-900" />
-              <IoAirplane className="text-primaryColor h-6 w-6 absolute top-0 right-[50%] translate-y-[-50%] translate-x-[50%]" />
+              <IoAirplane className="text-[#1D91CC] h-6 w-6 absolute top-0 right-[50%] translate-y-[-50%] translate-x-[50%]" />
             </div>
-            <p className="text-gray-500 flex items-center gap-3 justify-center">
+            {/* <p className="text-gray-500 flex items-center gap-3 justify-center">
               <GiGymBag className="h-6 w-6" />
               20 kg
-            </p>
+            </p> */}
           </div>
 
           <div className="flex flex-col items-center gap-1 text-center">
-            <p className="font-bold text-lg">21:50</p>
+            <p className="font-bold text-lg">
+              {extractTime(
+                flight.itineraries[0].segments[
+                  flight.itineraries[0].segments.length - 1
+                ].arrival.at
+              )}
+            </p>
             <p className="text-gray-600">{singleFlight.to}</p>
           </div>
         </div>

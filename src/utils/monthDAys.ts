@@ -80,6 +80,8 @@ export function extractTime(isoString: string | undefined): string {
 
 export function formatCurrency(amount: number): string {
   const FLIGHT_TYPE: { rate: number } = getItemFromStorage("flight_type");
+  if (!FLIGHT_TYPE?.rate) return String(amount);
+
   const addedPrice = addPercentage(Number(amount), FLIGHT_TYPE.rate);
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",

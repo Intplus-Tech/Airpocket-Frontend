@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
@@ -11,20 +11,28 @@ import { convertTime, extractTime, formatCurrency } from "@/utils/monthDAys";
 import Clock from "./assets/clock.svg";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { storeItem } from "@/utils/locaStorage";
+import { RootState } from "@/store/store";
 
 type AvailableFlightData = {
   availableFlight: { [x: string]: any }[] | undefined;
   setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
+  filters: FilterProps;
 };
 
 const FlightAvailable = ({
   availableFlight,
   setFilters,
+  filters,
 }: AvailableFlightData) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const dictionaries = useSelector(
+    (state: RootState) => state.search.result?.dictionaries
+  );
+
   const handleBookAction = (data: Generic) => {
+    storeItem("dictionaries", dictionaries);
     navigate("/flight-details");
     storeItem("currentStep", 2);
 
@@ -65,18 +73,24 @@ const FlightAvailable = ({
           <span className="text-sm font-bold">Sort By :</span>
           <span
             onClick={() => handleSort("Recommended")}
-            className={`underline text-[#1B96D6] cursor-pointer`}
+            className={`  cursor-pointer ${
+              filters.sort?.recommended && "text-[#1B96D6] underline"
+            } `}
           >
             Recommended
           </span>
           <span
-            className="cursor-pointer"
+            className={`  cursor-pointer ${
+              filters.sort?.fastest && "text-[#1B96D6] underline"
+            } `}
             onClick={() => handleSort("Fastest")}
           >
             Fastest
           </span>{" "}
           <span
-            className="cursor-pointer"
+            className={`  cursor-pointer ${
+              filters.sort?.cheapest && "text-[#1B96D6] underline"
+            } `}
             onClick={() => handleSort("Cheapest")}
           >
             cheapest
@@ -105,7 +119,11 @@ const FlightAvailable = ({
                             className="w-[30px] h-[30px] shrink-0 flex"
                           />
                           <span className="text-xs text-[#868686]">
-                            {flight.airline}
+                            {
+                              dictionaries?.carriers[
+                                segments[0].carrierCode as unknown as number
+                              ]
+                            }
                           </span>
                         </div>
 
@@ -153,35 +171,6 @@ const FlightAvailable = ({
                           </p>
                         </div>
                       </div>
-
-                      {/* <div className="pb-4 md:mt-[-1rem]">
-                      <div className="flex flex-col justify-center gap-2">
-                        <Dialog>
-                          <DialogTrigger>
-                            <p className="text-sm text-[#1B96D6] text-end underline">
-                            View Details
-                            </p>
-                          </DialogTrigger>
-                          <DialogContent className="w-full px-6 overflow-y-auto max-h-[80vh] bg-slate-50">
-                            <FilghtDetail data={flight} />
-                          </DialogContent>
-                        </Dialog>
-
-                        <div className="flex gap-4 items-center">
-                          <p className="text-[#1B96D6]">
-                            {formatCurrency(flight.price.grandTotal)}
-                          </p>
-                          <p>
-                            <button
-                              onClick={() => handleBookAction(flight)}
-                              className="w-full px-8 py-2 whitespace-nowrap bg-[#1B96D6] rounded-md text-white text-sm"
-                            >
-                              Book Now
-                            </button>
-                          </p>
-                        </div>
-                      </div>
-                    </div> */}
                     </section>
 
                     {itineraries[1] && (
@@ -194,7 +183,12 @@ const FlightAvailable = ({
                               className="w-[30px] h-[30px] shrink-0 flex"
                             />
                             <span className="text-xs text-[#868686]">
-                              {flight.airline}
+                              {
+                                dictionaries?.carriers[
+                                  segments[segments.length - 1]
+                                    .carrierCode as unknown as number
+                                ]
+                              }
                             </span>
                           </div>
 
@@ -225,7 +219,7 @@ const FlightAvailable = ({
                             />
                             <p className="flex gap-1">
                               <span className="text-[#868686] text-center text-sm">
-                                {` ${segments.length - 1} stops`}
+                                {` ${itineraries[1].segments.length - 1} stops`}
                               </span>
                               <span className="text-[#868686] text-center text-sm">
                                 {
@@ -241,8 +235,9 @@ const FlightAvailable = ({
                             </span>
                             <p className="text-sm text-[#868686]">
                               {
-                                itineraries[1].segments[segments.length - 1]
-                                  ?.arrival?.iataCode
+                                itineraries[1].segments[
+                                  itineraries[1].segments.length - 1
+                                ]?.arrival?.iataCode
                               }
                             </p>
                           </div>

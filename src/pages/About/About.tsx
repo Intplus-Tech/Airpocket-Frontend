@@ -1,5 +1,4 @@
 import MaxwidthWrapper from "@/components/MaxwidthWrapper.tsx/MaxWidthWrapper";
-import Footer from "@/components/Footer/Footer";
 import { Image } from "@/components/Image/Index";
 import About1 from "@/pages/About/assets/about1.svg";
 import About2 from "@/pages/About/assets/about2.svg";
@@ -49,7 +48,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-16">
           <div className="h-full order-2">
             <div className=" h-full flex mt-6 ">
               <p>
@@ -73,21 +72,21 @@ const About = () => {
           </div>
         </div>
 
-        <div className="mb-5">
+        <div className="mb-10 ">
           <h1 className="text-center font-bold text-3xl">Our value</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-3 mt-6 gap-6">
             {OUR_INFO.map((info) => (
               <div key={info.id} className="">
-                <h1 className="text-center font-bold py-1">{info.name}</h1>
+                <h1 className="text-center font-bold py-1 capitalize">
+                  {info.name}
+                </h1>
                 <p>{info.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </main>
-
-      <Footer />
     </MaxwidthWrapper>
   );
 };

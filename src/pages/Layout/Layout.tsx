@@ -20,6 +20,7 @@ import DownArrow from "./assets/downarrow.svg";
 import Menu from "./assets/Menu.svg";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import { clearStorage } from "@/utils/locaStorage";
+import Footer from "@/components/Footer/Footer";
 
 const Layout = () => {
   const location = useLocation();
@@ -169,7 +170,7 @@ const Layout = () => {
         </MaxWidthWrapper>
       )}
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

@@ -58,15 +58,17 @@ export const PassengerDetails = ({
 
   if (error) {
     return (
-      <div>
-        <h1>Something went wrong</h1>
+      <div className="flex flex-col gap-4 items-center justify-center">
+        <h1 className="block">Something went wrong</h1>
+
+        {/* <button className="block">Reload page</button> */}
       </div>
     );
   }
 
   // mx-4 md:mx-6 min-[1059px]:mx
   return (
-    <main className="max-w-screen-xl overflow-hidden lg:px-6 mx-6 min-[1059px]:mx-auto  ">
+    <main className="max-w-screen-xl overflow-hidden lg:px-6 mx-2 min-[1059px]:mx-auto  ">
       <div>
         {/* SINGLE_FLIGHT_STOPS Details */}
         {result && (

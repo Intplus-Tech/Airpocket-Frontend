@@ -1,10 +1,7 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState, useCallback } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 import parsePhoneNumberFromString from "libphonenumber-js";
-// import { parsePhoneNumberFromString } from "libphonenumber-js";
-
 import { getCountryCode } from "countries-list";
-
 import PassengerForm from "@/components/PassengerForm/PassengerForm";
 import { Generic, TravellerFormData } from "@/types/typs";
 import { useToast } from "@/components/ui/use-toast";
@@ -13,7 +10,7 @@ import { RootState } from "@/store/store";
 import { AutosignUpAccount } from "@/Features/userSlice/api";
 import { storeItem } from "@/utils/locaStorage";
 
-type FLGHT_DETAIL_FORM_PROPS = {
+type FlightDetailFormProps = {
   inputsArray: number[];
   setStep: React.Dispatch<React.SetStateAction<string>>;
   setPassengerFormData: React.Dispatch<React.SetStateAction<Generic[] | null>>;
@@ -31,11 +28,11 @@ type PassengerFormData = {
   }[];
 };
 
-const FlightDetailForm = ({
+const FlightDetailForm: React.FC<FlightDetailFormProps> = ({
   inputsArray,
   setStep,
   setPassengerFormData,
-}: FLGHT_DETAIL_FORM_PROPS) => {
+}) => {
   const dispatch = useDispatch();
   const { toast } = useToast();
   const {
@@ -60,32 +57,55 @@ const FlightDetailForm = ({
     email: "",
     phone: "",
   });
+
   const user = useSelector((state: RootState) => state.user.user);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+  useEffect(() => {
+    if (errors.passengers) {
+      toast({
+        description: "Please fill in your flight information",
+      });
+    }
+  }, [errors, toast]);
+
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-  };
+  }, []);
 
-  useEffect(() => {
-    errors.passengers &&
-      toast({
-        description: "Please fill in your flight information",
-      });
-  }, [errors]);
+  const validatePhoneNumber = useCallback((phoneNumber: string): boolean => {
+    const parsedNumber = parsePhoneNumberFromString(phoneNumber);
+    return parsedNumber ? parsedNumber.isValid() : false;
+  }, []);
 
-  const SubmitPassengerForm = async (data: FieldValues) => {
-    console.log(data);
-    setLoading(true);
-    if (!formData.email && !user?._id) {
-      toast({
-        description: "Please fill in your contact information or Login",
+  const handleInvalidNumberFound = useCallback(() => {
+    toast({
+      variant: "destructive",
+      title: "Phone number must be of international standard",
+    });
+  }, [toast]);
+
+  const checkPhoneNumbers = useCallback(
+    (arrayOfObjects: any[]): boolean => {
+      let invalidNumberFound = false;
+
+      arrayOfObjects.forEach((person) => {
+        person.contact.phones.forEach((phone: any) => {
+          if (!validatePhoneNumber(phone.number)) {
+            invalidNumberFound = true;
+          }
+        });
       });
-      return;
-    }
+
+      return invalidNumberFound;
+    },
+    [validatePhoneNumber]
+  );
+
+  const transformPassengerData = useCallback((data: FieldValues): any[] => {
     const arrayOfEntries = Object.entries(data);
     const filteredArray = arrayOfEntries.filter(
       ([_, value]) => !Array.isArray(value) || value.length > 0
@@ -126,28 +146,63 @@ const FlightDetailForm = ({
       }))
       .map(({ dob, isd, ped, ...rest }) => rest);
 
-    storeItem("passenger_form", updatedArray);
-    storeItem("contact_info", formData);
+    return updatedArray;
+  }, []);
 
-    if (formData.email) {
-      const response = await AutosignUpAccount(formData, dispatch);
-      response.success
-        ? toast({ title: "Successfully created an account" })
-        : toast({ title: "Failed something went wrong" });
+  const SubmitPassengerForm = useCallback(
+    async (data: FieldValues) => {
+      setLoading(true);
 
-      setPassengerFormData(updatedArray);
-      setStep("flightDetailsPreview");
-    } else {
-      setPassengerFormData(updatedArray);
-      // setStep("flightDetailsPreview");
-    }
-    setLoading(false);
-  };
+      if (!formData.email && !user?._id) {
+        toast({
+          description: "Please fill in your contact information or Login",
+        });
+        setLoading(false);
+        return;
+      }
+
+      const updatedArray = transformPassengerData(data);
+      console.log(updatedArray);
+      if (checkPhoneNumbers(updatedArray)) {
+        handleInvalidNumberFound();
+        setLoading(false);
+        return;
+      }
+
+      storeItem("passenger_form", updatedArray);
+      storeItem("contact_info", formData);
+
+      if (formData.email) {
+        const response = await AutosignUpAccount(formData, dispatch);
+        response.success
+          ? toast({ title: "Successfully created an account" })
+          : toast({ title: "Failed something went wrong" });
+
+        setPassengerFormData(updatedArray);
+        setStep("flightDetailsPreview");
+      } else {
+        setPassengerFormData(updatedArray);
+        setStep("flightDetailsPreview");
+      }
+      setLoading(false);
+    },
+    [
+      formData,
+      user,
+      toast,
+      transformPassengerData,
+      checkPhoneNumbers,
+      handleInvalidNumberFound,
+      dispatch,
+      setPassengerFormData,
+      setStep,
+    ]
+  );
 
   return (
-    <section className="w-full ">
+    <section className="w-full">
       <form className="w-full" onSubmit={handleSubmit(SubmitPassengerForm)}>
-        <div className="border rounded-md p-4  md:mx-6 min-[1059px]:mx-0">
+        <div className="border rounded-md p-4 md:mx-6 min-[1059px]:mx-0">
           <div className="flex items-center justify-between">
             <p className="font-bold border-b pb-2 w-full">Passenger Details</p>
           </div>
@@ -175,15 +230,13 @@ const FlightDetailForm = ({
               you already have an account Please Login
             </h1>
             <p className="text-[#868686]">
-              The ticket and purchase confirmation will be sent to the contact
-              information. Also, "announcement of ticket changes" or "receipt of
-              confirmation" will be done from one of the channels of "user
-              account contact information" or "information of the same form" .
+              The ticket confirmation will be sent to the email provided, also
+              all changes and payment receipt will be sent via email.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
               <label
-                htmlFor="Username"
+                htmlFor="FirstName"
                 className="relative w-full block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
               >
                 <input
@@ -195,13 +248,12 @@ const FlightDetailForm = ({
                   className="peer w-full border-none py-1.5 px-2 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                   placeholder="FirstName"
                 />
-
                 <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                   FirstName
                 </span>
               </label>
               <label
-                htmlFor="PhoneNumber"
+                htmlFor="LastName"
                 className="relative w-full block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
               >
                 <input
@@ -213,7 +265,6 @@ const FlightDetailForm = ({
                   className="peer w-full border-none py-1.5 px-2 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                   placeholder="lastname"
                 />
-
                 <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                   LastName
                 </span>
@@ -231,7 +282,6 @@ const FlightDetailForm = ({
                   className="peer w-full border-none py-1.5 px-2 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                   placeholder="Phone Number"
                 />
-
                 <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                   Phone Number
                 </span>
@@ -249,7 +299,6 @@ const FlightDetailForm = ({
                   className="peer w-full border-none py-1.5 px-2 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                   placeholder="email"
                 />
-
                 <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                   Email
                 </span>
@@ -258,21 +307,21 @@ const FlightDetailForm = ({
           </div>
         )}
 
-        <div className="flex gap-4 px-6 mx-4 md:mx-6 mt-5 mb-10 text-center justify-center ">
+        <div className="flex gap-4 px-6 mx-4 md:mx-6 mt-5 mb-10 text-center justify-center">
           <p>
             <input type="checkbox" />
           </p>
           <p className="text-[10px] sm:text-base">
             By proceeding, I acknowledge that I have read and agreed to
-            Airpocket’s Flight booking{" "}
-            <span className="text-[#1D91CC]"> terms & conditions</span>
+            Airpocket’s Flight booking
+            <span className="text-[#1D91CC]"> terms & conditions</span>
           </p>
         </div>
 
         <div className="w-[40%] mx-auto bg-[#1D91CC] rounded-md">
           <button
             type="submit"
-            className="bg-transparent w-full py-2 text-white "
+            className="bg-transparent w-full py-2 text-white"
           >
             {isLoading || loading ? "Saving" : "Save"}
           </button>

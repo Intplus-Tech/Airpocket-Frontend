@@ -29,7 +29,7 @@ const Stepper = () => {
       id: "2",
       stepKey: "travellersDetail",
 
-      name: "Traveller(s) Detials",
+      name: "Traveler(s) Detials",
       // Component: () => <PassengerDetails passengers={2} />,
       Img: payment,
     },

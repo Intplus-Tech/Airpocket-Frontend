@@ -45,7 +45,7 @@ function getSearchResultsApi(data: User) {
 function getsearchKeyWordApi(data: Generic) {
   const auto_complete_token = getItemFromStorage("auto_complete_token");
 
-  const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=${data.key}`;
+  const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=${data.key}`;
   const options = {
     method: "GET",
     headers: {

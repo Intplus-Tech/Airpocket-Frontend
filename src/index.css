@@ -202,3 +202,7 @@ input:-webkit-autofill:active {
 .tg {
   @apply -translate-x-2/4 -translate-y-2/4;
 }
+
+* {
+  transition: all 0.3s ease !important;
+}
