@@ -1,9 +1,7 @@
 import { useSelector } from "react-redux";
-import Gulf from "@/pages/SearchResults/assets/Gulf.svg";
 import Flight from "@/components/FlightAvailable/assets/flight.svg";
 
 import { Image } from "../Image/Index";
-
 import { FlightOffer } from "@/types/typs";
 import {
   // convertTime,
@@ -13,6 +11,8 @@ import {
 } from "@/utils/monthDAys";
 import { RootState } from "@/store/store";
 import { getItemFromStorage } from "@/utils/locaStorage";
+import { CLOUDINARY } from "@/utils/apiUrl";
+import { handleImageError } from "@/utils/Constant";
 
 type SINGLE_FLIGHT_DETAILS_PROPS = {
   SINGLE_FLIGHT_DETAILS: FlightOffer[] | null;
@@ -45,7 +45,12 @@ const FlightDetails = ({
           <article className="  pb-3    p-4 ">
             <section className="flex items-center  justify-between h-[4rem]  ">
               <div className="flex flex-col gap-2 w-[40%] md:w-full">
-                <Image src={Gulf} alt="airline Logo" height={70} width={70} />
+                <Image
+                  src={`${CLOUDINARY}/${segments[0].carrierCode}`}
+                  alt="airline Logo"
+                  handleError={handleImageError}
+                  className="w-[30px] h-[30px] shrink-0 flex"
+                />
                 <span className="text-xs text-[#868686]">
                   {/* {SINGLE_FLIGHT_DETAILS[0].id} */}
                   {
@@ -106,7 +111,12 @@ const FlightDetails = ({
             <article className="  pb-3    p-4 ">
               <section className="flex items-center justify-between h-[4rem]  ">
                 <div className="flex flex-col gap-2 w-[40%] md:w-full">
-                  <Image src={Gulf} alt="airline Logo" height={70} width={70} />
+                  <Image
+                    src={`${CLOUDINARY}/${itineraries[1].segments[0].carrierCode}`}
+                    alt="airline Logo"
+                    handleError={handleImageError}
+                    className="w-[30px] h-[30px] shrink-0 flex"
+                  />
                   <span className="text-xs text-[#868686]">
                     {
                       dictionaries?.carriers[

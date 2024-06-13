@@ -3,6 +3,7 @@ import Mimi from "@/pages/Home/assets/Mimi.jpeg";
 import Paul from "@/pages/Home/assets/Paul.jpeg";
 import Samuel from "@/pages/Home/assets/Samuel.jpeg";
 import Chidi from "@/pages/Home/assets/Chidi.jpeg";
+import Gulf from "@/components/Table/assets/logo.svg";
 
 export const LIMIT_FIVE = 5;
 
@@ -13,6 +14,12 @@ export const FLIGHT_TYPE: FLIGHT_TYPES = {
   INTERENATIONAL: {
     rate: 10,
   },
+};
+
+export const handleImageError = (
+  event: React.SyntheticEvent<HTMLImageElement, Event>
+) => {
+  event.currentTarget.src = Gulf;
 };
 
 export const TESTIMONIALS = [
