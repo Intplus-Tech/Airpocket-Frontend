@@ -3,13 +3,14 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Airpocket from "@/assets/Airpocket.svg";
 import { Image } from "../Image/Index";
+
 const Loader = () => {
   return (
     <main className="flex flex-col items-center justify-center h-[100vh] relative">
       <div className="rotating-box bg-gray-100"></div>
       <div className="text-xs z-10 w-36 h-36 flex flex-col gap-2 items-center justify-center mt-[-150px]  rounded-[50%] text-center">
         <p>
-          <Image src={Airpocket} alt="Airpocket" className="h-20 w-20 " />
+          <Image src={Airpocket} alt="Airpocket" className="h-20 w-20" />
         </p>
       </div>
     </main>
@@ -18,7 +19,6 @@ const Loader = () => {
 
 export const FetchLoader = () => {
   const flightLocation = getItemFromStorage("location");
-  console.log(location, "search");
   return (
     <main className="flex flex-col items-center justify-center h-[100vh] relative">
       <div className="rotating-box bg-gray-100"></div>
@@ -32,11 +32,11 @@ export const FetchLoader = () => {
         </p>
         <div className="flex gap-1 font-bold">
           <span className="text-[8px]">
-            {flightLocation?.depature?.label || "LONDON"}
+            {flightLocation?.depature?.cityName || "LONDON"}
           </span>{" "}
           <span>to</span>{" "}
           <span className="text-[8px]">
-            {flightLocation?.destination?.label || "SPAIN"}
+            {flightLocation?.destination?.cityName || "SPAIN"}
           </span>
         </div>
       </div>

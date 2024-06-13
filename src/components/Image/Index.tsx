@@ -7,11 +7,17 @@ type ImageProps = {
   rest?: ReactNode;
   height?: number;
   width?: number;
-  handleError?: () => void;
+  handleError?: (event: React.SyntheticEvent<HTMLImageElement, Event>) => void;
   handleLoad?: () => void;
 };
 
-export function Image({ className, src, alt, ...rest }: ImageProps) {
+export function Image({
+  className,
+  src,
+  handleError,
+  alt,
+  ...rest
+}: ImageProps) {
   // const handleLoad = () => {
   //   setLoading(false); // Set loading state to false when the image is successfully loaded
   // };
@@ -28,7 +34,7 @@ export function Image({ className, src, alt, ...rest }: ImageProps) {
       src={src}
       alt={alt}
       // onLoad={handleLoad}
-      // onError={handleError}
+      onError={handleError}
       {...rest}
       // style={{ display: loading ? "none" : "block" }}
     />

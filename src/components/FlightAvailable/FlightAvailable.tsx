@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
-import Gulf from "../Table/assets/logo.svg";
 import { Image } from "../Image/Index";
 import { FilterProps, Generic } from "@/types/typs";
 import Flight from "./assets/flight.svg";
@@ -12,6 +11,8 @@ import Clock from "./assets/clock.svg";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { storeItem } from "@/utils/locaStorage";
 import { RootState } from "@/store/store";
+import { CLOUDINARY } from "@/utils/apiUrl";
+import { handleImageError } from "@/utils/Constant";
 
 type AvailableFlightData = {
   availableFlight: { [x: string]: any }[] | undefined;
@@ -107,6 +108,9 @@ const FlightAvailable = ({
               const departureTime = extractTime(departure.at);
               const arrivalTime = extractTime(arrival.at);
               const realTime = convertTime(duration);
+              const realTime2 =
+                itineraries[1] && convertTime(itineraries[1].duration);
+
               return (
                 <section key={flight.id} className="border-b">
                   <section className="flex flex-col gap-4 py-3 ">
@@ -114,8 +118,9 @@ const FlightAvailable = ({
                       <div className="w-full flex items-center justify-around gap-8">
                         <div className="flex flex-col gap-2">
                           <Image
-                            src={Gulf}
+                            src={`${CLOUDINARY}/${segments[0].carrierCode}`}
                             alt="airline Logo"
+                            handleError={handleImageError}
                             className="w-[30px] h-[30px] shrink-0 flex"
                           />
                           <span className="text-xs text-[#868686]">
@@ -178,8 +183,9 @@ const FlightAvailable = ({
                         <div className="flex items-center justify-around w-full gap-8">
                           <div className="flex flex-col gap-2">
                             <Image
-                              src={Gulf}
+                              src={`${CLOUDINARY}/${itineraries[1].segments[0].carrierCode}`}
                               alt="airline Logo"
+                              handleError={handleImageError}
                               className="w-[30px] h-[30px] shrink-0 flex"
                             />
                             <span className="text-xs text-[#868686]">
@@ -207,7 +213,7 @@ const FlightAvailable = ({
                             <p className="flex gap-1 items-center">
                               <Image src={Clock} alt="clock" />
                               <span className="text-[#868686] text-center text-sm">
-                                {`${realTime?.hours}hrs  ${realTime?.minutes}mins` ||
+                                {`${realTime2?.hours}hrs  ${realTime2?.minutes}mins` ||
                                   "N/A"}
                               </span>
                             </p>

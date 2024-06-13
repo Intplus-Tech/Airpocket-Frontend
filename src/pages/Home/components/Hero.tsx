@@ -20,6 +20,7 @@ interface suggestionList {
   label: string;
   country: string;
   airport?: string;
+  cityName?: string;
 }
 [];
 
@@ -69,9 +70,10 @@ const Hero = () => {
       value: item.iataCode,
       label: `${item.address.cityName} (${item.iataCode}) ${item.name} ${item.subType}`,
       country: item.address.countryName,
+      cityName: `${item.address.cityName} (${item.iataCode})`,
       airport: `${item.name} ${item.subType}`,
     }));
-    console.log(result);
+
     setSuggestions(result);
   };
 
@@ -82,8 +84,8 @@ const Hero = () => {
   const storeDepartureAndDestination = () => {
     if (depature && destination) {
       storeItem("location", {
-        depature,
-        destination,
+        depature: depature,
+        destination: destination,
       });
     }
   };
@@ -143,8 +145,8 @@ const Hero = () => {
       travelClass: classType,
       originLocationCode: depature?.value,
       destinationLocationCode: destination?.value,
-      originLocation: depature?.label,
-      destinationLocation: destination?.label,
+      originLocation: depature?.cityName,
+      destinationLocation: destination?.cityName,
       depatureDate: formatDateString(checkInDate),
       returnDate: formatDateString(checkOutDate),
       depatureTimeDate: String(checkInDate),

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Image } from "@/components/Image/Index";
-import Gulf from "../../assets/Gulf.svg";
 import Flight from "../../assets/verticalstop.svg";
 import { SingleSearchResult } from "@/types/typs";
 import {
@@ -12,6 +11,8 @@ import {
   formatDate,
 } from "@/utils/monthDAys";
 import { RootState } from "@/store/store";
+import { CLOUDINARY } from "@/utils/apiUrl";
+import { handleImageError } from "@/utils/Constant";
 
 const FilghtDetail = (singleFlight: SingleSearchResult) => {
   const [componentType, setComponentType] = useState("flightDetails");
@@ -25,7 +26,7 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
     const dictionaries = useSelector(
       (state: RootState) => state.search.result?.dictionaries
     );
-    // const { departure } = segments[0];
+    const realTime2 = itineraries[1] && convertTime(itineraries[1].duration);
     // const { arrival } = segments[segments.length - 1];
     // const departureTime = extractTime(departure.at);
     // const arrivalTime = extractTime(arrival.at);
@@ -36,7 +37,12 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
         <section>
           <div className="flex items-center justify-between mt-4">
             <p className="flex gap-4 items-center w-full">
-              <Image src={Gulf} alt="Airline logo" />
+              <Image
+                src={`${CLOUDINARY}/${segments[0].carrierCode}`}
+                alt="airline Logo"
+                handleError={handleImageError}
+                className="w-[30px] h-[30px] shrink-0 flex"
+              />
               <span className="font-bold">
                 {
                   dictionaries?.carriers[
@@ -99,8 +105,30 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
           <hr className="my-5" />
           {itineraries[1] && (
             <div>
+              <div className="flex items-center justify-between py-2">
+                <p className="flex gap-4 items-center w-full">
+                  <Image
+                    src={`${CLOUDINARY}/${itineraries[1].segments[0].carrierCode}`}
+                    alt="airline Logo"
+                    handleError={handleImageError}
+                    className="w-[30px] h-[30px] shrink-0 flex"
+                  />
+                  <span className="font-bold">
+                    {
+                      dictionaries?.carriers[
+                        itineraries[1].segments[0]
+                          .carrierCode as unknown as number
+                      ]
+                    }
+                  </span>
+                </p>
+                <p className="w-full">
+                  Total: {` ${realTime2?.hours}hrs`}
+                  {` ${realTime2?.minutes}mins`}
+                </p>
+              </div>
+
               {itineraries[1].segments.map((segment: any, index: number) => {
-                console.log(segment);
                 return (
                   <div key={index} className="flex flex-col gap-2">
                     <div className="flex items-center">

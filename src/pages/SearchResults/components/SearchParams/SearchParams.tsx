@@ -24,6 +24,7 @@ interface suggestionList {
   value: string;
   label: string;
   country: string;
+  cityName?: string;
 }
 [];
 
@@ -107,7 +108,9 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
 
     const result = respnse.success?.data.data.map((item: any) => ({
       value: item.iataCode,
-      label: `${item.address.cityName} (${item.iataCode})`,
+      label: `${item.address.cityName} (${item.iataCode}) ${item.name} ${item.subType}`,
+      cityName: `${item.address.cityName} (${item.iataCode})`,
+      airport: `${item.name} ${item.subType}`,
     }));
 
     setSuggestions(result);
@@ -191,8 +194,8 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
       travelClass: classType,
       originLocationCode: depature?.value,
       destinationLocationCode: destination?.value,
-      originLocation: depature?.label,
-      destinationLocation: destination?.label,
+      originLocation: depature?.cityName,
+      destinationLocation: destination?.cityName,
       depatureDate: formatDateString(checkInDate),
       returnDate: formatDateString(checkOutDate),
       depatureTimeDate: String(checkInDate),
