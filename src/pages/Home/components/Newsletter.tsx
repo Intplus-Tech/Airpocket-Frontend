@@ -1,8 +1,26 @@
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { Image } from "../../../components/Image/Index";
 import Sisters from "../assets/Sisters.svg";
+import { FieldValues, useForm } from "react-hook-form";
+import { subscribeNewLetter } from "./slice/api";
+import { useToast } from "@/components/ui/use-toast";
 
 const Newsletter = () => {
+  const { register, handleSubmit, reset } = useForm();
+  const { toast } = useToast();
+
+  const handleNewsletter = async (data: FieldValues) => {
+    const response = await subscribeNewLetter(data);
+    response.success
+      ? toast({ title: response.success.message })
+      : toast({
+          variant: "destructive",
+          title: response.error?.response.message,
+        });
+    reset();
+    console.log(response);
+    console.log(data);
+  };
   return (
     // <main className="max-w-screen-xl mx-auto bg-[#EEECEC] mt-8 mb-8">
     //   <div className="flex relative items-center justify-between h-[250px]">
@@ -33,13 +51,14 @@ const Newsletter = () => {
             Get weekly update about our product on your email, no spam
             guaranteed we promise ✌️
           </p>
-          <form>
+          <form onSubmit={handleSubmit(handleNewsletter)}>
             <div className="relative max-w-[34rem]">
               <span className="absolute left-4 top-[50%] translate-y-[-50%] bg-[#F8F8F8] p-2">
                 <EnvelopeIcon className="h-4 w-4" />
               </span>
               <input
                 type="email"
+                {...register("email")}
                 placeholder="youremail123@gmail.com"
                 className="bg-white py-4 pl-14 text-gray-600 focus:outline-none text-xs lg:text-sm w-[90%]"
               />
