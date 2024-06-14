@@ -34,7 +34,6 @@ const BookedFlight = () => {
     console.log(id);
     // setStep("singleItenery");
   };
-  console.log(iteneries?.success.data);
   const renderStep = (step: string) => {
     if (step === "singleItenery") {
       return <MoreFlightDetails singleFlight={moreInfo} setStep={setStep} />;

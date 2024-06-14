@@ -1,8 +1,8 @@
 import { Image } from "@/components/Image/Index";
 import { IoAirplane } from "react-icons/io5";
-import Gulf from "@/pages/SearchResults/assets/Gulf.svg";
 import { FlightInformation } from "@/types/typs";
 import { extractTime } from "@/utils/monthDAys";
+import { getAirline } from "@/constants/AirlineCode";
 
 type SingleFlight = {
   _id: string;
@@ -34,9 +34,18 @@ export const SingleFlight = ({ singleFlight, viewItenery }: AllProp) => {
         <div className="flex gap-2 items-center ">
           <div>
             <div className="relative w-[50px] h-[50px] overflow-hidden mx-auto">
-              <Image src={Gulf} alt="airline" className="rounded" />
+              <Image
+                src={
+                  getAirline(flight.itineraries[0].segments[0].carrierCode)
+                    ?.logo as string
+                }
+                alt="airline"
+                className="rounded"
+              />
             </div>
-            <p className="text-gray-500 text-center py-1 text-sm">Oman Air</p>
+            <p className="text-gray-500 text-center py-1 text-sm">
+              {getAirline(flight.itineraries[0].segments[0].carrierCode)?.name}
+            </p>
           </div>
 
           <div className="flex flex-col items-center text-center gap-1">
