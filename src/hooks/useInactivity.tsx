@@ -9,7 +9,6 @@ function useInactivity(timeout: number): boolean {
     return localStorage.getItem("user");
   });
 
-  console.log(authenticated);
   useEffect(() => {
     if (!authenticated) return;
     let activityTimer: ReturnType<typeof setTimeout>;

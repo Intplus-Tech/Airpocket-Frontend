@@ -72,7 +72,6 @@ export const getUserHistory = async () => {
 
 export const getSingleUserHistory = async (id: string) => {
   try {
-    console.log(id, "api");
     const response: any = await getSingleUserHistoryApi(id);
     return { success: response };
   } catch (error) {

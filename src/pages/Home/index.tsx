@@ -21,7 +21,6 @@ const Home = () => {
     navigate("/flight-offers");
   }
   console.time("mapItems");
-  console.log(Airline.length);
 
   return (
     <MaxwidthWrapper>

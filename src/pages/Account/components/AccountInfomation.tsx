@@ -11,7 +11,6 @@ const AccountInformation = () => {
   // const { toast } = useToast();
   const user = useSelector((state: RootState) => state.user.user);
   const { isLoading, data, isError } = useGetUserInfo({ id: user?._id });
-  console.log(data);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {

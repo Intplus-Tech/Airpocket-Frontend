@@ -10,14 +10,14 @@ type StopsProps = {
   setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
 };
 
-const Stops = ({ setFilters }: StopsProps) => {
+const Stops = ({ setFilters, filters }: StopsProps) => {
   const [selected, setSelected] = useState<string | null>(null);
   const airStopList = [
+    { id: "0", key: "0", text: "zero" },
     { id: "1", key: "1", text: "One" },
     { id: "2", key: "2", text: "Two" },
     { id: "3", key: "3", text: "Three" },
   ];
-
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelected(event.target.value);
     setFilters((prev) => ({

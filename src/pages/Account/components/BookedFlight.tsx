@@ -24,14 +24,12 @@ const BookedFlight = () => {
 
   const viewItenery = async (id: string) => {
     const response = await getSingleUserHistory(id);
-    console.log(response);
     if (response.success) {
       setMoreinfo(response.success.data);
       console.log(moreInfo);
       setStep("singleItenery");
     }
 
-    console.log(id);
     // setStep("singleItenery");
   };
   const renderStep = (step: string) => {
@@ -82,7 +80,6 @@ type AllFlightProps = {
 
 const AllFlight = ({ allFlight, setStep, viewItenery }: AllFlightProps) => {
   const reverse = allFlight.reverse();
-  console.log(reverse, "r");
   return (
     <div>
       {allFlight.reverse().map((flight: flight) => {

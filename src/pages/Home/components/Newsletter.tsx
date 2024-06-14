@@ -18,7 +18,6 @@ const Newsletter = () => {
           title: response.error?.response.message,
         });
     reset();
-    console.log(response);
   };
   return (
     <section className=" max-w-screen-xl mx-auto mt-16 my-8 pl-2 w-full">

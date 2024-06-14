@@ -21,7 +21,6 @@ const MoreFlightDetails = ({ singleFlight }: AllProp) => {
   const bookingInformation: BookingInformation | undefined =
     singleFlight?.bookingInformation;
   const flightInformation: FlightInformation | undefined = singleFlight?.data;
-  console.log(bookingInformation);
   return (
     <main className="px-2 py-3">
       <div className="bg-white ">

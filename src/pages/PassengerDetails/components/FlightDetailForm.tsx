@@ -162,7 +162,6 @@ const FlightDetailForm: React.FC<FlightDetailFormProps> = ({
       }
 
       const updatedArray = transformPassengerData(data);
-      console.log(updatedArray);
       if (checkPhoneNumbers(updatedArray)) {
         handleInvalidNumberFound();
         setLoading(false);

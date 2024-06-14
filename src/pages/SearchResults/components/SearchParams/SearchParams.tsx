@@ -226,13 +226,15 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
                   Departure
                 </p>
                 <p className="font-bold text-sm">
-                  {flightSearchQuery.originLocation}
+                  {flightSearchQuery.originLocation ||
+                    flightSearchQuery.originLocationCode}
                 </p>
               </div>
               <div className="flex flex-col justify-center items-center h-full">
                 <p className="text-sm text-[#404040]">Destination</p>
                 <p className="font-bold text-sm">
-                  {flightSearchQuery.destinationLocation}
+                  {flightSearchQuery.destinationLocation ||
+                    flightSearchQuery.destinationLocationCode}
                 </p>
               </div>
               <div className="flex flex-col justify-center items-center h-full">
