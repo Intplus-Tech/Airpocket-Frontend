@@ -9,6 +9,7 @@ import Places from "./components/Places";
 import Testimonials from "./components/Testimonials";
 import SearchHistory from "@/components/SearchHistory/SearchHistory";
 import { FetchLoader } from "@/components/Loader/Loader";
+import { Airline } from "@/constants/AirlineCode";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ const Home = () => {
   if (!isLoading && result?.data) {
     navigate("/flight-offers");
   }
+  console.time("mapItems");
+  console.log(Airline.length);
 
   return (
     <MaxwidthWrapper>
@@ -28,7 +31,7 @@ const Home = () => {
       <Testimonials />
       <Newsletter />
       {isLoading && (
-        <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
+        <section className="fixed w-[100%] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
           <FetchLoader />
         </section>
       )}

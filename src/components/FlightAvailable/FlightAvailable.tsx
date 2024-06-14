@@ -11,8 +11,8 @@ import Clock from "./assets/clock.svg";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { storeItem } from "@/utils/locaStorage";
 import { RootState } from "@/store/store";
-import { CLOUDINARY } from "@/utils/apiUrl";
 import { handleImageError } from "@/utils/Constant";
+import { getAirline } from "@/constants/AirlineCode";
 
 type AvailableFlightData = {
   availableFlight: { [x: string]: any }[] | undefined;
@@ -118,7 +118,11 @@ const FlightAvailable = ({
                       <div className="w-full flex items-center justify-around gap-8">
                         <div className="flex flex-col gap-2">
                           <Image
-                            src={`${CLOUDINARY}/${segments[0].carrierCode}`}
+                            // src={`${CLOUDINARY}/${segments[0].carrierCode}`}
+                            src={
+                              getAirline(segments[0].carrierCode)
+                                ?.logo as string
+                            }
                             alt="airline Logo"
                             handleError={handleImageError}
                             className="w-[30px] h-[30px] shrink-0 flex"
@@ -183,7 +187,11 @@ const FlightAvailable = ({
                         <div className="flex items-center justify-around w-full gap-8">
                           <div className="flex flex-col gap-2">
                             <Image
-                              src={`${CLOUDINARY}/${itineraries[1].segments[0].carrierCode}`}
+                              src={
+                                getAirline(
+                                  itineraries[1].segments[0].carrierCode
+                                )?.logo as string
+                              }
                               alt="airline Logo"
                               handleError={handleImageError}
                               className="w-[30px] h-[30px] shrink-0 flex"
@@ -260,7 +268,7 @@ const FlightAvailable = ({
                             View Details
                           </p>
                         </DialogTrigger>
-                        <DialogContent className="w-full px-6 overflow-y-auto h-[35rem] bg-slate-50">
+                        <DialogContent className="w-full px-6 overflow-y-auto h-[35rem] bg-slate-50 ">
                           <FilghtDetail data={flight} />
                         </DialogContent>
                       </Dialog>

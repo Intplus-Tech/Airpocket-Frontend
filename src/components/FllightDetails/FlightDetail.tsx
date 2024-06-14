@@ -11,8 +11,8 @@ import {
 } from "@/utils/monthDAys";
 import { RootState } from "@/store/store";
 import { getItemFromStorage } from "@/utils/locaStorage";
-import { CLOUDINARY } from "@/utils/apiUrl";
 import { handleImageError } from "@/utils/Constant";
+import { getAirline } from "@/constants/AirlineCode";
 
 type SINGLE_FLIGHT_DETAILS_PROPS = {
   SINGLE_FLIGHT_DETAILS: FlightOffer[] | null;
@@ -35,6 +35,9 @@ const FlightDetails = ({
     const arrivalTime = extractTime(arrival.at);
     const arrivalDate = formatDate(arrival.at);
     // const realTime = convertTime(duration);
+    console.log(
+      itineraries[1]?.segments[itineraries[1].segments.length - 1]?.arrival.at
+    );
     return (
       // <div>hey</div>
       <section
@@ -46,7 +49,7 @@ const FlightDetails = ({
             <section className="flex items-center  justify-between h-[4rem]  ">
               <div className="flex flex-col gap-2 w-[40%] md:w-full">
                 <Image
-                  src={`${CLOUDINARY}/${segments[0].carrierCode}`}
+                  src={getAirline(segments[0].carrierCode)?.logo as string}
                   alt="airline Logo"
                   handleError={handleImageError}
                   className="w-[30px] h-[30px] shrink-0 flex"
@@ -112,7 +115,10 @@ const FlightDetails = ({
               <section className="flex items-center justify-between h-[4rem]  ">
                 <div className="flex flex-col gap-2 w-[40%] md:w-full">
                   <Image
-                    src={`${CLOUDINARY}/${itineraries[1].segments[0].carrierCode}`}
+                    src={
+                      getAirline(itineraries[1].segments[0].carrierCode)
+                        ?.logo as string
+                    }
                     alt="airline Logo"
                     handleError={handleImageError}
                     className="w-[30px] h-[30px] shrink-0 flex"
@@ -148,12 +154,17 @@ const FlightDetails = ({
                 </div>
                 <div className="flex flex-col gap-2 w-full items-center">
                   <span className="text-sm md:text-base font-bold">
-                    {extractTime(itineraries[1]?.segments[0]?.arrival.at)}
+                    {extractTime(
+                      itineraries[1]?.segments[
+                        itineraries[1].segments.length - 1
+                      ]?.arrival.at
+                    )}
                   </span>
                   <p className="text-sm text-[#868686]">
                     {
-                      itineraries[1]?.segments[segments.length - 1]?.arrival
-                        .iataCode
+                      itineraries[1]?.segments[
+                        itineraries[1].segments.length - 1
+                      ]?.arrival.iataCode
                     }
                   </p>
                 </div>
@@ -161,7 +172,9 @@ const FlightDetails = ({
                 <div className="w-full">
                   <p className="text-sm md:text-base">
                     {formatDate(
-                      itineraries[1]?.segments[segments.length - 1]?.arrival.at
+                      itineraries[1]?.segments[
+                        itineraries[1].segments.length - 1
+                      ]?.arrival.at
                     )}
                   </p>
                 </div>

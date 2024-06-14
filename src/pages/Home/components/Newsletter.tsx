@@ -19,30 +19,10 @@ const Newsletter = () => {
         });
     reset();
     console.log(response);
-    console.log(data);
   };
   return (
-    // <main className="max-w-screen-xl mx-auto bg-[#EEECEC] mt-8 mb-8">
-    //   <div className="flex relative items-center justify-between h-[250px]">
-    //     <div>
-    //       <h1 className="text-[#1B96D6] text-[45px] ">
-    //         Subscibe to Our Newsletter
-    //       </h1>
-    //       <p className="max-w-[30rem] text-[#333333]">
-    //         Get weekly update about our product on your email, no spam
-    //         guaranteed we promise ✌️
-    //       </p>
-    //     </div>
-
-    //     <Image
-    //       src={Sisters}
-    //       alt="Sisters"
-    //       className="absolute top-[-3rem] right-0 h-[296px]"
-    //     />
-    //   </div>
-    // </main>
     <section className=" max-w-screen-xl mx-auto mt-16 my-8 pl-2 w-full">
-      <div className="w-full px-4  lg:pl-12   mx-auto space-y-16 bg-[#EEECEC] rounded-md shadow-lg shadow-slate-300 max-h-[260px] overflow-y-visible lg:flex items-end justify-between">
+      <div className="w-full px-4  lg:pl-12   mx-auto space-y-16 bg-[#EEECEC] rounded-md shadow-lg shadow-slate-300 max-h-[260px] lg:flex items-end justify-between">
         <div className="space-y-4 py-8 self-center">
           <h2 className="text-[#1B96D6] tracking-wid font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[45px] sm:whitespace-nowrap">
             Subscribe to Our Newsletter
@@ -71,7 +51,7 @@ const Newsletter = () => {
             </div>
           </form>
         </div>
-        <div className="hidden lg:block relativ  w-[458px] h-full mb-8 mr-[-3.5rem]">
+        <div className="hidden lg:block relativ  w-[458px] h-full mb-8 mr-[-3rem]  overflow-hidden">
           <Image
             src={Sisters}
             alt="newsletter"

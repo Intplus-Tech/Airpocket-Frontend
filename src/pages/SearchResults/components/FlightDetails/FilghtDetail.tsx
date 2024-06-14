@@ -11,8 +11,8 @@ import {
   formatDate,
 } from "@/utils/monthDAys";
 import { RootState } from "@/store/store";
-import { CLOUDINARY } from "@/utils/apiUrl";
 import { handleImageError } from "@/utils/Constant";
+import { getAirline } from "@/constants/AirlineCode";
 
 const FilghtDetail = (singleFlight: SingleSearchResult) => {
   const [componentType, setComponentType] = useState("flightDetails");
@@ -38,7 +38,7 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
           <div className="flex items-center justify-between mt-4">
             <p className="flex gap-4 items-center w-full">
               <Image
-                src={`${CLOUDINARY}/${segments[0].carrierCode}`}
+                src={getAirline(segments[0].carrierCode)?.logo as string}
                 alt="airline Logo"
                 handleError={handleImageError}
                 className="w-[30px] h-[30px] shrink-0 flex"
@@ -108,7 +108,10 @@ const FilghtDetail = (singleFlight: SingleSearchResult) => {
               <div className="flex items-center justify-between py-2">
                 <p className="flex gap-4 items-center w-full">
                   <Image
-                    src={`${CLOUDINARY}/${itineraries[1].segments[0].carrierCode}`}
+                    src={
+                      getAirline(itineraries[1].segments[0].carrierCode)
+                        ?.logo as string
+                    }
                     alt="airline Logo"
                     handleError={handleImageError}
                     className="w-[30px] h-[30px] shrink-0 flex"
