@@ -79,7 +79,6 @@ type AllFlightProps = {
 };
 
 const AllFlight = ({ allFlight, setStep, viewItenery }: AllFlightProps) => {
-  const reverse = allFlight.reverse();
   return (
     <div>
       {allFlight.reverse().map((flight: flight) => {

@@ -9,7 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import Logo from "./assets/logo.svg";
 import { Image } from "../Image/Index";
 // import { FlightTableData } from "@/types/typs";
 import { formatCurrency } from "@/utils/monthDAys";
@@ -22,9 +21,6 @@ const TableComponent = () => {
   );
 
   return (
-    // max-w-[20rem] min-w-full overflow-x-auto
-    //  min-w-[40rem]
-    //px-12
     <section className="  ">
       <Table className=" text-[#606060] z-[-1]">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}

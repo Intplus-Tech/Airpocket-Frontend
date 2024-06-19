@@ -10,7 +10,7 @@ type StopsProps = {
   setFilters: React.Dispatch<React.SetStateAction<FilterProps>>;
 };
 
-const Stops = ({ setFilters, filters }: StopsProps) => {
+const Stops = ({ setFilters }: StopsProps) => {
   const [selected, setSelected] = useState<string | null>(null);
   const airStopList = [
     { id: "0", key: "0", text: "zero" },
@@ -25,6 +25,7 @@ const Stops = ({ setFilters, filters }: StopsProps) => {
       stops: event.target.value,
     }));
   };
+
   const renderStopPort = () => {
     return (
       <div>

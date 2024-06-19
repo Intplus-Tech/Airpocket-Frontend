@@ -18,8 +18,8 @@ type AllProp = {
 
 const MoreFlightDetails = ({ singleFlight }: AllProp) => {
   // const { bookingInformation, data: flightInformation } = singleFlight;
-  const bookingInformation: BookingInformation | undefined =
-    singleFlight?.bookingInformation;
+  // const bookingInformation: BookingInformation | undefined =
+  //   singleFlight?.bookingInformation;
   const flightInformation: FlightInformation | undefined = singleFlight?.data;
   return (
     <main className="px-2 py-3">
