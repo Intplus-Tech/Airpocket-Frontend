@@ -9,7 +9,6 @@ import Places from "./components/Places";
 import Testimonials from "./components/Testimonials";
 import SearchHistory from "@/components/SearchHistory/SearchHistory";
 import { FetchLoader } from "@/components/Loader/Loader";
-import { Airline } from "@/constants/AirlineCode";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -20,8 +19,6 @@ const Home = () => {
   if (!isLoading && result?.data) {
     navigate("/flight-offers");
   }
-  console.time("mapItems");
-  console.log(Airline.length);
 
   return (
     <MaxwidthWrapper>

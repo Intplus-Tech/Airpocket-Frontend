@@ -25,7 +25,6 @@ export const flightSelect = async (data: Generic, dispatch: any) => {
   try {
     const response: any = await flightSelectApi({ flightOffer: data });
     dispatch(selectFlightSuccess(response.data.data.data.flightOffers));
-    console.log(response.data.data);
 
     return { success: { ...response } };
   } catch (error) {

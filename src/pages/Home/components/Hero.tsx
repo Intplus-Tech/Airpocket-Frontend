@@ -64,7 +64,6 @@ const Hero = () => {
 
   const handleSearchKeyWork = async () => {
     const respnse = await searchKeyWord({ key: value });
-    console.log(respnse?.success.data);
 
     const result = respnse.success?.data.data.map((item: any) => ({
       value: item.iataCode,

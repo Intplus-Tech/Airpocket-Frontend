@@ -11,7 +11,6 @@ import { getItemFromStorage } from "@/utils/locaStorage";
 import { LIMIT_FIVE } from "@/utils/Constant";
 
 function getSearchResultsApi(data: User) {
-  console.log(data);
   let url;
   if (data.returnDate) {
     url = `${SERVER_URL}/flight-search?originLocationCode=${

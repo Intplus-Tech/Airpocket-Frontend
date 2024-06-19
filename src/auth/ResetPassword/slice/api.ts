@@ -23,7 +23,6 @@ function resetPasswordApi(data: ChangePassword) {
 export const resetPassword = async (data: ChangePassword) => {
   try {
     const response: any = await resetPasswordApi(data);
-    console.log(response);
     return { success: response.data };
   } catch (error) {
     const response = handleAxiosError(error);

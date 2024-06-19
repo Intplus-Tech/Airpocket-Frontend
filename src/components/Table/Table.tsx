@@ -9,10 +9,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import Logo from "./assets/logo.svg";
 import { Image } from "../Image/Index";
 // import { FlightTableData } from "@/types/typs";
 import { formatCurrency } from "@/utils/monthDAys";
+import { getAirline } from "@/constants/AirlineCode";
 
 const TableComponent = () => {
   const tableData = useSelector((state: RootState) => state.search.tableData);
@@ -21,9 +21,6 @@ const TableComponent = () => {
   );
 
   return (
-    // max-w-[20rem] min-w-full overflow-x-auto
-    //  min-w-[40rem]
-    //px-12
     <section className="  ">
       <Table className=" text-[#606060] z-[-1]">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
@@ -67,11 +64,11 @@ const TableComponent = () => {
               <TableCell className="border-r text-center text-[16px] p-1 text-[#1D91CC] whitespace-nowrap">
                 <p className="flex items-center  gap-2">
                   <Image
-                    src={Logo}
+                    src={getAirline(tableitem.carrierCode)?.logo as string}
                     alt="Logo"
-                    className="h-4 w-4 flex items-center shrink-0  mx-auto"
+                    className="h-4 w-4 flex items-center shrink-0  mx-auto "
                   />
-                  <span className="text-xs sm:text-base">
+                  <span className="text-xs sm:text-base flex-[3]">
                     {
                       dictionaries?.carriers[
                         tableitem?.carrierCode as unknown as number

@@ -35,9 +35,7 @@ const FlightDetails = ({
     const arrivalTime = extractTime(arrival.at);
     const arrivalDate = formatDate(arrival.at);
     // const realTime = convertTime(duration);
-    console.log(
-      itineraries[1]?.segments[itineraries[1].segments.length - 1]?.arrival.at
-    );
+
     return (
       // <div>hey</div>
       <section
