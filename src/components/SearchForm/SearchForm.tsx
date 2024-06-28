@@ -177,7 +177,11 @@ const SearchForm = ({
           )}
         </div>
 
-        <div className="grid grid-cols-1 min-[576px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-8 mt-6 flex-wrap">
+        <div
+          className={`grid grid-cols-1 min-[576px]:grid-cols-2 sm:grid-cols-3 ${
+            tripType === "Round Trip" ? "lg:grid-cols-5" : "lg:grid-cols-4"
+          }  gap-3 lg:gap-8 mt-6 flex-wrap`}
+        >
           <div className="flex flex-col ">
             <label className="text-sm md:text-base">Departure</label>
             <Select
@@ -212,6 +216,7 @@ const SearchForm = ({
             />
           </div>
           {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
+
           <div className="flex flex-col   ">
             <label className="text-sm md:text-base">Destination</label>
             <Select
@@ -244,6 +249,7 @@ const SearchForm = ({
               className="peer border-none rounded-xl w-full h-10  bg-[#283841] bg-opacity-10   "
             />
           </div>
+
           {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
           <div className="flex flex-col w-full">
@@ -252,13 +258,16 @@ const SearchForm = ({
           </div>
           {/* <div className="flex items-end h-16 w-[2px] bg-[#283841] bg-opacity-10" /> */}
 
-          <div className="flex flex-col w-full">
-            <label className="text-sm md:text-base">Returning</label>
-            <DatePickerComponent
-              date={checkOutDate}
-              setDate={setCheckOutDate}
-            />
-          </div>
+          {tripType === "Round Trip" && (
+            <div className="flex flex-col w-full">
+              <label className="text-sm md:text-base">Returning</label>
+              <DatePickerComponent
+                date={checkOutDate}
+                setDate={setCheckOutDate}
+              />
+            </div>
+          )}
+
           <div className="flex items-end w-full sm:w-[10rem] justify-end text-white rounded-md ">
             <button
               type="submit"
