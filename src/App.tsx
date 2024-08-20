@@ -53,12 +53,10 @@ function App() {
     }
   }, []);
 
-  const TOKEN_ENDPOINT =
-    import.meta.env.NODE_ENV === "production"
-      ? (import.meta.env.VITE_PROD_TOKE_ENDPOINT as string)
-      : (import.meta.env.VITE_TEST_TOKEN_ENDPOINT as string);
+  const TOKEN_ENDPOINT = import.meta.env.PROD
+    ? (import.meta.env.VITE_PROD_TOKE_ENDPOINT as string)
+    : (import.meta.env.VITE_TEST_TOKEN_ENDPOINT as string);
 
-  console.log(TOKEN_ENDPOINT, "TOKEN_ENDPOINT");
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {
