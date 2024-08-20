@@ -50,11 +50,12 @@ const Newsletter = () => {
             </div>
           </form>
         </div>
-        <div className="hidden lg:block relativ  w-[458px] h-full mb-8 mr-[-3rem]  overflow-hidden">
+
+        <div className="hidden lg:block relativ  w-[458px] h-full mb-8   overflow-hidden">
           <Image
             src={Sisters}
             alt="newsletter"
-            className="flex items-end justify-end "
+            className="flex items-end justify-end w-fit "
           />
         </div>
       </div>
