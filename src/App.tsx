@@ -54,8 +54,10 @@ function App() {
   }, []);
 
   const TOKEN_ENDPOINT = import.meta.env.PROD
-    ? (import.meta.env.VITE_PROD_TOKE_ENDPOINT as string)
+    ? (import.meta.env.VITE_PROD_TOKEN_ENDPOINT as string)
     : (import.meta.env.VITE_TEST_TOKEN_ENDPOINT as string);
+
+  console.log(import.meta.env.PROD, import.meta.env.MODE);
 
   useEffect(() => {
     const fetchAccessToken = async () => {
