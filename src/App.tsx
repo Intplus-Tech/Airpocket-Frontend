@@ -70,11 +70,11 @@ function App() {
           body: new URLSearchParams({
             grant_type: "client_credentials",
             client_id: import.meta.env.PROD
-              ? (import.meta.env.VITE_APP_CLIENT_ID as string)
-              : "IhSF3mhLY2l9xGDN0duCyuMXSgz0IGXr",
+              ? (import.meta.env.VITE_APP_PROD_CLIENT_ID as string)
+              : (import.meta.env.VITE_APP_CLIENT_ID as string),
             client_secret: import.meta.env.PROD
-              ? (import.meta.env.VITE_APP_CLIENT_SECRET as string)
-              : "LDvU41Ybz9LIzEw4",
+              ? (import.meta.env.VITE_APP_PROD_CLIENT_SECRET as string)
+              : (import.meta.env.VITE_APP_CLIENT_SECRET as string),
           }).toString(),
         });
 
