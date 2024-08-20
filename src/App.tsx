@@ -67,14 +67,12 @@ function App() {
           },
           body: new URLSearchParams({
             grant_type: "client_credentials",
-            client_id:
-              import.meta.env.NODE_ENV === "production"
-                ? (import.meta.env.VITE_APP_CLIENT_ID as string)
-                : "IhSF3mhLY2l9xGDN0duCyuMXSgz0IGXr",
-            client_secret:
-              import.meta.env.NODE_ENV === "production"
-                ? (import.meta.env.VITE_APP_CLIENT_SECRET as string)
-                : "LDvU41Ybz9LIzEw4",
+            client_id: import.meta.env.PROD
+              ? (import.meta.env.VITE_APP_CLIENT_ID as string)
+              : "IhSF3mhLY2l9xGDN0duCyuMXSgz0IGXr",
+            client_secret: import.meta.env.PROD
+              ? (import.meta.env.VITE_APP_CLIENT_SECRET as string)
+              : "LDvU41Ybz9LIzEw4",
           }).toString(),
         });
 
