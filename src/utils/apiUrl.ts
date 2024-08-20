@@ -1,5 +1,5 @@
 export const SERVER_URL =
-  import.meta.env.REACT_APP_ENV === "production"
+  import.meta.env.NODE_ENV === "production"
     ? import.meta.env.VITE_API_BASE_URL
     : import.meta.env.VITE_API_BASE_URL_DEV;
 
