@@ -44,7 +44,11 @@ function getSearchResultsApi(data: User) {
 function getsearchKeyWordApi(data: Generic) {
   const auto_complete_token = getItemFromStorage("auto_complete_token");
 
-  const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=${data.key}`;
+  const url = `${
+    import.meta.env.NODE_ENV === "production"
+      ? (import.meta.env.VITE_APP_PROD_SERVER_URL as string)
+      : (import.meta.env.VITE_APP_TEST_SERVER_URL as string)
+  }/v1/reference-data/locations?subType=AIRPORT&keyword=${data.key}`;
   const options = {
     method: "GET",
     headers: {

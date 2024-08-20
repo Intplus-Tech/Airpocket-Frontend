@@ -3,7 +3,7 @@ import { SERVER_URL } from "./utils/apiUrl";
 import handleAxiosError from "./utils/error";
 
 function verifyAcessTokenApi(access: string) {
-  const url = `${SERVER_URL}//verify-access-token`;
+  const url = `${SERVER_URL}/verify-access-token`;
   const options = {
     method: "GET",
     headers: {

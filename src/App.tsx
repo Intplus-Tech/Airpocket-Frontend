@@ -54,8 +54,11 @@ function App() {
   }, []);
 
   const TOKEN_ENDPOINT =
-    "https://test.api.amadeus.com/v1/security/oauth2/token";
+    import.meta.env.NODE_ENV === "production"
+      ? (import.meta.env.VITE_PROD_TOKE_ENDPOINT as string)
+      : (import.meta.env.VITE_TEST_TOKEN_ENDPOINT as string);
 
+  console.log(TOKEN_ENDPOINT, "TOKEN_ENDPOINT");
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {
@@ -66,8 +69,14 @@ function App() {
           },
           body: new URLSearchParams({
             grant_type: "client_credentials",
-            client_id: "IhSF3mhLY2l9xGDN0duCyuMXSgz0IGXr",
-            client_secret: "LDvU41Ybz9LIzEw4",
+            client_id:
+              import.meta.env.NODE_ENV === "production"
+                ? (import.meta.env.VITE_APP_CLIENT_ID as string)
+                : "IhSF3mhLY2l9xGDN0duCyuMXSgz0IGXr",
+            client_secret:
+              import.meta.env.NODE_ENV === "production"
+                ? (import.meta.env.VITE_APP_CLIENT_SECRET as string)
+                : "LDvU41Ybz9LIzEw4",
           }).toString(),
         });
 
