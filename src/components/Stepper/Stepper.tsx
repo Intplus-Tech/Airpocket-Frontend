@@ -100,8 +100,8 @@ const Stepper = () => {
                   currentStep > index + 1 && "text-[#E8F4FA]"
                 } ${
                   currentStep === index + 1
-                    ? "text-[#1D91CC] font-bold"
-                    : "text-[#ADADAD] "
+                    ? "text-blue-500 font-bold"
+                    : "text-[#38a9e1]"
                 }`}
               >
                 {step.name}

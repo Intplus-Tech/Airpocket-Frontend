@@ -9,7 +9,7 @@ const CompletedBooking = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
   return (
-    <div className="max-w-xl sm:mx-auto mx-4">
+    <div className="max-w-xl sm:mx-auto mx-4 min-h-[80vh] ">
       <p className="bg-[#F3FDFA] px-6 py-2 text-center rounded-md flex items-center justify-center gap-1 md:gap-2 capitalize">
         <span>
           <Image src={confirmation} alt="confirmation" />
@@ -20,7 +20,7 @@ const CompletedBooking = () => {
         <p className=" cursor-pointer">
           Thank you, your booking order will be processed soon.A confirmation
           email with all the details has been sent to
-          <span className="text-[#1D91CC] pl-2">{user?.email}</span>.
+          <span className="text-[#1D91CC] pl-2">{user?.email}</span>
         </p>
       </div>
 

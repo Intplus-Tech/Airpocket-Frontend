@@ -76,9 +76,7 @@ const SignUp = () => {
       reset();
     } else {
       toast({
-        // variant: "success",
-        // title: `${response?.error.status}`,
-        description: `${response?.error.message}`,
+        description: `${response?.error.message}` || "Something went wrong",
       });
     }
     setIsLoading(false);
