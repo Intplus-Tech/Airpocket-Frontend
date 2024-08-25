@@ -3,7 +3,6 @@ import { IoMdArrowBack } from "react-icons/io";
 import FlightDetails from "@/components/FllightDetails/FlightDetail";
 import CardPayment from "./components/CardPayment";
 import { useEffect, useState } from "react";
-// import Transfer from "./components/Transfer";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { FlightOffer } from "@/types/typs";
@@ -12,12 +11,16 @@ import { payment } from "@/Features/paymentSlice/api";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { addPercentage } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
+import { FLIGHT_TYPE } from "@/utils/Constant";
+import { useScrolltop } from "@/utils/useScrolltop";
 
 type paymentProps = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const Payment = ({ setCurrentStep }: paymentProps) => {
+  useScrolltop();
+
   const { toast } = useToast();
   const dispatch = useDispatch();
   // const [loading, setLoading] = useState(false);
@@ -27,7 +30,7 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
   );
 
   const flightSelected = getItemFromStorage("selected_flight");
-  const flightType: { rate: number } = getItemFromStorage("flight_type");
+  const flightType = getItemFromStorage("flight_type");
   const user = useSelector((state: RootState) => state.user.user);
   const loading = useSelector((state: RootState) => state.payment.isLoading);
 
@@ -52,7 +55,7 @@ const Payment = ({ setCurrentStep }: paymentProps) => {
         amount: addPercentage(
           Number(selectedFlight?.[0].price.grandTotal) *
             (adult + children + infants),
-          flightType.rate
+          (FLIGHT_TYPE as any)[flightType].fixed
         ),
       },
       dispatch

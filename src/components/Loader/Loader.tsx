@@ -19,6 +19,7 @@ const Loader = () => {
 
 export const FetchLoader = () => {
   const flightLocation = getItemFromStorage("location");
+  console.log(flightLocation?.depature, flightLocation?.destination);
   return (
     <main className="flex flex-col items-center justify-center h-[100vh] relative">
       <div className="rotating-box bg-gray-100"></div>
@@ -31,10 +32,12 @@ export const FetchLoader = () => {
           />
         </p>
         <div className="flex gap-1 font-bold">
-          <span className="text-[8px]">{flightLocation?.depature?.label}</span>{" "}
+          <span className="text-[8px]">
+            {flightLocation?.depature?.cityName}
+          </span>{" "}
           {flightLocation && <span>to</span>}{" "}
           <span className="text-[8px]">
-            {flightLocation?.destination?.label}
+            {flightLocation?.destination?.cityName}
           </span>
         </div>
       </div>
