@@ -141,9 +141,11 @@ export interface TravellerFormData {
 export type FLIGHT_TYPES = {
   LOCAL: {
     rate: number;
+    fixed: number;
   };
-  INTERENATIONAL: {
+  INTERNATIONAL: {
     rate: number;
+    fixed: number;
   };
 };
 

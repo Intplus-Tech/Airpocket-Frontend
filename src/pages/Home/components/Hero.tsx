@@ -13,7 +13,6 @@ import { storeItem } from "@/utils/locaStorage";
 import { formatDateString, isDateLessThanYesterday } from "@/utils/monthDAys";
 import { useToast } from "@/components/ui/use-toast";
 import SearchForm from "@/components/SearchForm/SearchForm";
-import { FLIGHT_TYPE } from "@/utils/Constant";
 
 interface suggestionList {
   value: string;
@@ -122,9 +121,9 @@ const Hero = () => {
     }
 
     if (depature?.country === destination?.country) {
-      storeItem("flight_type", FLIGHT_TYPE.LOCAL);
+      storeItem("flight_type", "LOCAL");
     } else {
-      storeItem("flight_type", FLIGHT_TYPE.INTERENATIONAL);
+      storeItem("flight_type", "INTERNATIONAL");
     }
 
     dispatch(

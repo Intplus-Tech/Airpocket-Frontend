@@ -18,7 +18,6 @@ import { searchFlight, searchKeyWord } from "@/Features/searchslice/api";
 import { useToast } from "@/components/ui/use-toast";
 import { setSearchQuery } from "@/Features/searchslice/reducers";
 import SearchForm from "@/components/SearchForm/SearchForm";
-import { FLIGHT_TYPE } from "@/utils/Constant";
 
 interface suggestionList {
   value: string;
@@ -88,6 +87,7 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
   });
 
   const [value] = useDebounce(query, 500);
+
   // const user = useSelector((state:RootState)=>state.user.user)
   const handleChangeDepature = (selectedCountry: suggestionList | null) => {
     setDeparute(selectedCountry);
@@ -111,6 +111,7 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
       label: `${item.address.cityName} (${item.iataCode}) ${item.name} ${item.subType}`,
       cityName: `${item.address.cityName} (${item.iataCode})`,
       airport: `${item.name} ${item.subType}`,
+      country: item.address.countryName,
     }));
 
     setSuggestions(result);
@@ -156,10 +157,11 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
       });
       return;
     }
+
     if (depature?.country === destination?.country) {
-      storeItem("flight_type", FLIGHT_TYPE.LOCAL);
+      storeItem("flight_type", "LOCAL");
     } else {
-      storeItem("flight_type", FLIGHT_TYPE.INTERENATIONAL);
+      storeItem("flight_type", "INTERNATIONAL");
     }
 
     searchFlight(

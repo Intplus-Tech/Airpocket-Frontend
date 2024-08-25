@@ -40,13 +40,11 @@ function App() {
   const verifyToken = async (token: string) => {
     const response = await verifyAccessToken(token);
     response.error && toast({ title: response.error });
-    console.log(response);
   };
 
   useEffect(() => {
     const access_token = getItemFromStorage("access_token");
     if (!access_token) {
-      console.log("ok");
       return;
     } else {
       verifyToken(access_token);
@@ -56,8 +54,6 @@ function App() {
   const TOKEN_ENDPOINT = import.meta.env.PROD
     ? (import.meta.env.VITE_PROD_TOKEN_ENDPOINT as string)
     : (import.meta.env.VITE_TEST_TOKEN_ENDPOINT as string);
-
-  console.log(import.meta.env.PROD, import.meta.env.MODE);
 
   useEffect(() => {
     const fetchAccessToken = async () => {
