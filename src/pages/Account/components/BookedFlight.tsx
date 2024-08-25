@@ -26,10 +26,9 @@ const BookedFlight = () => {
     const response = await getSingleUserHistory(id);
     if (response.success) {
       setMoreinfo(response.success.data);
-      console.log(moreInfo);
+
       setStep("singleItenery");
     }
-
     // setStep("singleItenery");
   };
   const renderStep = (step: string) => {

@@ -31,12 +31,10 @@ export const FetchLoader = () => {
           />
         </p>
         <div className="flex gap-1 font-bold">
+          <span className="text-[8px]">{flightLocation?.depature?.label}</span>{" "}
+          {flightLocation && <span>to</span>}{" "}
           <span className="text-[8px]">
-            {flightLocation?.depature?.cityName || "LONDON"}
-          </span>{" "}
-          <span>to</span>{" "}
-          <span className="text-[8px]">
-            {flightLocation?.destination?.cityName || "SPAIN"}
+            {flightLocation?.destination?.label}
           </span>
         </div>
       </div>

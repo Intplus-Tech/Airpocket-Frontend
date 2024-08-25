@@ -26,11 +26,6 @@ const Confirmation = ({ setCurrentStep }: Props) => {
 
   const { isLoading, data } = useConfirmPaypment({ id: paymentData?._id });
 
-  console.log(
-    data && data.data.gateway_response === "Successful",
-    "paymane data"
-  );
-
   if (loading) {
     return (
       <section className="fixed w-[100vw] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">

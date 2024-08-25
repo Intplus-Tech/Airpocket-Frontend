@@ -10,9 +10,11 @@ export const LIMIT_FIVE = 50;
 export const FLIGHT_TYPE: FLIGHT_TYPES = {
   LOCAL: {
     rate: 5,
+    fixed: 5000,
   },
-  INTERENATIONAL: {
+  INTERNATIONAL: {
     rate: 10,
+    fixed: 50000,
   },
 };
 

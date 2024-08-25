@@ -2,6 +2,7 @@ import { format } from "date-fns";
 
 import { enUS } from "date-fns/locale";
 import { getItemFromStorage } from "./locaStorage";
+import { FLIGHT_TYPE } from "./Constant";
 
 export function getDaysInMonth(year: number, month: number): string[] {
   // Create a new Date object for the first day of the specified month
@@ -79,10 +80,14 @@ export function extractTime(isoString: string | undefined): string {
 }
 
 export function formatCurrency(amount: number): string {
-  const FLIGHT_TYPE: { rate: number } = getItemFromStorage("flight_type");
-  if (!FLIGHT_TYPE?.rate) return String(amount);
+  const addition = getItemFromStorage("flight_type");
 
-  const addedPrice = addPercentage(Number(amount), FLIGHT_TYPE.rate);
+  if (!FLIGHT_TYPE) return String(amount);
+
+  const addedPrice = addPercentage(
+    Number(amount),
+    (FLIGHT_TYPE as any)[addition]?.fixed
+  );
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "NGN",
@@ -92,8 +97,8 @@ export function formatCurrency(amount: number): string {
 }
 
 export function addPercentage(price: number, percentage: number): number {
-  const additionalAmount = price * (percentage / 100);
-  const newPrice = price + additionalAmount;
+  // const additionalAmount = price * (percentage / 100);
+  const newPrice = price + percentage;
   return Math.round(newPrice); // Rounds the number to the nearest integer
 }
 

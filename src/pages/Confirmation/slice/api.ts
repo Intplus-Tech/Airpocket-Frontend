@@ -35,7 +35,6 @@ function bookFlighttApi(data: Generic) {
 
 export const confirmPayment = async (data: { id: string | undefined }) => {
   const response: any = await confirmPaymentApi(data);
-  console.log(response.data, "respn ");
 
   return response.data.paymentDetailsResponse;
 };
