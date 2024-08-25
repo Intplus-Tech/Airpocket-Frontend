@@ -10,6 +10,7 @@ import { getItemFromStorage } from "@/utils/locaStorage";
 import { FlightOffer, Generic } from "@/types/typs";
 import { flightSelect } from "@/Features/selectFlight/api";
 import { SkeletonComponent } from "@/components/Loader/Loader";
+import { useScrolltop } from "@/utils/useScrolltop";
 
 type PassengerDetialProp = {
   passengers?: number;
@@ -20,6 +21,8 @@ export const PassengerDetails = ({
   // passengers,
   setCurrentStep,
 }: PassengerDetialProp) => {
+  useScrolltop();
+
   const dispatch = useDispatch();
   const [step, setStep] = useState("flightDetailsForm");
   const [passengerFormData, setPassengerFormData] = useState<Generic[] | null>(
@@ -38,11 +41,6 @@ export const PassengerDetails = ({
 
   const { adult, children, infants } = flightSearchQuery;
 
-  // const testing = array.map((passenger, idx) =>
-  //   Array.from({ length: passenger.value }).map((_, index) => (
-  //     <h1>{`testint${passenger.name}`}</h1>
-  //   ))
-  // );
   const inputsArray = Array.from(
     { length: adult + children + infants },
     (_, index) => index + 1
@@ -58,7 +56,7 @@ export const PassengerDetails = ({
 
   if (error) {
     return (
-      <div className="flex flex-col gap-4 items-center justify-center">
+      <div className="flex flex-col gap-4 min-h-[80vh] items-center justify-center">
         <h1 className="block">Something went wrong</h1>
 
         {/* <button className="block">Reload page</button> */}
@@ -68,7 +66,7 @@ export const PassengerDetails = ({
 
   // mx-4 md:mx-6 min-[1059px]:mx
   return (
-    <main className="max-w-screen-xl overflow-hidden lg:px-6 mx-2 min-[1059px]:mx-auto  ">
+    <main className="max-w-screen-xl min-h-[80vh] bg-red-500 overflow-hidden lg:px-6 mx-2 min-[1059px]:mx-auto  ">
       <div>
         {/* SINGLE_FLIGHT_STOPS Details */}
         {result && (

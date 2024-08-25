@@ -42,12 +42,14 @@ const SearchParams = ({ setIsOpen, isOpen }: SearchParamsProps) => {
   const prevDeparture: suggestionList | null = {
     label: flightSearchQuery.originLocation,
     value: flightSearchQuery.originLocationCode,
+    cityName: flightSearchQuery.originLocation,
     country: "",
   };
 
   const prevDestination: suggestionList | null = {
     label: flightSearchQuery.destinationLocation,
     value: flightSearchQuery.destinationLocationCode,
+    cityName: flightSearchQuery.destinationLocation,
     country: "",
   };
   const prevChekInDate = flightSearchQuery.depatureTimeDate;
