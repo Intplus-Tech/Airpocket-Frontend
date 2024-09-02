@@ -9,11 +9,15 @@ type AboutProp = {
   text: string | null;
 };
 
-const AboutUs = ({ img, text }: AboutProp) => {
+const AboutUs = ({ text }: AboutProp) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 place-items-center gap-4 col-span-1 my-6 h-full">
       <div className="w-fit relative">
-        <Image src={img} alt="Water" className="" />
+        <Image
+          src="https://ik.imagekit.io/0xy9wqmrh/sea.jpg"
+          alt="Water"
+          className=""
+        />
         {text && (
           <div className="absolute top-4 right-[-1rem] sm:right-[-3rem] bg-white z-30 p-4 rounded-md flex flex-col items-start shadow-lg w-[200px] ">
             <Image

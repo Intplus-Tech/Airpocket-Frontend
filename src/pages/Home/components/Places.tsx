@@ -4,41 +4,34 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { Image } from "../../../components/Image/Index";
 import Water from "../assets/Img5.svg";
-import Thailand from "../assets/thailand.jpeg";
-import Singapore from "../assets/singapore.jpeg";
-import Shangai from "../assets/shangai.jpeg";
-import Thailand2 from "../assets/thailand (2).jpeg";
-import Barcelona from "../assets/barcelona.jpeg";
-import Zanziba from "@/pages/Home//assets/Zanziba.jpeg";
-import Egypt from "@/pages/Home//assets/Egypt.jpeg";
-import Kigali from "@/pages/Home//assets/Kigali.jpeg";
+
 import AboutUs from "./aboutUs";
 
 const Places = () => {
   const destinations = [
     {
       id: "1",
-      Img: Thailand,
+      Img: "https://ik.imagekit.io/0xy9wqmrh/barcelona.jpeg",
       name: "Thailand",
     },
     {
       id: "3",
-      Img: Singapore,
+      Img: "https://ik.imagekit.io/0xy9wqmrh/singapore.jpeg",
       name: "Singapore",
     },
     {
       id: "4",
-      Img: Barcelona,
+      Img: "https://ik.imagekit.io/0xy9wqmrh/thailand.jpg",
       name: "Barcelona",
     },
     {
       id: "2",
-      Img: Thailand2,
+      Img: "https://ik.imagekit.io/0xy9wqmrh/thailand%20(2).jpeg",
       name: "Thailand",
     },
     {
       id: "5",
-      Img: Shangai,
+      Img: "https://ik.imagekit.io/0xy9wqmrh/shangai.jpeg",
       name: "Shangai",
     },
   ];
@@ -129,14 +122,22 @@ const Places = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center py-5">
         <div>
-          <Image src={Kigali} alt="kigali" className="shadow-md rounded-md " />
-        </div>
-        <div>
-          <Image src={Egypt} alt="Egypt" className="shadow-md rounded-md " />
+          <Image
+            src="https://ik.imagekit.io/0xy9wqmrh/Kigali.jpeg?updatedAt=1725265629732"
+            alt="kigali"
+            className="shadow-md rounded-md "
+          />
         </div>
         <div>
           <Image
-            src={Zanziba}
+            src="https://ik.imagekit.io/0xy9wqmrh/Egypt.jpeg?updatedAt=1725265629392"
+            alt="Egypt"
+            className="shadow-md rounded-md "
+          />
+        </div>
+        <div>
+          <Image
+            src="https://ik.imagekit.io/0xy9wqmrh/Zanziba.jpeg?updatedAt=1725265629998"
             alt="zanziba"
             className="shadow-md rounded-md flex shrink-0"
           />
