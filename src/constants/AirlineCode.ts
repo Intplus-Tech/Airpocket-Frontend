@@ -13,7 +13,7 @@ export const Airline: Airline[] = [
     logo: "https://images.kiwi.com/airlines/64/AUTOSTRAD.png",
   },
   {
-    id: "169",
+    id: "X1",
     lcc: "None",
     name: "Han Air Technologies",
     logo: "https://ik.imagekit.io/0xy9wqmrh/Hahn-Air-Emblem.png",
