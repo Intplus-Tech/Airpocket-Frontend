@@ -66,7 +66,7 @@ export const PassengerDetails = ({
 
   // mx-4 md:mx-6 min-[1059px]:mx
   return (
-    <main className="max-w-screen-xl min-h-[80vh] bg-red-500 overflow-hidden lg:px-6 mx-2 min-[1059px]:mx-auto  ">
+    <main className="max-w-screen-xl min-h-[80vh]  overflow-hidden lg:px-6 mx-2 min-[1059px]:mx-auto  ">
       <div>
         {/* SINGLE_FLIGHT_STOPS Details */}
         {result && (

@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { Image } from "../../../components/Image/Index";
 import Water from "../assets/Img5.svg";
-
 import AboutUs from "./aboutUs";
 
 const Places = () => {
@@ -156,8 +155,6 @@ const Places = () => {
           <p>Incredible places you must visit…</p>
         </div>
 
-        {/* <div className="mt-8 max-w-[30rem] md:max-w-full min-w-full overflow-x-auto grid grid-cols-3 space-x-8 md:gap-4 place-items-center"> */}
-        {/* <div className="flex gap-x-4 gap-y-10 pt-8 py-4 w-full max-w-[30rem] min-w-full overflow-x-auto wrapper md:max-w-full"> */}
         <div className="mt-8 mx-auto  w-[95%]">
           <Slider {...settings}>
             {destinations.map((destination) => {
