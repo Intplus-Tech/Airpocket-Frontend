@@ -224,10 +224,10 @@ const FlightDetailForm: React.FC<FlightDetailFormProps> = ({
         {!user?._id && (
           <div className="mt-6 border px-6 mx-4 md:mx-6 min-[1059px]:mx-0 h-full rounded-md py-6">
             <h1 className="font-bold">Contact information</h1>
-            <h1 className="font-bold text-red-400 animate-scale">
+            {/* <h1 className="font-bold text-red-400 animate-scale">
               Contact information automatically creates an account for you. If
               you already have an account Please Login
-            </h1>
+            </h1> */}
             <p className="text-[#868686]">
               The ticket confirmation will be sent to the email provided, also
               all changes and payment receipt will be sent via email.
