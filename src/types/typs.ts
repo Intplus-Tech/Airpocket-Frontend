@@ -394,3 +394,25 @@ interface Queue {
   number: string;
   category: string;
 }
+
+
+export type FlightBookingResponse ={
+  message: string;
+  PNR: string;
+  data: FlightBookingData;
+}
+
+interface FlightBookingData {
+  flightOrder: string;
+  from: string;
+  to: string;
+  departure: string;
+  cabin: string;
+  user: string;
+  flightInformation: string; // JSON string of flight details
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+

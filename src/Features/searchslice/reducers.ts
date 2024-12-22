@@ -33,7 +33,7 @@ interface SearchState {
 }
 
 const initialState: SearchState = {
-  query:
+  query: getItemFromStorage("flight-search-query")||
     {
       adult: 0,
       children: 0,
@@ -43,7 +43,7 @@ const initialState: SearchState = {
       originLocationCode: null,
       returnDate: "",
       travelClass: "First class",
-    } || getItemFromStorage("flight-search-query"),
+    } ,
   // result: [{ message: "", data: [{}], meta: [{}] }],
   result: null,
   tableData: null,
@@ -67,7 +67,7 @@ const searchSlice = createSlice({
       action: PayloadAction<{
         data: {
           message: string;
-          data: {}[];
+          data:[];
           meta: { [x: string]: any }[];
           dictionaries: { carriers: string };
         };

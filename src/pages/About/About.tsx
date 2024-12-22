@@ -57,7 +57,7 @@ const About = () => {
                 holiday packages. We provide swift online booking of affordable
                 flight tickets for some of the world&apos;s leading airlines,
                 such as Air Peace, Arik Air, and Dana Air, and other
-                international airlines.
+                international airlines.
               </p>
             </div>
           </div>

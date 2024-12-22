@@ -1,3 +1,4 @@
+/* @typescript-eslint/no-explicit-any */
 import { Generic } from "@/types/typs";
 import { SERVER_URL } from "@/utils/apiUrl";
 import handleAxiosError from "@/utils/error";

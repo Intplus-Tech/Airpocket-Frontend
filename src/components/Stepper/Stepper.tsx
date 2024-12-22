@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import {
-  Confirmation,
+  // Confirmation,
   PassengerDetails,
   Payment,
   SearchResults,
@@ -11,7 +11,7 @@ import confirmation from "@/components/Stepper/assets/confirmation.svg";
 import { Image } from "../Image/Index";
 import Done from "./assets/Done.svg";
 import { getItemFromStorage } from "@/utils/locaStorage";
-import CompletedBooking from "../CompletedBooking/CompletedBooking";
+// import CompletedBooking from "../CompletedBooking/CompletedBooking";
 
 const Stepper = () => {
   const step = getItemFromStorage("currentStep");
@@ -41,14 +41,14 @@ const Stepper = () => {
       // Component: () => <Payment />,
       Img: payment,
     },
-    {
-      id: "4",
-      stepKey: "confirmation",
+    // {
+    //   id: "4",
+    //   stepKey: "confirmation",
 
-      name: "confirmation",
-      // Component: () => <Confirmation />,
-      Img: confirmation,
-    },
+    //   name: "confirmation",
+    //   // Component: () => <Confirmation />,
+    //   Img: confirmation,
+    // },
   ];
 
   const stepToRender = (key: number) => {
@@ -64,11 +64,11 @@ const Stepper = () => {
       case 3:
         return <Payment setCurrentStep={setCurrentStep} />;
 
-      case 4:
-        return <Confirmation setCurrentStep={setCurrentStep} />;
+      // case 4:
+      //   return <Confirmation setCurrentStep={setCurrentStep} />;
 
-      case 5:
-        return <CompletedBooking />;
+      // case 5:
+      //   return <CompletedBooking />;
 
       default:
         break;

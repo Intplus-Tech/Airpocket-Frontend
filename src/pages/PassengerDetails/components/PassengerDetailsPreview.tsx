@@ -1,10 +1,15 @@
+import { useToast } from "@/components/ui/use-toast";
+import { storeFlightDetails } from "@/Features/paymentSlice/reducer";
+import { bookFlight } from "@/pages/Confirmation/slice/api";
 import { RootState } from "@/store/store";
 import { FlightOffer, Generic, TravellerFormData } from "@/types/typs";
-import { storeItem } from "@/utils/locaStorage";
+import { getItemFromStorage, storeItem } from "@/utils/locaStorage";
 import { formatCurrency } from "@/utils/monthDAys";
+import { Loader } from "lucide-react";
+import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 type PASSENGER_DETAILS_PREVIEW_PROPS = {
   setStep: React.Dispatch<React.SetStateAction<string>>;
@@ -17,14 +22,60 @@ const PassengerDetailsPreview = ({
   setCurrentStep,
   passengerFormData,
 }: PASSENGER_DETAILS_PREVIEW_PROPS) => {
+  const { toast } = useToast();
   const selectedFlight: FlightOffer[] | null = useSelector(
     (state: RootState) => state.selectFlight.result
   );
 
-  const handleContinue = () => {
-    storeItem("currentStep", 3);
-    setCurrentStep(3);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const user = useSelector((state: RootState) => state.user.user);
+  // const paymentData = getItemFromStorage("paymentData");
+  const TravellerDetails = getItemFromStorage("passenger_form");
+  // const selectedflight = getItemFromStorage("selected_flight");
+  const searchQuery = getItemFromStorage("flight-search-query");
+
+  const handleBookFlight = async () => {
+    setLoading(true);
+    const bookingData = searchQuery.returnDate
+      ? {
+          flightOffers: selectedFlight,
+          travelers: TravellerDetails,
+          // payment: paymentData?._id,
+          cabin: searchQuery.travelClass,
+          from: searchQuery.originLocationCode,
+          to: searchQuery.destinationLocationCode,
+          departure: searchQuery.depatureTimeDate,
+          destination: searchQuery.returnTimeDate,
+          user: user?._id,
+        }
+      : {
+          flightOffers: selectedFlight,
+          travelers: TravellerDetails,
+          // payment: paymentData?._id,
+          cabin: searchQuery.travelClass,
+          from: searchQuery.originLocationCode,
+          to: searchQuery.destinationLocationCode,
+          departure: searchQuery.depatureTimeDate,
+          user: user?._id,
+        };
+
+    const response = await bookFlight(bookingData);
+    console.log(response);
+
+    if (response.success) {
+      toast({ title: "Your flight has been booked successfull" });
+      dispatch(storeFlightDetails(response.success));
+      storeItem("PNR", response.success.PNR);
+      storeItem("currentStep", 3);
+      setCurrentStep(3);
+    } else {
+      toast({ title: "Something went wrong" });
+    }
+    setLoading(false);
   };
+
   return (
     <div className="bg-white py-3 my-4 rounded-lg border px-2 md:px-4">
       <div className="text-sm md:text-base flex justify-between items-center pt-2 pb-4 border-b border-b-gray-300">
@@ -118,11 +169,14 @@ const PassengerDetailsPreview = ({
               </span>
             </p>
             <button
-              onClick={handleContinue}
+              onClick={handleBookFlight}
               className=" min-w-fit text-white bg-[#1D91CC] py-2 px-8 rounded-lg"
             >
-              Continue
-              {/* Make Payment */}
+              {loading ? (
+                <Loader className="animate-spin mx-auto w-full" />
+              ) : (
+                "Book Flight"
+              )}
             </button>
           </div>
         </div>

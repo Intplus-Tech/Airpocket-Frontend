@@ -1,3 +1,4 @@
+import { FlightBookingResponse } from "@/types/typs";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface PaymentResponse {
@@ -26,12 +27,14 @@ interface PaymentState {
   result: PaymentResponse | null;
   isLoading: boolean;
   error: boolean | { [x: string]: any };
+  flightDetails:FlightBookingResponse|null
 }
 
 const initialState: PaymentState = {
   result: null,
   isLoading: false,
   error: false,
+  flightDetails:null
 };
 
 const paymentSlice = createSlice({
@@ -50,10 +53,13 @@ const paymentSlice = createSlice({
     paymentError(state, action: PayloadAction<boolean>) {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    }, 
+    storeFlightDetails(state, action:PayloadAction<FlightBookingResponse>){
+      state.flightDetails = action.payload
+    }
   },
 });
 
-export const { makePayment, paymentSuccess, paymentError } =
+export const { makePayment, paymentSuccess, paymentError,storeFlightDetails } =
   paymentSlice.actions;
 export default paymentSlice.reducer;

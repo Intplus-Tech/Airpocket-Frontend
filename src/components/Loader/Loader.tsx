@@ -1,46 +1,31 @@
-import { getItemFromStorage } from "@/utils/locaStorage";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Airpocket from "@/assets/Airpocket.svg";
-import { Image } from "../Image/Index";
+// import Airpocket from "@/assets/Airpocket.svg";
+// import { Image } from "../Image/Index";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Loader = () => {
   return (
-    <main className="flex flex-col items-center justify-center h-[100vh] relative">
-      <div className="rotating-box bg-gray-100"></div>
-      <div className="text-xs z-10 w-36 h-36 flex flex-col gap-2 items-center justify-center mt-[-150px]  rounded-[50%] text-center">
-        <p>
-          <Image src={Airpocket} alt="Airpocket" className="h-20 w-20" />
-        </p>
-      </div>
+    <main className="w-full h-screen grid place-items-center">
+      <DotLottieReact
+        src="https://lottie.host/8e3ca5f2-27f8-4d92-85c3-3e70220ca43b/7ZhQMiavxb.lottie"
+        loop
+        autoplay
+        className=" "
+      />
     </main>
   );
 };
 
 export const FetchLoader = () => {
-  const flightLocation = getItemFromStorage("location");
-  console.log(flightLocation?.depature, flightLocation?.destination);
   return (
-    <main className="flex flex-col items-center justify-center h-[100vh] relative">
-      <div className="rotating-box bg-gray-100"></div>
-      <div className="text-xs z-10 w-36 h-36 flex flex-col gap-2 items-center justify-center mt-[-150px]  rounded-[50%] text-center">
-        <p>
-          <Image
-            src={Airpocket}
-            alt="Airpocket"
-            className="h-10 w-20 mt-[-2rem]"
-          />
-        </p>
-        <div className="flex gap-1 font-bold">
-          <span className="text-[8px]">
-            {flightLocation?.depature?.cityName}
-          </span>{" "}
-          {flightLocation && <span>to</span>}{" "}
-          <span className="text-[8px]">
-            {flightLocation?.destination?.cityName}
-          </span>
-        </div>
-      </div>
+    <main className="w-full h-screen grid place-items-center">
+      <DotLottieReact
+        src="https://lottie.host/8e3ca5f2-27f8-4d92-85c3-3e70220ca43b/7ZhQMiavxb.lottie"
+        loop
+        autoplay
+        className=""
+      />
     </main>
   );
 };

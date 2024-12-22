@@ -167,6 +167,7 @@ const FlightDetailForm: React.FC<FlightDetailFormProps> = ({
         setLoading(false);
         return;
       }
+      console.log(updatedArray, "updatedArray");
 
       storeItem("passenger_form", updatedArray);
       storeItem("contact_info", formData);

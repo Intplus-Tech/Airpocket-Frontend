@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -8,7 +7,6 @@ import SignUp from "./auth/Signup/Signup";
 import Stepper from "./components/Stepper/Stepper";
 import { Toaster } from "./components/ui/toaster";
 import { getItemFromStorage, storeItem } from "./utils/locaStorage";
-import TawkToScript from "./Tawkto/Tawkto.tsx";
 import { PrivateRoute } from "./ProtectedRoute/ProtectedRoute.tsx";
 import Loader from "./components/Loader/Loader.tsx";
 import VerifyEmail from "./pages/VerifyEmail/VerifyEmail.tsx";
@@ -133,24 +131,8 @@ function App() {
         </Suspense>
       </BrowserRouter>
       <Toaster />
-      <TawkToScript />
     </>
   );
 }
 
 export default App;
-{
-  /* <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/664c8430981b6c564772dd20/1hude8ntv';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script--> */
-}

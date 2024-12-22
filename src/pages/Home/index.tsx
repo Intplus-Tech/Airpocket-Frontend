@@ -8,7 +8,7 @@ import Newsletter from "./components/Newsletter";
 import Places from "./components/Places";
 import Testimonials from "./components/Testimonials";
 import SearchHistory from "@/components/SearchHistory/SearchHistory";
-import { FetchLoader } from "@/components/Loader/Loader";
+import Loader from "@/components/Loader/Loader";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Home = () => {
       <Newsletter />
       {isLoading && (
         <section className="fixed w-[100%] h-full bg-[#1B96D6] bg-opacity-30 top-0 left-0 z-[100] ">
-          <FetchLoader />
+          <Loader />
         </section>
       )}
     </MaxwidthWrapper>
