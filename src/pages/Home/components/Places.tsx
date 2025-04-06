@@ -1,6 +1,6 @@
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Marquee from "react-fast-marquee"
 
 import { Image } from "../../../components/Image/Index";
 import Water from "../assets/Img5.svg";
@@ -35,79 +35,8 @@ const Places = () => {
     },
   ];
 
-  function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "none", background: "black" }}
-        onClick={onClick}
-      />
-    );
-  }
 
-  function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          display: "none",
-          background: "black",
-          color: "white",
-        }}
-        onClick={onClick}
-      />
-    );
-  }
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    // speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    autoplay: true,
-    speed: 6000,
-    autoplaySpeed: 4000,
-    cssEase: "linear",
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1240,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 840,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 4,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 4,
-        },
-      },
-      // {
-      //   breakpoint: 500,
-      //   settings: {
-      //     slidesToShow: 1,
-      //     slidesToScroll: 1,
-      //   },
-      // },
-    ],
-  };
 
   return (
     <main className=" max-w-screen-xl h-full mx-6 sm:mx-auto mt-8">
@@ -119,29 +48,52 @@ const Places = () => {
           Experience the best with our summer deals
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center py-5">
-        <div>
-          <Image
-            src="https://ik.imagekit.io/0xy9wqmrh/Kigali.jpeg?updatedAt=1725265629732"
-            alt="kigali"
-            className="shadow-md rounded-md "
-          />
+      <Marquee pauseOnHover={true}>
+        <div className="flex items-center overflow-hidden gap-4 place-items-center my-5">
+          <div className="w-[300px] h-[300px]">
+            <Image
+              src="https://ik.imagekit.io/0xy9wqmrh/New%20Folder/japan"
+              alt="kigali"
+              className="shadow-md rounded-md "
+            />
+          </div>
+          <div className="w-[300px] h-[300px]">
+            <Image
+              src="https://ik.imagekit.io/0xy9wqmrh/New%20Folder/japan"
+              alt="Egypt"
+              className="shadow-md rounded-md "
+            />
+          </div>
+          <div className="w-[300px] h-[300px]">
+            <Image
+              src="https://ik.imagekit.io/0xy9wqmrh/New%20Folder/china"
+              alt="zanziba"
+              className="shadow-md rounded-md flex shrink-0"
+            />
+          </div>
+          <div className="w-[300px] h-[300px]">
+            <Image
+              src="https://ik.imagekit.io/0xy9wqmrh/New%20Folder/london"
+              alt="zanziba"
+              className="shadow-md rounded-md flex shrink-0"
+            />
+          </div>
+          <div className="w-[300px] h-[300px]">
+            <Image
+              src="https://ik.imagekit.io/0xy9wqmrh/New%20Folder/cairo"
+              alt="zanziba"
+              className="shadow-md rounded-md flex shrink-0"
+            />
+          </div>
+          <div className="w-[300px] h-[300px] mr-4">
+            <Image
+              src="https://ik.imagekit.io/0xy9wqmrh/New%20Folder/coming"
+              alt="zanziba"
+              className="shadow-md rounded-md flex shrink-0"
+            />
+          </div>
         </div>
-        <div>
-          <Image
-            src="https://ik.imagekit.io/0xy9wqmrh/Egypt.jpeg?updatedAt=1725265629392"
-            alt="Egypt"
-            className="shadow-md rounded-md "
-          />
-        </div>
-        <div>
-          <Image
-            src="https://ik.imagekit.io/0xy9wqmrh/Zanziba.jpeg?updatedAt=1725265629998"
-            alt="zanziba"
-            className="shadow-md rounded-md flex shrink-0"
-          />
-        </div>
-      </div>
+      </Marquee>
 
       <div>
         <AboutUs img={Water} text={"About Us"} />
@@ -156,7 +108,7 @@ const Places = () => {
         </div>
 
         <div className="mt-8 mx-auto  w-[95%]">
-          <Slider {...settings}>
+          <Marquee >
             {destinations.map((destination) => {
               return (
                 <div key={destination.id} className="relative mx-2 ">
@@ -173,7 +125,7 @@ const Places = () => {
                 </div>
               );
             })}
-          </Slider>
+          </Marquee>
         </div>
         {/* </div> */}
       </div>
